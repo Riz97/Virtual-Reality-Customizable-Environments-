@@ -92,7 +92,7 @@ public class Domain : MonoBehaviour
         if ((Output_Text.text.ToString() == Wait_Message || Output_Text.text.ToString() == Computing_Message) && Chat.Number_of_Objects > 10)
         {
       
-            yield return new WaitForSeconds(180);
+            yield return new WaitForSeconds(150);
         }
 
         else if ((Output_Text.text.ToString() == Wait_Message || Output_Text.text.ToString() == Computing_Message) && Chat.Number_of_Objects <= 10)
