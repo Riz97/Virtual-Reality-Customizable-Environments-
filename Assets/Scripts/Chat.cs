@@ -182,6 +182,8 @@ public class Chat : MonoBehaviour
             //Time of execution Start
             float start_time = Time.time;
             string result_aux, result_auxx, result_auxxx;
+
+
             //-----------------------OpenAI API Usage----------------------------------
 
             var messages = new List<Message>
@@ -196,6 +198,12 @@ public class Chat : MonoBehaviour
             result = result_auxx.Replace("C#", "");
             char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
             //-----------------------------------------------------------------------
+
+            //---------------------------- GEMINI Python Server Usage----------------------------------------------
+
+
+
+            //-------------------------------------------------------------------------------------------------
 
 
             Debug.Log(result);
