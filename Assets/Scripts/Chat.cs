@@ -132,6 +132,10 @@ public class Chat : MonoBehaviour
     async void Start()
 
     {
+
+        GameObject NetworkManager = GameObject.Find("NetworkManager");
+        NetworkManager.SetActive(false);
+        
         
 
 
