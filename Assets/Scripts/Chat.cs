@@ -112,6 +112,8 @@ public class Chat : MonoBehaviour
     [SerializeField]
     public Material material;
 
+    [SerializeField]
+    public TMP_Dropdown dropdown;
     
  
     public GameObject Models;
@@ -121,10 +123,11 @@ public class Chat : MonoBehaviour
 
  
     //public static Model model = Model.GPT3_5_Turbo_16k;
-    //public static Model model = Model.GPT3_5_Turbo;
-    public static Model model = Model.GPT4;
+    public static Model model = Model.GPT3_5_Turbo;
+    //public static Model model = Model.GPT4;
 
 
+   
 
     //--------------------------------------------------------------------
 
@@ -133,12 +136,17 @@ public class Chat : MonoBehaviour
 
     {
 
-        GameObject NetworkManager = GameObject.Find("NetworkManager");
-        NetworkManager.SetActive(false);
+        //GameObject NetworkManager = GameObject.Find("NetworkManager");
         
         
 
+        if(dropdown.options[dropdown.value].text == "GEMINI")
+        {
+ 
+            Debug.Log("Sono dentro GEMINI");
 
+        }
+  
 
         Number_Models_Text.SetText("Number of models is : " + Number_of_Objects.ToString());
 
@@ -185,87 +193,101 @@ public class Chat : MonoBehaviour
 
 
             //-----------------------OpenAI API Usage----------------------------------
-
-            var messages = new List<Message>
+            
+            if (dropdown.options[dropdown.value].text == "GPT")
+            {
+                var messages = new List<Message>
             {
                 new Message(Role.User, input)
             };
 
-            var api = new OpenAIClient();
-            var chatRequest = new ChatRequest(messages, model);
-            result_aux = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
-            result_auxx = result_aux.Replace("`", "");
-            result = result_auxx.Replace("C#", "");
-            char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
+                var api = new OpenAIClient();
+                var chatRequest = new ChatRequest(messages, model);
+                result_aux = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
+                result_auxx = result_aux.Replace("`", "");
+                result = result_auxx.Replace("C#", "");
+                char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
+
+
+                Debug.Log(result);
+
+                //If the algorithm run again , it means that the IA was not able to provide a correct script and so the counter is increased by 1
+                tries++;
+
+                if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects))
+                {
+
+
+                    //Elapsed time for the generation of the script
+                    elapsed_time = Time.time - start_time;
+
+                    //It sets the text of the scroll view
+                    Text.color = new Color32(27, 255, 0, 255);
+                    Text.SetText(result.ToString());
+
+
+                    //--------------------------------------- User Mode Information ---------------------------------------
+
+                    if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
+                    {
+                        Info_Text.text = ("Executing......");
+
+                    }
+
+                    //-----------------------------------------------------------------------------------------------------
+
+
+                }
+                else if (input != null)
+                {
+
+                    Text.color = new Color32(27, 255, 0, 255);
+
+                    //--------------------------- User Mode Information -----------------------------------------
+
+                    if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
+                    {
+                        Info_Text.text = ("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
+
+
+
+                    }
+
+                    //-------------------------------------------------------------------------------------
+
+                    Text.SetText("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
+
+
+                    Start();
+
+                }
+
+                else
+                {
+                    return;
+                }
+
+
+            }
+        }
+
+           
             //-----------------------------------------------------------------------
 
             //---------------------------- GEMINI Python Server Usage----------------------------------------------
 
+            else if (dropdown.options[dropdown.value].text == "GEMINI")
+            {
+
+                Debug.Log("Sono dentro GEMINI");
+
+            }
 
 
             //-------------------------------------------------------------------------------------------------
 
 
-            Debug.Log(result);
-
-            //If the algorithm run again , it means that the IA was not able to provide a correct script and so the counter is increased by 1
-            tries++;
-
-            if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u')  && ContainsAny(result,All) && CheckContainsTwoStrings(result,All) && CheckIfWordContainedTwice(result,"Vector3",Number_of_Objects))
-            {
-             
-                
-                //Elapsed time for the generation of the script
-                elapsed_time = Time.time - start_time;
-
-                //It sets the text of the scroll view
-                Text.color = new Color32(27, 255, 0, 255);
-                Text.SetText(result.ToString());
-
-          
-                //--------------------------------------- User Mode Information ---------------------------------------
-
-                if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
-                {
-                    Info_Text.text = ("Executing......");
-
-                }
-
-                //-----------------------------------------------------------------------------------------------------
-
-
-            }
-            else if(input != null)
-            {
-
-                Text.color = new Color32(27, 255, 0, 255);
-
-                //--------------------------- User Mode Information -----------------------------------------
-
-                if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
-                {
-                    Info_Text.text = ("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
-                   
-
-
-                }
-
-                //-------------------------------------------------------------------------------------
-
-                Text.SetText("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
-                
-
-                Start();
-
-            }
-
-            else
-            {
-                return;
-            }
-
-            
-       }
+       
        
     }
 
@@ -816,6 +838,22 @@ public string Enum_Objects(List<string> objects, int Number_of_Objects, string i
     }
 
     //---------------------------------------------------------------------------------------------------------
+
+
+    public void GetDropDownValue()
+    {
+        dropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(dropdown); }); 
+    }
+
+    public string DropdownValueChanged(TMP_Dropdown change)
+
+    {
+        string selectedOption = dropdown.options[dropdown.value].text;
+        Debug.Log(selectedOption);
+
+        return selectedOption; 
+    }
+
 
 
     //----------------------------------------- META LANGUAGE ---------------------------------------------------------------------------------
