@@ -136,17 +136,10 @@ public class Chat : MonoBehaviour
 
     {
 
-        //GameObject NetworkManager = GameObject.Find("NetworkManager");
-        
-        
+        GameObject NetworkManager = GameObject.Find("NetworkManager");
+        NetworkManager.SetActive(false);
 
-        if(dropdown.options[dropdown.value].text == "GEMINI")
-        {
- 
-            Debug.Log("Sono dentro GEMINI");
-
-        }
-  
+      
 
         Number_Models_Text.SetText("Number of models is : " + Number_of_Objects.ToString());
 
@@ -193,7 +186,7 @@ public class Chat : MonoBehaviour
 
 
             //-----------------------OpenAI API Usage----------------------------------
-            
+
             if (dropdown.options[dropdown.value].text == "GPT")
             {
                 var messages = new List<Message>
@@ -208,66 +201,9 @@ public class Chat : MonoBehaviour
                 result = result_auxx.Replace("C#", "");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
 
+                AIList(result,firstNonWhiteSpaceChar,Number_of_Objects,start_time);
 
-                Debug.Log(result);
-
-                //If the algorithm run again , it means that the IA was not able to provide a correct script and so the counter is increased by 1
                 tries++;
-
-                if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects))
-                {
-
-
-                    //Elapsed time for the generation of the script
-                    elapsed_time = Time.time - start_time;
-
-                    //It sets the text of the scroll view
-                    Text.color = new Color32(27, 255, 0, 255);
-                    Text.SetText(result.ToString());
-
-
-                    //--------------------------------------- User Mode Information ---------------------------------------
-
-                    if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
-                    {
-                        Info_Text.text = ("Executing......");
-
-                    }
-
-                    //-----------------------------------------------------------------------------------------------------
-
-
-                }
-                else if (input != null)
-                {
-
-                    Text.color = new Color32(27, 255, 0, 255);
-
-                    //--------------------------- User Mode Information -----------------------------------------
-
-                    if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
-                    {
-                        Info_Text.text = ("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
-
-
-
-                    }
-
-                    //-------------------------------------------------------------------------------------
-
-                    Text.SetText("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
-
-
-                    Start();
-
-                }
-
-                else
-                {
-                    return;
-                }
-
-
             }
         }
 
@@ -276,19 +212,21 @@ public class Chat : MonoBehaviour
 
             //---------------------------- GEMINI Python Server Usage----------------------------------------------
 
-            else if (dropdown.options[dropdown.value].text == "GEMINI")
+            if (dropdown.options[dropdown.value].text == "GEMINI")
             {
-
-                Debug.Log("Sono dentro GEMINI");
+            
+            NetworkManager.SetActive(true);
+            Debug.Log("Sono dentro GEMINI");
 
             }
 
 
-            //-------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------
 
 
-       
-       
+        NetworkManager.SetActive(true);
+
+
     }
 
 
@@ -679,7 +617,6 @@ public class Chat : MonoBehaviour
         }
 
 
-            
     }
 
     //----------------------------AUXILIARIES FUNCTIONS-------------------------------------------------------
@@ -821,7 +758,7 @@ public string Enum_Objects(List<string> objects, int Number_of_Objects, string i
     }
 
 
-    //------------------------------------------------- Numbers Of Models Increase - Decrease --------------------------------------------------
+    //------------------------------------------------- Numbers Of Models Increase - Decrease -----------------------------------------------------------------------------------------
     
     //Functions attached to the Plus and Minus Buttons
     public void Add()
@@ -837,8 +774,9 @@ public string Enum_Objects(List<string> objects, int Number_of_Objects, string i
         Number_of_Objects -= 1;
     }
 
-    //---------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    //------------------------------------------------- EXECUTION OF THE ARTIFICIAL INTELLIGENCE REQUEST (OPEN AI) ---------------------------------------------------------------------
 
     public void GetDropDownValue()
     {
@@ -855,6 +793,67 @@ public string Enum_Objects(List<string> objects, int Number_of_Objects, string i
     }
 
 
+    public void AIList(string result,char firstNonWhiteSpaceChar,int Number_Of_Objects,float start_time)
+    {
+        if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects))
+        {
+
+
+            //Elapsed time for the generation of the script
+            elapsed_time = Time.time - start_time;
+
+            //It sets the text of the scroll view
+            Text.color = new Color32(27, 255, 0, 255);
+            Text.SetText(result.ToString());
+
+
+            //--------------------------------------- User Mode Information ---------------------------------------
+
+            if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
+            {
+                Info_Text.text = ("Executing......");
+
+            }
+
+            //-----------------------------------------------------------------------------------------------------
+
+
+        }
+        else if (input != null)
+        {
+
+            Text.color = new Color32(27, 255, 0, 255);
+
+            //--------------------------- User Mode Information -----------------------------------------
+
+            if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
+            {
+                Info_Text.text = ("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
+
+
+
+            }
+
+            //-------------------------------------------------------------------------------------
+
+            Text.SetText("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
+
+
+            Start();
+
+        }
+
+        else
+        {
+            return;
+        }
+
+
+    
+
+}
+
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     //----------------------------------------- META LANGUAGE ---------------------------------------------------------------------------------
 
