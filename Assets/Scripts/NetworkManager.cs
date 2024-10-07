@@ -26,11 +26,11 @@ public class NetworkManager : MonoBehaviour
         Debug.Log("Connessione stabilita");
 
         // Avvia un nuovo thread per la ricezione dei messaggi
-        receiveThread = new Thread(ReceiveMessages);
+        receiveThread = new Thread(ReceiveMessage);
         receiveThread.Start();
     }
 
-    void ReceiveMessages()
+    public void ReceiveMessage()
     {
         while (client.Connected)
         {
@@ -55,7 +55,7 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
-    public void SendMessage(string message)
+    public void sendMessage(string message)
     {
         if (client.Connected)
         {

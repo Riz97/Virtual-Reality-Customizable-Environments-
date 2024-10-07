@@ -1,5 +1,5 @@
 import socket
-import google.generativeai as genai
+import google.generativeai as genai 
 import threading
 genai.configure(api_key="AIzaSyBg2hw222D0cgT0PaOfEcvQBpJTz2k0nMw")
 
@@ -21,7 +21,7 @@ def handle_client(conn, addr):
             question = data.decode()
             print(f"Ricevuta domanda: {question}")
 
-            # Utilizza Gemini per generare la risposta
+            #Utilizza Gemini per generare la risposta
             response = model.generate_content(question)
             string = response.text
             conn.sendall(string.encode())
