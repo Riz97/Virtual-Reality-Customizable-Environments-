@@ -37,7 +37,7 @@ public class NetworkManager : MonoBehaviour
             
         
             message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-            Debug.Log(message);
+           // Debug.Log(message);
             return message;
         
 

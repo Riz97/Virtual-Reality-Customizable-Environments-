@@ -1,43 +1,31 @@
 using UnityEngine;
-using UnityEngine.Networking;
-using System.Collections;
+using System.Net.Sockets;
+using System.Text;
 
-public class Test : MonoBehaviour
+public class UnityClient : MonoBehaviour
 {
-    [SerializeField] private string apiKey = "AIzaSyANvh8Ovudo65m0wwqKKqdHZ9H4nTag3es"; // Sostituisci con la tua chiave API
-    [SerializeField] private string prompt = "Qual è la capitale della Francia?";
+    private TcpClient client;
+    private NetworkStream stream;
 
-    public void SendRequest()
+    public void SendMessageToServer(string message)
     {
-        StartCoroutine(GetRequest());
-    }
+        // Assumiamo che il server stia ascoltando sulla porta 12345 e sull'indirizzo "localhost"
+        client = new TcpClient("localhost", 12345);
+        stream = client.GetStream();
 
-    IEnumerator GetRequest()
-    {
-        // Costruisci l'URL della richiesta
-        string url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key=" + apiKey;
+        byte[] data = Encoding.UTF8.GetBytes(message);
+        stream.Write(data, 0, data.Length);
 
-        // Crea la richiesta
-        UnityWebRequest request = new UnityWebRequest(url, "POST");
-        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes("{\"prompt\":\"" + prompt + "\"}");
-        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
-        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
-        request.SetRequestHeader("Content-Type", "application/json");
+        // Ricezione della risposta (semplificata)
+        byte[] buffer = new byte[1024];
+        int bytesRead = stream.Read(buffer, 0, buffer.Length);
+        string response = Encoding.UTF8.GetString(buffer, 0, bytesRead);
 
 
-        // Invia la richiesta
-        yield return request.SendWebRequest();
+        Debug.Log("Risposta dal server: " + response);
 
-        if (request.result == UnityWebRequest.Result.Success)
-        {
-            // Processa la risposta
-            string response = request.downloadHandler.text;
-            Debug.Log("Risposta da Gemini: " + response);
-            // Qui puoi parsare la risposta JSON per estrarre il testo generato
-        }
-        else
-        {
-            Debug.LogError("Errore nella richiesta: " + request.error);
-        }
+        // Chiusura della connessione
+        stream.Close();
+        client.Close();
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -845,18 +845,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: {fileID: 33634638}
   InputField: {fileID: 1921083187}
-  Reminders_List:
-  - 'Avoid the method FindGameObjectByTag '
-  - Renaming must be done before the Instantiate
-  - Do not say anthing about the result , I WANT ONLY CODE , ONLY C# CODE
-  First_Reminder: 'DO NOT WRITE "Here''s the Unity script" or sentences like that
-    at the beginning of the output. DO NOT USE AUXILIARY FUNCTIONS,IT IS MANDATORY
-    TO WRITE ONLY C# CODE NOT ANY OTHER COMMENT PLEASE NO APOSTROPHES AT THE BEGINNING
-    OR AT THE ENDING  Write a C# unity script with libraries inclusion that Remember
-    the code you are going to create must be executed without touching it, IT IS
-    MANDATORY TO WRITE ONLY C# CODE NOT ANY OTHER COMMENT PLEASE NO APOSTROPHES AT
-    THE BEGINNING OR AT THE ENDING and do not search the models by tag,  Write a
-    C# unity script with libraries inclusion that '
+  Reminders_List: []
+  First_Reminder: C# Unity Script,
   Generate_Script_Button: {fileID: 55758270}
   Output_Text: {fileID: 33634638}
   Info_Text: {fileID: 0}
@@ -3952,7 +3942,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1681943904}
   - component: {fileID: 1681943903}
-  - component: {fileID: 1681943905}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -3972,6 +3961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbc78c03a896654db977ad88e431c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  message: 
 --- !u!4 &1681943904
 Transform:
   m_ObjectHideFlags: 0
@@ -3987,33 +3977,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1681943905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1681943902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <isClient>k__BackingField: 0
-  <isServer>k__BackingField: 0
-  <isLocalPlayer>k__BackingField: 0
-  <isOwned>k__BackingField: 0
-  clientStarted: 0
-  <netId>k__BackingField: 0
-  sceneId: 1461226463
-  _assetId: 0
-  serverOnly: 0
-  destroyCalled: 0
-  <NetworkBehaviours>k__BackingField: []
-  visibility: 0
-  hasSpawned: 0
-  <SpawnedFromInstantiate>k__BackingField: 0
-  hadAuthority: 0
 --- !u!1 &1761568650
 GameObject:
   m_ObjectHideFlags: 0
