@@ -37,6 +37,7 @@ public class Chat : MonoBehaviour
     public static string input_auxx;
     public static string input_auxx3;
 
+    public static bool GeminiFlag = false;
     public static bool Bases = false;
     public static bool Custom = false;
     private bool check = false;
@@ -138,8 +139,7 @@ public class Chat : MonoBehaviour
 
     {
 
-        GameObject Network = GameObject.Find("NetworkManager");
-        Network.SetActive(false);
+       
 
       
 
@@ -204,8 +204,8 @@ public class Chat : MonoBehaviour
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
 
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
-
                 tries++;
+                
             }
 
 
@@ -218,14 +218,22 @@ public class Chat : MonoBehaviour
             {
 
 
+             await Network.SendMessageToServer(input);
 
-                GeminiHandler();
+
+             result_aux = await Network.ReceiveMessages();
+            
+            result_auxx = result_aux.Replace("`", "");
+            result = result_auxx.Replace("C#", "").Replace("csharp","");
+            result = RemoveAfterCharacter(result, '*');
+            char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
+            AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+            tries++;
+            //Debug.Log(result);
+                
 
                 
-                
-                
-
-                Debug.Log("Sono dentro GEMINI");
+       
 
             }
 
@@ -234,23 +242,10 @@ public class Chat : MonoBehaviour
         //-------------------------------------------------------------------------------------------------
 
 
-        Network.SetActive(true);
 
 
     }
     
-    public void GeminiHandler()
-    {
-        Network.SendMessageToServer(input);
-        Network.ReceiveMessages();
-
-        
-                //result = result_auxx.Replace("C#", "");
-                //char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-                //AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
-
-
-    }
 
 
 
@@ -365,7 +360,7 @@ public class Chat : MonoBehaviour
                     " 'Model_0' (Desk) at Y position equals to -0.47, at X position 0.08 and Z position 7.13 , 'Model_1' (Chair) at Y position equals to -0.47, at X position 0.13 and Z position 9.25 'Model_2' (Table) at Y position equals to -0.47, at X position -2.64 and Z position 4.62 " +
                      "'Model_3' (Chair) at Y position equals to -0.47, at X position  -2.76 and Z position 6.28  'Model_4' (Chair) at Y position equals to -0.47, at X position -4.37 and Z position 4.81 and Y rotation equals -97.34"+        
                     " and add just one collider per gameobject, find the gameobject named Plane and change its" +
-                    " material with the material   called 'Material'THAT MUST BE LOADED inside the 'Furniture' folder which is inside the folder Resources and do not destroy it, using a method called Start , avoid any type of comments , you must write only code";
+                    " material with the material   called 'Material'THAT MUST BE LOADED inside the 'Furniture' folder which is inside the folder Resources and do not destroy it, you must write only code";
 
             Start();
          
@@ -828,6 +823,7 @@ public string Enum_Objects(List<string> objects, int Number_of_Objects, string i
             //It sets the text of the scroll view
             Text.color = new Color32(27, 255, 0, 255);
             Text.SetText(result.ToString());
+            GeminiFlag = true;
 
 
             //--------------------------------------- User Mode Information ---------------------------------------
@@ -1005,6 +1001,21 @@ public string Enum_Objects(List<string> objects, int Number_of_Objects, string i
         return false;
       
     }
+
+
+    public static string RemoveAfterCharacter(string input, char delimiter)
+    {
+        int index = input.IndexOf(delimiter);
+        if (index >= 0)
+        {
+            return input.Substring(0, index);
+        }
+        else
+        {
+            return input; // Se il carattere non è trovato, restituisce la stringa originale
+        }
+    }
+
 
     //---------------------------------------------------------------------------------------------------------
 }

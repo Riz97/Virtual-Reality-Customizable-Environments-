@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 public class NetworkManager : MonoBehaviour
-{
+{ 
+    public string message;
     private TcpClient client;
     private NetworkStream stream;
     int count = 0;
@@ -20,32 +21,35 @@ public class NetworkManager : MonoBehaviour
     }
 
        //It Contains the answered received from GEMINI
-     public async Task ReceiveMessages()
+     public async Task<string> ReceiveMessages()
     {
         
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[10240];
             int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
 
             if (bytesRead == 0)
             {
                 // Handle disconnection
                 Debug.Log("Disconnected from server!");
-               
+               return "";
             }
 
-            if(count == 0)
-        {
-            string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-            Debug.Log("Messaggio dal server: " + message);
-            count++;
-        }
             
+        
+            message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+            Debug.Log(message);
+            return message;
+        
+
         
     }
 
     public async Task SendMessageToServer(string message)
     {
-        byte[] data = Encoding.UTF8.GetBytes(message);
-        await stream.WriteAsync(data, 0, data.Length);
+        if (Chat.GeminiFlag == false)
+        {
+            byte[] data = Encoding.UTF8.GetBytes(message);
+            await stream.WriteAsync(data, 0, data.Length);
+        }
     }
 }
