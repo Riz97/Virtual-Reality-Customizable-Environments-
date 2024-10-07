@@ -22,6 +22,7 @@ using Button = UnityEngine.UI.Button;
 using Utilities.Extensions;
 using NUnit.Framework;
 using UnityEngine.Windows;
+using static UnityEngine.XR.ARSubsystems.XRCpuImage;
 
 
 
@@ -136,8 +137,8 @@ public class Chat : MonoBehaviour
 
     {
 
-        GameObject NetworkManager = GameObject.Find("NetworkManager");
-        NetworkManager.SetActive(false);
+        GameObject Network = GameObject.Find("NetworkManager");
+        Network.SetActive(false);
 
       
 
@@ -182,7 +183,7 @@ public class Chat : MonoBehaviour
 
             //Time of execution Start
             float start_time = Time.time;
-            string result_aux, result_auxx, result_auxxx;
+            string result_aux, result_auxx;
 
 
             //-----------------------OpenAI API Usage----------------------------------
@@ -201,34 +202,42 @@ public class Chat : MonoBehaviour
                 result = result_auxx.Replace("C#", "");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
 
-                AIList(result,firstNonWhiteSpaceChar,Number_of_Objects,start_time);
+                AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
 
                 tries++;
             }
-        }
 
-           
+
+
             //-----------------------------------------------------------------------
 
             //---------------------------- GEMINI Python Server Usage----------------------------------------------
 
             if (dropdown.options[dropdown.value].text == "GEMINI")
             {
-            
-            NetworkManager.SetActive(true);
-            Debug.Log("Sono dentro GEMINI");
+
+                Network.SetActive(true);
+                Network.SendMessage(input);
+                result_aux = NetworkManager.message; //Responsible for receiving the answer from GEMINI
+                result_auxx = result_aux.Replace("`", "");
+                result = result_auxx.Replace("C#", "");
+                char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
+                AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+
+                Debug.Log("Sono dentro GEMINI");
 
             }
 
+        }
 
         //-------------------------------------------------------------------------------------------------
 
 
-        NetworkManager.SetActive(true);
+        Network.SetActive(true);
 
 
     }
-
+    
 
 
     //It handles the InputField string written by the user

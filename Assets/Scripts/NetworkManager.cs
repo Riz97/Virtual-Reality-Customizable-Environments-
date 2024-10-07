@@ -1,15 +1,16 @@
 using UnityEngine;
 using System.Collections;
+using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-public class NetworkClient : MonoBehaviour
+public class NetworkManager : MonoBehaviour
 {
     private TcpClient client;
     private NetworkStream stream;
     private Thread receiveThread;
-
+    public static string message;
     private void Start()
     {
         StartCoroutine(ConnectToServer());
@@ -39,7 +40,7 @@ public class NetworkClient : MonoBehaviour
                 int bytesRead = stream.Read(buffer, 0, buffer.Length);
                 if (bytesRead > 0)
                 {
-                    string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                     message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
 
                     Debug.Log("Messaggio ricevuto: " + message);
                 }
