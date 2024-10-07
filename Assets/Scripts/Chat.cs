@@ -119,6 +119,7 @@ public class Chat : MonoBehaviour
  
     public GameObject Models;
 
+    public NetworkManager Network = new NetworkManager();
 
     //-------------------- OPEN AI CLIENT INFO ------------------------
 
@@ -216,13 +217,13 @@ public class Chat : MonoBehaviour
             if (dropdown.options[dropdown.value].text == "GEMINI")
             {
 
-                Network.SetActive(true);
-                Network.SendMessage(input);
-                result_aux = NetworkManager.message; //Responsible for receiving the answer from GEMINI
-                result_auxx = result_aux.Replace("`", "");
-                result = result_auxx.Replace("C#", "");
-                char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-                AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+
+
+                GeminiHandler();
+
+                
+                
+                
 
                 Debug.Log("Sono dentro GEMINI");
 
@@ -238,6 +239,19 @@ public class Chat : MonoBehaviour
 
     }
     
+    public void GeminiHandler()
+    {
+        Network.SendMessageToServer(input);
+        Network.ReceiveMessages();
+
+        
+                //result = result_auxx.Replace("C#", "");
+                //char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
+                //AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+
+
+    }
+
 
 
     //It handles the InputField string written by the user

@@ -1,84 +1,51 @@
-using UnityEngine;
-using System.Collections;
-using System.IO;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading.Tasks;
+using UnityEngine;
 
 public class NetworkManager : MonoBehaviour
 {
     private TcpClient client;
     private NetworkStream stream;
-    private Thread receiveThread;
-    public static string message;
-    private void Start()
+    int count = 0;
+    public void Start()
     {
-        StartCoroutine(ConnectToServer());
-
-    }
-
-    IEnumerator ConnectToServer()
-    {
-        client = new TcpClient();
-        yield return client.ConnectAsync("127.0.0.1", 65432);
+        client = new TcpClient("127.0.0.1", 1234);
         stream = client.GetStream();
 
-        Debug.Log("Connessione stabilita");
-
-        // Avvia un nuovo thread per la ricezione dei messaggi
-        receiveThread = new Thread(ReceiveMessage);
-        receiveThread.Start();
+        // Start receiving messages in a separate task
+        Task receiveTask = Task.Run(async () => await ReceiveMessages());
     }
 
-    public void ReceiveMessage()
+       //It Contains the answered received from GEMINI
+     public async Task ReceiveMessages()
     {
-        while (client.Connected)
-        {
-            try
+        
+            byte[] buffer = new byte[1024];
+            int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+
+            if (bytesRead == 0)
             {
-                byte[] buffer = new byte[1024];
-                int bytesRead = stream.Read(buffer, 0, buffer.Length);
-                if (bytesRead > 0)
-                {
-                     message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                // Handle disconnection
+                Debug.Log("Disconnected from server!");
+               
+            }
 
-                    Debug.Log("Messaggio ricevuto: " + message);
-                }
-            }
-            catch (SocketException ex)
-            {
-                Debug.LogError("Errore di rete: " + ex.Message);
-                // Gestisci la disconnessione
-                Disconnect();
-                break;
-            }
+            if(count == 0)
+        {
+            string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+            Debug.Log("Messaggio dal server: " + message);
+            count++;
         }
+            
+        
     }
 
-    public void sendMessage(string message)
+    public async Task SendMessageToServer(string message)
     {
-        if (client.Connected)
-        {
-            byte[] data = Encoding.UTF8.GetBytes(message);
-            stream.Write(data, 0, data.Length);
-        }
-        else
-        {
-            Debug.LogError("Non connesso al server");
-        }
-    }
-
-    private void Disconnect()
-    {
-        if (client != null)
-        {
-            client.Close();
-            client = null;
-        }
-        if (receiveThread != null)
-        {
-            receiveThread.Abort();
-            receiveThread = null;
-        }
+        byte[] data = Encoding.UTF8.GetBytes(message);
+        await stream.WriteAsync(data, 0, data.Length);
     }
 }
