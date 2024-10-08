@@ -236,7 +236,7 @@ public class Chat : MonoBehaviour
             ModelName = "Gemini-Pro-1.0";
             AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
             tries++;
-            Debug.Log(result);
+           
                 
 
                 
@@ -422,22 +422,21 @@ public class Chat : MonoBehaviour
             Number_of_Objects = 5; // In this way the global variable is set with the exact amount of objects for this environment
 
 
-            input = "Unity C# scrpti code, no comments, that follow drastically these numbered steps 1) Find with the Find method the objects called  called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them" +
-                "2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder"+ 
-                "3) Substitute them with objects loaded from the Resources/Furniture folder, the gameobjects to be uploaded are 'Desk' 'Table' 'Chair' 'Chair'  and rename them 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 " +
-               " 'Model_0' (Desk) at Y position equals to -0.47, at X position 0.08 and Z position 7.13 , 'Model_1' (Chair) at Y position equals to -0.47, at X position 0.13 and Z position 9.25 'Model_2' (Table) at Y position equals to -0.47, at X position -2.64 and Z position 4.62 " +
-                     "'Model_3' (Chair) at Y position equals to -0.47, at X position  -2.76 and Z position 6.28  'Model_4' (Chair) at Y position equals to -0.47, at X position -4.37 and Z position 4.81 and Y rotation equals -97.34" +
-                     "3)Add a collider for every object ";
+            input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
+                    " 1) Find with the Find method the objects called  called 'Model_0', " +
+                    " 'Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them" +
+                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder"+ 
+                    " 3) Substitute them with objects loaded from the Resources/Furniture folder, the gameobjects to be uploaded are 'Desk' 'Table' 'Chair' 'Chair'  " +
+                    " and rename them 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 " +
+                    " 'Model_0' (Desk) at Y position equals to -0.47, at X position 0.08 and Z position 7.13 , 'Model_1' (Chair) at Y position equals to -0.47," +
+                    " at X position 0.13 and Z position 9.25 'Model_2' (Table) at Y position equals to -0.47, at X position -2.64 and Z position 4.62 " +
+                    " 'Model_3' (Chair) at Y position equals to -0.47, at X position  -2.76 and Z position 6.28  'Model_4' (Chair) at Y position equals to -0.47, " +
+                    " at X position -4.37 and Z position 4.81 and Y rotation equals -97.34" +
+                    " 4)Add a collider for every object ";
                       
 
 
-            /*input = " Build a c# unity script and do the steps in this order, remember that i need only code and everyhting that i  am going to ask you must be inside the script :  1)the first thing to do must be find using the Find() method in order to find the  gameobjects  called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4  and  destroy them and YOU MUST  substitute them  with the gameobjects THAT YOU MUST   load  from the folder named 'Furniture' inside the folder  " +
-                "'Resources' called 'Desk' , " +
-                "Chair' 'Table' 'Chair' 'Chair'  ,You MUST RENAME THEM AS 'Model_0' 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4  in the unity hierarchy MANDATORY" +
-                    " 'Model_0' (Desk) at Y position equals to -0.47, at X position 0.08 and Z position 7.13 , 'Model_1' (Chair) at Y position equals to -0.47, at X position 0.13 and Z position 9.25 'Model_2' (Table) at Y position equals to -0.47, at X position -2.64 and Z position 4.62 " +
-                     "'Model_3' (Chair) at Y position equals to -0.47, at X position  -2.76 and Z position 6.28  'Model_4' (Chair) at Y position equals to -0.47, at X position -4.37 and Z position 4.81 and Y rotation equals -97.34"+        
-                    " and add just one collider per gameobject, find the gameobject named Plane and change its" +
-                    " material with the material   called 'Material'THAT MUST BE LOADED inside the 'Furniture' folder which is inside the folder Resources and do not destroy it, you must write only code";*/
+            
 
             Start();
          

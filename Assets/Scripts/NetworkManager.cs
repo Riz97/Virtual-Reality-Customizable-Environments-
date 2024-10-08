@@ -45,12 +45,9 @@ public class NetworkManager : MonoBehaviour
 
     public async Task SendMessageToServer(string message)
     {
-        //Debug.Log(Chat.GeminiFlag);
-
-        if (Chat.GeminiFlag == false)
-        {
+        
             byte[] data = Encoding.UTF8.GetBytes(message);
             await stream.WriteAsync(data, 0, data.Length);
-        }
+        
     }
 }
