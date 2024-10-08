@@ -206,7 +206,7 @@ public class Chat : MonoBehaviour
                 result_auxx = result_aux.Replace("`", "");
                 result = result_auxx.Replace("C#", "");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-
+                Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 tries++;
                 
@@ -249,7 +249,8 @@ public class Chat : MonoBehaviour
 
     public void AIList(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
     {
-        if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects))
+        if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && 
+            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects))
         {
 
 
@@ -260,8 +261,8 @@ public class Chat : MonoBehaviour
             Text.color = new Color32(27, 255, 0, 255);
             Text.SetText(result.ToString());
          
-         // If we arrive at this point, we know that the script generated is acceptable. So we must set the input string to STOP in order to
-         // block the communication between the python server and the GEMINI LLM
+            // If we arrive at this point, we know that the script generated is acceptable. So we must set the input string to STOP in order to
+            // block the communication between the python server and the GEMINI LLM
             input = "STOP";
             
         
@@ -638,11 +639,7 @@ public class Chat : MonoBehaviour
             input = Input_Request(input, Number_of_Objects, words_City, "City",list_Directions);
 
 
-            
-
             Start();
-
-      
 
         }
 
@@ -666,7 +663,8 @@ public class Chat : MonoBehaviour
 
       
 
-        else if ((words_City.Count() != Number_of_Objects || words_Cars.Count() != Number_of_Objects || words_Industrial.Count() != Number_of_Objects  || words_Nature.Count() != Number_of_Objects  || words_Furniture.Count() != Number_of_Objects)) 
+        else if ((words_City.Count() != Number_of_Objects || words_Cars.Count() != Number_of_Objects || words_Industrial.Count() != Number_of_Objects  
+                 || words_Nature.Count() != Number_of_Objects  || words_Furniture.Count() != Number_of_Objects)) 
         {
             Text.color = new Color(255, 0, 0);
             Text.SetText("Error : you have to ask for the exactly amount of models requested  for this simulation");
@@ -686,7 +684,11 @@ public class Chat : MonoBehaviour
 
         // Otherwise the user has asked for a model or environment which is not implemented yet
 
-         if(!ContainsAny(input,City_Models) && !ContainsAny(input, Furniture_Models) && !ContainsAny(input, Car_Models) && !ContainsAny(input, Nature_Models) && !ContainsAny(input, Industrial_Models) && !ContainsAny(input,Industrial_Strings) && !ContainsAny(input,Nature_Strings) && !ContainsAny(input,Forest_Strings) && !ContainsAny(input,City_Strings) && !ContainsAny(input,Furniture_Strings) && !ContainsAny(input, Apartment_Strings) && !ContainsAny(input, Car_Strings))
+         if(!ContainsAny(input,City_Models) && !ContainsAny(input, Furniture_Models) && !ContainsAny(input, Car_Models) 
+            && !ContainsAny(input, Nature_Models) && !ContainsAny(input, Industrial_Models) && !ContainsAny(input,Industrial_Strings) 
+            && !ContainsAny(input,Nature_Strings) && !ContainsAny(input,Forest_Strings) && !ContainsAny(input,City_Strings) 
+            && !ContainsAny(input,Furniture_Strings) && !ContainsAny(input, Apartment_Strings) && !ContainsAny(input, Car_Strings))
+        
         {
             Text.color = new Color(255, 0, 0);
             Text.SetText("Error : The environment you asked is not implemented yet, sorry");
@@ -714,7 +716,7 @@ public class Chat : MonoBehaviour
     public void createModels(int Number)
     {
     
-         n = Number;
+        n = Number;
 
         for (int i = 0; i < n; i++)
         {
@@ -867,7 +869,7 @@ public string Enum_Objects(List<string> objects, int Number_of_Objects, string i
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    //------------------------------------------------- EXECUTION OF THE ARTIFICIAL INTELLIGENCE REQUEST (OPEN AI) ---------------------------------------------------------------------
+    //------------------------------------------------- DROPDOWN MENU OPTIONS MANAGER ---------------------------------------------------------------------
 
     public void GetDropDownValue()
     {
