@@ -1,8 +1,9 @@
-# Master-Thesis
+# Framework based on Large Language Models for creating customized virtual environment
 
 
-This thesis aims to exploit generative language models to create customized virtual reality environments.
-In many fields of application, such as exergames for cognitive or physical training, one of the main issues is to create a wide range of simulated situations, thus avoiding the onset of boredom and habituation phenomena. However, creating many simulated situations may be a long and tedious task. 
-This thesis aims to cope with this issue, creating a framework for generating different virtual reality scenarios described in natural language. The framework will allow unskilled people to add virtual scenarios and simulations to existing sw, such as cognitive exergames.
-The student will analyse the use of generative language models (e.g. chatgpt) and their use to create virtual environments (e.g., in Unity).
-A further development will be the combination with real-world elements, detected in real-time, to create dynamic environments where virtual and real objects coexist.
+FIRST PART
+
+Large Language Models (LLMs) trained for code generation can be used to transform a natural language request for a virtual world into reality. The main objective of this thesis is to utilize LLMs to generate custom virtual environments tailored to user requests. In recent years, AI models have achieved remarkable levels of reliability when responding to inquiries. Therefore, we intend to exploit these models and provide users with a framework that can overcome the problem of creating different environments for various situations with minimal effort. Our goal is to enable the construction of environments using natural language, making the framework accessible to individuals outside the realm of computer science. The possibilities for custom-designed VRs are virtually limitless. For instance, a physiotherapist could request a virtual environment that is tuned to the needs of a patient with an unusual injury. Students in a laboratory could inspect, analyse, and become familiar with materials or machines that they might not have access to because of budget constraints, safety concerns, or physical limitations. Furthermore, without the support of a framework like this, building the environment would be a boring and tedious task that must be repeated hundreds of times. 
+
+SECOND PART
+
