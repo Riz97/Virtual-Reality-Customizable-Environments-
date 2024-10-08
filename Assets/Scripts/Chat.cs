@@ -87,8 +87,7 @@ public class Chat : MonoBehaviour
     List<string> All = new List<string>() { "Barrel\"", "Bench\"", "Bin\"", "Dumpster\"", "Hydrant\"", "Mailbox\"", "Stoplight\"", "Cable\"", "Garbage\"", "Pallet\"", "Car\"", "Plank\"", "Tank\"", "Tubes\"", "Oak\"", "Bush\"", "Mushroom\"", "Wood\"", "Stone\"", "Pine\"", "Flower\"", "Cops\"", "Sedan\"", "Sport\"", "Suv\"", "Taxi\"", "Sport\"", "Desk\"", "Chair\"", "Bed\"", "Table\"", "Drawer\"", "Shower\"", "Sink\"" };
 
 
-    [SerializeField]
-    public TMP_Text Text;
+    [SerializeField] public TMP_Text Text;
 
     [SerializeField]
     public TMP_InputField InputField;
@@ -175,11 +174,6 @@ public class Chat : MonoBehaviour
         //--------------------------------------------------------------------------
 
 
-
-        // Debug.Log(input);
-
-
-
         if (input != null && input != input_aux)
         {
 
@@ -241,8 +235,10 @@ public class Chat : MonoBehaviour
 
         //-------------------------------------------------------------------------------------------------
 
+        //  --------------------------------- LLAMA Python Server Usage ----------------------------------
 
 
+        // -------------------------------------------------------------------------------------------------
 
     }
 
