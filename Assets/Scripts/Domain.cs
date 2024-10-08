@@ -84,6 +84,7 @@ public class Domain : MonoBehaviour
         //In this way we wait 20 seconds only the first time the app is launched
         //, in these  seconds the ai should be able to 
         //provide a correct script that Roslyn will compile at runtime
+        Debug.Log("sono qua prima dell'esecuzione");
 
 
         yield return new WaitForSeconds(20);
@@ -91,20 +92,20 @@ public class Domain : MonoBehaviour
 
         if ((Output_Text.text.ToString() == Wait_Message || Output_Text.text.ToString() == Computing_Message) && Chat.Number_of_Objects > 10)
         {
-      
+            
             yield return new WaitForSeconds(180);
         }
 
         else if ((Output_Text.text.ToString() == Wait_Message || Output_Text.text.ToString() == Computing_Message) && Chat.Number_of_Objects <= 10)
         {
-      
+            Debug.Log("sono qua");
             yield return new WaitForSeconds(90);
         }
 
         if (Output_Text.text.ToString() != Welcome_Message && Output_Text.text.ToString() != Error_Message && Output_Text.text.ToString() != Wait_Message && Output_Text.text != "Executing......" && Output_Text.text != Error && Output_Text.text != Computing_Message)
         {
             sourceCode = Output_Text.text.ToString();
-            Debug.Log(sourceCode);
+            
 
             yield return new WaitForSeconds(20);
 
@@ -171,7 +172,7 @@ public class Domain : MonoBehaviour
         if (!File.Exists(path))
         {
 
-            File.WriteAllText(path, "LOG GENERATED FOR THE SESSION" + "\n" + "Model - " + Chat.model.ToString());
+            File.WriteAllText(path, "LOG GENERATED FOR THE SESSION" + "\n" + "Model - " + Chat.ModelName);
 
         }
 

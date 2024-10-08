@@ -14,16 +14,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     with conn:
         print('Connected by', addr)
         while True:
-            data = conn.recv(1024)
-            if not data:
-                break
-            
-
-            response = model.generate_content(data.decode())
-            time.sleep(15)
-            string = response.text
-            print(string)
-
-           
-
-            conn.sendall(string.encode())
+            data = conn.recv(10240)
+            print(data.decode())      
+            if(data.decode()!= "STOP"):
+                response = model.generate_content(data.decode())
+                time.sleep(10)
+                string = response.text
+                print(string)
+                conn.sendall(string.encode())

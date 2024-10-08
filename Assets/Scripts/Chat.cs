@@ -23,6 +23,8 @@ using Utilities.Extensions;
 using NUnit.Framework;
 using UnityEngine.Windows;
 using static UnityEngine.XR.ARSubsystems.XRCpuImage;
+using JetBrains.Annotations;
+using System.Threading;
 
 
 
@@ -122,13 +124,17 @@ public class Chat : MonoBehaviour
 
     public NetworkManager Network = new NetworkManager();
 
+    public static CancellationTokenSource cts = new CancellationTokenSource();
+
+
     //-------------------- OPEN AI CLIENT INFO ------------------------
 
- 
+
     //public static Model model = Model.GPT3_5_Turbo_16k;
     public static Model model = Model.GPT3_5_Turbo;
     //public static Model model = Model.GPT4;
 
+    public static string ModelName = model.ToString();
 
    
 
@@ -138,10 +144,6 @@ public class Chat : MonoBehaviour
     async void Start()
 
     {
-
-       
-
-      
 
         Number_Models_Text.SetText("Number of models is : " + Number_of_Objects.ToString());
 
@@ -191,6 +193,9 @@ public class Chat : MonoBehaviour
 
             if (dropdown.options[dropdown.value].text == "GPT")
             {
+                
+
+
                 var messages = new List<Message>
             {
                 new Message(Role.User, input)
@@ -217,6 +222,7 @@ public class Chat : MonoBehaviour
             if (dropdown.options[dropdown.value].text == "GEMINI")
             {
 
+            
 
              await Network.SendMessageToServer(input);
 
@@ -227,6 +233,7 @@ public class Chat : MonoBehaviour
             result = result_auxx.Replace("C#", "").Replace("csharp","").Replace("c#","");
             result = RemoveAfterCharacter(result, '*');
             char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
+            ModelName = "Gemini-Pro-1.0";
             AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
             tries++;
             Debug.Log(result);
@@ -245,9 +252,69 @@ public class Chat : MonoBehaviour
 
 
     }
-    
 
 
+    public void AIList(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
+    {
+        if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects))
+        {
+
+
+            //Elapsed time for the generation of the script
+            elapsed_time = Time.time - start_time;
+
+            //It sets the text of the scroll view
+            Text.color = new Color32(27, 255, 0, 255);
+            Text.SetText(result.ToString());
+            input = "STOP";
+            GeminiFlag = true;
+            Debug.Log(input);
+
+            //--------------------------------------- User Mode Information ---------------------------------------
+
+            if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
+            {
+                Info_Text.text = ("Executing......");
+
+            }
+
+            //-----------------------------------------------------------------------------------------------------
+
+
+        }
+        else if (input != null)
+        {
+
+            Text.color = new Color32(27, 255, 0, 255);
+
+            //--------------------------- User Mode Information -----------------------------------------
+
+            if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
+            {
+                Info_Text.text = ("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
+
+
+
+            }
+
+            //-------------------------------------------------------------------------------------
+
+            Text.SetText("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
+
+
+            Start();
+
+        }
+
+        else
+        {
+            return;
+        }
+
+
+
+
+    }
 
     //It handles the InputField string written by the user
 
@@ -357,7 +424,7 @@ public class Chat : MonoBehaviour
 
             input = "Unity C# scrpti code, no comments, that follow drastically these numbered steps 1) Find with the Find method the objects called  called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them" +
                 "2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder"+ 
-                "3) Substitute them with objects loaded from the Resources/Furniture folder, the gameobjects to be uploaded are 'Chair' 'Table' 'Chair' 'Chair'  and rename them 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 " +
+                "3) Substitute them with objects loaded from the Resources/Furniture folder, the gameobjects to be uploaded are 'Desk' 'Table' 'Chair' 'Chair'  and rename them 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 " +
                " 'Model_0' (Desk) at Y position equals to -0.47, at X position 0.08 and Z position 7.13 , 'Model_1' (Chair) at Y position equals to -0.47, at X position 0.13 and Z position 9.25 'Model_2' (Table) at Y position equals to -0.47, at X position -2.64 and Z position 4.62 " +
                      "'Model_3' (Chair) at Y position equals to -0.47, at X position  -2.76 and Z position 6.28  'Model_4' (Chair) at Y position equals to -0.47, at X position -4.37 and Z position 4.81 and Y rotation equals -97.34" +
                      "3)Add a collider for every object ";
@@ -821,66 +888,7 @@ public string Enum_Objects(List<string> objects, int Number_of_Objects, string i
     }
 
 
-    public void AIList(string result,char firstNonWhiteSpaceChar,int Number_Of_Objects,float start_time)
-    {
-        if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects))
-        {
 
-
-            //Elapsed time for the generation of the script
-            elapsed_time = Time.time - start_time;
-
-            //It sets the text of the scroll view
-            Text.color = new Color32(27, 255, 0, 255);
-            Text.SetText(result.ToString());
-            GeminiFlag = true;
-
-
-            //--------------------------------------- User Mode Information ---------------------------------------
-
-            if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
-            {
-                Info_Text.text = ("Executing......");
-
-            }
-
-            //-----------------------------------------------------------------------------------------------------
-
-
-        }
-        else if (input != null)
-        {
-
-            Text.color = new Color32(27, 255, 0, 255);
-
-            //--------------------------- User Mode Information -----------------------------------------
-
-            if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
-            {
-                Info_Text.text = ("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
-
-
-
-            }
-
-            //-------------------------------------------------------------------------------------
-
-            Text.SetText("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
-
-
-            Start();
-
-        }
-
-        else
-        {
-            return;
-        }
-
-
-    
-
-}
 
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

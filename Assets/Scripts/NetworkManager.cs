@@ -17,7 +17,6 @@ public class NetworkManager : MonoBehaviour
         stream = client.GetStream();
 
         // Start receiving messages in a separate task
-        Task receiveTask = Task.Run(async () => await ReceiveMessages());
     }
 
        //It Contains the answered received from GEMINI
@@ -46,6 +45,8 @@ public class NetworkManager : MonoBehaviour
 
     public async Task SendMessageToServer(string message)
     {
+        //Debug.Log(Chat.GeminiFlag);
+
         if (Chat.GeminiFlag == false)
         {
             byte[] data = Encoding.UTF8.GetBytes(message);
