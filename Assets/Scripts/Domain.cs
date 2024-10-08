@@ -155,7 +155,7 @@ public class Domain : MonoBehaviour
 
         }
 
-        Chat.GeminiFlag = false;
+        
 
     }
 

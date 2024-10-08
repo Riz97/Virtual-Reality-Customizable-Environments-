@@ -25,6 +25,8 @@ using UnityEngine.Windows;
 using static UnityEngine.XR.ARSubsystems.XRCpuImage;
 using JetBrains.Annotations;
 using System.Threading;
+using static UnityEditor.PlayerSettings;
+using UnityEngine.WSA;
 
 
 
@@ -39,7 +41,6 @@ public class Chat : MonoBehaviour
     public static string input_auxx;
     public static string input_auxx3;
 
-    public static bool GeminiFlag = false;
     public static bool Bases = false;
     public static bool Custom = false;
     private bool check = false;
@@ -124,7 +125,7 @@ public class Chat : MonoBehaviour
 
     public NetworkManager Network = new NetworkManager();
 
-    public static CancellationTokenSource cts = new CancellationTokenSource();
+    
 
 
     //-------------------- OPEN AI CLIENT INFO ------------------------
@@ -193,9 +194,7 @@ public class Chat : MonoBehaviour
 
             if (dropdown.options[dropdown.value].text == "GPT")
             {
-                
-
-
+         
                 var messages = new List<Message>
             {
                 new Message(Role.User, input)
@@ -224,24 +223,18 @@ public class Chat : MonoBehaviour
 
             
 
-             await Network.SendMessageToServer(input);
-
-
-             result_aux = await Network.ReceiveMessages();
+            await Network.SendMessageToServer(input);
+            result_aux = await Network.ReceiveMessages();
             
             result_auxx = result_aux.Replace("`", "");
             result = result_auxx.Replace("C#", "").Replace("csharp","").Replace("c#","");
             result = RemoveAfterCharacter(result, '*');
             char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-            ModelName = "Gemini-Pro-1.0";
+            ModelName = "Gemini-Pro-1.0"; //The actual Google Gemini LLM must be changed inside the Python Server
+
             AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
             tries++;
            
-                
-
-                
-       
-
             }
 
         }
@@ -266,9 +259,12 @@ public class Chat : MonoBehaviour
             //It sets the text of the scroll view
             Text.color = new Color32(27, 255, 0, 255);
             Text.SetText(result.ToString());
+         
+         // If we arrive at this point, we know that the script generated is acceptable. So we must set the input string to STOP in order to
+         // block the communication between the python server and the GEMINI LLM
             input = "STOP";
-            GeminiFlag = true;
-            Debug.Log(input);
+            
+        
 
             //--------------------------------------- User Mode Information ---------------------------------------
 
@@ -318,7 +314,7 @@ public class Chat : MonoBehaviour
 
     //It handles the InputField string written by the user
 
-    //Method called with On End Edit (writing ended)
+    //Method called with On End Edit (writing ended) attached to "Generate Script" Button
     public void ReadStringInput(TMP_InputField InputField)
 
     {
@@ -433,13 +429,8 @@ public class Chat : MonoBehaviour
                     " 'Model_3' (Chair) at Y position equals to -0.47, at X position  -2.76 and Z position 6.28  'Model_4' (Chair) at Y position equals to -0.47, " +
                     " at X position -4.37 and Z position 4.81 and Y rotation equals -97.34" +
                     " 4)Add a collider for every object ";
-                      
-
-
-            
 
             Start();
-         
 
         }
 
@@ -454,13 +445,19 @@ public class Chat : MonoBehaviour
             Number_of_Objects = 7;
 
 
-            input = " the first thing to do must be find using the Find() method the  gameobjects  called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6 and  destroy them and YOU MUST  substitute them  with the gameobjects THAT YOU MUST   load  from the folder named 'Furniture' inside the folder  'Resources' called 'Bed' , " +
-                "Drawer' 'Desk' 'Chair' 'Drawer' 'Shower' 'Sink' , You MUST RENAME THEM AS 'Model_0' 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6 in the unity hierarchy MANDATORY" +
-                    " 'Model_0' (Bed) at Y position equals to -0.47, at X position -0.64 and Z position 9.99 , 'Model_1' (Drawer) at Y position equals to -0.47, at X position -3.30 and Z position 12.38 'Model_2' (Desk) at Y position equals to -0.47, at X position -4.35 and Z position 6.35 and Y rotation equals to 87.809" +
-                     "'Model_3' (Chair) at Y position equals to -0.47, at X position  -3.31 and Z position 6.09 and Y rotation equals 97.00 'Model_4' (Drawer) at Y position equals to -0.47, at X position 1.42 and Z position 12.1 'Model_5' (Shower) at Y position equals to -0.47, at X position 4.69 " +
-                     "and Z position 10.72 and 'Model_6' (Sink) at Y position equals to -0.47, at X position 6.34 and Z position 10.02" +
-                    " and add just one collider per gameobject, find the gameobject named Plane and change its" +
-                    " material with the material   called 'Material'THAT MUST BE LOADED inside the 'Furniture' folder which is inside the folder Resources and do not destroy it, using a method called Start , avoid any type of comments , you must write only code";
+            input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
+                    " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6' and destroy them"+
+                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/ Material folder" +
+                    " 3) Substitute them with the objects loaded from the Resources/Furniture, the gameobjects to be uploaded are 'Bed' 'Drawer' 'Desk' 'Chair' 'Drawer' 'Shower' 'Sink'"+
+                    " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' 'Model_5' 'Model_6' " +
+                    " Model_0' (Bed) at Y position equals to -0.47, at X position -0.64 and Z position 9.99 , 'Model_1' (Drawer) at Y position equals to -0.47, at X position -3.30 and " +
+                    " Z position 12.38 'Model_2' (Desk) at Y position equals to -0.47, at X position -4.35 and Z position 6.35 and Y rotation equals to 87.809" +
+                    " 'Model_3' (Chair) at Y position equals to -0.47, at X position  -3.31 and Z position 6.09 and Y rotation equals 97.00 " +
+                    " 'Model_4' (Drawer) at Y position equals to -0.47, at X position 1.42 and Z position 12.1 " +
+                    " 'Model_5' (Shower) at Y position equals to -0.47, at X position 4.69 and Z position 10.72 and " +
+                    " 'Model_6' (Sink) at Y position equals to -0.47, at X position 6.34 and Z position 10.02"+
+                    " 4) Add a collider for every object";
+            
            
             Start();
             
