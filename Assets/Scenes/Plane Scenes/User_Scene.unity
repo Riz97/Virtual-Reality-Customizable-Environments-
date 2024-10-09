@@ -1252,7 +1252,9 @@ MonoBehaviour:
   Info_Text: {fileID: 955833111}
   Number_Models_Text: {fileID: 33134918}
   material: {fileID: 5561349426305759274, guid: 9e1dc1c14313460d872de39e35129b39, type: 3}
+  dropdown: {fileID: 0}
   Models: {fileID: 456743519}
+  Network: {fileID: 0}
 --- !u!4 &478013928
 Transform:
   m_ObjectHideFlags: 0
@@ -2492,7 +2494,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ask to the IA.....
+  m_text: Ask to the AI.....
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

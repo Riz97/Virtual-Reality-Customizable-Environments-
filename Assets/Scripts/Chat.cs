@@ -286,10 +286,6 @@ public class Chat : MonoBehaviour
         {
             return;
         }
-
-
-
-
     }
 
     //It handles the InputField string written by the user
@@ -568,8 +564,6 @@ public class Chat : MonoBehaviour
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-
         //-----------------------------------------------------------------------   CUSTOM ENVIRONMENT -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -588,7 +582,6 @@ public class Chat : MonoBehaviour
 
   
         }
-
 
         // ---------------------------  CARS  -------------------
 
@@ -691,6 +684,7 @@ public class Chat : MonoBehaviour
                 input = null; //in this way the execution is blocked
             }
             input = null; // in this way the execution is blocked
+
             //------------------------------------------------------------------------------------------------------------------
         }
 
@@ -708,7 +702,6 @@ public class Chat : MonoBehaviour
             GameObject obj = Instantiate(Models, transform.position, Quaternion.identity);
             obj.name = "Model_" + i.ToString();
             
-
         }
     }
 
@@ -768,33 +761,32 @@ public class Chat : MonoBehaviour
         return randomCoordinate;
     }
 
-    //Input Request function definition
+    //Input Request function definition for the customized environments
     public string Input_Request(string input, int Number_of_Objects, List<string> list, string Material, List<string> list_Directions)
 
     {
-
-   
-
+ 
         input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps : 1)  Find with the Find method the objects called ";
 
-        input = Define_Models(Number_of_Objects, input) + " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from " + Material + "/Material folder, " +
-        "3) Substitute them with the objects loaded from the Resources/" + Material +  "," +
-        " the gameobjects to be uploaded are  ";
+        input = Define_Models(Number_of_Objects, input) + 
+                " 2) MANDATORY!!!! Find with the Find() method the gameobject " +
+                " 'Plane' and change its material with the material loaded from " + Material + "/Material folder, " +
+                " 3) Substitute them with the objects loaded from the Resources/" + Material +  "," +
+                " the gameobjects to be uploaded are  ";
 
         input = Enum_Objects(list, Number_of_Objects, input) + " and rename them ";
 
         input = Define_Models(Number_of_Objects, input);
 
-
-        input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + " , rename them  " +  Enum_Objects(list, Number_of_Objects, input) + " 4) add just one collider per gameobject, " +
-        " 5) use a method called Start";
-
+        input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + 
+               " , rename them  " +  Enum_Objects(list, Number_of_Objects, input) + " 4) add just one collider per gameobject, " +
+               " 5) use a method called Start";
 
        return input;
-  }
+    }
 
-//It defines which object Name must be inserted in the input for CHATGPT
-public string Enum_Objects(List<string> objects, int Number_of_Objects, string input){
+    //It defines which object Name must be inserted in the input for CHATGPT
+    public string Enum_Objects(List<string> objects, int Number_of_Objects, string input){
         
         
 
@@ -838,7 +830,6 @@ public string Enum_Objects(List<string> objects, int Number_of_Objects, string i
         return input;
     }
 
-
     //------------------------------------------------- Numbers Of Models Increase - Decrease -----------------------------------------------------------------------------------------
     
     //Functions attached to the Plus and Minus Buttons
@@ -873,9 +864,6 @@ public string Enum_Objects(List<string> objects, int Number_of_Objects, string i
         return selectedOption; 
     }
 
-
-
-
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     //----------------------------------------- META LANGUAGE ---------------------------------------------------------------------------------
@@ -908,8 +896,7 @@ public string Enum_Objects(List<string> objects, int Number_of_Objects, string i
 
         //Subdivide the string in a List of substrings 
         List<string> aux = s.Split(' ').ToList();
-
-        
+   
         //For every string inside the list
         foreach (string str in aux)
         {
@@ -921,11 +908,8 @@ public string Enum_Objects(List<string> objects, int Number_of_Objects, string i
                 subSet.Add(str.Substring(0, 1).ToUpper() + str.Substring(1).ToLower());
             }
 
-            
-
         }
-            
-        
+              
         return subSet; 
     }
 
@@ -950,12 +934,7 @@ public string Enum_Objects(List<string> objects, int Number_of_Objects, string i
 
                 subSet.Add(str.Substring(0, 1).ToUpper() + str.Substring(1).ToLower());
             }
-
- 
-
-
         }
-
 
         return subSet;
     }
@@ -1006,7 +985,6 @@ public string Enum_Objects(List<string> objects, int Number_of_Objects, string i
       
     }
 
-
     public static string RemoveAfterCharacter(string input, char delimiter)
     {
         int index = input.IndexOf(delimiter);
@@ -1019,8 +997,6 @@ public string Enum_Objects(List<string> objects, int Number_of_Objects, string i
             return input; // Se il carattere non è trovato, restituisce la stringa originale
         }
     }
-
-
     //---------------------------------------------------------------------------------------------------------
 }
 
