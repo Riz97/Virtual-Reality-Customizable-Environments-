@@ -1,22 +1,10 @@
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.FlowAnalysis;
-using OpenAI.Chat;
+
 using RoslynCSharp;
-using RoslynCSharp.Compiler;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq.Expressions;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using TMPro;
-using Unity.PlasticSCM.Editor.WebApi;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Utilities.Extensions;
 
 
 public class Domain : MonoBehaviour

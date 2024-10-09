@@ -1,7 +1,5 @@
 using System.Net.Sockets;
 using System.Text;
-using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -10,7 +8,7 @@ public class NetworkManager : MonoBehaviour
     public string message;
     private TcpClient client;
     private NetworkStream stream;
-    int count = 0;
+
     public void Start()
     {
         client = new TcpClient("127.0.0.1", 1234);
@@ -38,9 +36,6 @@ public class NetworkManager : MonoBehaviour
             message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
            // Debug.Log(message);
             return message;
-        
-
-        
     }
 
     public async Task SendMessageToServer(string message)

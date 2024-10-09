@@ -4,29 +4,13 @@ using UnityEngine;
 //using OpenAIClient.ChatEndpoint;
 using OpenAI.Models;
 using OpenAI;
-using System.Threading.Tasks;
 using OpenAI.Chat;
 using System;
-using UnityEngine.UI;
 using TMPro;
-using UnityEngine.UIElements;
 using System.Linq;
-using System.Data.SqlTypes;
 using UnityEngine.SceneManagement;
-using System.Text;
-using UnityEngine.XR;
-using UnityEngine.InputSystem.Android;
-using static System.Net.Mime.MediaTypeNames;
-using Unity.XR.Oculus.Input;
 using Button = UnityEngine.UI.Button;
-using Utilities.Extensions;
-using NUnit.Framework;
-using UnityEngine.Windows;
-using static UnityEngine.XR.ARSubsystems.XRCpuImage;
-using JetBrains.Annotations;
-using System.Threading;
-using static UnityEditor.PlayerSettings;
-using UnityEngine.WSA;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 
 
@@ -196,11 +180,10 @@ public class Chat : MonoBehaviour
 
                 var api = new OpenAIClient();
                 var chatRequest = new ChatRequest(messages, model);
-                result_aux = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
-                result_auxx = result_aux.Replace("`", "");
-                result = result_auxx.Replace("C#", "");
+                result_aux = await api.ChatEndpoint.GetCompletionAsync(chatRequest);             
+                result = result_aux.Replace("C#", "").Replace("`","");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-                Debug.Log(result);
+                //Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 tries++;
                 
@@ -225,7 +208,7 @@ public class Chat : MonoBehaviour
             result = RemoveAfterCharacter(result, '*');
             char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
             ModelName = "Gemini-Pro-1.0"; //The actual Google Gemini LLM must be changed inside the Python Server
-
+            //Debug.Log(result);
             AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
             tries++;
            
@@ -383,9 +366,6 @@ public class Chat : MonoBehaviour
 
         List<string> list_Directions = list_Directions_aux;
 
-
-
-
         Text.color = new Color32(27, 255, 0, 255);
         Text.SetText(Computing_Message);
 
@@ -424,7 +404,8 @@ public class Chat : MonoBehaviour
                     " at X position 0.13 and Z position 9.25 'Model_2' (Table) at Y position equals to -0.47, at X position -2.64 and Z position 4.62 " +
                     " 'Model_3' (Chair) at Y position equals to -0.47, at X position  -2.76 and Z position 6.28  'Model_4' (Chair) at Y position equals to -0.47, " +
                     " at X position -4.37 and Z position 4.81 and Y rotation equals -97.34" +
-                    " 4)Add a collider for every object ";
+                    " 4)Add a collider for every object " +
+                    " 5) use a method called Start";
 
             Start();
 
@@ -452,8 +433,9 @@ public class Chat : MonoBehaviour
                     " 'Model_4' (Drawer) at Y position equals to -0.47, at X position 1.42 and Z position 12.1 " +
                     " 'Model_5' (Shower) at Y position equals to -0.47, at X position 4.69 and Z position 10.72 and " +
                     " 'Model_6' (Sink) at Y position equals to -0.47, at X position 6.34 and Z position 10.02"+
-                    " 4) Add a collider for every object";
-                   
+                    " 4) Add a collider for every object" +
+                    " 5) use a method called Start";
+
             Start();
             
         }
@@ -477,7 +459,8 @@ public class Chat : MonoBehaviour
                     " 'Model_2' (Pine) at Y position equals to -0.47, at X position -0.77 and Z position 9.61 Model_3' (Mushroom) at Y position equals to -0.47, at X position  -2.31 and Z position 7.68  " +
                     " 'Model_4' (Oak) at Y position equals to -0.47, at X position 1.11 and Z position 7.74 " +
                     " 'Model_5' (Stone) at Y position equals to -0.47, at X position -2.98 and Z position 13.72 " +
-                    " 4) Add a collider for every object";
+                    " 4) Add a collider for every object" +
+                    " 5) use a method called Start";
 
             Start();
 
@@ -500,7 +483,8 @@ public class Chat : MonoBehaviour
                     " 'Model_0' (Pine) at Y position equals to -0.47, at X position -3.52 and Z position 7.48, 'Model_1' (Flower) at Y position equals to -0.47, at X position -4.17 and Z position 7.25 " +
                     " 'Model_2' (Mushroom) at Y position equals to -0.47, at X position -2.70 and Z position 7.41 'Model_3' (Oak) at Y position equals to -0.47, at X position  -1.7 and Z position 7.68 " +
                     " 'Model_4' (Wood) at Y position equals to -0.47, at X position 1.11 and Z position 7.74 " +
-                    " 4) Add a collider for every object ";
+                    " 4) Add a collider for every object " +
+                    " 5) use a method called Start";
 
             Start();
 
@@ -524,7 +508,8 @@ public class Chat : MonoBehaviour
                     " 'Model_0' (Sport) at Y position equals to -0.47, at X position -3.74 and Z position 17.69, 'Model_1' (Cops) at Y position equals to -0.47, at X position -0.59 and Z position 22.06 " +
                     " 'Model_2' (Suv) at Y position equals to -0.47, at X position 2.52 and Z position 17.69 'Model_3' (Taxi) at Y position equals to -0.47, at X position  -7.33 and Z position 21.52  " +
                     " 'Model_4' (Sedan) at Y position equals to -0.47, at X position 6.53 and Z position 21.18 " +
-                    " 4) Add a collider for every object ";
+                    " 4) Add a collider for every object " +
+                    " 5) use a method called Start";
 
             Start();
         }
@@ -549,7 +534,8 @@ public class Chat : MonoBehaviour
                     " 'Model_4' (Dumpster) at Y position equals to -0.47, at X position 6.66 and Z position 8.08 and Y rotation equals -92.135 'Model_5' (Barrel) at Y position equals to -0.47, at X position 6.24 " +
                     " 'Model_5' (Barrel) at Y position equals to -0.47, at X position 6.24 and Z position 6.43" +
                     " 'Model_6' (Sink) at Y position equals to -0.47, at X position 6.34 and Z position 10.02 and 'Model_6' (Barrel) at Y position equals to -0.47, at X position 7.04 and Z position 6.54" +
-                    " 4) Add a collider for every object";
+                    " 4) Add a collider for every object" +
+                    " 5) use a method called Start";
 
             Start();
 
@@ -573,7 +559,8 @@ public class Chat : MonoBehaviour
                     " 'Model_2' (Garbage) at Y position equals to -0.47, at X position 1.64 and Z position 11.61 Model_3' 'Model_3' (Pallet) at Y position equals to -0.47, at X position  2.90 and Z position 9.70  " +
                     " 'Model_4' (Pallet) at Y position equals to -0.47, at X position 4.11 and Z position 9.28  " +
                     " 'Model_5' (Car) at Y position equals to -0.47, at X position 6.66 and Z position 8.86 " +
-                    " 4) Add a collider for every object";
+                    " 4) Add a collider for every object" +
+                    " 5) use a method called Start";
 
             Start();
 
@@ -583,10 +570,10 @@ public class Chat : MonoBehaviour
 
 
 
-        //----------------------------------------------------------------- CUSTOM ENVIRONMENT -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------   CUSTOM ENVIRONMENT -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-        // ------ FURNITURE -----------
+        // -------------------------  FURNITURE   ---------------
 
 
         else if (words_Furniture.Count() == Number_of_Objects && words_Furniture.Count()!=0)
@@ -603,7 +590,7 @@ public class Chat : MonoBehaviour
         }
 
 
-        // ------ CARS -----------
+        // ---------------------------  CARS  -------------------
 
         else if (words_Cars.Count() == Number_of_Objects && words_Cars.Count() != 0)
         {
@@ -612,31 +599,24 @@ public class Chat : MonoBehaviour
 
             input = Input_Request(input, Number_of_Objects, words_Cars , "Cars", list_Directions);
 
-     
-
-
             Start();
 
-            
         }
 
-        // ------ NATURE -----------
+        // ---------------------------  NATURE  ------------------
 
         else if (words_Nature.Count() == Number_of_Objects && words_Nature.Count() != 0)
         {
-
-            
 
             createModels(Number_of_Objects);
 
             input = Input_Request(input, Number_of_Objects, words_Nature, "Nature", list_Directions);
 
             Start();
-
           
         }
 
-        // ------ CITY ----------
+        // -----------------------------  CITY  --------------------
 
         else if (words_City.Count() == Number_of_Objects && words_City.Count() != 0 ) 
         {
@@ -644,22 +624,21 @@ public class Chat : MonoBehaviour
 
             input = Input_Request(input, Number_of_Objects, words_City, "City",list_Directions);
 
-
             Start();
 
         }
 
 
-        // ------ INDUSTRIAL -----------
+        // ---------------------------  INDUSTRIAL  ---------------------
 
         else if (words_Industrial.Count() == Number_of_Objects && words_Industrial.Count() != 0) 
         {
             createModels(Number_of_Objects);
+
             input = Input_Request(input, Number_of_Objects, words_Industrial,"Industrial", list_Directions);
 
             Start();
 
-            
         }
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -737,8 +716,7 @@ public class Chat : MonoBehaviour
     public float Random_PositionZ(List<string> list, int i)
     {
         float randomCoordinate = 0;
-       
-
+      
         if (list[i].ToLower() == "right")
         {
             randomCoordinate = UnityEngine.Random.Range(9f, 23f);
@@ -767,17 +745,17 @@ public class Chat : MonoBehaviour
         float randomCoordinate = 0;
         
 
-        if (list[i] == "Right" || list[i] == "right")
+        if (list[i].ToLower() == "right")
         {
             randomCoordinate = UnityEngine.Random.Range(14f, 17f);
         }
 
-        else if (list[i] == "Left" || list[i] == "left")
+        else if (list[i].ToLower() == "left")
         {
             randomCoordinate = UnityEngine.Random.Range(-9f, -11f);
         }
 
-        else if (list[i] == "Center" || list[i] == "center")
+        else if (list[i].ToLower() == "center")
         {
             randomCoordinate = UnityEngine.Random.Range(-4f, 5f);
         }
@@ -795,17 +773,21 @@ public class Chat : MonoBehaviour
 
     {
 
-        input = "the first thing to do must be find using the Find() method the gameobjects  called ";
+   
 
-        input = Define_Models(Number_of_Objects, input) + "and  destroy them and YOU  MUST   substitute them , by using the same pattern of code for all the gameobjects,   with the gameobjects THAT YOU MUST   load  from the       11 folder named " + Material + " inside the folder  'Resources' called ";
+        input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps : 1)  Find with the Find method the objects called ";
 
-        input = Enum_Objects(list, Number_of_Objects, input) + "You MUST RENAME THEM AS ";
+        input = Define_Models(Number_of_Objects, input) + " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from " + Material + "/Material folder, " +
+        "3) Substitute them with the objects loaded from the Resources/" + Material +  "," +
+        " the gameobjects to be uploaded are  ";
 
-        input = Define_Models(Number_of_Objects, input) + " in the unity hierarchy  MANDATORY at the e but only after you positioned them";
+        input = Enum_Objects(list, Number_of_Objects, input) + " and rename them ";
+
+        input = Define_Models(Number_of_Objects, input);
 
 
-        input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + " , rename them  " +  Enum_Objects(list, Number_of_Objects, input) + "   add just one collider per gameobject, find the gameobject named Plane   and change its" + "material with the material   called 'Material'THAT MUST BE 23 LOADED inside the" +  Material + " folder which is inside the folder  Resources," +
-        "using a method called Start , avoid any type of comments , you must write only  code";
+        input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + " , rename them  " +  Enum_Objects(list, Number_of_Objects, input) + " 4) add just one collider per gameobject, " +
+        " 5) use a method called Start";
 
 
        return input;
