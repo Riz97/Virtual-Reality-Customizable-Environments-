@@ -416,8 +416,7 @@ public class Chat : MonoBehaviour
 
 
             input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
-                    " 1) Find with the Find method the objects called  called 'Model_0', " +
-                    " 'Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them" +
+                    " 1) Find with the Find method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
                     " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder"+ 
                     " 3) Substitute them with objects loaded from the Resources/Furniture folder, the gameobjects to be uploaded are 'Desk' 'Table' 'Chair' 'Chair'  " +
                     " and rename them 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 " +
@@ -444,7 +443,7 @@ public class Chat : MonoBehaviour
 
             input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
                     " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6' and destroy them"+
-                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/ Material folder" +
+                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder" +
                     " 3) Substitute them with the objects loaded from the Resources/Furniture, the gameobjects to be uploaded are 'Bed' 'Drawer' 'Desk' 'Chair' 'Drawer' 'Shower' 'Sink'"+
                     " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' 'Model_5' 'Model_6' " +
                     " Model_0' (Bed) at Y position equals to -0.47, at X position -0.64 and Z position 9.99 , 'Model_1' (Drawer) at Y position equals to -0.47, at X position -3.30 and " +
@@ -454,8 +453,7 @@ public class Chat : MonoBehaviour
                     " 'Model_5' (Shower) at Y position equals to -0.47, at X position 4.69 and Z position 10.72 and " +
                     " 'Model_6' (Sink) at Y position equals to -0.47, at X position 6.34 and Z position 10.02"+
                     " 4) Add a collider for every object";
-            
-           
+                   
             Start();
             
         }
@@ -470,13 +468,16 @@ public class Chat : MonoBehaviour
             Number_of_Objects = 6;
 
 
-            input = " the first thing to do must be find using the Find() method the  gameobjects  called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5  and  destroy them and YOU MUST  substitute them  with the gameobjects THAT YOU MUST   load  from the folder named 'Nature' inside the folder  'Resources' called 'Oak' , " +
-                "Pine' 'Pine' 'Mushroom' 'Oak' 'Stone' , You MUST RENAME THEM AS 'Model_0' 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5  in the unity hierarchy MANDATORY" +
-                    " 'Model_0' (Oak) at Y position equals to -0.47, at X position -4.25 and Z position 10.48, 'Model_1' (Pine) at Y position equals to -0.47, at X position -1.48 and Z position 7.49 'Model_2' (Pine) at Y position equals to -0.47, at X position -0.77 and Z position 9.61 " +
-                     "'Model_3' (Mushroom) at Y position equals to -0.47, at X position  -2.31 and Z position 7.68  'Model_4' (Oak) at Y position equals to -0.47, at X position 1.11 and Z position 7.74 'Model_5' (Stone) at Y position equals to -0.47, at X position -2.98 " +
-                     "and Z position 13.72 " +
-                    " and add just one collider per gameobject, find the gameobject named Plane and change its" +
-                    " material with the material   called 'Material'THAT MUST BE LOADED inside the 'Nature' folder which is inside the folder Resources and do not destroy it, using a method called Start , avoid any type of comments , you must write only code";
+            input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
+                    " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 and destroy them " +
+                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Nature/Material folder" +
+                    " 3) Substitute them with the objects loaded from the Resources/Nature, the gameobjects to be uploaded are 'Oak' 'Pine' 'Pine' 'Mushroom' 'Oak' 'Stone'" +
+                    " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' 'Model_5' " +
+                    " 'Model_0' (Oak) at Y position equals to -0.47, at X position -4.25 and Z position 10.48, 'Model_1' (Pine) at Y position equals to -0.47, at X position -1.48 and Z position 7.49 " +
+                    " 'Model_2' (Pine) at Y position equals to -0.47, at X position -0.77 and Z position 9.61 Model_3' (Mushroom) at Y position equals to -0.47, at X position  -2.31 and Z position 7.68  " +
+                    " 'Model_4' (Oak) at Y position equals to -0.47, at X position 1.11 and Z position 7.74 " +
+                    " 'Model_5' (Stone) at Y position equals to -0.47, at X position -2.98 and Z position 13.72 " +
+                    " 4) Add a collider for every object";
 
             Start();
 
@@ -491,16 +492,17 @@ public class Chat : MonoBehaviour
 
             Number_of_Objects = 5;
 
-
-            input = " the first thing to do must be find using the Find() method the  gameobjects  called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4   and  destroy them and YOU MUST  substitute them  with the gameobjects THAT YOU MUST   load  from the folder named 'Nature' inside the folder  'Resources' called 'Pine' , " +
-                "Flower' 'Mushroom' 'Oak' 'Wood'  , You MUST RENAME THEM AS 'Model_0' 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4   in the unity hierarchy MANDATORY" +
-                    " 'Model_0' (Pine) at Y position equals to -0.47, at X position -3.52 and Z position 7.48, 'Model_1' (Flower) at Y position equals to -0.47, at X position -4.17 and Z position 7.25 'Model_2' (Mushroom) at Y position equals to -0.47, at X position -2.70 and Z position 7.41 " +
-                     "'Model_3' (Oak) at Y position equals to -0.47, at X position  -1.7 and Z position 7.68  'Model_4' (Wood) at Y position equals to -0.47, at X position 1.11 and Z position 7.74 " +      
-                    " and add just one collider per gameobject, find the gameobject named Plane and change its" +
-                    " material with the material   called 'Material'THAT MUST BE LOADED inside the 'Nature' folder which is inside the folder Resources and do not destroy it, using a method called Start , avoid any type of comments , you must write only code";
+            input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
+                    " 1) Find with the Find method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
+                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Nature/Material folder " +
+                    " 3) Substitute them with the objects loaded from the Resources/Nature, the gameobjects to be uploaded are 'Pine' 'Flower' 'Mushroom' 'Oak' 'Wood' " +
+                    " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' " +
+                    " 'Model_0' (Pine) at Y position equals to -0.47, at X position -3.52 and Z position 7.48, 'Model_1' (Flower) at Y position equals to -0.47, at X position -4.17 and Z position 7.25 " +
+                    " 'Model_2' (Mushroom) at Y position equals to -0.47, at X position -2.70 and Z position 7.41 'Model_3' (Oak) at Y position equals to -0.47, at X position  -1.7 and Z position 7.68 " +
+                    " 'Model_4' (Wood) at Y position equals to -0.47, at X position 1.11 and Z position 7.74 " +
+                    " 4) Add a collider for every object ";
 
             Start();
-
 
         }
 
@@ -514,13 +516,16 @@ public class Chat : MonoBehaviour
 
             Number_of_Objects = 5;
 
+            input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
+                    " 1) Find with the Find method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
+                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Cars/Material folder " +
+                    " 3) Substitute them with the objects loaded from the Resources/Cars, the gameobjects to be uploaded are 'Pine' 'Flower' 'Mushroom' 'Oak' 'Wood' " +
+                    " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' " +
+                    " 'Model_0' (Sport) at Y position equals to -0.47, at X position -3.74 and Z position 17.69, 'Model_1' (Cops) at Y position equals to -0.47, at X position -0.59 and Z position 22.06 " +
+                    " 'Model_2' (Suv) at Y position equals to -0.47, at X position 2.52 and Z position 17.69 'Model_3' (Taxi) at Y position equals to -0.47, at X position  -7.33 and Z position 21.52  " +
+                    " 'Model_4' (Sedan) at Y position equals to -0.47, at X position 6.53 and Z position 21.18 " +
+                    " 4) Add a collider for every object ";
 
-            input = " the first thing to do must be find using the Find() method the  gameobjects  called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4   and  destroy them and YOU MUST  substitute them  with the gameobjects THAT YOU MUST   load  from the folder named 'Cars' inside the folder  'Resources' called 'Sport' , " +
-                "Cops' 'Suv' 'Taxi' 'Sedan', You MUST RENAME THEM AS 'Model_0' 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4   in the unity hierarchy MANDATORY" +
-                    " 'Model_0' (Sport) at Y position equals to -0.47, at X position -3.74 and Z position 17.69, 'Model_1' (Cops) at Y position equals to -0.47, at X position -0.59 and Z position 22.06 'Model_2' (Suv) at Y position equals to -0.47, at X position 2.52 and Z position 17.69 " +
-                     "'Model_3' (Taxi) at Y position equals to -0.47, at X position  -7.33 and Z position 21.52  'Model_4' (Sedan) at Y position equals to -0.47, at X position 6.53 and Z position 21.18 " +
-                    " and add just one collider per gameobject, find the gameobject named Plane and change its" +
-                    " material with the material   called 'Material'THAT MUST BE LOADED inside the 'Cars' folder which is inside the folder Resources and do not destroy it, using a method called Start , avoid any type of comments , you must write only code";
             Start();
         }
 
@@ -533,17 +538,20 @@ public class Chat : MonoBehaviour
 
             Number_of_Objects = 7;
 
-
-            input = " the first thing to do must be find using the Find() method the  gameobjects  called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6 and  destroy them and YOU MUST  substitute them  with the gameobjects THAT YOU MUST   load  from the folder named 'City' inside the folder  'Resources' called 'Bench' , " +
-               "Bin' 'Mailbox' 'Stoplight' 'Dumpster' 'Barrel' 'Barrel' , You MUST RENAME THEM AS 'Model_0' 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6 in the unity hierarchy MANDATORY" +
-                   " 'Model_0' (Bench) at Y position equals to -0.47, at X position -3.29 and Z position 7.85 and Y rotation equals to 88.27 , 'Model_1' (Bin) at Y position equals to -0.47, at X position -3.25 and Z position 5.99 'Model_2' (Mailbox) at Y position equals to -0.47, at X position -3.28 and Z position 9.66 and Y rotation equals to -78.88" +
-                    "'Model_3' (Stoplight) at Y position equals to -0.47, at X position  1.31 and Z position 25.09 and Y rotation equals -176.29 'Model_4' (Dumpster) at Y position equals to -0.47, at X position 6.66 and Z position 8.08 and Y rotation equals -92.135 'Model_5' (Barrel) at Y position equals to -0.47, at X position 6.24 " +
-                    "and Z position 6.43 and 'Model_6' (Barrel) at Y position equals to -0.47, at X position 7.04 and Z position 6.54" +
-                   " and add just one collider per gameobject, find the gameobject named Plane and change its" +
-                   " material with the material   called 'Material'THAT MUST BE LOADED inside the 'City' folder which is inside the folder Resources and do not destroy it, using a method called Start , avoid any type of comments , you must write only code";
+            input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
+                    " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6' and destroy them" +
+                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from City/Material folder" +
+                    " 3) Substitute them with the objects loaded from the Resources/City, the gameobjects to be uploaded are 'Bench' 'Bin' 'Mailbox' 'Stoplight' 'Dumpster' 'Barrel' 'Barrel' " +
+                    " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' 'Model_5' 'Model_6' " +
+                    " 'Model_0' (Bench) at Y position equals to -0.47, at X position -3.29 and Z position 7.85 and Y rotation equals to 88.27 , 'Model_1' (Bin) at Y position equals to -0.47, at X position -3.25 and Z position 5.99 " +
+                    " 'Model_2' (Mailbox) at Y position equals to -0.47, at X position -3.28 and Z position 9.66 and Y rotation equals to -78.88 " +
+                    " 'Model_3' (Chair) at Y position equals to -0.47, at X position  -3.31 and Z position 6.09 and Y rotation equals 97.00 'Model_3' (Stoplight) at Y position equals to -0.47, at X position  1.31 and Z position 25.09 and Y rotation equals -176.29 " +
+                    " 'Model_4' (Dumpster) at Y position equals to -0.47, at X position 6.66 and Z position 8.08 and Y rotation equals -92.135 'Model_5' (Barrel) at Y position equals to -0.47, at X position 6.24 " +
+                    " 'Model_5' (Barrel) at Y position equals to -0.47, at X position 6.24 and Z position 6.43" +
+                    " 'Model_6' (Sink) at Y position equals to -0.47, at X position 6.34 and Z position 10.02 and 'Model_6' (Barrel) at Y position equals to -0.47, at X position 7.04 and Z position 6.54" +
+                    " 4) Add a collider for every object";
 
             Start();
-
 
         }
 
@@ -556,14 +564,16 @@ public class Chat : MonoBehaviour
 
             Number_of_Objects = 6;
 
-
-            input = " the first thing to do must be find using the Find() method the   gameobjects  called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5  and  destroy them and YOU MUST  substitute them  with the gameobjects THAT YOU MUST   load  from the folder named 'Industrial' inside the folder  'Resources' called 'Tubes' , " +
-                "Plank' 'Garbage' 'Pallet' 'Pallet' 'Car' , You MUST RENAME THEM AS 'Model_0' 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5  in the unity hierarchy MANDATORY" +
-                    " 'Model_0' (Tubes) at Y position equals to -0.47, at X position -4.56 and Z position 7.55, 'Model_1' (Plank) at Y position equals to -0.47, at X position -1.81 and Z position 11.90 'Model_2' (Garbage) at Y position equals to -0.47, at X position 1.64 and Z position 11.61 " +
-                     "'Model_3' (Pallet) at Y position equals to -0.47, at X position  2.90 and Z position 9.70  'Model_4' (Pallet) at Y position equals to -0.47, at X position 4.11 and Z position 9.28 'Model_5' (Car) at Y position equals to -0.47, at X position 6.66 " +
-                     "and Z position 8.86 " +
-                    " and add just one collider per gameobject, find the gameobject named Plane and change its" +
-                    " material with the material   called 'Material'THAT MUST BE LOADED inside the 'City' folder which is inside the folder Resources and do not destroy it, using a method called Start , avoid any type of comments , you must write only code";
+            input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
+                    " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 and destroy them " +
+                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Industrial/Material folder" +
+                    " 3) Substitute them with the objects loaded from the Resources/Industrial, the gameobjects to be uploaded are 'Tubes' 'Plank' 'Garbage' 'Pallet' 'Pallet' 'Car' " +
+                    " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' 'Model_5' " +
+                    " 'Model_0' (Tubes) at Y position equals to -0.47, at X position -4.56 and Z position 7.55, 'Model_1' (Plank) at Y position equals to -0.47, at X position -1.81 and Z position 11.90 " +
+                    " 'Model_2' (Garbage) at Y position equals to -0.47, at X position 1.64 and Z position 11.61 Model_3' 'Model_3' (Pallet) at Y position equals to -0.47, at X position  2.90 and Z position 9.70  " +
+                    " 'Model_4' (Pallet) at Y position equals to -0.47, at X position 4.11 and Z position 9.28  " +
+                    " 'Model_5' (Car) at Y position equals to -0.47, at X position 6.66 and Z position 8.86 " +
+                    " 4) Add a collider for every object";
 
             Start();
 
