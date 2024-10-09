@@ -68,7 +68,8 @@ public class Chat : MonoBehaviour
     List<string> City_Strings = new List<string>() {"City"};
     List<string> City_Models = new List<string>() {"Barrel" , "Bench" , "Bin" , "Dumpster" , "Hydrant", "Mailbox" , "Stoplight"};
 
-    List<string> All = new List<string>() { "Barrel\"", "Bench\"", "Bin\"", "Dumpster\"", "Hydrant\"", "Mailbox\"", "Stoplight\"", "Cable\"", "Garbage\"", "Pallet\"", "Car\"", "Plank\"", "Tank\"", "Tubes\"", "Oak\"", "Bush\"", "Mushroom\"", "Wood\"", "Stone\"", "Pine\"", "Flower\"", "Cops\"", "Sedan\"", "Sport\"", "Suv\"", "Taxi\"", "Sport\"", "Desk\"", "Chair\"", "Bed\"", "Table\"", "Drawer\"", "Shower\"", "Sink\"" };
+    List<string> All = new List<string>() { "Barrel\"", "Bench\"", "Bin\"", "Dumpster\"", "Hydrant\"", "Mailbox\"", "Stoplight\"", "Cable\"", "Garbage\"", "Pallet\"", "Car\"", "Plank\"", "Tank\"", "Tubes\"", "Oak\"", "Bush\"", "Mushroom\"", 
+                                            "Wood\"", "Stone\"", "Pine\"", "Flower\"", "Cops\"", "Sedan\"", "Sport\"", "Suv\"", "Taxi\"", "Sport\"", "Desk\"", "Chair\"", "Bed\"", "Table\"", "Drawer\"", "Shower\"", "Sink\"" };
 
 
     [SerializeField] public TMP_Text Text;
@@ -183,7 +184,7 @@ public class Chat : MonoBehaviour
                 result_aux = await api.ChatEndpoint.GetCompletionAsync(chatRequest);             
                 result = result_aux.Replace("C#", "").Replace("`","");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-                //Debug.Log(result);
+                Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 tries++;
                 
@@ -208,7 +209,7 @@ public class Chat : MonoBehaviour
             result = RemoveAfterCharacter(result, '*');
             char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
             ModelName = "Gemini-Pro-1.0"; //The actual Google Gemini LLM must be changed inside the Python Server
-            //Debug.Log(result);
+            Debug.Log(result);
             AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
             tries++;
            
@@ -766,12 +767,12 @@ public class Chat : MonoBehaviour
 
     {
  
-        input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps : 1)  Find with the Find method the objects called ";
+        input = " Unity C# script code with the libraries inclusion, no comments, that follow drastically these numbered steps : 1)  Find with the Find method the objects called ";
 
-        input = Define_Models(Number_of_Objects, input) + 
-                " 2) MANDATORY!!!! Find with the Find() method the gameobject " +
-                " 'Plane' and change its material with the material loaded from " + Material + "/Material folder, " +
-                " 3) Substitute them with the objects loaded from the Resources/" + Material +  "," +
+        input = Define_Models(Number_of_Objects, input)+ " and destroy them" +
+                " 2) Substitute them with the objects loaded from the Resources/" + Material + ", then " +
+                " 3) MANDATORY!!!! Find with the Find() method the gameobject " +
+                " 'Plane' and change its material with the following code Resources.Load<Material>("+ Material+ "/Material " +
                 " the gameobjects to be uploaded are  ";
 
         input = Enum_Objects(list, Number_of_Objects, input) + " and rename them ";
@@ -779,8 +780,7 @@ public class Chat : MonoBehaviour
         input = Define_Models(Number_of_Objects, input);
 
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + 
-               " , rename them  " +  Enum_Objects(list, Number_of_Objects, input) + " 4) add just one collider per gameobject, " +
-               " 5) use a method called Start";
+               " 4) add just one collider per gameobject";
 
        return input;
     }
@@ -823,7 +823,7 @@ public class Chat : MonoBehaviour
 
         for (int ii = 0; ii < Number_of_Objects; ii++)
         {
-            input += " Model_" + ii.ToString() + "is an " +  objects[ii]  + " at  Y position equals to -0.47, at X Position equals to  " + Random_PositionX(list_Directions,ii).ToString() + " and Z position equals to " + Random_PositionZ(list_Directions,ii).ToString();
+            input += " Model_" + ii.ToString() + " is an " +  objects[ii]  + " at  Y position equals to -0.47, at X Position equals to  " + Random_PositionX(list_Directions,ii).ToString() + " and Z position equals to " + Random_PositionZ(list_Directions,ii).ToString();
 
         }
 
