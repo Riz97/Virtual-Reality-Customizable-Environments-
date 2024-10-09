@@ -739,17 +739,17 @@ public class Chat : MonoBehaviour
         float randomCoordinate = 0;
        
 
-        if (list[i] == "Right" || list[i] == "right")
+        if (list[i].ToLower() == "right")
         {
             randomCoordinate = UnityEngine.Random.Range(9f, 23f);
         } 
 
-        else if (list[i] == "Left" || list[i] == "left")
+        else if (list[i].ToLower() == "left")
         {
             randomCoordinate = UnityEngine.Random.Range(10f, 20f);
         }
 
-        else if (list[i] == "Center" || list[i] == "center")
+        else if (list[i].ToLower() == "center" )
         {
             randomCoordinate = UnityEngine.Random.Range(10f, 20f);
         }
