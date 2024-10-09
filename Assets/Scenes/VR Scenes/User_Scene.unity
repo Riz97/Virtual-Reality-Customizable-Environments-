@@ -1211,7 +1211,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 210411010}
   m_HandleRect: {fileID: 210411009}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.99362993
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1413,7 +1413,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.3351, y: -1.9003502}
+  m_AnchoredPosition: {x: 5.3351, y: 1.3836477}
   m_SizeDelta: {x: -10.0387, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &207989659
@@ -5073,7 +5073,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ask to the IA.....
+  m_text: Ask to the AI.....
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7707,7 +7707,9 @@ MonoBehaviour:
   Info_Text: {fileID: 984823615}
   Number_Models_Text: {fileID: 501296600}
   material: {fileID: 5561349426305759274, guid: 9e1dc1c14313460d872de39e35129b39, type: 3}
+  dropdown: {fileID: 0}
   Models: {fileID: 2013011777}
+  Network: {fileID: 0}
 --- !u!4 &1848734665
 Transform:
   m_ObjectHideFlags: 0
