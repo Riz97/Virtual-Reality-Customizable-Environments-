@@ -21,7 +21,7 @@ public class NetworkManager : MonoBehaviour
      public async Task<string> ReceiveMessages()
     {
         
-            byte[] buffer = new byte[10240];
+            byte[] buffer = new byte[102400];
             int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
 
             if (bytesRead == 0)

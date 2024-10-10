@@ -39,7 +39,7 @@ public class Chat : MonoBehaviour
     public static int tries = 0;
  
 
-    List<string> Mandatory_Words = new List<string>() {"Find(", "Instantiate", ".name",  };
+    List<string> Mandatory_Words = new List<string>() {"Find(", ".name",  };
 
     List<string> Material_Words = new List<string>() {
            "\"" + "Furniture/Material"+ "\"" , 
@@ -230,7 +230,7 @@ public class Chat : MonoBehaviour
     public void AIList(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
     {
         if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && 
-            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects))
+            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) /*&& CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects)*/)
         {
 
 
@@ -767,12 +767,12 @@ public class Chat : MonoBehaviour
 
     {
  
-        input = " Unity C# script code with the libraries inclusion, no comments, that follow drastically these numbered steps : 1)  Find with the Find method the objects called ";
+        input = " Unity C# script code with the libraries inclusion, no comments, that follow drastically these numbered steps : 1)  Find with the Find method, not FindObjectsByTag, the objects called ";
 
         input = Define_Models(Number_of_Objects, input)+ " and destroy them" +
                 " 2) Substitute them with the objects loaded from the Resources/" + Material + ", then " +
                 " 3) MANDATORY!!!! Find with the Find() method the gameobject " +
-                " 'Plane' and change its material with the following code Resources.Load<Material>("+ Material+ "/Material " +
+                " 'Plane' and change its material with the following code Resources.Load<Material>("+ Material+ "/Material) " +
                 " the gameobjects to be uploaded are  ";
 
         input = Enum_Objects(list, Number_of_Objects, input) + " and rename them ";
@@ -823,7 +823,7 @@ public class Chat : MonoBehaviour
 
         for (int ii = 0; ii < Number_of_Objects; ii++)
         {
-            input += " Model_" + ii.ToString() + " is an " +  objects[ii]  + " at  Y position equals to -0.47, at X Position equals to  " + Random_PositionX(list_Directions,ii).ToString() + " and Z position equals to " + Random_PositionZ(list_Directions,ii).ToString();
+            input += " Model_" + ii.ToString() + " is an " +  objects[ii]  + " at  Y position equals to -0.47, at X Position equals to  " + Random_PositionX(list_Directions,ii).ToString() + " and Z position equals to " + Random_PositionZ(list_Directions,ii).ToString() + " remember even the Y coordinates in the Vector3 definition";
 
         }
 

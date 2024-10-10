@@ -82,6 +82,15 @@ public class Domain : MonoBehaviour
         yield return new WaitForSeconds(20);
 
 
+        while((Output_Text.text.ToString() == Wait_Message || Output_Text.text.ToString() == Computing_Message) /*&& Chat.Number_of_Objects > 10*/)
+        {
+            yield return new WaitForSeconds(1);
+            Debug.Log("Attendo");
+        }
+
+
+
+        /*
         if ((Output_Text.text.ToString() == Wait_Message || Output_Text.text.ToString() == Computing_Message) && Chat.Number_of_Objects > 10)
         {
             
@@ -93,13 +102,13 @@ public class Domain : MonoBehaviour
             Debug.Log("sono qua");
             yield return new WaitForSeconds(90);
         }
-
+        */
         if (Output_Text.text.ToString() != Welcome_Message && Output_Text.text.ToString() != Error_Message && Output_Text.text.ToString() != Wait_Message && Output_Text.text != "Executing......" && Output_Text.text != Error && Output_Text.text != Computing_Message)
         {
             sourceCode = Output_Text.text.ToString();
             
 
-            yield return new WaitForSeconds(20);
+            //yield return new WaitForSeconds(20);
 
        
 

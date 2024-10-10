@@ -16,7 +16,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     with conn:
         print('Connected by', addr)
         while True:
-            data = conn.recv(10240)
+            data = conn.recv(102400)
             print(data.decode())      
             if(data.decode()!= "STOP"):
                 response = model.generate_content(data.decode())
