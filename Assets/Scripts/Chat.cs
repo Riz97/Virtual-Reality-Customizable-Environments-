@@ -780,7 +780,8 @@ public class Chat : MonoBehaviour
         input = Define_Models(Number_of_Objects, input);
 
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + 
-               " 4) add just one collider per gameobject";
+               " 4) add just one collider per gameobject" +
+               " 5) Do not use too many lines of code"; 
 
        return input;
     }
