@@ -162,8 +162,6 @@ public class Chat : MonoBehaviour
         if (input != null && input != input_aux)
         {
 
-
-
             //Time of execution Start
             float start_time = Time.time;
             string result_aux, result_auxx;
@@ -392,7 +390,7 @@ public class Chat : MonoBehaviour
             Number_of_Objects = 5; // In this way the global variable is set with the exact amount of objects for this environment
 
 
-            input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
+            input = " Unity C# script code, no comments, that follow drastically these numbered steps " +
                     " 1) Find with the Find method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
                     " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder"+ 
                     " 3) Substitute them with objects loaded from the Resources/Furniture folder, the gameobjects to be uploaded are 'Desk' 'Table' 'Chair' 'Chair'  " +
@@ -419,7 +417,7 @@ public class Chat : MonoBehaviour
             Number_of_Objects = 7;
 
 
-            input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
+            input = " Unity C# script code, no comments, that follow drastically these numbered steps " +
                     " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6' and destroy them"+
                     " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder" +
                     " 3) Substitute them with the objects loaded from the Resources/Furniture, the gameobjects to be uploaded are 'Bed' 'Drawer' 'Desk' 'Chair' 'Drawer' 'Shower' 'Sink'"+
@@ -447,7 +445,7 @@ public class Chat : MonoBehaviour
             Number_of_Objects = 6;
 
 
-            input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
+            input = " Unity C# script code, no comments, that follow drastically these numbered steps " +
                     " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 and destroy them " +
                     " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Nature/Material folder" +
                     " 3) Substitute them with the objects loaded from the Resources/Nature, the gameobjects to be uploaded are 'Oak' 'Pine' 'Pine' 'Mushroom' 'Oak' 'Stone'" +
@@ -472,7 +470,7 @@ public class Chat : MonoBehaviour
 
             Number_of_Objects = 5;
 
-            input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
+            input = " Unity C# script code, no comments, that follow drastically these numbered steps " +
                     " 1) Find with the Find method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
                     " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Nature/Material folder " +
                     " 3) Substitute them with the objects loaded from the Resources/Nature, the gameobjects to be uploaded are 'Pine' 'Flower' 'Mushroom' 'Oak' 'Wood' " +
@@ -497,7 +495,7 @@ public class Chat : MonoBehaviour
 
             Number_of_Objects = 5;
 
-            input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
+            input = " Unity C# script code, no comments, that follow drastically these numbered steps " +
                     " 1) Find with the Find method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
                     " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Cars/Material folder " +
                     " 3) Substitute them with the objects loaded from the Resources/Cars, the gameobjects to be uploaded are 'Pine' 'Flower' 'Mushroom' 'Oak' 'Wood' " +
@@ -520,7 +518,7 @@ public class Chat : MonoBehaviour
 
             Number_of_Objects = 7;
 
-            input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
+            input = " Unity C# script code, no comments, that follow drastically these numbered steps " +
                     " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6' and destroy them" +
                     " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from City/Material folder" +
                     " 3) Substitute them with the objects loaded from the Resources/City, the gameobjects to be uploaded are 'Bench' 'Bin' 'Mailbox' 'Stoplight' 'Dumpster' 'Barrel' 'Barrel' " +
@@ -767,7 +765,8 @@ public class Chat : MonoBehaviour
 
     {
  
-        input = " Unity C# script code with the libraries inclusion, no comments, that follow drastically these numbered steps : 1)  Find with the GameObject.Find method, not FindObjectsByTag, the objects called ";
+        input = " Unity C# script code with the libraries inclusion, no comments, that follow drastically these numbered steps : 1)  Find with the GameObject.Find method" +
+            ", not FindObjectsByTag, the objects called ";
 
         input = Define_Models(Number_of_Objects, input)+ " and destroy them" +
                 " 2) Substitute them with the objects loaded from the Resources/" + Material + ", then " +
@@ -780,8 +779,7 @@ public class Chat : MonoBehaviour
         input = Define_Models(Number_of_Objects, input);
 
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + 
-               " 4) add just one collider per gameobject" +
-               " 5) Do not use too many lines of code"; 
+               " 4) add just one collider per gameobject"; 
 
        return input;
     }

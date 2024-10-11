@@ -2,7 +2,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-
+using System.Diagnostics;
+    
 public class NetworkManager : MonoBehaviour
 { 
     public string message;
@@ -17,6 +18,12 @@ public class NetworkManager : MonoBehaviour
         // Start receiving messages in a separate task
     }
 
+    //Method that switch on the Gemini Python Server
+    public void GeminiServerConnectio()
+    {  
+
+    }
+
        //It Contains the answered received from GEMINI
      public async Task<string> ReceiveMessages()
     {
@@ -27,7 +34,7 @@ public class NetworkManager : MonoBehaviour
             if (bytesRead == 0)
             {
                 // Handle disconnection
-                Debug.Log("Disconnected from server!");
+                UnityEngine.Debug.Log("Disconnected from server!");
                return "";
             }
 
