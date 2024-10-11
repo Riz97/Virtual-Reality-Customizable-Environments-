@@ -74,35 +74,25 @@ public class Chat : MonoBehaviour
 
     [SerializeField] public TMP_Text Text;
 
-    [SerializeField]
-    public TMP_InputField InputField;
+    [SerializeField] public TMP_InputField InputField;
 
-    [SerializeField]
-    public List<string> Reminders_List = new List<string>();
+    [SerializeField] public List<string> Reminders_List = new List<string>();
 
-    [SerializeField]
-    public string First_Reminder;
+    [SerializeField] public string First_Reminder;
 
-    [SerializeField]
-    public static int Number_of_Objects;
+    [SerializeField] public static int Number_of_Objects;
 
-    [SerializeField]
-    public  Button Generate_Script_Button;
+    [SerializeField] public  Button Generate_Script_Button;
 
-    [SerializeField]
-    TMP_Text Output_Text;
+    [SerializeField] TMP_Text Output_Text;
 
-    [SerializeField]
-    TMP_Text Info_Text; //User Mode Text
+    [SerializeField] TMP_Text Info_Text; //User Mode Text
 
-    [SerializeField]
-    public TMP_Text Number_Models_Text;
+    [SerializeField] public TMP_Text Number_Models_Text;
 
-    [SerializeField]
-    public Material material;
+    [SerializeField] public Material material;
 
-    [SerializeField]
-    public TMP_Dropdown dropdown;
+    [SerializeField] public TMP_Dropdown dropdown;
     
  
     public GameObject Models;
@@ -115,9 +105,9 @@ public class Chat : MonoBehaviour
     //-------------------- OPEN AI CLIENT INFO ------------------------
 
 
-    //public static Model model = Model.GPT3_5_Turbo_16k;
+  //public static Model model = Model.GPT3_5_Turbo_16k;
     public static Model model = Model.GPT3_5_Turbo;
-    //public static Model model = Model.GPT4;
+  //public static Model model = Model.GPT4;
 
     public static string ModelName = model.ToString();
 
@@ -217,7 +207,7 @@ public class Chat : MonoBehaviour
 
         //-------------------------------------------------------------------------------------------------
 
-        //  --------------------------------- LLAMA Python Server Usage ----------------------------------
+        //  --------------------------------- LLAMA Amazon Bedrock Usage ----------------------------------
 
 
         // -------------------------------------------------------------------------------------------------
@@ -255,7 +245,6 @@ public class Chat : MonoBehaviour
 
             //-----------------------------------------------------------------------------------------------------
 
-
         }
         else if (input != null)
         {
@@ -268,17 +257,13 @@ public class Chat : MonoBehaviour
             {
                 Info_Text.text = ("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
 
-
-
             }
 
             //-------------------------------------------------------------------------------------
 
             Text.SetText("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
 
-
             Start();
-
         }
 
         else

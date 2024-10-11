@@ -10,14 +10,11 @@ using UnityEngine.UI;
 public class Domain : MonoBehaviour
 {
 
-    [SerializeField]
-    TMP_Text Output_Text;
+    [SerializeField] TMP_Text Output_Text;
 
-    [SerializeField]
-    TMP_Text Input_Text;
+    [SerializeField] TMP_Text Input_Text;
 
-    [SerializeField]
-    public Button Generate_Script_Button;
+    [SerializeField] public Button Generate_Script_Button;
 
     //-------------------- SYSTEM MESSAGES----------------------------------------------------------
 
@@ -32,16 +29,11 @@ public class Domain : MonoBehaviour
     private ScriptDomain domain = null;
     private string sourceCode;
 
-
-
-
     static string s_time = System.DateTime.Now.ToString("dd-MM-hh-mm-ss");
     string path = Application.dataPath + "/Logs/" + s_time + ".txt";
 
     public void Start()
     {
-
-
         //Waiter
         if (Output_Text.text.ToString() != Welcome_Message && Output_Text.text.ToString()
            != Error_Message && Output_Text.text.ToString() != Wait_Message && Output_Text.text != "Executing......")
@@ -49,13 +41,10 @@ public class Domain : MonoBehaviour
             PrintAI_Thoughts();
         }
 
-
     }
 
     public void DoScript()
-
-    {
-
+    { 
         PrintAI_Thoughts();
 
     }
@@ -70,17 +59,11 @@ public class Domain : MonoBehaviour
 
     IEnumerator WaitIA()
     {
-
-
-
         //In this way we wait 20 seconds only the first time the app is launched
         //, in these  seconds the ai should be able to 
         //provide a correct script that Roslyn will compile at runtime
        
-
-
         yield return new WaitForSeconds(20);
-
 
         //The system is put in wait, until the script is found and printed in the output text window
 
@@ -93,16 +76,9 @@ public class Domain : MonoBehaviour
         if (Output_Text.text.ToString() != Welcome_Message && Output_Text.text.ToString() != Error_Message && Output_Text.text.ToString() != Wait_Message && Output_Text.text != "Executing......" && Output_Text.text != Error && Output_Text.text != Computing_Message)
         {
             sourceCode = Output_Text.text.ToString();
-            
-
-            //yield return new WaitForSeconds(20);
-
-       
-
+          
             // Create domain
             domain = ScriptDomain.CreateDomain("Example Domain");
-
-
 
             // Compile and load code - Note that we use 'CompileAndLoadMainSource' which is the same as 'CompileAndLoadSource' but returns the main type in the compiled assembly
             ScriptType type = domain.CompileAndLoadMainSource(sourceCode, ScriptSecurityMode.UseSettings);
@@ -113,8 +89,6 @@ public class Domain : MonoBehaviour
             CreateLogFile(sourceCode, Input_Text);
 
             proxy.SafeCall(sourceCode);
-
-
 
             //If the user has asked for a Bases Environment we have to set the flag to true , in this way when another environment is asked , the system knows the 
             //exact amount of models to destroy.
@@ -142,16 +116,9 @@ public class Domain : MonoBehaviour
         Generate_Script_Button.interactable = true;
 
         }
-
-        
-
     }
 
     //-------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
     //------------------------------------------------- LOG FILES FUNCTION ------------------------------------------
 
     void CreateLogFile(string sourcecode, TMP_Text Input_Text)
@@ -171,8 +138,6 @@ public class Domain : MonoBehaviour
         +"\n" + "The IA required " + Chat.tries + " tries , for obtaining an accetable script \n");
         Chat.tries = 0;
     }
-
-
     //--------------------------------------------------------------------------------------------------------------
 
 }
