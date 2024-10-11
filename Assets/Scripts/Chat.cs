@@ -208,7 +208,7 @@ public class Chat : MonoBehaviour
             result = result_auxx.Replace("C#", "").Replace("csharp","").Replace("c#","");
             result = RemoveAfterCharacter(result, '*');
             char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-            ModelName = "Gemini-Pro-1.0"; //The actual Google Gemini LLM must be changed inside the Python Server
+            ModelName = "Gemini-Pro-1.5"; //The actual Google Gemini LLM must be changed inside the Python Server
             Debug.Log(result);
             AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
             tries++;
@@ -767,7 +767,7 @@ public class Chat : MonoBehaviour
 
     {
  
-        input = " Unity C# script code with the libraries inclusion, no comments, that follow drastically these numbered steps : 1)  Find with the Find method, not FindObjectsByTag, the objects called ";
+        input = " Unity C# script code with the libraries inclusion, no comments, that follow drastically these numbered steps : 1)  Find with the GameObject.Find method, not FindObjectsByTag, the objects called ";
 
         input = Define_Models(Number_of_Objects, input)+ " and destroy them" +
                 " 2) Substitute them with the objects loaded from the Resources/" + Material + ", then " +
