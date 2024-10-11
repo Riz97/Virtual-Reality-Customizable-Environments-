@@ -846,7 +846,7 @@ MonoBehaviour:
   Text: {fileID: 33634638}
   InputField: {fileID: 1921083187}
   Reminders_List: []
-  First_Reminder: C# Unity Script,
+  First_Reminder: 
   Generate_Script_Button: {fileID: 55758270}
   Output_Text: {fileID: 33634638}
   Info_Text: {fileID: 0}

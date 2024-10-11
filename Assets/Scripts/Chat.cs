@@ -208,7 +208,7 @@ public class Chat : MonoBehaviour
             result = result_auxx.Replace("C#", "").Replace("csharp","").Replace("c#","");
             result = RemoveAfterCharacter(result, '*');
             char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-            ModelName = "Gemini-Pro-1.5"; //The actual Google Gemini LLM must be changed inside the Python Server
+            ModelName = "Gemini-Pro-1.0"; //The actual Google Gemini LLM must be changed inside the Python Server
             Debug.Log(result);
             AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
             tries++;
