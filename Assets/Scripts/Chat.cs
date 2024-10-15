@@ -159,7 +159,7 @@ public class Chat : MonoBehaviour
 
             //-----------------------OpenAI API Usage----------------------------------
 
-            if (dropdown.options[dropdown.value].text == "GPT")
+             if (dropdown.options[dropdown.value].text == "GPT")
             {
          
                 var messages = new List<Message>
