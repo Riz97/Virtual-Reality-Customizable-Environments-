@@ -48,7 +48,7 @@ public class Chat : MonoBehaviour
            "\"" + "City/Material"+ "\"",
            "\"" + "Industrial/Material"+ "\"" };
        
-    List<string> Directions = new List<string>() { "Right", "Left" , "Middle","right", "left" , "center"};
+    List<string> Directions = new List<string>() { "Right", "Left" , "Middle","right", "left" , "center","Center","middle"};
 
 
     List<string> Furniture_Strings = new List<string>() { "Office" };
@@ -183,7 +183,7 @@ public class Chat : MonoBehaviour
             //-----------------------------------------------------------------------
 
             //---------------------------- GEMINI Python Server Usage----------------------------------------------
-
+         
             if (dropdown.options[dropdown.value].text == "GEMINI")
             {
 
@@ -202,7 +202,7 @@ public class Chat : MonoBehaviour
             tries++;
            
             }
-
+           
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -704,7 +704,7 @@ public class Chat : MonoBehaviour
             randomCoordinate = UnityEngine.Random.Range(10f, 20f);
         }
 
-        else if (list[i].ToLower() == "center" )
+        else if (list[i].ToLower() == "center" || list[i].ToLower() == "middle" )
         {
             randomCoordinate = UnityEngine.Random.Range(10f, 20f);
         }
