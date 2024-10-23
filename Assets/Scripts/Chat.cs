@@ -13,6 +13,11 @@ using Button = UnityEngine.UI.Button;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
 using Amazon.BedrockRuntime;
 using Amazon;
+using Amazon.BedrockRuntime.Model;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System.IO;
+using Amazon.Runtime;
 
 
 
@@ -105,6 +110,11 @@ public class Chat : MonoBehaviour
     private AmazonBedrockRuntimeClient client;
     private const string LlamaModel = "eu.meta.llama3-2-1b-instruct-v1:0";
     private static readonly RegionEndpoint RegionEndpoint = RegionEndpoint.EUWest3;
+
+
+    [SerializeField] private string LLAMAaccessKeyId;
+
+    [SerializeField] private string LLAMAsecretAccessKey;
     //------------------------------------------------------------------
 
     //-------------------- OPEN AI CLIENT INFO ------------------------
@@ -124,6 +134,8 @@ public class Chat : MonoBehaviour
     async void Start()
 
     {
+        var credentials = new BasicAWSCredentials(LLAMAaccessKeyId, LLAMAsecretAccessKey);
+        client = new AmazonBedrockRuntimeClient(credentials, RegionEndpoint);
 
         Number_Models_Text.SetText("Number of models is : " + Number_of_Objects.ToString());
 
@@ -164,23 +176,23 @@ public class Chat : MonoBehaviour
 
             //-----------------------OpenAI API Usage----------------------------------
 
-             if (dropdown.options[dropdown.value].text == "GPT")
+            if (dropdown.options[dropdown.value].text == "GPT")
             {
-         
-                var messages = new List<Message>
+
+                var messages = new List<OpenAI.Chat.Message>
             {
-                new Message(Role.User, input)
+                new OpenAI.Chat.Message(Role.User, input)
             };
 
                 var api = new OpenAIClient();
                 var chatRequest = new ChatRequest(messages, model);
-                result_aux = await api.ChatEndpoint.GetCompletionAsync(chatRequest);             
-                result = result_aux.Replace("C#", "").Replace("`","");
+                result_aux = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
+                result = result_aux.Replace("C#", "").Replace("`", "");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 tries++;
-                
+
             }
 
 
@@ -188,39 +200,65 @@ public class Chat : MonoBehaviour
             //-----------------------------------------------------------------------
 
             //---------------------------- GEMINI Python Server Usage----------------------------------------------
-         
+
             if (dropdown.options[dropdown.value].text == "GEMINI")
             {
 
-            
 
-            await Network.SendMessageToServer(input);
-            result_aux = await Network.ReceiveMessages();
-            
-            result_auxx = result_aux.Replace("`", "");
-            result = result_auxx.Replace("C#", "").Replace("csharp","").Replace("c#","");
-            result = RemoveAfterCharacter(result, '*');
-            char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-            ModelName = "Gemini-Pro-1.0"; //The actual Google Gemini LLM must be changed inside the Python Server
-            Debug.Log(result);
-            AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
-            tries++;
-           
+
+                await Network.SendMessageToServer(input);
+                result_aux = await Network.ReceiveMessages();
+
+                result_auxx = result_aux.Replace("`", "");
+                result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
+                result = RemoveAfterCharacter(result, '*');
+                char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
+                ModelName = "Gemini-Pro-1.0"; //The actual Google Gemini LLM must be changed inside the Python Server
+                Debug.Log(result);
+                AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                tries++;
+
             }
-           
-        }
 
-        //-------------------------------------------------------------------------------------------------
 
-        //  --------------------------------- LLAMA Amazon Bedrock Usage ----------------------------------
+
+            //-------------------------------------------------------------------------------------------------
+
+            //  --------------------------------- LLAMA Amazon Bedrock Usage ----------------------------------
 
             if (dropdown.options[dropdown.value].text == "LLAMA")
             {
+
+            
+
+                Debug.Log("Mando richiesta");
+
+                var request = new InvokeModelRequest()
+                {
+                    ModelId = LlamaModel,
+                    Body = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new
+                    {
+                        prompt = $"user\n{input} {input}\n\nassistant\n",
+                        max_gen_len = 512,
+                        temperature = 0.5
+
+                    }))),
+                    ContentType = "application/json"
+                };
+
+                var response = await client.InvokeModelAsync(request);
+                var responsBody = await new StreamReader(response.Body).ReadToEndAsync();
+                var modelResponse = JObject.Parse(responsBody);
               
+                result = modelResponse["generation"]?.ToString()/*.Replace("`", "").Replace("C#", "").Replace("csharp", "").Replace("c#", "")*/;
+                char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
+                Debug.Log(result);
+                AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                tries++;
             }
 
-        // -------------------------------------------------------------------------------------------------
-
+            // -------------------------------------------------------------------------------------------------
+        }
     }
 
 
