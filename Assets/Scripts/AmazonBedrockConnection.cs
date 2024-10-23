@@ -22,7 +22,7 @@ public class AmazonBedrockConnection : MonoBehaviour
     [SerializeField] private TextMeshProUGUI responseText;
     [SerializeField] private TMP_InputField inputField;
     [SerializeField] private Button submitButton;
-    //[SerializeField] 
+
 
     [SerializeField] private string userPrompt = "Answer in one sentence please";
 
