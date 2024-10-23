@@ -67,7 +67,7 @@ public class Domain : MonoBehaviour
 
         //The system is put in wait, until the script is found and printed in the output text window
 
-        while((Output_Text.text.ToString() == Wait_Message || Output_Text.text.ToString() == Computing_Message) /*&& Chat.Number_of_Objects > 10*/)
+        while((Output_Text.text.ToString() == Wait_Message || Output_Text.text.ToString() == Computing_Message))
         {
             yield return new WaitForSeconds(1);
             Debug.Log("I'm waiting for the executable script");

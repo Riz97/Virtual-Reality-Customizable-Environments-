@@ -11,6 +11,8 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using Button = UnityEngine.UI.Button;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
+using Amazon.BedrockRuntime;
+using Amazon;
 
 
 
@@ -99,13 +101,16 @@ public class Chat : MonoBehaviour
 
     public NetworkManager Network = new NetworkManager();
 
-    
-
+    //-------------------- META LLAMA CLIENT INFO----------------------
+    private AmazonBedrockRuntimeClient client;
+    private const string LlamaModel = "eu.meta.llama3-2-1b-instruct-v1:0";
+    private static readonly RegionEndpoint RegionEndpoint = RegionEndpoint.EUWest3;
+    //------------------------------------------------------------------
 
     //-------------------- OPEN AI CLIENT INFO ------------------------
 
 
-  //public static Model model = Model.GPT3_5_Turbo_16k;
+    //public static Model model = Model.GPT3_5_Turbo_16k;
     public static Model model = Model.GPT3_5_Turbo;
   //public static Model model = Model.GPT4;
 
@@ -209,6 +214,10 @@ public class Chat : MonoBehaviour
 
         //  --------------------------------- LLAMA Amazon Bedrock Usage ----------------------------------
 
+            if (dropdown.options[dropdown.value].text == "LLAMA")
+            {
+              
+            }
 
         // -------------------------------------------------------------------------------------------------
 
