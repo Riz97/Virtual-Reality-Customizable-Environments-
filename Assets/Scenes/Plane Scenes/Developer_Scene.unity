@@ -1788,7 +1788,7 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: GEMINI
       m_Image: {fileID: 0}
-    - m_Text: ' LLAMA'
+    - m_Text: LLAMA
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
