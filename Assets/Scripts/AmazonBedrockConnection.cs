@@ -48,7 +48,7 @@ public class AmazonBedrockConnection : MonoBehaviour
             ModelId = ModelId,
             Body = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new
             {
-                prompt = fullPrompt,
+                prompt = "write a unity c# script",
                 max_gen_len = 512,
                 temperature = 0.5
 

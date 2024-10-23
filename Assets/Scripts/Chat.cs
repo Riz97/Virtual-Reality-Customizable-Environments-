@@ -108,7 +108,7 @@ public class Chat : MonoBehaviour
 
     //-------------------- META LLAMA CLIENT INFO----------------------
     private AmazonBedrockRuntimeClient client;
-    private const string LlamaModel = "eu.meta.llama3-2-1b-instruct-v1:0";
+    private const string LlamaModel = "eu.meta.llama3-2-3b-instruct-v1:0";
     private static readonly RegionEndpoint RegionEndpoint = RegionEndpoint.EUWest3;
 
 
@@ -228,19 +228,15 @@ public class Chat : MonoBehaviour
 
             if (dropdown.options[dropdown.value].text == "LLAMA")
             {
-
-            
-
-                Debug.Log("Mando richiesta");
-
+                
                 var request = new InvokeModelRequest()
                 {
                     ModelId = LlamaModel,
                     Body = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new
                     {
-                        prompt = $"user\n{input} {input}\n\nassistant\n",
-                        max_gen_len = 512,
-                        temperature = 0.5
+                        prompt = input,
+                        max_gen_len = 4000,
+                        temperature = 1
 
                     }))),
                     ContentType = "application/json"
@@ -250,7 +246,7 @@ public class Chat : MonoBehaviour
                 var responsBody = await new StreamReader(response.Body).ReadToEndAsync();
                 var modelResponse = JObject.Parse(responsBody);
               
-                result = modelResponse["generation"]?.ToString()/*.Replace("`", "").Replace("C#", "").Replace("csharp", "").Replace("c#", "")*/;
+                result = modelResponse["generation"]?.ToString().Replace("`", "").Replace("C#", "").Replace("csharp", "").Replace("c#", "");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
@@ -422,7 +418,7 @@ public class Chat : MonoBehaviour
             Number_of_Objects = 5; // In this way the global variable is set with the exact amount of objects for this environment
 
 
-            input = " Unity C# script code, no comments, that follow drastically these numbered steps " +
+            input = " Unity C# script code, no comments or suggestions just code, that follow drastically these numbered steps " +
                     " 1) Find with the Find method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
                     " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder"+ 
                     " 3) Substitute them with objects loaded from the Resources/Furniture folder, the gameobjects to be uploaded are 'Desk' 'Table' 'Chair' 'Chair'  " +
@@ -431,8 +427,7 @@ public class Chat : MonoBehaviour
                     " at X position 0.13 and Z position 9.25 'Model_2' (Table) at Y position equals to -0.47, at X position -2.64 and Z position 4.62 " +
                     " 'Model_3' (Chair) at Y position equals to -0.47, at X position  -2.76 and Z position 6.28  'Model_4' (Chair) at Y position equals to -0.47, " +
                     " at X position -4.37 and Z position 4.81 and Y rotation equals -97.34" +
-                    " 4)Add a collider for every object " +
-                    " 5) use a method called Start";
+                    " 4)Add a collider for every object ";
 
             Start();
 
