@@ -12,7 +12,7 @@ public class LlamaNetworkManager : MonoBehaviour
 
     public void Start()
     {
-        client = new TcpClient("127.0.0.1", 1234);
+        client = new TcpClient("127.0.1.1", 1234);
         stream = client.GetStream();
 
         // Start receiving messages in a separate task

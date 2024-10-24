@@ -2,7 +2,7 @@
 import ollama
 import socket
 import time
-HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
+HOST = '127.0.1.1'  # Standard loopback interface address (localhost)
 PORT = 1234        # Port to listen on (non-privileged ports are > 1023)
 model = "llama3.1"
 prompt = "C# script code , with no comments "
