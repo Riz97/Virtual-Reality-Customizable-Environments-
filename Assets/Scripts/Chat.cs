@@ -107,14 +107,7 @@ public class Chat : MonoBehaviour
     public NetworkManager Network = new NetworkManager();
 
     //-------------------- META LLAMA CLIENT INFO----------------------
-    private AmazonBedrockRuntimeClient client;
-    private const string LlamaModel = "eu.meta.llama3-2-3b-instruct-v1:0";
-    private static readonly RegionEndpoint RegionEndpoint = RegionEndpoint.EUWest3;
 
-
-    [SerializeField] private string LLAMAaccessKeyId;
-
-    [SerializeField] private string LLAMAsecretAccessKey;
     //------------------------------------------------------------------
 
     //-------------------- OPEN AI CLIENT INFO ------------------------
@@ -134,8 +127,7 @@ public class Chat : MonoBehaviour
     async void Start()
 
     {
-        var credentials = new BasicAWSCredentials(LLAMAaccessKeyId, LLAMAsecretAccessKey);
-        client = new AmazonBedrockRuntimeClient(credentials, RegionEndpoint);
+ 
 
         Number_Models_Text.SetText("Number of models is : " + Number_of_Objects.ToString());
 
@@ -228,25 +220,9 @@ public class Chat : MonoBehaviour
 
             if (dropdown.options[dropdown.value].text == "LLAMA")
             {
-                
-                var request = new InvokeModelRequest()
-                {
-                    ModelId = LlamaModel,
-                    Body = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new
-                    {
-                        prompt = input,
-                        max_gen_len = 4000,
-                        temperature = 1
 
-                    }))),
-                    ContentType = "application/json"
-                };
 
-                var response = await client.InvokeModelAsync(request);
-                var responsBody = await new StreamReader(response.Body).ReadToEndAsync();
-                var modelResponse = JObject.Parse(responsBody);
-              
-                result = modelResponse["generation"]?.ToString().Replace("`", "").Replace("C#", "").Replace("csharp", "").Replace("c#", "");
+               
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
