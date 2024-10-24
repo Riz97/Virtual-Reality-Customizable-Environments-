@@ -104,7 +104,8 @@ public class Chat : MonoBehaviour
  
     public GameObject Models;
 
-    public NetworkManager Network = new NetworkManager();
+    public GeminiNetworkManager GeminiNetwork = new GeminiNetworkManager();
+    public LlamaNetworkManager LlamaNetwork = new LlamaNetworkManager();
 
     //-------------------- META LLAMA CLIENT INFO----------------------
 
@@ -198,8 +199,8 @@ public class Chat : MonoBehaviour
 
 
 
-                await Network.SendMessageToServer(input);
-                result_aux = await Network.ReceiveMessages();
+                await GeminiNetwork.SendMessageToServer(input);
+                result_aux = await GeminiNetwork.ReceiveMessages();
 
                 result_auxx = result_aux.Replace("`", "");
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
@@ -221,9 +222,16 @@ public class Chat : MonoBehaviour
             if (dropdown.options[dropdown.value].text == "LLAMA")
             {
 
+                await LlamaNetwork.SendMessageToServer(input);
+                result_aux = await LlamaNetwork.ReceiveMessages();
 
-               
+                result_auxx = result_aux.Replace("`", "");
+                result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
+                result = RemoveAfterCharacter(result, '*');
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
+                //ModelName = "Gemini-Pro-1.0"; //The actual Google Gemini LLM must be changed inside the Python Server
+
+           
                 Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 tries++;
