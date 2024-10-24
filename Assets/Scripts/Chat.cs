@@ -46,7 +46,9 @@ public class Chat : MonoBehaviour
     public static int tries = 0;
  
 
-    List<string> Mandatory_Words = new List<string>() {"Find(", ".name",  };
+    List<string> Mandatory_Words = new List<string>() {"Find(", ".name"};
+
+    List<string> Atleast2_Words = new List<string>() { "Furniture/", "Cars/", "Nature/", "City/", "Industrial/" };
 
     List<string> Material_Words = new List<string>() {
            "\"" + "Furniture/Material"+ "\"" , 
@@ -116,7 +118,7 @@ public class Chat : MonoBehaviour
 
     //public static Model model = Model.GPT3_5_Turbo_16k;
     public static Model model = Model.GPT3_5_Turbo;
-  //public static Model model = Model.GPT4;
+    //public static Model model = Model.GPT4;
 
     public static string ModelName = model.ToString();
 
@@ -217,7 +219,7 @@ public class Chat : MonoBehaviour
 
             //-------------------------------------------------------------------------------------------------
 
-            //  --------------------------------- LLAMA Amazon Bedrock Usage ----------------------------------
+            //  --------------------------------- LLAMA Python Server Usage ----------------------------------
 
             if (dropdown.options[dropdown.value].text == "LLAMA")
             {
@@ -226,10 +228,10 @@ public class Chat : MonoBehaviour
                 result_aux = await LlamaNetwork.ReceiveMessages();
 
                 result_auxx = result_aux.Replace("`", "");
-                result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
-                result = RemoveAfterCharacter(result, '*');
+                result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "").Replace("Here is the code that follows the steps you provided:","").
+                    Replace("Here is the code that follows the specified steps:","").Replace("Here is the code that follows the steps","");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-                //ModelName = "Gemini-Pro-1.0"; //The actual Google Gemini LLM must be changed inside the Python Server
+                ModelName = "Llama3.1"; //The actual Meta Llama LLM must be changed inside the Python Server
 
            
                 Debug.Log(result);
@@ -245,7 +247,7 @@ public class Chat : MonoBehaviour
     public void AIList(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
     {
         if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && 
-            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) /*&& CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects)*/)
+            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && CheckIfWordContainedTwice(result,"Furniture/",Number_Of_Objects) && CheckIfWordContainedTwice(result, "Find(", 2)/*&& CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects)*/)
         {
 
 
@@ -402,16 +404,17 @@ public class Chat : MonoBehaviour
             Number_of_Objects = 5; // In this way the global variable is set with the exact amount of objects for this environment
 
 
-            input = " Unity C# script code, no comments or suggestions just code, that follow drastically these numbered steps " +
-                    " 1) Find with the Find method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
-                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder"+ 
-                    " 3) Substitute them with objects loaded from the Resources/Furniture folder, the gameobjects to be uploaded are 'Desk' 'Table' 'Chair' 'Chair'  " +
+            input = " Unity C# script code, no comments or suggestions just code, that follow drastically these numbered steps and DO NOT USE FindGameObjectsByTag " +
+                    " 1) Find with the Find() method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
+                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder" +
+                    " 3) Substitute them with objects loaded from the Furniture folder, the gameobjects to be uploaded are 'Desk' 'Table' 'Chair' 'Chair'  " +
                     " and rename them 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 " +
                     " 'Model_0' (Desk) at Y position equals to -0.47, at X position 0.08 and Z position 7.13 , 'Model_1' (Chair) at Y position equals to -0.47," +
                     " at X position 0.13 and Z position 9.25 'Model_2' (Table) at Y position equals to -0.47, at X position -2.64 and Z position 4.62 " +
                     " 'Model_3' (Chair) at Y position equals to -0.47, at X position  -2.76 and Z position 6.28  'Model_4' (Chair) at Y position equals to -0.47, " +
-                    " at X position -4.37 and Z position 4.81 and Y rotation equals -97.34" +
-                    " 4)Add a collider for every object ";
+                    " at X position -4.37 and Z position 4.81 and  rotation Y equals -97.34" +
+                    " 4)Add a collider for every object " +
+                    " 5) Use the method caleld Start() e no auxiliary methods";
 
             Start();
 
@@ -458,7 +461,7 @@ public class Chat : MonoBehaviour
 
             input = " Unity C# script code, no comments, that follow drastically these numbered steps " +
                     " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 and destroy them " +
-                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Nature/Material folder" +
+                    " 2) MANDATORY!!!! Find with the Find() method , do not use FindGameObjectsWithTag(), the gameobject 'Plane' and change its material with the material loaded from Nature/Material folder" +
                     " 3) Substitute them with the objects loaded from the Resources/Nature, the gameobjects to be uploaded are 'Oak' 'Pine' 'Pine' 'Mushroom' 'Oak' 'Stone'" +
                     " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' 'Model_5' " +
                     " 'Model_0' (Oak) at Y position equals to -0.47, at X position -4.25 and Z position 10.48, 'Model_1' (Pine) at Y position equals to -0.47, at X position -1.48 and Z position 7.49 " +
