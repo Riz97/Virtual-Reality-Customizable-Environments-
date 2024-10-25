@@ -229,7 +229,7 @@ public class Chat : MonoBehaviour
 
                 result_auxx = result_aux.Replace("`", "");
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "").Replace("Here is the code that follows the steps you provided:","").
-                    Replace("Here is the code that follows the specified steps:","").Replace("Here is the code that follows the steps","");
+                    Replace("Here is the code that follows the specified steps:","").Replace("Here is the code that follows the steps:","");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "Llama3.1"; //The actual Meta Llama LLM must be changed inside the Python Server
 
@@ -284,13 +284,13 @@ public class Chat : MonoBehaviour
 
             if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
             {
-                Info_Text.text = ("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
+                Info_Text.text = ("Sorry, the AI was not able to generate a correct script. Wait! The AI is trying to generate another one :)");
 
             }
 
             //-------------------------------------------------------------------------------------
 
-            Text.SetText("Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)");
+            Text.SetText("Sorry, the AI was not able to generate a correct script. Wait! The AI is trying to generate another one :)");
 
             Start();
         }

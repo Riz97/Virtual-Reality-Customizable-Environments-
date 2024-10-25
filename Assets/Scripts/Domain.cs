@@ -20,7 +20,7 @@ public class Domain : MonoBehaviour
 
     private const string Welcome_Message = "static void Main()";
     private const string Error_Message = "Error : The environment you asked is not implemented yet, sorry";
-    private const string Wait_Message = "Sorry, the AI was not able to generate a correct script. Wait! The IA is trying to generate another one :)";
+    private const string Wait_Message = "Sorry, the AI was not able to generate a correct script. Wait! The AI is trying to generate another one :)";
     private const string Computing_Message = "Computing the script , just wait!!!!";
     private const string Error = "Error : you have to ask for the exactly amount of models requested  for this simulation";
 
