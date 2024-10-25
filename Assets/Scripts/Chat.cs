@@ -792,7 +792,7 @@ public class Chat : MonoBehaviour
             ", not FindObjectsByTag, the objects called ";
 
         input = Define_Models(Number_of_Objects, input)+ " and destroy them" +
-                " 2) Substitute them with the objects loaded from the Resources/" + Material + ", then " +
+                " 2) Substitute them with the previous objects loaded from the Resources/" + Material + ", then " +
                 " 3) MANDATORY!!!! Find with the Find() method the gameobject " +
                 " 'Plane' and change its material with the following code Resources.Load<Material>("+ Material+ "/Material) " +
                 " the gameobjects to be uploaded are  ";
