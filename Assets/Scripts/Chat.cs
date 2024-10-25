@@ -496,7 +496,7 @@ public class Chat : MonoBehaviour
             input = " Unity C# script code, no comments, that follow drastically these numbered steps " +
                     " 1) Find with the Find method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
                     " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Nature/Material folder " +
-                    " 3) Substitute them with the objects loaded from the Resources/Nature, the gameobjects to be uploaded are 'Pine' 'Flower' 'Mushroom' 'Oak' 'Wood' " +
+                    " 3) Substitute them with the objects loaded previously from the Resources/Nature, the gameobjects to be uploaded are 'Pine' 'Flower' 'Mushroom' 'Oak' 'Wood' " +
                     " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' " +
                     " 'Model_0' (Pine) at Y position equals to -0.47, at X position -3.52 and Z position 7.48, 'Model_1' (Flower) at Y position equals to -0.47, at X position -4.17 and Z position 7.25 " +
                     " 'Model_2' (Mushroom) at Y position equals to -0.47, at X position -2.70 and Z position 7.41 'Model_3' (Oak) at Y position equals to -0.47, at X position  -1.7 and Z position 7.68 " +
@@ -802,7 +802,7 @@ public class Chat : MonoBehaviour
         input = Define_Models(Number_of_Objects, input);
 
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + 
-               " 4) add just one collider per gameobject"+
+               " 4) add a boxcollider per gameobject"+
                " 5) No comments at the end of the script , i need only code"; 
 
        return input;
