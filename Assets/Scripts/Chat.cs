@@ -46,7 +46,7 @@ public class Chat : MonoBehaviour
     public static int tries = 0;
  
 
-    List<string> Mandatory_Words = new List<string>() {"Find(", ".name"};
+    List<string> Mandatory_Words = new List<string>() {"Find("};
 
     List<string> Atleast2_Words = new List<string>() { "Furniture/", "Cars/", "Nature/", "City/", "Industrial/" };
 
@@ -242,7 +242,7 @@ public class Chat : MonoBehaviour
                 Debug.Log((firstNonWhiteSpaceChar == 'u'));
                 Debug.Log(ContainsAny(result, All));
                 Debug.Log(CheckContainsTwoStrings(result, All));
-                Debug.Log(CheckIfWordContainedTwice(result, "Find(", 2));
+                //Debug.Log(CheckIfWordContainedTwice(result, "Find(", 2));
 
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 tries++;
@@ -256,7 +256,7 @@ public class Chat : MonoBehaviour
     public void AIList(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
     {
         if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && 
-            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && CheckIfWordContainedTwice(result, "Find(", 2)/*&& CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects)*/)
+            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) /*&& CheckIfWordContainedTwice(result, "Find(", 2)&& CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects)*/)
         {
 
 
@@ -797,7 +797,7 @@ public class Chat : MonoBehaviour
                 " 'Plane' and change its material with the following code Resources.Load<Material>("+ Material+ "/Material) " +
                 " the gameobjects to be uploaded are  ";
 
-        input = Enum_Objects(list, Number_of_Objects, input) + " and rename them ";
+        input = Enum_Objects(list, Number_of_Objects, input) + "in this way Resources.Load<GameObject>("+ Material + "/nameoftheobject\") and rename them ";
 
         input = Define_Models(Number_of_Objects, input);
 
