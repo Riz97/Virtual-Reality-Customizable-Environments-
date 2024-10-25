@@ -229,12 +229,21 @@ public class Chat : MonoBehaviour
 
                 result_auxx = result_aux.Replace("`", "");
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "").Replace("Here is the code that follows the steps you provided:","").
-                    Replace("Here is the code that follows the specified steps:","").Replace("Here is the code that follows the steps:","");
+                    Replace("Here is the code that follows the specified steps:","").Replace("Here is the code that follows the steps:","").Replace("Here is the Unity  script code that follows the specified steps:","")
+                    .Replace("Here is the Unity C# script code that follows the numbered steps:","").Replace("Here is the Unity C# script that follows the steps you provided:","")
+                    .Replace("Here is the Unity C# script that meets your requirements:","").Replace("Here is the Unity C# script that follows the specified steps:","");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "Llama3.1"; //The actual Meta Llama LLM must be changed inside the Python Server
 
            
                 Debug.Log(result);
+                Debug.Log(ContainsAll(result, Mandatory_Words));
+                Debug.Log(ContainsAny(result, Material_Words));
+                Debug.Log((firstNonWhiteSpaceChar == 'u'));
+                Debug.Log(ContainsAny(result, All));
+                Debug.Log(CheckContainsTwoStrings(result, All));
+                Debug.Log(CheckIfWordContainedTwice(result, "Find(", 2));
+
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 tries++;
             }
@@ -247,7 +256,7 @@ public class Chat : MonoBehaviour
     public void AIList(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
     {
         if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && 
-            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && CheckIfWordContainedTwice(result,"Furniture/",Number_Of_Objects) && CheckIfWordContainedTwice(result, "Find(", 2)/*&& CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects)*/)
+            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && CheckIfWordContainedTwice(result, "Find(", 2)/*&& CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects)*/)
         {
 
 
@@ -779,7 +788,7 @@ public class Chat : MonoBehaviour
 
     {
  
-        input = " Unity C# script code with the libraries inclusion, no comments, that follow drastically these numbered steps : 1)  Find with the GameObject.Find method" +
+        input = " Unity C# script code with the libraries inclusion, no comments i need only C# code, that follow drastically these numbered steps : 1)  Find with the GameObject.Find method" +
             ", not FindObjectsByTag, the objects called ";
 
         input = Define_Models(Number_of_Objects, input)+ " and destroy them" +
@@ -793,7 +802,8 @@ public class Chat : MonoBehaviour
         input = Define_Models(Number_of_Objects, input);
 
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + 
-               " 4) add just one collider per gameobject"; 
+               " 4) add just one collider per gameobject"+
+               " 5) No comments at the end of the script , i need only code"; 
 
        return input;
     }

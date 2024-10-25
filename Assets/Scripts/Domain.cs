@@ -92,7 +92,7 @@ public class Domain : MonoBehaviour
                 proxy.SafeCall(sourceCode);
             } catch
             {
-
+                //Chat.Start();
             }
             
 
