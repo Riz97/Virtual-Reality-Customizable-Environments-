@@ -413,7 +413,7 @@ public class Chat : MonoBehaviour
                     " at X position 0.13 and Z position 9.25 'Model_2' (Table) at Y position equals to -0.47, at X position -2.64 and Z position 4.62 " +
                     " 'Model_3' (Chair) at Y position equals to -0.47, at X position  -2.76 and Z position 6.28  'Model_4' (Chair) at Y position equals to -0.47, " +
                     " at X position -4.37 and Z position 4.81 and  rotation Y equals -97.34" +
-                    " 4)Add a collider for every object " +
+                    " 4) Add a simple collider for every object " +
                     " 5) Use the method caleld Start() e no auxiliary methods";
 
             Start();

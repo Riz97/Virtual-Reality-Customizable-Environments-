@@ -87,8 +87,14 @@ public class Domain : MonoBehaviour
             ScriptProxy proxy = type.CreateInstance(gameObject);
 
             CreateLogFile(sourceCode, Input_Text);
+            try
+            {
+                proxy.SafeCall(sourceCode);
+            } catch
+            {
 
-            proxy.SafeCall(sourceCode);
+            }
+            
 
             //If the user has asked for a Bases Environment we have to set the flag to true , in this way when another environment is asked , the system knows the 
             //exact amount of models to destroy.
