@@ -127,7 +127,7 @@ public class Chat : MonoBehaviour
     //--------------------------------------------------------------------
 
     // Update is called once per frame
-    async void Start()
+    public async void Start()
 
     {
  
@@ -413,7 +413,7 @@ public class Chat : MonoBehaviour
             Number_of_Objects = 5; // In this way the global variable is set with the exact amount of objects for this environment
 
 
-            input = " Unity C# script code, no comments or suggestions just code, that follow drastically these numbered steps and DO NOT USE FindGameObjectsByTag " +
+            input = " Unity C# script code, no comments or suggestions just code, that follow drastically these numbered steps " +
                     " 1) Find with the Find() method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
                     " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder" +
                     " 3) Substitute them with objects loaded from the Furniture folder, the gameobjects to be uploaded are 'Desk' 'Table' 'Chair' 'Chair'  " +

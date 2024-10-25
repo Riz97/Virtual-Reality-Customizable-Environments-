@@ -1,5 +1,6 @@
 
 using RoslynCSharp;
+using System;
 using System.Collections;
 using System.IO;
 using TMPro;
@@ -16,6 +17,7 @@ public class Domain : MonoBehaviour
 
     [SerializeField] public Button Generate_Script_Button;
 
+    public Chat chat = new Chat();
     //-------------------- SYSTEM MESSAGES----------------------------------------------------------
 
     private const string Welcome_Message = "static void Main()";
@@ -38,26 +40,26 @@ public class Domain : MonoBehaviour
         if (Output_Text.text.ToString() != Welcome_Message && Output_Text.text.ToString()
            != Error_Message && Output_Text.text.ToString() != Wait_Message && Output_Text.text != "Executing......")
         {
-            PrintAI_Thoughts();
+            PrintAI_Thoughts(chat);
         }
 
     }
 
     public void DoScript()
     { 
-        PrintAI_Thoughts();
+        PrintAI_Thoughts(chat);
 
     }
 
     //---------------------------------------------- SCRIPT EXECUTOR -----------------------------
 
-    public void PrintAI_Thoughts()
+    public void PrintAI_Thoughts(Chat chat)
     {
-        { StartCoroutine(WaitIA()); }
+        { StartCoroutine(WaitIA(chat)); }
     }
 
 
-    IEnumerator WaitIA()
+    IEnumerator WaitIA(Chat chat)
     {
         //In this way we wait 20 seconds only the first time the app is launched
         //, in these  seconds the ai should be able to 
@@ -79,7 +81,8 @@ public class Domain : MonoBehaviour
           
             // Create domain
             domain = ScriptDomain.CreateDomain("Example Domain");
-
+            try
+            {
             // Compile and load code - Note that we use 'CompileAndLoadMainSource' which is the same as 'CompileAndLoadSource' but returns the main type in the compiled assembly
             ScriptType type = domain.CompileAndLoadMainSource(sourceCode, ScriptSecurityMode.UseSettings);
 
@@ -87,12 +90,12 @@ public class Domain : MonoBehaviour
             ScriptProxy proxy = type.CreateInstance(gameObject);
 
             CreateLogFile(sourceCode, Input_Text);
-            try
-            {
+            
                 proxy.SafeCall(sourceCode);
-            } catch
+            } catch(Exception e)
             {
-                //Chat.Start();
+                Debug.Log("The AI generated script contains compilation errors");
+                chat.Start();
             }
             
 
