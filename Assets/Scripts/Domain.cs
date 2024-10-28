@@ -92,7 +92,8 @@ public class Domain : MonoBehaviour
             CreateLogFile(sourceCode, Input_Text);
             
                 proxy.SafeCall(sourceCode);
-            } catch(Exception e)
+            } 
+               catch(Exception e)
             {
                 Debug.Log("The AI generated script contains compilation errors");
                 chat.Start();
