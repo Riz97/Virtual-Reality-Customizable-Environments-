@@ -273,7 +273,7 @@ public class Chat : MonoBehaviour
                 Debug.Log(input_auxx);
                 input = input_auxx;
 
-                Start();
+                ReadStringInput(InputField);
 
             }
 
