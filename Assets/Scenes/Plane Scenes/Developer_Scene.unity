@@ -2647,6 +2647,7 @@ MonoBehaviour:
   Output_Text: {fileID: 33634638}
   Input_Text: {fileID: 426530254}
   Generate_Script_Button: {fileID: 55758270}
+  InputField: {fileID: 1921083187}
 --- !u!1 &1161325974
 GameObject:
   m_ObjectHideFlags: 0

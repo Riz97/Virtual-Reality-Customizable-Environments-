@@ -17,7 +17,9 @@ public class Domain : MonoBehaviour
 
     [SerializeField] public Button Generate_Script_Button;
 
-    public Chat chat = new Chat();
+    [SerializeField] public TMP_InputField InputField;
+
+    
     //-------------------- SYSTEM MESSAGES----------------------------------------------------------
 
     private const string Welcome_Message = "static void Main()";
@@ -30,7 +32,7 @@ public class Domain : MonoBehaviour
 
     private ScriptDomain domain = null;
     private string sourceCode;
-
+    public static bool  isExeceutable = true;
     static string s_time = System.DateTime.Now.ToString("dd-MM-hh-mm-ss");
     string path = Application.dataPath + "/Logs/" + s_time + ".txt";
 
@@ -40,26 +42,26 @@ public class Domain : MonoBehaviour
         if (Output_Text.text.ToString() != Welcome_Message && Output_Text.text.ToString()
            != Error_Message && Output_Text.text.ToString() != Wait_Message && Output_Text.text != "Executing......")
         {
-            PrintAI_Thoughts(chat);
+            PrintAI_Thoughts();
         }
 
     }
 
     public void DoScript()
     { 
-        PrintAI_Thoughts(chat);
+        PrintAI_Thoughts();
 
     }
 
     //---------------------------------------------- SCRIPT EXECUTOR -----------------------------
 
-    public void PrintAI_Thoughts(Chat chat)
+    public void PrintAI_Thoughts()
     {
-        { StartCoroutine(WaitIA(chat)); }
+        { StartCoroutine(WaitIA()); }
     }
 
 
-    IEnumerator WaitIA(Chat chat)
+    IEnumerator WaitIA()
     {
         //In this way we wait 20 seconds only the first time the app is launched
         //, in these  seconds the ai should be able to 
@@ -83,22 +85,26 @@ public class Domain : MonoBehaviour
             domain = ScriptDomain.CreateDomain("Example Domain");
             try
             {
-            // Compile and load code - Note that we use 'CompileAndLoadMainSource' which is the same as 'CompileAndLoadSource' but returns the main type in the compiled assembly
-            ScriptType type = domain.CompileAndLoadMainSource(sourceCode, ScriptSecurityMode.UseSettings);
+                // Compile and load code - Note that we use 'CompileAndLoadMainSource' which is the same as 'CompileAndLoadSource' but returns the main type in the compiled assembly
+                ScriptType type = domain.CompileAndLoadMainSource(sourceCode, ScriptSecurityMode.UseSettings);
 
-            // Create an instance of 'Example'
-            ScriptProxy proxy = type.CreateInstance(gameObject);
+                // Create an instance of 'Example'
+                ScriptProxy proxy = type.CreateInstance(gameObject);
 
-            CreateLogFile(sourceCode, Input_Text);
-            
+                CreateLogFile(sourceCode, Input_Text);
+
                 proxy.SafeCall(sourceCode);
-            } 
-               catch(Exception e)
-            {
-                Debug.Log("The AI generated script contains compilation errors");
-                chat.Start();
+                isExeceutable = true;
             }
-            
+            catch (Exception e)
+            {
+                    Chat chats = new Chat();
+                    
+                Debug.Log("The AI generated script contains compilation errors");
+                isExeceutable = false;
+                chats.ReadStringInput(InputField);
+            }
+          
 
             //If the user has asked for a Bases Environment we have to set the flag to true , in this way when another environment is asked , the system knows the 
             //exact amount of models to destroy.

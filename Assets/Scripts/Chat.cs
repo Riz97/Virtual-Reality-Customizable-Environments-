@@ -130,7 +130,6 @@ public class Chat : MonoBehaviour
     public async void Start()
 
     {
- 
 
         Number_Models_Text.SetText("Number of models is : " + Number_of_Objects.ToString());
 
@@ -162,7 +161,10 @@ public class Chat : MonoBehaviour
 
 
         if (input != null && input != input_aux)
-        {
+        {        
+            
+            
+
 
             //Time of execution Start
             float start_time = Time.time;
@@ -224,6 +226,8 @@ public class Chat : MonoBehaviour
             if (dropdown.options[dropdown.value].text == "LLAMA")
             {
 
+                Debug.Log("dentro LLAMA");
+
                 await LlamaNetwork.SendMessageToServer(input);
                 result_aux = await LlamaNetwork.ReceiveMessages();
 
@@ -233,17 +237,7 @@ public class Chat : MonoBehaviour
                     .Replace("Here is the Unity C# script code that follows the numbered steps:","").Replace("Here is the Unity C# script that follows the steps you provided:","")
                     .Replace("Here is the Unity C# script that meets your requirements:","").Replace("Here is the Unity C# script that follows the specified steps:","");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-                ModelName = "Llama3.1"; //The actual Meta Llama LLM must be changed inside the Python Server
-
-           
-                Debug.Log(result);
-                Debug.Log(ContainsAll(result, Mandatory_Words));
-                Debug.Log(ContainsAny(result, Material_Words));
-                Debug.Log((firstNonWhiteSpaceChar == 'u'));
-                Debug.Log(ContainsAny(result, All));
-                Debug.Log(CheckContainsTwoStrings(result, All));
-                //Debug.Log(CheckIfWordContainedTwice(result, "Find(", 2));
-
+                ModelName = "Llama3.1"; //The actual Meta Llama LLM must be changed inside the Python Serve
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 tries++;
             }
@@ -259,17 +253,32 @@ public class Chat : MonoBehaviour
             ContainsAny(result, All) && CheckContainsTwoStrings(result, All) /*&& CheckIfWordContainedTwice(result, "Find(", 2)&& CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects)*/)
         {
 
-
+            Debug.Log(Domain.isExeceutable);
             //Elapsed time for the generation of the script
             elapsed_time = Time.time - start_time;
 
             //It sets the text of the scroll view
             Text.color = new Color32(27, 255, 0, 255);
             Text.SetText(result.ToString());
-         
+
             // If we arrive at this point, we know that the script generated is acceptable. So we must set the input string to STOP in order to
             // block the communication between the python server and the GEMINI LLM
-            input = "STOP";
+            if (Domain.isExeceutable == true)
+            {
+               input = "STOP";
+            }
+
+            if (Domain.isExeceutable == false)
+            {
+                Debug.Log("dentro chat is exec");
+                Debug.Log(input_auxx);
+                input = input_auxx;
+
+                Start();
+
+            }
+
+            
             
         
 
@@ -316,6 +325,8 @@ public class Chat : MonoBehaviour
     public void ReadStringInput(TMP_InputField InputField)
 
     {
+        Debug.Log("Sono dentro ReadStringInput");
+        Debug.Log(Domain.isExeceutable);
         //While the algorithm is running the button for genearating a script is not interactable, It will be interactable again when the script has been executed
         Generate_Script_Button.interactable = false; 
 
@@ -350,7 +361,7 @@ public class Chat : MonoBehaviour
     
       
         input = InputField.text.ToString().ToLower();
-        input_auxx = InputField.text.ToString();
+        input_auxx = InputField.text.ToString().ToLower();
 
 
         List<string> words_Furniture = isIn(input, Furniture_Models);
