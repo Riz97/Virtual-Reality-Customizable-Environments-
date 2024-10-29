@@ -98,11 +98,10 @@ public class Domain : MonoBehaviour
             }
             catch (Exception e)
             {
-                    Chat chats = new Chat();
+                   
                     
                 Debug.Log("The AI generated script contains compilation errors");
-                isExeceutable = false;
-                chats.ReadStringInput(InputField);
+               
             }
           
 

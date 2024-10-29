@@ -226,7 +226,7 @@ public class Chat : MonoBehaviour
             if (dropdown.options[dropdown.value].text == "LLAMA")
             {
 
-                Debug.Log("dentro LLAMA");
+                
 
                 await LlamaNetwork.SendMessageToServer(input);
                 result_aux = await LlamaNetwork.ReceiveMessages();
@@ -253,7 +253,6 @@ public class Chat : MonoBehaviour
             ContainsAny(result, All) && CheckContainsTwoStrings(result, All) /*&& CheckIfWordContainedTwice(result, "Find(", 2)&& CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects)*/)
         {
 
-            Debug.Log(Domain.isExeceutable);
             //Elapsed time for the generation of the script
             elapsed_time = Time.time - start_time;
 
@@ -325,8 +324,7 @@ public class Chat : MonoBehaviour
     public void ReadStringInput(TMP_InputField InputField)
 
     {
-        Debug.Log("Sono dentro ReadStringInput");
-        Debug.Log(Domain.isExeceutable);
+      
         //While the algorithm is running the button for genearating a script is not interactable, It will be interactable again when the script has been executed
         Generate_Script_Button.interactable = false; 
 
@@ -413,7 +411,8 @@ public class Chat : MonoBehaviour
         check = true;
 
         //------------------------------------------------------------------------------------ BASE CASES ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        
+
+        Debug.Log(input);
         
         // ------ OFFICE -----------
 
