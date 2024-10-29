@@ -7,7 +7,11 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Microsoft.CodeAnalysis;
 
+using System.Linq;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Emit;
 
 public class Domain : MonoBehaviour
 {
@@ -20,7 +24,7 @@ public class Domain : MonoBehaviour
 
     [SerializeField] public TMP_InputField InputField;
 
-    
+
     //-------------------- SYSTEM MESSAGES----------------------------------------------------------
 
     private const string Welcome_Message = "static void Main()";
@@ -33,7 +37,7 @@ public class Domain : MonoBehaviour
 
     private ScriptDomain domain = null;
     private string sourceCode;
-    public static bool  isExeceutable = true;
+    public static bool isExeceutable = true;
     static string s_time = System.DateTime.Now.ToString("dd-MM-hh-mm-ss");
     string path = Application.dataPath + "/Logs/" + s_time + ".txt";
     string faultypath = Application.dataPath + "/Logs/Faulty Scripts/Faulty_Scripts.txt";
@@ -50,7 +54,7 @@ public class Domain : MonoBehaviour
     }
 
     public void DoScript()
-    { 
+    {
         PrintAI_Thoughts();
 
     }
@@ -68,12 +72,12 @@ public class Domain : MonoBehaviour
         //In this way we wait 20 seconds only the first time the app is launched
         //, in these  seconds the ai should be able to 
         //provide a correct script that Roslyn will compile at runtime
-       
+
         yield return new WaitForSeconds(20);
 
         //The system is put in wait, until the script is found and printed in the output text window
 
-        while((Output_Text.text.ToString() == Wait_Message || Output_Text.text.ToString() == Computing_Message))
+        while ((Output_Text.text.ToString() == Wait_Message || Output_Text.text.ToString() == Computing_Message))
         {
             yield return new WaitForSeconds(1);
             Debug.Log("I'm waiting for the executable script");
@@ -82,7 +86,7 @@ public class Domain : MonoBehaviour
         if (Output_Text.text.ToString() != Welcome_Message && Output_Text.text.ToString() != Error_Message && Output_Text.text.ToString() != Wait_Message && Output_Text.text != "Executing......" && Output_Text.text != Error && Output_Text.text != Computing_Message)
         {
             sourceCode = Output_Text.text.ToString();
-          
+
             // Create domain
             domain = ScriptDomain.CreateDomain("Example Domain");
             try
@@ -93,30 +97,32 @@ public class Domain : MonoBehaviour
                 // Create an instance of 'Example'
                 ScriptProxy proxy = type.CreateInstance(gameObject);
 
-              
+
 
                 proxy.SafeCall(sourceCode);
                 isExeceutable = true;
             }
             catch (Exception e)
             {
-                   
-                isExeceutable= false;
+
+                isExeceutable = false;
                 Debug.Log("The AI generated script contains compilation errors");
-                CreateFaultyScriptsFile(sourceCode, Input_Text,e);
+                CreateFaultyScriptsFile(sourceCode, Input_Text, e);    
+                
+           
             }
-          
+
 
             //If the user has asked for a Bases Environment we have to set the flag to true , in this way when another environment is asked , the system knows the 
             //exact amount of models to destroy.
 
-       if  (Chat.input_auxx.ToLower() == "office" || 
-            Chat.input_auxx.ToLower() == "apartment" || 
-            Chat.input_auxx.ToLower() == "nature" || 
-            Chat.input_auxx.ToLower() == "forest" || 
-            Chat.input_auxx.ToLower() == "grid" || 
-            Chat.input_auxx.ToLower() == "city" || 
-            Chat.input_auxx.ToLower() == "industry")
+            if (Chat.input_auxx.ToLower() == "office" ||
+                 Chat.input_auxx.ToLower() == "apartment" ||
+                 Chat.input_auxx.ToLower() == "nature" ||
+                 Chat.input_auxx.ToLower() == "forest" ||
+                 Chat.input_auxx.ToLower() == "grid" ||
+                 Chat.input_auxx.ToLower() == "city" ||
+                 Chat.input_auxx.ToLower() == "industry")
 
             {
 
@@ -129,73 +135,110 @@ public class Domain : MonoBehaviour
                 Chat.Custom = true;
 
             }
-        //Script executed , the button now interactable
-        Generate_Script_Button.interactable = true;
+            //Script executed , the button now interactable
+            Generate_Script_Button.interactable = true;
             if (isExeceutable)
             {
+
+
+            
                 CreateLogFile(sourceCode, Input_Text);
+
+                
             }
-        
-        }
-    }
 
-    //-------------------------------------------------------------------------------------------------------------------------------------------
-    //------------------------------------------------- LOG FILES FUNCTION ------------------------------------------
+            //-------------------------------------------------------------------------------------------------------------------------------------------
+            //------------------------------------------------- LOG FILES FUNCTION ------------------------------------------
 
-    void CreateLogFile(string sourcecode, TMP_Text Input_Text)
-    {
-
-        if (!File.Exists(path))
-        {
-
-            File.WriteAllText(path, "LOG GENERATED FOR THE SESSION" + "\n");
-
-        }
-
-        File.AppendAllText(path, "\n Model - " + Chat.ModelName + "\nNumber of models in the scene ~ " 
-        + Chat.Number_of_Objects + "\nYou wrote the following  sentence : " +
-        Input_Text.text + "\n" + "\n" + "The script generated by the AI is the following: \n " + sourcecode + "\n" +
-        "Elapsed time for the generation of the script took " + Chat.elapsed_time + " seconds"
-        +"\n" + "The IA required " + Chat.tries + " tries , for obtaining an accetable script \n");
-        Chat.tries = 0;
-    }
-    //--------------------------------------------------------------------------------------------------------------
-
-    void CreateFaultyScriptsFile(string sourcecode, TMP_Text Input_Text,Exception e)
-    {
-        Debug.Log("dentro");
-
-        if (!File.Exists(faultypath))
-        {
-            File.WriteAllText(faultypath, "LIST OF ALL THE FAULTY SCRIPT FOUND DURING THE TESTS" + "\n");
-        }
-
-        string[] rows = File.ReadAllLines(faultypath);
-
-        bool scriptAlreadyIn = false;
-        foreach (string row in rows)
-        {
-            if(row == sourcecode)
+            void CreateLogFile(string sourcecode, TMP_Text Input_Text)
             {
-                scriptAlreadyIn = true;
-                break;
-            }
 
-        if(!scriptAlreadyIn)
+                if (!File.Exists(path))
+                {
+
+                    File.WriteAllText(path, "LOG GENERATED FOR THE SESSION" + "\n");
+
+                }
+
+                File.AppendAllText(path, "\n Model - " + Chat.ModelName + "\nNumber of models in the scene ~ "
+                + Chat.Number_of_Objects + "\nYou wrote the following  sentence : " +
+                Input_Text.text + "\n" + "\n" + "The script generated by the AI is the following: \n " + sourcecode + "\n" +
+                "Elapsed time for the generation of the script took " + Chat.elapsed_time + " seconds"
+                + "\n" + "The IA required " + Chat.tries + " tries , for obtaining an accetable script \n");
+                Chat.tries = 0;
+            }
+            //--------------------------------------------------------------------------------------------------------------
+
+            void CreateFaultyScriptsFile(string sourcecode, TMP_Text Input_Text, Exception e)
             {
-                File.AppendAllText(faultypath, "\n Model - " + Chat.ModelName + "\nNumber of models in the scene ~ "
-             + Chat.Number_of_Objects + "\nYou wrote the following  sentence : " +
-             Input_Text.text + "\n" + "\n" + "The script faulty generated by the AI is the following: \n " + sourcecode + "\n" +
-               "Elapsed time for the generation of the script took " + Chat.elapsed_time + " seconds \n" +
-               "Compilation error ------>>>> " + e.Message + "\n");
+                int c = 0;
+                int i = 0;
+                string errors = "";
+                string errors_aux;
+                // Create a syntax tree from the source code
+                SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(sourcecode);
+
+                // Create a compilation object
+                CSharpCompilation compilation = CSharpCompilation.Create(
+                    assemblyName: "MyAssembly",
+                    syntaxTrees: new[] { syntaxTree },
+                    references: new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) }
+                );
+
+                // Perform compilation and get diagnostics
+                EmitResult result = compilation.Emit(new MemoryStream());
+
+                if (!result.Success)
+                {
+                    
+                    foreach (var diagnostic in result.Diagnostics)
+                    {
+                        errors_aux = (diagnostic.GetMessage().ToString());
+                        errors += i+")" +errors_aux;
+                        i++;
+                    }
+                }
+            
+
+            if (!File.Exists(faultypath))
+                {
+                    File.WriteAllText(faultypath, "LIST OF ALL THE FAULTY SCRIPT FOUND DURING THE TESTS" + "\n");
+                }
+
+                string[] rows = File.ReadAllLines(faultypath);
+
+                bool scriptAlreadyIn = false;
+                foreach (string row in rows)
+                {
+                    if (row == sourcecode)
+                    {
+                        scriptAlreadyIn = true;
+                        break;
+                    }
+
+                    if (!scriptAlreadyIn && c == 0)
+                    {
+                        File.AppendAllText(faultypath, "\n Model - " + Chat.ModelName + "\nNumber of models in the scene ~ "
+                     + Chat.Number_of_Objects + "\nYou wrote the following  sentence : " +
+                     Input_Text.text + "\n" + "\n" + "The script faulty generated by the AI is the following: \n " + sourcecode + "\n" +
+                       "Elapsed time for the generation of the script took " + Chat.elapsed_time + " seconds \n" +
+                       "Compilation error ------>>>> " + errors + "\n");
+                        c++;
+
+                    }
+                }
+
             }
         }
-
     }
 }
 
 
- 
+
+
+
+
+
 
 
 
