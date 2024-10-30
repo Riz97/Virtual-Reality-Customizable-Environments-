@@ -263,20 +263,11 @@ public class Chat : MonoBehaviour
 
             // If we arrive at this point, we know that the script generated is acceptable. So we must set the input string to STOP in order to
             // block the communication between the python server and the GEMINI LLM
-            if (Domain.isExeceutable == true)
-            {
+            
                input = "STOP";
-            }
+            
 
-            if (Domain.isExeceutable == false)
-            {
-                Debug.Log("dentro chat is exec");
-                Debug.Log(input_auxx);
-                input = input_auxx;
-
-                ReadStringInput(InputField);
-
-            }
+            
 
             
      
