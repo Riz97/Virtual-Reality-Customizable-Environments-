@@ -232,10 +232,11 @@ public class Chat : MonoBehaviour
                 result_aux = await LlamaNetwork.ReceiveMessages();
 
                 result_auxx = result_aux.Replace("`", "");
-                result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "").Replace("Here is the code that follows the steps you provided:","").
-                    Replace("Here is the code that follows the specified steps:","").Replace("Here is the code that follows the steps:","").Replace("Here is the Unity  script code that follows the specified steps:","")
-                    .Replace("Here is the Unity C# script code that follows the numbered steps:","").Replace("Here is the Unity C# script that follows the steps you provided:","")
-                    .Replace("Here is the Unity C# script that meets your requirements:","").Replace("Here is the Unity C# script that follows the specified steps:","");
+                result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "").Replace("Here is the code that follows the steps you provided:","")
+                .Replace("Here is the code that follows the specified steps:","")
+                .Replace("Here is the code that follows the steps:","").Replace("Here is the Unity  script code that follows the specified steps:","")
+                .Replace("Here is the Unity C# script code that follows the numbered steps:","").Replace("Here is the Unity C# script that follows the steps you provided:","")
+                .Replace("Here is the Unity C# script that meets your requirements:","").Replace("Here is the Unity C# script that follows the specified steps:","");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "Llama3.1"; //The actual Meta Llama LLM must be changed inside the Python Serve
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
@@ -278,9 +279,7 @@ public class Chat : MonoBehaviour
             }
 
             
-            
-        
-
+     
             //--------------------------------------- User Mode Information ---------------------------------------
 
             if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
@@ -671,8 +670,7 @@ public class Chat : MonoBehaviour
 
         // Error Handling : if the user does not ask for the correct number of models , an error is thrown
 
-      
-
+     
         else if ((words_City.Count() != Number_of_Objects || words_Cars.Count() != Number_of_Objects || words_Industrial.Count() != Number_of_Objects  
                  || words_Nature.Count() != Number_of_Objects  || words_Furniture.Count() != Number_of_Objects)) 
         {
@@ -719,7 +717,6 @@ public class Chat : MonoBehaviour
 
             //------------------------------------------------------------------------------------------------------------------
         }
-
 
     }
 
@@ -821,8 +818,6 @@ public class Chat : MonoBehaviour
     //It defines which object Name must be inserted in the input for CHATGPT
     public string Enum_Objects(List<string> objects, int Number_of_Objects, string input){
         
-        
-
         for(int i = 0; i < Number_of_Objects; i++)
         {
             input += objects[i] + " ";
@@ -834,8 +829,6 @@ public class Chat : MonoBehaviour
    //It defines all the model requested 
     public string Define_Models(int Number_of_Objects,string input)
     {
-
-
 
         for (int ii = 0; ii < Number_of_Objects; ii++)
         {
