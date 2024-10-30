@@ -104,11 +104,18 @@ public class Domain : MonoBehaviour
               
             }
 
+            catch (UnityException ue) {
+                Debug.Log("The AI generated script contains Unity errors");
+                CreateFaultyScriptsFile(sourceCode, Input_Text, ue);
+                FaultyScriptCount++;
+
+            }
+
             //A faulty script (Syntax errors or Semantic Errors is caught)
             catch (Exception e)
             {
 
-                Debug.Log("The AI generated script contains compilation errors");
+                Debug.Log("The AI generated script contains syntax compilation errors");
                 CreateFaultyScriptsFile(sourceCode, Input_Text, e);
                 FaultyScriptCount++;
             }
