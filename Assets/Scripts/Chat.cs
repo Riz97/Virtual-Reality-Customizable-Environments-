@@ -201,8 +201,6 @@ public class Chat : MonoBehaviour
             if (dropdown.options[dropdown.value].text == "GEMINI")
             {
 
-
-
                 await GeminiNetwork.SendMessageToServer(input);
                 result_aux = await GeminiNetwork.ReceiveMessages();
 
@@ -218,15 +216,12 @@ public class Chat : MonoBehaviour
             }
 
 
-
             //-------------------------------------------------------------------------------------------------
 
             //  --------------------------------- LLAMA Python Server Usage ----------------------------------
 
             if (dropdown.options[dropdown.value].text == "LLAMA")
             {
-
-                
 
                 await LlamaNetwork.SendMessageToServer(input);
                 result_aux = await LlamaNetwork.ReceiveMessages();
@@ -238,12 +233,20 @@ public class Chat : MonoBehaviour
                 .Replace("Here is the Unity C# script code that follows the numbered steps:","").Replace("Here is the Unity C# script that follows the steps you provided:","")
                 .Replace("Here is the Unity C# script that meets your requirements:","").Replace("Here is the Unity C# script that follows the specified steps:","");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-                ModelName = "Llama3.1"; //The actual Meta Llama LLM must be changed inside the Python Serve
+                ModelName = "Llama3.1"; //The actual Meta Llama LLM must be changed inside the Python Server
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 tries++;
             }
 
             // -------------------------------------------------------------------------------------------------
+
+            //------------------------------- CODEX ------------------------------------------------------------------
+
+            //-------------------------------------------------------------------------------------------------
+
+            //------------------------------ COPILOT --------------------------------------------------------
+
+            //-------------------------------------------------------------------------------------------------
         }
     }
 
@@ -265,12 +268,7 @@ public class Chat : MonoBehaviour
             // block the communication between the python server and the GEMINI LLM
             
                input = "STOP";
-            
 
-            
-
-            
-     
             //--------------------------------------- User Mode Information ---------------------------------------
 
             if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
