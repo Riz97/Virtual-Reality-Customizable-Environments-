@@ -10,12 +10,7 @@ using TMPro;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using Button = UnityEngine.UI.Button;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
-using Amazon.BedrockRuntime;
-using Amazon;
-using Amazon.BedrockRuntime.Model;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
+
 using System.IO;
 using Amazon.Runtime;
 
@@ -242,9 +237,19 @@ public class Chat : MonoBehaviour
 
             //------------------------------- CODEX ------------------------------------------------------------------
 
-            //-------------------------------------------------------------------------------------------------
+            if (dropdown.options[dropdown.value].text == "CODEX")
+            {
+
+            }
+
+            //-----------------------------------------------------------------------------------------------------
 
             //------------------------------ COPILOT --------------------------------------------------------
+
+            if (dropdown.options[dropdown.value].text == "COPILOT")
+            {
+
+            }
 
             //-------------------------------------------------------------------------------------------------
         }

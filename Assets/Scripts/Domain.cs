@@ -1,5 +1,4 @@
 
-using Mono.Cecil.Cil;
 using RoslynCSharp;
 using System;
 using System.Collections;
@@ -7,12 +6,6 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Microsoft.CodeAnalysis;
-
-using System.Linq;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Emit;
-using Palmmedia.ReportGenerator.Core;
 using UnityEditor;
 
 public class Domain : MonoBehaviour
