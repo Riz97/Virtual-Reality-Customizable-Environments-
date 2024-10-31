@@ -26,6 +26,8 @@ public class Domain : MonoBehaviour
 
     [SerializeField] public TMP_InputField InputField;
 
+    [SerializeField] public  GameObject popup;
+
 
     //-------------------- SYSTEM MESSAGES----------------------------------------------------------
 
@@ -34,6 +36,7 @@ public class Domain : MonoBehaviour
     private const string Wait_Message = "Sorry, the AI was not able to generate a correct script. Wait! The AI is trying to generate another one :)";
     private const string Computing_Message = "Computing the script , just wait!!!!";
     private const string Error = "Error : you have to ask for the exactly amount of models requested  for this simulation";
+    private const string Faulty_Message = "The AI generated code has compilation errors and cannot be executed. Wait! The AI is trying to generate another one :)";
 
     //------------------------------------------------------------------------------------------------
 
@@ -46,6 +49,7 @@ public class Domain : MonoBehaviour
     string path = Application.dataPath + "/Logs/" + s_time + ".txt";
     string faultypath = Application.dataPath + "/Logs/Faulty Scripts/Faulty_Scripts.txt";
     private Chat chat = new Chat();
+   
     public void Start()
     {
         //Waiter
@@ -87,7 +91,7 @@ public class Domain : MonoBehaviour
             Debug.Log("I'm waiting for the executable script");
         }
 
-        if (Output_Text.text.ToString() != Welcome_Message && Output_Text.text.ToString() != Error_Message && Output_Text.text.ToString() != Wait_Message && Output_Text.text != "Executing......" && Output_Text.text != Error && Output_Text.text != Computing_Message)
+        if (Output_Text.text != Welcome_Message && Output_Text.text != Error_Message && Output_Text.text.ToString() != Wait_Message && Output_Text.text != "Executing......" && Output_Text.text != Error && Output_Text.text != Computing_Message)
         {
             sourceCode = Output_Text.text.ToString();
 
@@ -130,11 +134,17 @@ public class Domain : MonoBehaviour
                 chat = IA_Manager.GetComponent<Chat>();
 
                 Debug.Log("The AI generated script contains syntax compilation errors");
-
+       
                 //Add the Faulty Script to Faulty_Script.txt
                 CreateFaultyScriptsFile(sourceCode, Input_Text, e);
+
+
                 FaultyScriptCount++;//Increase the number of faulty scripts generated for an environment
                 totaltries += Chat.tries;//Keep track of all the tries
+
+
+                StartCoroutine(showPopup());
+
                 chat.ReadStringInput(InputField);//Send again the request to the LLM
                 DoScript();//Execute the code otherwise wait for an acceptable script
                 Generate_Script_Button.interactable = false;
@@ -231,7 +241,17 @@ public class Domain : MonoBehaviour
             }
         }
     }
-//-------------------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------
+
+    //-------------------------------------- POP UP HANDLER ------------------------------------------------------------------------------------
+    IEnumerator showPopup()
+    {
+        popup.SetActive(true); // Mostra il pop-up
+        yield return new WaitForSeconds(5); // Aspetta 5 secondi
+        popup.SetActive(false); // Nasconde il pop-up
+    }
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------
 }
 
 
