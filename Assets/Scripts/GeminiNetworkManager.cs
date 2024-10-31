@@ -10,22 +10,32 @@ public class GeminiNetworkManager : MonoBehaviour
     private TcpClient client;
     private NetworkStream stream;
 
+    //----------------------------- Python Scripts Location ---------------------------------------------------------------------------------------------
+
+    //Location must be checked in different devices
+
+    private string geminiPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\gemini.py";
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
+
     public void Start()
     {
-        client = new TcpClient("127.0.0.1", 1234);
-        stream = client.GetStream();
+  
 
         // Start receiving messages in a separate task
     }
 
     //Method that switch on the Gemini Python Server
-    public void GeminiServerConnectio()
-    {  
+    public void GeminiServerConnection()
+    {
+        Process.Start("cmd.exe", geminiPy);
+        client = new TcpClient("127.0.1.1", 1234);
+        stream = client.GetStream();
 
     }
 
-       //It Contains the answered received from GEMINI
-     public async Task<string> ReceiveMessages()
+    //It Contains the answered received from GEMINI
+    public async Task<string> ReceiveMessages()
     {
         
             byte[] buffer = new byte[102400];

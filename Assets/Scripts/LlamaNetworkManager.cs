@@ -3,13 +3,22 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using System.Diagnostics;
+using UnityEngine.UI;
 
 public class LlamaNetworkManager : MonoBehaviour
 {
     public string message;
     private TcpClient client;
     private NetworkStream stream;
+    [SerializeField] Button ServerButton;
 
+//----------------------------- Python Scripts Location ---------------------------------------------------------------------------------------------
+
+    //Location must be checked in different devices
+
+    private string llamaPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\llama.py";
+   
+//----------------------------------------------------------------------------------------------------------------------------------------------------
     public void Start()
     {
 
@@ -18,11 +27,12 @@ public class LlamaNetworkManager : MonoBehaviour
     }
 
     //Method that switch on the Gemini Python Server
-    public void LLamaiServerConnection()
+    public void LLamaServerConnection()
     {
-        Process.Start("cmd.exe", "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\llama.py"); 
+        Process.Start("cmd.exe", llamaPy);
         client = new TcpClient("127.0.1.1", 1234);
         stream = client.GetStream();
+
     }
 
     //It Contains the answered received from GEMINI
