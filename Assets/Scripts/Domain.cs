@@ -36,8 +36,7 @@ public class Domain : MonoBehaviour
     private const string Wait_Message = "Sorry, the AI was not able to generate a correct script. Wait! The AI is trying to generate another one :)";
     private const string Computing_Message = "Computing the script , just wait!!!!";
     private const string Error = "Error : you have to ask for the exactly amount of models requested  for this simulation";
-    private const string Faulty_Message = "The AI generated code has compilation errors and cannot be executed. Wait! The AI is trying to generate another one :)";
-
+    
     //------------------------------------------------------------------------------------------------
 
     private ScriptDomain domain = null;
@@ -109,6 +108,8 @@ public class Domain : MonoBehaviour
               
             }
 
+            //------------------------------ UNITY EXCEPTION ------------------------------------------
+
             catch (UnityException ue) {
 
                 //We get access to the ReadStringInput Method inside Chat.cs
@@ -121,10 +122,15 @@ public class Domain : MonoBehaviour
                 CreateFaultyScriptsFile(sourceCode, Input_Text, ue);
                 FaultyScriptCount++; //Increase the number of faulty scripts generated for an environment
                 totaltries += Chat.tries; //Keep track of all the tries 
+
+                StartCoroutine(showPopup()); //It shows a 5 seconds pop up error
+
                 chat.ReadStringInput(InputField);//Send again the request to the LLM
                 DoScript();//Execute the code otherwise wait for an acceptable script
                 Generate_Script_Button.interactable = false;
             }
+
+            //--------------------------- EXCEPTION ----------------------------------------------------
 
             //A faulty script (Syntax errors or Semantic Errors is caught)
             catch (Exception e)
@@ -143,7 +149,7 @@ public class Domain : MonoBehaviour
                 totaltries += Chat.tries;//Keep track of all the tries
 
 
-                StartCoroutine(showPopup());
+                StartCoroutine(showPopup());//It shows a 5 seconds pop up error
 
                 chat.ReadStringInput(InputField);//Send again the request to the LLM
                 DoScript();//Execute the code otherwise wait for an acceptable script
@@ -241,9 +247,9 @@ public class Domain : MonoBehaviour
             }
         }
     }
-    //-------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------
 
-    //-------------------------------------- POP UP HANDLER ------------------------------------------------------------------------------------
+//-------------------------------------- POP UP HANDLER ------------------------------------------------------------------------------------
     IEnumerator showPopup()
     {
         popup.SetActive(true); // Mostra il pop-up
