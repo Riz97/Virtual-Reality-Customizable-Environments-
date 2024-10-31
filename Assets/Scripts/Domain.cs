@@ -107,32 +107,37 @@ public class Domain : MonoBehaviour
 
             catch (UnityException ue) {
 
+                //We get access to the ReadStringInput Method inside Chat.cs
                 GameObject IA_Manager = GameObject.Find("Ai_Manager");
                 chat = IA_Manager.GetComponent<Chat>();
 
                 Debug.Log("The AI generated script contains Unity errors");
-                CreateFaultyScriptsFile(sourceCode, Input_Text, ue);
-                FaultyScriptCount++;
 
-                chat.ReadStringInput(InputField);
-                DoScript();
+                //Add the Faulty Script to Faulty_Script.txt
+                CreateFaultyScriptsFile(sourceCode, Input_Text, ue);
+                FaultyScriptCount++; //Increase the number of faulty scripts generated for an environment
+                totaltries += Chat.tries; //Keep track of all the tries 
+                chat.ReadStringInput(InputField);//Send again the request to the LLM
+                DoScript();//Execute the code otherwise wait for an acceptable script
+                Generate_Script_Button.interactable = false;
             }
 
             //A faulty script (Syntax errors or Semantic Errors is caught)
             catch (Exception e)
             {
+                //We get access to the ReadStringInput Method inside Chat.cs
                 GameObject IA_Manager = GameObject.Find("Ai_Manager");
                 chat = IA_Manager.GetComponent<Chat>();
 
                 Debug.Log("The AI generated script contains syntax compilation errors");
-                CreateFaultyScriptsFile(sourceCode, Input_Text, e);
-                FaultyScriptCount++;
-                Debug.Log(FaultyScriptCount);
-                totaltries += Chat.tries;
-                Debug.Log(totaltries);
 
-                chat.ReadStringInput(InputField);
-                DoScript();
+                //Add the Faulty Script to Faulty_Script.txt
+                CreateFaultyScriptsFile(sourceCode, Input_Text, e);
+                FaultyScriptCount++;//Increase the number of faulty scripts generated for an environment
+                totaltries += Chat.tries;//Keep track of all the tries
+                chat.ReadStringInput(InputField);//Send again the request to the LLM
+                DoScript();//Execute the code otherwise wait for an acceptable script
+                Generate_Script_Button.interactable = false;
             }
 
 
@@ -158,7 +163,7 @@ public class Domain : MonoBehaviour
                 Chat.Custom = true;
 
             }
-            //Script executed , the button now interactable
+            //Script executed , the button is now interactable and the correct Log File can be created
             Generate_Script_Button.interactable = true;
             
                 totaltries += Chat.tries;
