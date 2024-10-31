@@ -12,16 +12,17 @@ public class LlamaNetworkManager : MonoBehaviour
 
     public void Start()
     {
-        client = new TcpClient("127.0.1.1", 1234);
-        stream = client.GetStream();
+
 
         // Start receiving messages in a separate task
     }
 
     //Method that switch on the Gemini Python Server
-    public void GeminiServerConnectio()
+    public void LLamaiServerConnection()
     {
-
+        Process.Start("cmd.exe", "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\llama.py"); 
+        client = new TcpClient("127.0.1.1", 1234);
+        stream = client.GetStream();
     }
 
     //It Contains the answered received from GEMINI
