@@ -164,7 +164,7 @@ public class Domain : MonoBehaviour
 
             }
             //Script executed , the button is now interactable and the correct Log File can be created
-            Generate_Script_Button.interactable = true;
+                Generate_Script_Button.interactable = true;
             
                 totaltries += Chat.tries;
                 CreateLogFile(sourceCode, Input_Text,FaultyScriptCount);
@@ -202,6 +202,7 @@ public class Domain : MonoBehaviour
                     + "Copy the script into an empty C# script file for checking all the syntax errors");
                 }
 
+            //If a faulty script is already inside the file, it is not written in.
                 string[] rows = File.ReadAllLines(faultypath);
 
                 bool scriptAlreadyIn = false;
