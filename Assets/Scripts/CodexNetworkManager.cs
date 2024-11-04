@@ -30,7 +30,7 @@ public class CodexNetworkManager : MonoBehaviour
     public void CodexServerConnection()
     {
         Process.Start("cmd.exe", codexPy);
-        client = new TcpClient("127.0.1.1", 1234);
+        client = new TcpClient("127.0.0.1", 1234);
         stream = client.GetStream();
 
     }
