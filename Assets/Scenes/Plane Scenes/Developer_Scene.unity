@@ -901,6 +901,7 @@ MonoBehaviour:
   Models: {fileID: 24031616}
   GeminiNetwork: {fileID: 1681943903}
   LlamaNetwork: {fileID: 1730955408}
+  CodexNetwork: {fileID: 29696901}
 --- !u!4 &331239456
 Transform:
   m_ObjectHideFlags: 0

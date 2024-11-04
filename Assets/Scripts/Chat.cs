@@ -103,6 +103,7 @@ public class Chat : MonoBehaviour
 
     public GeminiNetworkManager GeminiNetwork = new GeminiNetworkManager();
     public LlamaNetworkManager LlamaNetwork = new LlamaNetworkManager();
+    public CodexNetworkManager CodexNetwork = new CodexNetworkManager();
 
     //-------------------- META LLAMA CLIENT INFO----------------------
 
@@ -239,6 +240,21 @@ public class Chat : MonoBehaviour
 
             if (dropdown.options[dropdown.value].text == "CODEX")
             {
+
+
+                await CodexNetwork.SendMessageToServer(input);
+                result_aux = await CodexNetwork.ReceiveMessages();
+
+                result_auxx = result_aux.Replace("`", "");
+                result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
+                result = RemoveAfterCharacter(result, '*');
+                char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
+                ModelName = "gpt-4o-mini"; //The actual Codex LLM must be changed inside the Python Server
+                Debug.Log(result);
+                AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                tries++;
+
+
 
             }
 
