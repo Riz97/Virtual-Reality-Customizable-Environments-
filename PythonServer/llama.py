@@ -3,7 +3,7 @@ import ollama
 import socket
 import time
 HOST = '127.0.1.1'  # Standard loopback interface address (localhost)
-PORT = 1234        # Port to listen on (non-privileged ports are > 1023)
+PORT = 12345        # Port to listen on (non-privileged ports are > 1023)
 model = "llama3.2"
 
 

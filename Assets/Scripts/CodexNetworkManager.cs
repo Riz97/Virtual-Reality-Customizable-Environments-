@@ -10,6 +10,7 @@ public class CodexNetworkManager : MonoBehaviour
     public string message;
     private TcpClient client;
     private NetworkStream stream;
+    [SerializeField] Button ServerButton;
     
 
     //----------------------------- Python Scripts Location ---------------------------------------------------------------------------------------------
@@ -32,6 +33,7 @@ public class CodexNetworkManager : MonoBehaviour
         Process.Start("cmd.exe", codexPy);
         client = new TcpClient("127.0.0.1", 1234);
         stream = client.GetStream();
+        ServerButton.interactable = false;
 
     }
 

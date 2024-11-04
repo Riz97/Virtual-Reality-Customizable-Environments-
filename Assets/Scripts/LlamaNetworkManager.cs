@@ -10,9 +10,11 @@ public class LlamaNetworkManager : MonoBehaviour
     public string message;
     private TcpClient client;
     private NetworkStream stream;
-  
+    [SerializeField] Button ServerButton;
 
-//----------------------------- Python Scripts Location ---------------------------------------------------------------------------------------------
+
+
+    //----------------------------- Python Scripts Location ---------------------------------------------------------------------------------------------
 
     //Location must be checked in different devices
 
@@ -30,8 +32,9 @@ public class LlamaNetworkManager : MonoBehaviour
     public void LLamaServerConnection()
     {
         Process.Start("cmd.exe", llamaPy);
-        client = new TcpClient("127.0.1.1", 1234);
+        client = new TcpClient("127.0.1.1", 12345);
         stream = client.GetStream();
+        ServerButton.interactable = false;
 
     }
 

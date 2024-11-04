@@ -3,12 +3,15 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using System.Diagnostics;
-    
+using UnityEngine.UI;
+
 public class GeminiNetworkManager : MonoBehaviour
 { 
     public string message;
     private TcpClient client;
     private NetworkStream stream;
+    [SerializeField] Button ServerButton;
+
 
     //----------------------------- Python Scripts Location ---------------------------------------------------------------------------------------------
 
@@ -31,6 +34,7 @@ public class GeminiNetworkManager : MonoBehaviour
         Process.Start("cmd.exe", geminiPy);
         client = new TcpClient("127.0.1.1", 1234);
         stream = client.GetStream();
+        ServerButton.interactable = false;
 
     }
 
