@@ -33,7 +33,6 @@ public class Chat : MonoBehaviour
     string sceneName;
 
     private int n;
-   
 
     private const string Computing_Message = "Computing the script , just wait!!!!";
 

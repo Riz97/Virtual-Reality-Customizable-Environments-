@@ -93,7 +93,7 @@ public class Domain : MonoBehaviour
             // Create domain
             domain = ScriptDomain.CreateDomain("Example Domain");
             try
-            {Debug.Log(totaltries);
+            {
                 // Compile and load code - Note that we use 'CompileAndLoadMainSource' which is the same as 'CompileAndLoadSource' but returns the main type in the compiled assembly
                 ScriptType type = domain.CompileAndLoadMainSource(sourceCode, ScriptSecurityMode.UseSettings);
 
@@ -122,6 +122,29 @@ public class Domain : MonoBehaviour
                 CreateFaultyScriptsFile(sourceCode, Input_Text, ue);
                 FaultyScriptCount++; //Increase the number of faulty scripts generated for an environment
                
+
+                StartCoroutine(showPopup()); //It shows a 5 seconds pop up error
+
+                chat.ReadStringInput(InputField);//Send again the request to the LLM
+                DoScript();//Execute the code otherwise wait for an acceptable script
+                Generate_Script_Button.interactable = false;
+            }
+
+            catch (ArgumentException ae)
+            {
+
+                //We get access to the ReadStringInput Method inside Chat.cs
+                GameObject IA_Manager = GameObject.Find("Ai_Manager");
+                chat = IA_Manager.GetComponent<Chat>();
+
+                isExecutable = false;
+
+                Debug.Log("The AI generated script contains Unity errors");
+
+                //Add the Faulty Script to Faulty_Script.txt
+                CreateFaultyScriptsFile(sourceCode, Input_Text, ae);
+                FaultyScriptCount++; //Increase the number of faulty scripts generated for an environment
+
 
                 StartCoroutine(showPopup()); //It shows a 5 seconds pop up error
 

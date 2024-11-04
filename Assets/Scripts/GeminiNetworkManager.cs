@@ -32,7 +32,7 @@ public class GeminiNetworkManager : MonoBehaviour
     public void GeminiServerConnection()
     {
         Process.Start("cmd.exe", geminiPy);
-        client = new TcpClient("127.0.1.1", 12346);
+        client = new TcpClient("127.0.1.2", 12346);
         stream = client.GetStream();
         ServerButton.interactable = false;
 
@@ -53,7 +53,6 @@ public class GeminiNetworkManager : MonoBehaviour
             }
 
             message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-           // Debug.Log(message);
             return message;
     }
 

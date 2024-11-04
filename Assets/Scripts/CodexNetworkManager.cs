@@ -52,7 +52,6 @@ public class CodexNetworkManager : MonoBehaviour
         }
 
         message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-        // Debug.Log(message);
         return message;
     }
 
