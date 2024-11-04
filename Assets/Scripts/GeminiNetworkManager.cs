@@ -32,7 +32,7 @@ public class GeminiNetworkManager : MonoBehaviour
     public void GeminiServerConnection()
     {
         Process.Start("cmd.exe", geminiPy);
-        client = new TcpClient("127.0.1.1", 1234);
+        client = new TcpClient("127.0.1.1", 12346);
         stream = client.GetStream();
         ServerButton.interactable = false;
 

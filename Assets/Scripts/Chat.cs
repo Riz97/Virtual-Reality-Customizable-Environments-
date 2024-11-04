@@ -231,7 +231,8 @@ public class Chat : MonoBehaviour
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "Llama3.1"; //The actual Meta Llama LLM must be changed inside the Python Server
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
-                tries++;
+                tries++; 
+                Debug.Log(tries);
             }
 
             // -------------------------------------------------------------------------------------------------
@@ -252,6 +253,7 @@ public class Chat : MonoBehaviour
                 ModelName = "gpt-4o-mini"; //The actual Codex LLM must be changed inside the Python Server
                 Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+
                 tries++;
 
 
