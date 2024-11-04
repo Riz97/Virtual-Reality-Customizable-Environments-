@@ -79,3 +79,4 @@ Assets/Resources/OpenAIConfiguration.asset
 9613382f-4b6b-49e9-8eff-07f7ac5378ef.dll
 *.dll
 Assets/Resources/OpenAIConfiguration.asset
+PythonServer/codex.py
