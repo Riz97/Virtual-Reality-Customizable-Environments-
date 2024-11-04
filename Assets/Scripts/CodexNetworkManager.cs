@@ -5,20 +5,20 @@ using UnityEngine;
 using System.Diagnostics;
 using UnityEngine.UI;
 
-public class LlamaNetworkManager : MonoBehaviour
+public class CodexNetworkManager : MonoBehaviour
 {
     public string message;
     private TcpClient client;
     private NetworkStream stream;
-  
+    
 
-//----------------------------- Python Scripts Location ---------------------------------------------------------------------------------------------
+    //----------------------------- Python Scripts Location ---------------------------------------------------------------------------------------------
 
     //Location must be checked in different devices
 
-    private string llamaPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\llama.py";
-   
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+    private string codexPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\codex.py";
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
     public void Start()
     {
 
@@ -27,9 +27,9 @@ public class LlamaNetworkManager : MonoBehaviour
     }
 
     //Method that switch on the Gemini Python Server
-    public void LLamaServerConnection()
+    public void CodexServerConnection()
     {
-        Process.Start("cmd.exe", llamaPy);
+        Process.Start("cmd.exe", codexPy);
         client = new TcpClient("127.0.1.1", 1234);
         stream = client.GetStream();
 
