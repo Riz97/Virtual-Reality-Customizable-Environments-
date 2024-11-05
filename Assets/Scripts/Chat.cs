@@ -422,7 +422,7 @@ public class Chat : MonoBehaviour
 
         //------------------------------------------------------------------------------------ BASE CASES ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        Debug.Log(input);
+     
         
         // ------ OFFICE -----------
 
@@ -810,18 +810,19 @@ public class Chat : MonoBehaviour
             ", not FindObjectsByTag, the objects called ";
 
         input = Define_Models(Number_of_Objects, input)+ " and destroy them" +
-                " 2) Substitute them with the previous objects loaded from the Resources/" + Material + ", then " +
-                " 3) MANDATORY!!!! Find with the Find() method the gameobject " +
-                " 'Plane' and change its material with the following code Resources.Load<Material>("+ Material+ "/Material) " +
-                " the gameobjects to be uploaded are  ";
+                " 2) Substitute them with the objects loaded from the Resources/" + Material +
+               
+                " the gameobjects to be uploaded are :  ";
 
-        input = Enum_Objects(list, Number_of_Objects, input) + "in this way Resources.Load<GameObject>("+ Material + "/nameoftheobject\") and rename them ";
+        input = Enum_Objects(list, Number_of_Objects, input) + "in this way Resources.Load<GameObject>("+ Material + "/nameoftheobject\") and rename them, the number of object is " + Number_of_Objects;
 
         input = Define_Models(Number_of_Objects, input);
 
-        input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + 
-               " 4) add a boxcollider per gameobject"+
-               " 5) No comments at the end of the script , i need only code"; 
+        input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) +
+                " 3) Find with the Find() method the gameobject " +
+                " 'Plane' and change its material with the following code Resources.Load<Material>(" + Material + "/Material) " +
+               " 4) add a boxcollider per gameobject";
+               
 
        return input;
     }
@@ -860,7 +861,7 @@ public class Chat : MonoBehaviour
 
         for (int ii = 0; ii < Number_of_Objects; ii++)
         {
-            input += " Model_" + ii.ToString() + " is an " +  objects[ii]  + " at  Y position equals to -0.47, at X Position equals to  " + Random_PositionX(list_Directions,ii).ToString() + " and Z position equals to " + Random_PositionZ(list_Directions,ii).ToString() + " remember even the Y coordinates in the Vector3 definition";
+            input += " Model_" + ii.ToString() + " is an " +  objects[ii]  + " at  Y position equals to -0.47, at X Position equals to  " + Random_PositionX(list_Directions,ii).ToString() + " and Z position equals to " + Random_PositionZ(list_Directions,ii).ToString();
 
         }
 

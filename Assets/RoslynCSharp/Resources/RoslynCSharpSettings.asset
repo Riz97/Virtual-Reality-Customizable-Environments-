@@ -48,7 +48,7 @@ MonoBehaviour:
   allowOptimizeCode: 0
   allowConcurrentCompile: 1
   deterministic: 1
-  generateInMemory: 0
+  generateInMemory: 1
   generateSymbols: 0
   warningLevel: 4
   languageVersion: 0

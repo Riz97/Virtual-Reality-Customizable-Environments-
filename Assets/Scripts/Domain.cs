@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
+using System.Reflection;
 
 public class Domain : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class Domain : MonoBehaviour
 
     [SerializeField] public  GameObject popup;
 
+   
 
     //-------------------- SYSTEM MESSAGES----------------------------------------------------------
 
@@ -92,91 +94,20 @@ public class Domain : MonoBehaviour
 
             // Create domain
             domain = ScriptDomain.CreateDomain("Example Domain");
-            try
-            {
+            
                 // Compile and load code - Note that we use 'CompileAndLoadMainSource' which is the same as 'CompileAndLoadSource' but returns the main type in the compiled assembly
-                ScriptType type = domain.CompileAndLoadMainSource(sourceCode, ScriptSecurityMode.UseSettings);
+                 ScriptType type = domain.CompileAndLoadMainSource(sourceCode, ScriptSecurityMode.UseSettings);
 
                 // Create an instance of 'Example'
                 ScriptProxy proxy = type.CreateInstance(gameObject);
 
                 proxy.SafeCall(sourceCode);
+   
+          
 
                 isExecutable = true;
 
-            }
-
-            //------------------------------ UNITY EXCEPTION ------------------------------------------
-
-            catch (UnityException ue) {
-
-                //We get access to the ReadStringInput Method inside Chat.cs
-                GameObject IA_Manager = GameObject.Find("Ai_Manager");
-                chat = IA_Manager.GetComponent<Chat>();
-
-                isExecutable = false;
-
-                Debug.Log("The AI generated script contains Unity errors");
-
-                //Add the Faulty Script to Faulty_Script.txt
-                CreateFaultyScriptsFile(sourceCode, Input_Text, ue);
-                FaultyScriptCount++; //Increase the number of faulty scripts generated for an environment
-               
-
-                StartCoroutine(showPopup()); //It shows a 5 seconds pop up error
-
-                chat.ReadStringInput(InputField);//Send again the request to the LLM
-                DoScript();//Execute the code otherwise wait for an acceptable script
-                Generate_Script_Button.interactable = false;
-            }
-
-            catch (ArgumentException ae)
-            {
-
-                //We get access to the ReadStringInput Method inside Chat.cs
-                GameObject IA_Manager = GameObject.Find("Ai_Manager");
-                chat = IA_Manager.GetComponent<Chat>();
-
-                isExecutable = false;
-
-                Debug.Log("The AI generated script contains Unity errors");
-
-                //Add the Faulty Script to Faulty_Script.txt
-                CreateFaultyScriptsFile(sourceCode, Input_Text, ae);
-                FaultyScriptCount++; //Increase the number of faulty scripts generated for an environment
-
-
-                StartCoroutine(showPopup()); //It shows a 5 seconds pop up error
-
-                chat.ReadStringInput(InputField);//Send again the request to the LLM
-                DoScript();//Execute the code otherwise wait for an acceptable script
-                Generate_Script_Button.interactable = false;
-            }
-
-            //--------------------------- EXCEPTION ----------------------------------------------------
-
-            //A faulty script (Syntax errors or Semantic Errors is caught)
-            catch (Exception e)
-            {
-                //We get access to the ReadStringInput Method inside Chat.cs
-                GameObject IA_Manager = GameObject.Find("Ai_Manager");
-                chat = IA_Manager.GetComponent<Chat>();
-
-                Debug.Log("The AI generated script contains syntax compilation errors");
-
-                isExecutable = false;
-
-                //Add the Faulty Script to Faulty_Script.txt
-                CreateFaultyScriptsFile(sourceCode, Input_Text, e);
-
-                FaultyScriptCount++;//Increase the number of faulty scripts generated for an environment
-
-                StartCoroutine(showPopup());//It shows a 5 seconds pop up error
-
-                chat.ReadStringInput(InputField);//Send again the request to the LLM
-                DoScript();//Execute the code otherwise wait for an acceptable script
-                Generate_Script_Button.interactable = false;
-            }
+   
 
 
             //If the user has asked for a Bases Environment we have to set the flag to true , in this way when another environment is asked , the system knows the 
@@ -230,47 +161,12 @@ public class Domain : MonoBehaviour
                 + "\n" + "The IA required " + Chat.tries + " tries , for obtaining an accetable script \n" + "The number of faulty script for this environemnt is £ " + FaultyScriptCount + "\n");
              
                 Chat.tries = 0;
+                FaultyScriptCount = 0;
             }
 //--------------------------------------------------------------------------------------------------------------
 //------------------------------------------------- LOG FAULTY SCRIPTS FILES FUNCTION ------------------------------------------
 
-            void CreateFaultyScriptsFile(string sourcecode, TMP_Text Input_Text, Exception e)
-            {
-                int c = 0;
-             
-            if (!File.Exists(faultypath))
-                {
-                    File.WriteAllText(faultypath, "LIST OF ALL THE FAULTY SCRIPT FOUND DURING THE TESTS " + "\n" 
-                    + "Copy the script into an empty C# script file for checking all the syntax errors");
-                }
 
-            //If a faulty script is already inside the file, it is not written in.
-                string[] rows = File.ReadAllLines(faultypath);
-
-                bool scriptAlreadyIn = false;
-                foreach (string row in rows)
-                {
-                    if (row == sourcecode)
-                    {
-                        scriptAlreadyIn = true;
-                        break;
-                    }
-
-                    if (!scriptAlreadyIn && c == 0)
-                    {
-
-                     File.AppendAllText(faultypath, "\nModel - " + Chat.ModelName + "\nNumber of models in the scene ~ "
-                     + Chat.Number_of_Objects + "\nYou wrote the following  sentence : " + 
-                     Input_Text.text + "\n" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + 
-                     "\n" + "\n" + "The faulty script generated by the AI is the following: \n " + sourcecode + "\n" +
-                     "Elapsed time for the generation of the script took " + Chat.elapsed_time + " seconds \n" 
-                     +"\n");
-                        c++;
-
-                    }
-                }
-
-            }
         }
     }
 //-------------------------------------------------------------------------------------------------------------------------------------------
@@ -283,9 +179,109 @@ public class Domain : MonoBehaviour
         popup.SetActive(false); // Nasconde il pop-up
     }
 
-    //-------------------------------------------------------------------------------------------------------------------------------------------
-}
+    private void OnEnable()
+    {
+        // Sottoscrivi l'evento logMessageReceived quando lo script viene attivato
+        Application.logMessageReceived += OnLogMessageReceived;
+    }
 
+    private void OnDisable()
+    {
+        // Annulla la sottoscrizione dell'evento quando lo script viene disattivato
+        Application.logMessageReceived -= OnLogMessageReceived;
+    }
+
+    private void OnLogMessageReceived(string logString, string stackTrace, LogType type)
+    {
+        if (Chat.input_auxx.ToLower() == "office" ||
+            Chat.input_auxx.ToLower() == "apartment" ||
+            Chat.input_auxx.ToLower() == "nature" ||
+            Chat.input_auxx.ToLower() == "forest" ||
+            Chat.input_auxx.ToLower() == "grid" ||
+            Chat.input_auxx.ToLower() == "city" ||
+            Chat.input_auxx.ToLower() == "industry")
+
+        {
+
+            Chat.Bases = true;
+
+        }
+
+        else
+        {
+            Chat.Custom = true;
+        }
+            // Verifica se il log è un errore o un'eccezione
+            if (type == LogType.Error || type == LogType.Exception)
+        {
+            
+
+            // Esegui il codice specifico in caso di errore
+            EseguiCodiceSuErrore();
+        }
+    }
+
+    private void EseguiCodiceSuErrore()
+    {
+        //We get access to the ReadStringInput Method inside Chat.cs
+        GameObject IA_Manager = GameObject.Find("Ai_Manager");
+        chat = IA_Manager.GetComponent<Chat>();
+
+        Debug.Log("The AI generated script contains syntax compilation errors");
+
+        isExecutable = false;
+
+        //Add the Faulty Script to Faulty_Script.txt
+        CreateFaultyScriptsFile(sourceCode, Input_Text);
+
+        FaultyScriptCount++;//Increase the number of faulty scripts generated for an environment
+
+        StartCoroutine(showPopup());//It shows a 5 seconds pop up error
+
+        chat.ReadStringInput(InputField);//Send again the request to the LLM
+        DoScript();//Execute the code otherwise wait for an acceptable script
+        Generate_Script_Button.interactable = false;
+
+    }
+    void CreateFaultyScriptsFile(string sourcecode, TMP_Text Input_Text)
+    {
+        int c = 0;
+
+        if (!File.Exists(faultypath))
+        {
+            File.WriteAllText(faultypath, "LIST OF ALL THE FAULTY SCRIPT FOUND DURING THE TESTS " + "\n"
+            + "Copy the script into an empty C# script file for checking all the syntax errors");
+        }
+
+        //If a faulty script is already inside the file, it is not written in.
+        string[] rows = File.ReadAllLines(faultypath);
+
+        bool scriptAlreadyIn = false;
+        foreach (string row in rows)
+        {
+            if (row == sourcecode)
+            {
+                scriptAlreadyIn = true;
+                break;
+            }
+
+            if (!scriptAlreadyIn && c == 0)
+            {
+
+                File.AppendAllText(faultypath, "\nModel - " + Chat.ModelName + "\nNumber of models in the scene ~ "
+                + Chat.Number_of_Objects + "\nYou wrote the following  sentence : " +
+                Input_Text.text + "\n" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") +
+                "\n" + "\n" + "The faulty script generated by the AI is the following: \n " + sourcecode + "\n" +
+                "Elapsed time for the generation of the script took " + Chat.elapsed_time + " seconds \n"
+                + "\n");
+                c++;
+
+            }
+        }
+
+    }
+}
+  //-------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
