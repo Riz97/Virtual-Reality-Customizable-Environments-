@@ -1,4 +1,4 @@
-
+ï»¿
 using RoslynCSharp;
 using System;
 using System.Collections;
@@ -21,9 +21,9 @@ public class Domain : MonoBehaviour
 
     [SerializeField] public TMP_InputField InputField;
 
-    [SerializeField] public  GameObject popup;
+    [SerializeField] public GameObject popup;
 
-   
+
 
     //-------------------- SYSTEM MESSAGES----------------------------------------------------------
 
@@ -32,19 +32,19 @@ public class Domain : MonoBehaviour
     private const string Wait_Message = "Sorry, the AI was not able to generate a correct script. Wait! The AI is trying to generate another one :)";
     private const string Computing_Message = "Computing the script , just wait!!!!";
     private const string Error = "Error : you have to ask for the exactly amount of models requested  for this simulation";
-    
+
     //------------------------------------------------------------------------------------------------
 
     private ScriptDomain domain = null;
-    int FaultyScriptCount = 0;
+    int FaultyScriptCount;
     int totaltries;
     private string sourceCode;
-    public static bool isExecutable = true;
+    public static bool isExecutable = false;
     static string s_time = System.DateTime.Now.ToString("dd-MM-hh-mm-ss");
     string path = Application.dataPath + "/Logs/" + s_time + ".txt";
     string faultypath = Application.dataPath + "/Logs/Faulty Scripts/Faulty_Scripts.txt";
     private Chat chat = new Chat();
-   
+    private int n;
     public void Start()
     {
         //Waiter
@@ -92,28 +92,44 @@ public class Domain : MonoBehaviour
         if (Output_Text.text != Welcome_Message && Output_Text.text != Error_Message && Output_Text.text.ToString() != Wait_Message && Output_Text.text != "Executing......" && Output_Text.text != Error && Output_Text.text != Computing_Message)
         {
             sourceCode = Output_Text.text.ToString();
-
+            
             // Create domain
             domain = ScriptDomain.CreateDomain("Example Domain");
-            
-                // Compile and load code - Note that we use 'CompileAndLoadMainSource' which is the same as 'CompileAndLoadSource' but returns the main type in the compiled assembly
-                 ScriptType type = domain.CompileAndLoadMainSource(sourceCode, ScriptSecurityMode.UseSettings);
+
+            // Compile and load code - Note that we use 'CompileAndLoadMainSource' which is the same as 'CompileAndLoadSource' but returns the main type in the compiled assembly
+            try
+            {
+                ScriptType type = domain.CompileAndLoadMainSource(sourceCode, ScriptSecurityMode.UseSettings);
 
                 // Create an instance of 'Example'
                 ScriptProxy proxy = type.CreateInstance(gameObject);
 
                 proxy.SafeCall(sourceCode);
-   
-          
-
-                isExecutable = true;
-
-   
 
 
+            }
+
+
+
+            catch (Exception e)
+            {
+           
+                //We get access to the ReadStringInput Method inside Chat.cs
+                GameObject IA_Manager = GameObject.Find("Ai_Manager");
+                chat = IA_Manager.GetComponent<Chat>();
+                Debug.Log("The AI generated script contains syntax compilation errors");
+                isExecutable = false;
+                //Add the Faulty Script to Faulty_Script.txt
+                CreateFaultyScriptsFile(sourceCode, Input_Text);
+                FaultyScriptCount++;//Increase the number of faulty scripts generated for an environment
+                StartCoroutine(showPopup());//It shows a 5 seconds pop up error
+                chat.ReadStringInput(InputField);//Send again the request to the LLM
+                DoScript();//Execute the code otherwise wait for an acceptable script
+                Generate_Script_Button.interactable = false;
+            }
             //If the user has asked for a Bases Environment we have to set the flag to true , in this way when another environment is asked , the system knows the 
             //exact amount of models to destroy.
-
+            yield return new WaitForSeconds(2);
             if (Chat.input_auxx.ToLower() == "office" ||
                  Chat.input_auxx.ToLower() == "apartment" ||
                  Chat.input_auxx.ToLower() == "nature" ||
@@ -134,11 +150,12 @@ public class Domain : MonoBehaviour
 
             }
             //Script executed , the button is now interactable and the correct Log File can be created
-                Generate_Script_Button.interactable = true;
-           
-            if(isExecutable)
+            Generate_Script_Button.interactable = true;
+            isExecutable = true;
+
+            if (isExecutable)
             {
-                CreateLogFile(sourceCode, Input_Text,FaultyScriptCount);
+                CreateLogFile(sourceCode, Input_Text, FaultyScriptCount);
             }
 
             yield return new WaitForSeconds(2);
@@ -147,8 +164,9 @@ public class Domain : MonoBehaviour
 
             //------------------------------------------------- LOG FILES FUNCTION ------------------------------------------
 
-            void CreateLogFile(string sourcecode, TMP_Text Input_Text,int FaultyScriptCount)
+            void CreateLogFile(string sourcecode, TMP_Text Input_Text, int FaultyScriptCount)
             {
+                int temp = Chat.tries + FaultyScriptCount;
 
                 if (!File.Exists(path))
                 {
@@ -161,98 +179,19 @@ public class Domain : MonoBehaviour
                 + Chat.Number_of_Objects + "\nYou wrote the following  sentence : " +
                 Input_Text.text + "\n" + "\n" + "The script generated by the AI is the following: \n " + sourcecode + "\n" +
                 "Elapsed time for the generation of the script took " + Chat.elapsed_time + " seconds"
-                + "\n" + "The IA required " + Chat.tries + " tries , for obtaining an accetable script \n" + "The number of faulty script for this environemnt is £ " + FaultyScriptCount + "\n");
-             
+                + "\n" + "The IA required " + temp + " tries , for obtaining an accetable script \n" + "The number of faulty script for this environment is Â£ " + FaultyScriptCount + "\n");
                 Chat.tries = 0;
                 FaultyScriptCount = 0;
             }
-//--------------------------------------------------------------------------------------------------------------
-//------------------------------------------------- LOG FAULTY SCRIPTS FILES FUNCTION ------------------------------------------
+            //--------------------------------------------------------------------------------------------------------------
+            //------------------------------------------------- LOG FAULTY SCRIPTS FILES FUNCTION ------------------------------------------
 
 
         }
     }
-//-------------------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------
 
-//-------------------------------------- POP UP HANDLER ------------------------------------------------------------------------------------
-    IEnumerator showPopup()
-    {
-        popup.SetActive(true); // Mostra il pop-up
-        yield return new WaitForSeconds(5); // Aspetta 5 secondi
-        popup.SetActive(false); // Nasconde il pop-up
-    }
-
-    private void OnEnable()
-    {
-        // Sottoscrivi l'evento logMessageReceived quando lo script viene attivato
-        Application.logMessageReceived += OnLogMessageReceived;
-    }
-
-    private void OnDisable()
-    {
-        // Annulla la sottoscrizione dell'evento quando lo script viene disattivato
-        Application.logMessageReceived -= OnLogMessageReceived;
-    }
-
-    private void OnLogMessageReceived(string logString, string stackTrace, LogType type)
-    {
-      bool errorHandled = false;
-
-     
-            // Verifica se il log è un errore o un'eccezione
-            if ((type == LogType.Error || type == LogType.Exception) && !errorHandled )
-        {
-
-            
-            errorHandled = true;
-
-            // Esegui il codice specifico in caso di errore
-            EseguiCodiceSuErrore();
-        }
-    }
-
-    private void EseguiCodiceSuErrore()
-    {
-        if (Chat.input_auxx.ToLower() == "office" ||
-    Chat.input_auxx.ToLower() == "apartment" ||
-    Chat.input_auxx.ToLower() == "nature" ||
-    Chat.input_auxx.ToLower() == "forest" ||
-    Chat.input_auxx.ToLower() == "grid" ||
-    Chat.input_auxx.ToLower() == "city" ||
-    Chat.input_auxx.ToLower() == "industry")
-
-        {
-
-            Chat.Bases = true;
-
-        }
-
-        else
-        {
-            Chat.Custom = true;
-        }
-        //We get access to the ReadStringInput Method inside Chat.cs
-        GameObject IA_Manager = GameObject.Find("Ai_Manager");
-        chat = IA_Manager.GetComponent<Chat>();
-
-        Debug.Log("The AI generated script contains syntax compilation errors");
-
-        isExecutable = false;
-
-        //Add the Faulty Script to Faulty_Script.txt
-        CreateFaultyScriptsFile(sourceCode, Input_Text);
-
-        FaultyScriptCount++;//Increase the number of faulty scripts generated for an environment
-
-        Debug.Log(FaultyScriptCount);
-
-        StartCoroutine(showPopup());//It shows a 5 seconds pop up error
-
-        chat.ReadStringInput(InputField);//Send again the request to the LLM
-        DoScript();//Execute the code otherwise wait for an acceptable script
-        Generate_Script_Button.interactable = false;
-
-    }
+    //-------------------------------------- POP UP HANDLER ------------------------------------------------------------------------------------
     void CreateFaultyScriptsFile(string sourcecode, TMP_Text Input_Text)
     {
         int c = 0;
@@ -290,11 +229,92 @@ public class Domain : MonoBehaviour
         }
 
     }
+
+    IEnumerator showPopup()
+    {
+        popup.SetActive(true); // Mostra il pop-up
+        yield return new WaitForSeconds(5); // Aspetta 5 secondi
+        popup.SetActive(false); // Nasconde il pop-up
+    }
+
+    /*
+    private void OnEnable()
+    {
+        // Sottoscrivi l'evento logMessageReceived quando lo script viene attivato
+        Application.logMessageReceived += OnLogMessageReceived;
+    }
+
+    private void OnDisable()
+    {
+        // Annulla la sottoscrizione dell'evento quando lo script viene disattivato
+        Application.logMessageReceived -= OnLogMessageReceived;
+    }
+
+    private void OnLogMessageReceived(string logString, string stackTrace, LogType type)
+    {
+        bool errorHandled = false;
+
+
+        // Verifica se il log ï¿½ un errore o un'eccezione
+        if ((type == LogType.Error || type == LogType.Exception) && !errorHandled)
+        {
+
+
+            errorHandled = true;
+
+            // Esegui il codice specifico in caso di errore
+            EseguiCodiceSuErrore();
+        }
+    }
+
+    private void EseguiCodiceSuErrore()
+    {
+        if (Chat.input_auxx.ToLower() == "office" ||
+    Chat.input_auxx.ToLower() == "apartment" ||
+    Chat.input_auxx.ToLower() == "nature" ||
+    Chat.input_auxx.ToLower() == "forest" ||
+    Chat.input_auxx.ToLower() == "grid" ||
+    Chat.input_auxx.ToLower() == "city" ||
+    Chat.input_auxx.ToLower() == "industry")
+
+        {
+
+            Chat.Bases = true;
+
+        }
+
+        else
+        {
+            Chat.Custom = true;
+        }
+        //We get access to the ReadStringInput Method inside Chat.cs
+        GameObject IA_Manager = GameObject.Find("Ai_Manager");
+        chat = IA_Manager.GetComponent<Chat>();
+        //-------------------------------------------------------------------------------------------------------------------------------------------
+
+        Debug.Log("The AI generated script contains syntax compilation errors");
+
+        isExecutable = false;
+
+        //Add the Faulty Script to Faulty_Script.txt
+        CreateFaultyScriptsFile(sourceCode, Input_Text);
+
+        FaultyScriptCount++;//Increase the number of faulty scripts generated for an environment
+
+        Debug.Log(FaultyScriptCount);
+
+        StartCoroutine(showPopup());//It shows a 5 seconds pop up error
+
+        chat.ReadStringInput(InputField);//Send again the request to the LLM
+        DoScript();//Execute the code otherwise wait for an acceptable script
+        Generate_Script_Button.interactable = false;
+
+    }
 }
-  //-------------------------------------------------------------------------------------------------------------------------------------------
+    */
+    
 
-
-
+}
 
 
 

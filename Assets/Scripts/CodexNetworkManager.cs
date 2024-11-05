@@ -11,13 +11,14 @@ public class CodexNetworkManager : MonoBehaviour
     private TcpClient client;
     private NetworkStream stream;
     [SerializeField] Button ServerButton;
-    
+
 
     //----------------------------- Python Scripts Location ---------------------------------------------------------------------------------------------
 
     //Location must be checked in different devices
 
-    private string codexPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\codex.py";
+    //private string codexPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\codex.py"; //Laptop
+    private string codexPy = "/k python C:\\Users\\ricky\\Desktop\\Virtual-Reality-Customizable-Environments-\\PythonServer\\codex.py"; //Desktop
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------
     public void Start()

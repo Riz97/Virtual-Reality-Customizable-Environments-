@@ -38,6 +38,7 @@ public class Chat : MonoBehaviour
 
     public static float elapsed_time;
     public static int tries = 0;
+    
  
 
     List<string> Mandatory_Words = new List<string>() {"Find(",".name"};
@@ -336,8 +337,8 @@ public class Chat : MonoBehaviour
     {
       
         //While the algorithm is running the button for genearating a script is not interactable, It will be interactable again when the script has been executed
-        Generate_Script_Button.interactable = false; 
-
+        Generate_Script_Button.interactable = false;
+        Debug.Log(Custom);
         //-----------------------------------Deletion of the objects of the old customized or bases scenes -------------------------------
 
         //For bases scene we have a known number of models
@@ -355,7 +356,7 @@ public class Chat : MonoBehaviour
         //For the customized scenes the number of models is determined by the user 
         if (Custom)
         {
-           
+            Debug.Log("Elimino tutto");
             for (int i = 0; i < n; i++)
             {
                 GameObject.Destroy(GameObject.Find("Model_" + i.ToString()));
@@ -612,7 +613,7 @@ public class Chat : MonoBehaviour
         // -------------------------  FURNITURE   ---------------
 
 
-        else if (words_Furniture.Count() == Number_of_Objects && words_Furniture.Count()!=0)
+        else if (words_Furniture.Count() == Number_of_Objects && words_Furniture.Count()!=0 )
         {
            
            createModels(Number_of_Objects);
@@ -642,7 +643,7 @@ public class Chat : MonoBehaviour
 
         else if (words_Nature.Count() == Number_of_Objects && words_Nature.Count() != 0)
         {
-
+            
             createModels(Number_of_Objects);
 
             input = Input_Request(input, Number_of_Objects, words_Nature, "Nature", list_Directions);
