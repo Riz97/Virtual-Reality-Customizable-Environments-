@@ -40,7 +40,7 @@ public class Chat : MonoBehaviour
     public static int tries = 0;
  
 
-    List<string> Mandatory_Words = new List<string>() {"Find("};
+    List<string> Mandatory_Words = new List<string>() {"Find(",".name"};
 
     List<string> Atleast2_Words = new List<string>() { "Furniture/", "Cars/", "Nature/", "City/", "Industrial/" };
 

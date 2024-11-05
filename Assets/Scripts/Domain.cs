@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 using System.Reflection;
+using JetBrains.Annotations;
 
 public class Domain : MonoBehaviour
 {
@@ -139,10 +140,12 @@ public class Domain : MonoBehaviour
             {
                 CreateLogFile(sourceCode, Input_Text,FaultyScriptCount);
             }
-                
+
+            yield return new WaitForSeconds(2);
 
 
-//------------------------------------------------- LOG FILES FUNCTION ------------------------------------------
+
+            //------------------------------------------------- LOG FILES FUNCTION ------------------------------------------
 
             void CreateLogFile(string sourcecode, TMP_Text Input_Text,int FaultyScriptCount)
             {
@@ -193,13 +196,30 @@ public class Domain : MonoBehaviour
 
     private void OnLogMessageReceived(string logString, string stackTrace, LogType type)
     {
+      bool errorHandled = false;
+
+     
+            // Verifica se il log è un errore o un'eccezione
+            if ((type == LogType.Error || type == LogType.Exception) && !errorHandled )
+        {
+
+            
+            errorHandled = true;
+
+            // Esegui il codice specifico in caso di errore
+            EseguiCodiceSuErrore();
+        }
+    }
+
+    private void EseguiCodiceSuErrore()
+    {
         if (Chat.input_auxx.ToLower() == "office" ||
-            Chat.input_auxx.ToLower() == "apartment" ||
-            Chat.input_auxx.ToLower() == "nature" ||
-            Chat.input_auxx.ToLower() == "forest" ||
-            Chat.input_auxx.ToLower() == "grid" ||
-            Chat.input_auxx.ToLower() == "city" ||
-            Chat.input_auxx.ToLower() == "industry")
+    Chat.input_auxx.ToLower() == "apartment" ||
+    Chat.input_auxx.ToLower() == "nature" ||
+    Chat.input_auxx.ToLower() == "forest" ||
+    Chat.input_auxx.ToLower() == "grid" ||
+    Chat.input_auxx.ToLower() == "city" ||
+    Chat.input_auxx.ToLower() == "industry")
 
         {
 
@@ -211,18 +231,6 @@ public class Domain : MonoBehaviour
         {
             Chat.Custom = true;
         }
-            // Verifica se il log è un errore o un'eccezione
-            if (type == LogType.Error || type == LogType.Exception)
-        {
-            
-
-            // Esegui il codice specifico in caso di errore
-            EseguiCodiceSuErrore();
-        }
-    }
-
-    private void EseguiCodiceSuErrore()
-    {
         //We get access to the ReadStringInput Method inside Chat.cs
         GameObject IA_Manager = GameObject.Find("Ai_Manager");
         chat = IA_Manager.GetComponent<Chat>();
@@ -235,6 +243,8 @@ public class Domain : MonoBehaviour
         CreateFaultyScriptsFile(sourceCode, Input_Text);
 
         FaultyScriptCount++;//Increase the number of faulty scripts generated for an environment
+
+        Debug.Log(FaultyScriptCount);
 
         StartCoroutine(showPopup());//It shows a 5 seconds pop up error
 

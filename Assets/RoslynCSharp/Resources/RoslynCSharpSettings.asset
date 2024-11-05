@@ -43,7 +43,7 @@ MonoBehaviour:
       useRegexMatch: 0
     ignoreCase: 0
     allowPInvoke: 0
-  logDetail: 3
+  logDetail: 2
   allowUnsafeCode: 0
   allowOptimizeCode: 0
   allowConcurrentCompile: 1
