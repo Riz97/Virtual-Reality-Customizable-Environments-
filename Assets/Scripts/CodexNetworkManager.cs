@@ -17,8 +17,8 @@ public class CodexNetworkManager : MonoBehaviour
 
     //Location must be checked in different devices
 
-    //private string codexPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\codex.py"; //Laptop
-    private string codexPy = "/k python C:\\Users\\ricky\\Desktop\\Virtual-Reality-Customizable-Environments-\\PythonServer\\codex.py"; //Desktop
+    private string codexPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\codex.py"; //Laptop
+    //private string codexPy = "/k python C:\\Users\\ricky\\Desktop\\Virtual-Reality-Customizable-Environments-\\PythonServer\\codex.py"; //Desktop
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------
     public void Start()

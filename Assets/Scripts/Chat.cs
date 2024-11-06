@@ -94,7 +94,7 @@ public class Chat : MonoBehaviour
 
     [SerializeField] public TMP_Text Number_Models_Text;
 
-    [SerializeField] public Material material;
+    [SerializeField] public  Material material;
 
     [SerializeField] public TMP_Dropdown dropdown;
     
@@ -276,6 +276,8 @@ public class Chat : MonoBehaviour
 
     public void AIList(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
     {
+
+    
         if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && 
             ContainsAny(result, All) && CheckContainsTwoStrings(result, All) /*&& CheckIfWordContainedTwice(result, "Find(", 2)&& CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects)*/)
         {
@@ -338,7 +340,7 @@ public class Chat : MonoBehaviour
       
         //While the algorithm is running the button for genearating a script is not interactable, It will be interactable again when the script has been executed
         Generate_Script_Button.interactable = false;
-        Debug.Log(Custom);
+        
         //-----------------------------------Deletion of the objects of the old customized or bases scenes -------------------------------
 
         //For bases scene we have a known number of models
@@ -356,7 +358,7 @@ public class Chat : MonoBehaviour
         //For the customized scenes the number of models is determined by the user 
         if (Custom)
         {
-            Debug.Log("Elimino tutto");
+            
             for (int i = 0; i < n; i++)
             {
                 GameObject.Destroy(GameObject.Find("Model_" + i.ToString()));
@@ -436,7 +438,7 @@ public class Chat : MonoBehaviour
 
             input = " Unity C# script code, no comments or suggestions just code, that follow drastically these numbered steps " +
                     " 1) Find with the Find() method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
-                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder" +
+                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the sharedMaterial loaded from Furniture/Material folder" +
                     " 3) Substitute them with objects loaded from the Furniture folder, the gameobjects to be uploaded are 'Desk' 'Table' 'Chair' 'Chair'  " +
                     " and rename them 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 " +
                     " 'Model_0' (Desk) at Y position equals to -0.47, at X position 0.08 and Z position 7.13 , 'Model_1' (Chair) at Y position equals to -0.47," +
@@ -1037,5 +1039,6 @@ public class Chat : MonoBehaviour
         }
     }
     //---------------------------------------------------------------------------------------------------------
+
 }
 

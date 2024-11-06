@@ -23,6 +23,9 @@ public class Domain : MonoBehaviour
 
     [SerializeField] public GameObject popup;
 
+    [SerializeField] public Material[] material;
+
+
 
 
     //-------------------- SYSTEM MESSAGES----------------------------------------------------------
@@ -70,13 +73,13 @@ public class Domain : MonoBehaviour
     }
 
 
-    IEnumerator WaitIA()
+    IEnumerator  WaitIA()
     {
         //In this way we wait 20 seconds only the first time the app is launched
         //, in these  seconds the ai should be able to 
         //provide a correct script that Roslyn will compile at runtime
 
-        yield return new WaitForSeconds(20);
+        yield return new WaitForSeconds(10);
 
         totaltries = Chat.tries;
 
@@ -96,9 +99,11 @@ public class Domain : MonoBehaviour
             // Create domain
             domain = ScriptDomain.CreateDomain("Example Domain");
 
-            // Compile and load code - Note that we use 'CompileAndLoadMainSource' which is the same as 'CompileAndLoadSource' but returns the main type in the compiled assembly
             try
             {
+
+                // Compile and load code - Note that we use 'CompileAndLoadMainSource' which is the same as 'CompileAndLoadSource' but returns the main type in the compiled assembly
+
                 ScriptType type = domain.CompileAndLoadMainSource(sourceCode, ScriptSecurityMode.UseSettings);
 
                 // Create an instance of 'Example'
@@ -106,14 +111,12 @@ public class Domain : MonoBehaviour
 
                 proxy.SafeCall(sourceCode);
 
-
             }
 
 
-
-            catch (Exception e)
+            catch (Exception ex)
             {
-           
+
                 //We get access to the ReadStringInput Method inside Chat.cs
                 GameObject IA_Manager = GameObject.Find("Ai_Manager");
                 chat = IA_Manager.GetComponent<Chat>();
@@ -127,10 +130,11 @@ public class Domain : MonoBehaviour
                 DoScript();//Execute the code otherwise wait for an acceptable script
                 Generate_Script_Button.interactable = false;
             }
+            
             //If the user has asked for a Bases Environment we have to set the flag to true , in this way when another environment is asked , the system knows the 
             //exact amount of models to destroy.
-            yield return new WaitForSeconds(2);
-            if (Chat.input_auxx.ToLower() == "office" ||
+          
+            if  (Chat.input_auxx.ToLower() == "office" ||
                  Chat.input_auxx.ToLower() == "apartment" ||
                  Chat.input_auxx.ToLower() == "nature" ||
                  Chat.input_auxx.ToLower() == "forest" ||
@@ -237,81 +241,8 @@ public class Domain : MonoBehaviour
         popup.SetActive(false); // Nasconde il pop-up
     }
 
-    /*
-    private void OnEnable()
-    {
-        // Sottoscrivi l'evento logMessageReceived quando lo script viene attivato
-        Application.logMessageReceived += OnLogMessageReceived;
-    }
-
-    private void OnDisable()
-    {
-        // Annulla la sottoscrizione dell'evento quando lo script viene disattivato
-        Application.logMessageReceived -= OnLogMessageReceived;
-    }
-
-    private void OnLogMessageReceived(string logString, string stackTrace, LogType type)
-    {
-        bool errorHandled = false;
-
-
-        // Verifica se il log � un errore o un'eccezione
-        if ((type == LogType.Error || type == LogType.Exception) && !errorHandled)
-        {
-
-
-            errorHandled = true;
-
-            // Esegui il codice specifico in caso di errore
-            EseguiCodiceSuErrore();
-        }
-    }
-
-    private void EseguiCodiceSuErrore()
-    {
-        if (Chat.input_auxx.ToLower() == "office" ||
-    Chat.input_auxx.ToLower() == "apartment" ||
-    Chat.input_auxx.ToLower() == "nature" ||
-    Chat.input_auxx.ToLower() == "forest" ||
-    Chat.input_auxx.ToLower() == "grid" ||
-    Chat.input_auxx.ToLower() == "city" ||
-    Chat.input_auxx.ToLower() == "industry")
-
-        {
-
-            Chat.Bases = true;
-
-        }
-
-        else
-        {
-            Chat.Custom = true;
-        }
-        //We get access to the ReadStringInput Method inside Chat.cs
-        GameObject IA_Manager = GameObject.Find("Ai_Manager");
-        chat = IA_Manager.GetComponent<Chat>();
-        //-------------------------------------------------------------------------------------------------------------------------------------------
-
-        Debug.Log("The AI generated script contains syntax compilation errors");
-
-        isExecutable = false;
-
-        //Add the Faulty Script to Faulty_Script.txt
-        CreateFaultyScriptsFile(sourceCode, Input_Text);
-
-        FaultyScriptCount++;//Increase the number of faulty scripts generated for an environment
-
-        Debug.Log(FaultyScriptCount);
-
-        StartCoroutine(showPopup());//It shows a 5 seconds pop up error
-
-        chat.ReadStringInput(InputField);//Send again the request to the LLM
-        DoScript();//Execute the code otherwise wait for an acceptable script
-        Generate_Script_Button.interactable = false;
-
-    }
-}
-    */
+    
+ 
     
 
 }
