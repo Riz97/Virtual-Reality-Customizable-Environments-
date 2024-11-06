@@ -1,12 +1,12 @@
 import ollama
 import socket
 import time
-HOST = '127.0.1.1'  # Standard loopback interface address (localhost)
-PORT = 12345        # Port to listen on (non-privileged ports are > 1023)
+HOST = '127.0.1.3'  # Standard loopback interface address (localhost)
+PORT = 12340        # Port to listen on (non-privileged ports are > 1023)
 model = "qwen2.5-coder"
 
 
-print("Welcome to the LLAMA Python server for this Framework")
+print("Welcome to the QWEN Python server for this Framework")
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST,PORT))

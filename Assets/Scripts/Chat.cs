@@ -104,6 +104,7 @@ public class Chat : MonoBehaviour
     public GeminiNetworkManager GeminiNetwork = new GeminiNetworkManager();
     public LlamaNetworkManager LlamaNetwork = new LlamaNetworkManager();
     public CodexNetworkManager CodexNetwork = new CodexNetworkManager();
+    public QwenNetworkManager QwenNetwork  = new QwenNetworkManager();
 
     //-------------------- META LLAMA CLIENT INFO----------------------
 
@@ -264,8 +265,20 @@ public class Chat : MonoBehaviour
 
             //------------------------------ COPILOT --------------------------------------------------------
 
-            if (dropdown.options[dropdown.value].text == "COPILOT")
+            if (dropdown.options[dropdown.value].text == "QWEN")
             {
+                await QwenNetwork.SendMessageToServer(input);
+                result_aux = await QwenNetwork.ReceiveMessages();
+
+                result_auxx = result_aux.Replace("`", "");
+                result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
+                result = RemoveAfterCharacter(result, '*');
+                char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
+                ModelName = "qwen2.5-coder"; //The actual Codex LLM must be changed inside the Python Server
+                Debug.Log(result);
+                AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+
+                tries++;
 
             }
 
