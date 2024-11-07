@@ -89,7 +89,7 @@ public class Domain : MonoBehaviour
         while ((Output_Text.text.ToString() == Wait_Message || Output_Text.text.ToString() == Computing_Message))
         {
             yield return new WaitForSeconds(1);
-            Debug.Log("I'm waiting for the executable script");
+            //Debug.Log("I'm waiting for the executable script");
         }
 
         if (Output_Text.text != Welcome_Message && Output_Text.text != Error_Message && Output_Text.text.ToString() != Wait_Message && Output_Text.text != "Executing......" && Output_Text.text != Error && Output_Text.text != Computing_Message)

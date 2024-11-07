@@ -287,12 +287,22 @@ public class Chat : MonoBehaviour
     }
 
 
+
+
     public void AIList(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
     {
+    Debug.Log(ContainsAll(result, Mandatory_Words));
+           Debug.Log(ContainsAny(result, Material_Words));
+           Debug.Log(firstNonWhiteSpaceChar == 'u');
+           Debug.Log(ContainsAny(result, All));
+           Debug.Log(CheckContainsTwoStrings(result, All));
+           Debug.Log(ContieneSottoStringaAlmenoDueVolte(result, "Nature"));
+        Debug.Log(CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects));
 
-    
+
+
         if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && 
-            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) /*&& CheckIfWordContainedTwice(result, "Find(", 2)&& CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects)*/)
+            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && (ContieneSottoStringaAlmenoDueVolte(result, "Nature") || ContieneSottoStringaAlmenoDueVolte(result, "Furniture")) && CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects))
         {
 
             //Elapsed time for the generation of the script
@@ -830,9 +840,11 @@ public class Chat : MonoBehaviour
                
                 " the gameobjects to be uploaded are :  ";
 
-        input = Enum_Objects(list, Number_of_Objects, input) + "in this way Resources.Load<GameObject>("+ Material + "/nameoftheobject\") 3) MANDATORY In the third step you must rename the new models in the following way";
+        input = Enum_Objects(list, Number_of_Objects, input) + "in the same way is written here Resources.Load<GameObject>("+"\""+Material + "/nameoftheobject\")"+
+            
+            "3) In the third step, it is mandatory to  rename the new models with .name in the following way";
 
-        input = Define_Models(Number_of_Objects, input) + " The positions for every objects are the following : ";
+        input = Define_Models(Number_of_Objects, input) + "The total number of Vector3 must be" +Number_of_Objects + "The positions for every objects are the following and are ALL mandatory to be inserted in the script, do  not truncate the code, : ";
 
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) +
                 " 4) Find with the Find() method the gameobject " +
@@ -877,8 +889,7 @@ public class Chat : MonoBehaviour
 
         for (int ii = 0; ii < Number_of_Objects; ii++)
         {
-            input += " Model_" + ii.ToString() + " is a " +  objects[ii]  + " at  Y position equals to -0.47, at X Position equals to  " + Random_PositionX(list_Directions,ii).ToString() + " and Z position equals to " + Random_PositionZ(list_Directions,ii).ToString() + ", You must write the code for every model";
-
+            input += " Model_" + ii.ToString() + " is a " + objects[ii] + " at Vector3(" + Random_PositionX(list_Directions, ii).ToString().Replace(",", ".") + ",-0.47," + Random_PositionZ(list_Directions, ii).ToString().Replace(",", ".") + ")";
         }
 
         return input;
@@ -1050,6 +1061,29 @@ public class Chat : MonoBehaviour
         {
             return input; // Se il carattere non è trovato, restituisce la stringa originale
         }
+    }
+
+
+    public static bool ContieneSottoStringaAlmenoDueVolte(string testo, string sottostringa)
+    {
+        int count = 0;
+        int posizione = 0;
+
+        // Cerca la sotto-stringa finché ci sono occorrenze
+        while ((posizione = testo.IndexOf(sottostringa, posizione, StringComparison.OrdinalIgnoreCase)) != -1)
+        {
+            count++;
+            posizione += sottostringa.Length; // Avanza oltre l'occorrenza trovata
+
+            // Se troviamo almeno due occorrenze, restituiamo true
+            if (count >= 2)
+            {
+                return true;
+            }
+        }
+
+        // Se non sono state trovate almeno due occorrenze, restituisce false
+        return false;
     }
     //---------------------------------------------------------------------------------------------------------
 
