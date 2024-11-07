@@ -822,22 +822,22 @@ public class Chat : MonoBehaviour
 
     {
  
-        input = " Unity C# script code with the libraries inclusion, no comments i need only C# code, that follow drastically these numbered steps : 1)  Find with the GameObject.Find method" +
+        input = " A complete Unity C# script code with the libraries inclusion, MANDATORY NO COMMENTS, NO EXPLANATION , ONLY CODE at the beginning or at the end i need only C# code, that follow drastically these numbered steps : 1)  Find with the GameObject.Find method" +
             ", not FindObjectsByTag, the objects called ";
 
         input = Define_Models(Number_of_Objects, input)+ " and destroy them" +
-                " 2) Substitute them with the objects loaded from the Resources/" + Material +
+                " 2) Substitute them with the objects loaded from the Resources/" + Material + 
                
                 " the gameobjects to be uploaded are :  ";
 
-        input = Enum_Objects(list, Number_of_Objects, input) + "in this way Resources.Load<GameObject>("+ Material + "/nameoftheobject\") and rename them, the number of object is " + Number_of_Objects;
+        input = Enum_Objects(list, Number_of_Objects, input) + "in this way Resources.Load<GameObject>("+ Material + "/nameoftheobject\") 3) MANDATORY In the third step you must rename the new models in the following way";
 
-        input = Define_Models(Number_of_Objects, input);
+        input = Define_Models(Number_of_Objects, input) + " The positions for every objects are the following : ";
 
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) +
-                " 3) Find with the Find() method the gameobject " +
+                " 4) Find with the Find() method the gameobject " +
                 " 'Plane' and change its material with the following code Resources.Load<Material>(" + Material + "/Material) " +
-               " 4) add a boxcollider per gameobject";
+               " 5) add a boxcollider per gameobject";
                
 
        return input;
@@ -877,7 +877,7 @@ public class Chat : MonoBehaviour
 
         for (int ii = 0; ii < Number_of_Objects; ii++)
         {
-            input += " Model_" + ii.ToString() + " is an " +  objects[ii]  + " at  Y position equals to -0.47, at X Position equals to  " + Random_PositionX(list_Directions,ii).ToString() + " and Z position equals to " + Random_PositionZ(list_Directions,ii).ToString();
+            input += " Model_" + ii.ToString() + " is a " +  objects[ii]  + " at  Y position equals to -0.47, at X Position equals to  " + Random_PositionX(list_Directions,ii).ToString() + " and Z position equals to " + Random_PositionZ(list_Directions,ii).ToString() + ", You must write the code for every model";
 
         }
 
