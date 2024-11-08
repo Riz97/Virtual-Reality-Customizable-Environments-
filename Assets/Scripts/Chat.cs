@@ -302,7 +302,7 @@ public class Chat : MonoBehaviour
 
 
         if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && 
-            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && (ContieneSottoStringaAlmenoDueVolte(result, "Furniture")) && CheckIfWordContainedTwice(result, "Vector3(", Number_of_Objects))
+            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && ContieneSottoStringaAlmenoDueVolte(result, "Nature") && CheckIfWordContainedTwice(result, "Vector3(", Number_of_Objects))
         {
 
             //Elapsed time for the generation of the script
@@ -461,7 +461,7 @@ public class Chat : MonoBehaviour
 
             input = " Unity C# script code, no comments or suggestions just code, that follow drastically these numbered steps " +
                     " 1) Find with the Find() method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
-                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the sharedMaterial loaded from Furniture/Material folder" +
+                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the following code Resources.Load<Material>(Furniture/Material) " +
                     " 3) Substitute them with objects loaded from the Furniture folder, the gameobjects to be uploaded are 'Desk' 'Table' 'Chair' 'Chair'  " +
                     " and rename them 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 " +
                     " 'Model_0' (Desk) at Y position equals to -0.47, at X position 0.08 and Z position 7.13 , 'Model_1' (Chair) at Y position equals to -0.47," +
