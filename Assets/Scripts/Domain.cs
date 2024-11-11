@@ -28,6 +28,7 @@ public class Domain : MonoBehaviour
 
 
 
+
     //-------------------- SYSTEM MESSAGES----------------------------------------------------------
 
     private const string Welcome_Message = "static void Main()";
@@ -129,8 +130,9 @@ public class Domain : MonoBehaviour
                 CreateFaultyScriptsFile(sourceCode, Input_Text);
                 FaultyScriptCount++;//Increase the number of faulty scripts generated for an environment
                 StartCoroutine(showPopup());//It shows a 5 seconds pop up error
-                chat.ReadStringInput(InputField);//Send again the request to the LLM
-                DoScript();//Execute the code otherwise wait for an acceptable script
+                Generate_Script_Button.onClick.Invoke();
+                //chat.ReadStringInput(InputField);//Send again the request to the LLM
+                //DoScript();//Execute the code otherwise wait for an acceptable script
                 Generate_Script_Button.interactable = false;
 
                 if (Chat.input_auxx.ToLower() == "office" ||

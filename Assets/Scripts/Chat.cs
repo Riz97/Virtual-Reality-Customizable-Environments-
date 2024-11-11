@@ -270,7 +270,9 @@ public class Chat : MonoBehaviour
                 await QwenNetwork.SendMessageToServer(input);
                 result_aux = await QwenNetwork.ReceiveMessages();
 
-                result_aux = RemoveUntilColon(result_aux);
+                result_aux = RemoveUntilColon(result_aux,'h',':');
+                result_aux = RemoveUntilColon(result_aux, 'B', '.');
+                result_aux = TrimAfterLastBrace(result_aux);
 
                 result_auxx = result_aux.Replace("`", "");
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
@@ -835,8 +837,8 @@ public class Chat : MonoBehaviour
 
     {
  
-        input = " A complete, Unity C# script code with the libraries inclusion, MANDATORY NO COMMENTS, NO EXPLANATION , ONLY CODE at the beginning or at the end i need only C# code, that follow drastically these numbered steps : STEP ONE -  Find with the GameObject.Find method" +
-            ", not FindObjectsByTag,one method call per gameobject, and they are  called ";
+        input = " A complete, Unity C# script code with the libraries inclusion and with NO COMMENTS AT THE BEGINNING AND AT THE END OF THE SCRIPT, that follow drastically these numbered steps and (IMPORTANT) - Do not truncate the code by saying and so on for all models , you must write all the code\" : STEP ONE -  Find with the GameObject.Find method" +
+            ", not FindObjectsByTag or FindGameObjectsWithTag,one method call per gameobject, and they are  called ";
 
         input = Define_Models(Number_of_Objects, input)+ " and destroy them" +
                 " STEP TWO - Instantiate the new objects, through Instantiate method,  loaded from the Resources/" + Material + 
@@ -852,7 +854,8 @@ public class Chat : MonoBehaviour
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) +
                 " STEP FIVE - Find with the Find() method the gameobject " +
                 " 'Plane' and change its material with the exact following code Resources.Load<Material>(" + Material + "/Material) " +
-               " STEP SIX - add a boxcollider per gameobject";
+               " STEP SIX - add a boxcollider per gameobject ";
+       
                
 
                
@@ -1091,16 +1094,16 @@ public class Chat : MonoBehaviour
         return false;
     }
 
-    public static string RemoveUntilColon(string input)
+    public static string RemoveUntilColon(string input,char c,char p)
     {
         // Controlla se la stringa è vuota o se il primo carattere non è 'h'
-        if (string.IsNullOrEmpty(input) || input[0] != 'h')
+        if (string.IsNullOrEmpty(input) || input[0] != c)
         {
             return input; // Restituisce la stringa originale
         }
 
         // Trova l'indice del primo carattere ':'
-        int colonIndex = input.IndexOf(':');
+        int colonIndex = input.IndexOf('p');
 
         // Se ':' non viene trovato, restituisce una stringa vuota
         if (colonIndex == -1)
@@ -1110,6 +1113,21 @@ public class Chat : MonoBehaviour
 
         // Restituisce la parte della stringa dopo ':'
         return input.Substring(colonIndex + 1);
+    }
+
+    public static string TrimAfterLastBrace(string input)
+    {
+        // Trova l'indice dell'ultima parentesi graffa chiusa '}'
+        int lastBraceIndex = input.LastIndexOf('}');
+
+        // Se non c'è nessuna '}', ritorna la stringa originale
+        if (lastBraceIndex == -1)
+        {
+            return input;
+        }
+
+        // Ritorna la sottostringa fino all'ultima '}'
+        return input.Substring(0, lastBraceIndex + 1);
     }
 
     //---------------------------------------------------------------------------------------------------------
