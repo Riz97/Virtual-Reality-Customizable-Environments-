@@ -270,9 +270,12 @@ public class Chat : MonoBehaviour
                 await QwenNetwork.SendMessageToServer(input);
                 result_aux = await QwenNetwork.ReceiveMessages();
 
+                result_aux = RemoveUntilColon(result_aux);
+
                 result_auxx = result_aux.Replace("`", "");
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
                 result = RemoveAfterCharacter(result, '*');
+                
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "qwen2.5-coder"; //The actual Codex LLM must be changed inside the Python Server
                 Debug.Log(result);
@@ -302,7 +305,7 @@ public class Chat : MonoBehaviour
 
 
         if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && 
-            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && ContieneSottoStringaAlmenoDueVolte(result, "Nature") && CheckIfWordContainedTwice(result, "Vector3(", Number_of_Objects))
+            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && ContieneSottoStringaAlmenoDueVolte(result, "Nature")/* && CheckIfWordContainedTwice(result, "Vector3(", Number_of_Objects)*/)
         {
 
             //Elapsed time for the generation of the script
@@ -832,24 +835,26 @@ public class Chat : MonoBehaviour
 
     {
  
-        input = " A complete Unity C# script code with the libraries inclusion, MANDATORY NO COMMENTS, NO EXPLANATION , ONLY CODE at the beginning or at the end i need only C# code, that follow drastically these numbered steps : 1)  Find with the GameObject.Find method" +
-            ", not FindObjectsByTag, the objects called ";
+        input = " A complete, Unity C# script code with the libraries inclusion, MANDATORY NO COMMENTS, NO EXPLANATION , ONLY CODE at the beginning or at the end i need only C# code, that follow drastically these numbered steps : STEP ONE -  Find with the GameObject.Find method" +
+            ", not FindObjectsByTag,one method call per gameobject, and they are  called ";
 
         input = Define_Models(Number_of_Objects, input)+ " and destroy them" +
-                " 2) Substitute them with the objects loaded from the Resources/" + Material + 
+                " STEP TWO - Instantiate the new objects, through Instantiate method,  loaded from the Resources/" + Material + 
                
-                " the gameobjects to be uploaded are :  ";
+                " the gameobjects to be instantiated are :  ";
 
         input = Enum_Objects(list, Number_of_Objects, input) + "in the same way is written here Resources.Load<GameObject>("+"\""+Material + "/nameoftheobject\")"+
             
-            "3) In the third step, it is mandatory to  rename the new models with .name in the following way";
+            "STEP THREE - In the third step, it is mandatory to  rename the freshly created models with .name in the following way";
 
-        input = Define_Models(Number_of_Objects, input) + "The total number of Vector3 must be" +Number_of_Objects + "The positions for every objects are the following and are ALL mandatory to be inserted in the script, do  not truncate the code, : ";
+        input = Define_Models(Number_of_Objects, input) + " STEP FOUR -The positions for every objects are the following and are ALL mandatory to be inserted in the script as float, do  not truncate the code, : ";
 
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) +
-                " 4) Find with the Find() method the gameobject " +
-                " 'Plane' and change its material with the following code Resources.Load<Material>(" + Material + "/Material) " +
-               " 5) add a boxcollider per gameobject";
+                " STEP FIVE - Find with the Find() method the gameobject " +
+                " 'Plane' and change its material with the exact following code Resources.Load<Material>(" + Material + "/Material) " +
+               " STEP SIX - add a boxcollider per gameobject";
+               
+
                
 
        return input;
@@ -860,7 +865,7 @@ public class Chat : MonoBehaviour
         
         for(int i = 0; i < Number_of_Objects; i++)
         {
-            input += objects[i] + " ";
+            input +=  "'" + objects[i]+ "'" + " ";
         }
 
         return input;
@@ -1085,6 +1090,28 @@ public class Chat : MonoBehaviour
         // Se non sono state trovate almeno due occorrenze, restituisce false
         return false;
     }
+
+    public static string RemoveUntilColon(string input)
+    {
+        // Controlla se la stringa è vuota o se il primo carattere non è 'h'
+        if (string.IsNullOrEmpty(input) || input[0] != 'h')
+        {
+            return input; // Restituisce la stringa originale
+        }
+
+        // Trova l'indice del primo carattere ':'
+        int colonIndex = input.IndexOf(':');
+
+        // Se ':' non viene trovato, restituisce una stringa vuota
+        if (colonIndex == -1)
+        {
+            return string.Empty;
+        }
+
+        // Restituisce la parte della stringa dopo ':'
+        return input.Substring(colonIndex + 1);
+    }
+
     //---------------------------------------------------------------------------------------------------------
 
 }
