@@ -424,6 +424,8 @@ public class Chat : MonoBehaviour
         
         //-----------------------------------Deletion of the objects of the old customized or bases scenes -------------------------------
 
+        // TODO : DELETE THE CLONES iF THERE ARE SOME
+
         //For bases scene we have a known number of models
         if (Bases)
         {

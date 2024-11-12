@@ -135,10 +135,27 @@ public class Domain : MonoBehaviour
                 //DoScript();//Execute the code otherwise wait for an acceptable script
                 Generate_Script_Button.interactable = false;
 
-             
+                if (Chat.input_auxx.ToLower() == "office" ||
+                 Chat.input_auxx.ToLower() == "apartment" ||
+                 Chat.input_auxx.ToLower() == "nature" ||
+                 Chat.input_auxx.ToLower() == "forest" ||
+                 Chat.input_auxx.ToLower() == "grid" ||
+                 Chat.input_auxx.ToLower() == "city" ||
+                 Chat.input_auxx.ToLower() == "industry")
+
+                {
+
+                    Chat.Bases = true;
+
+                }
+
+                else
+                {
                     Chat.Custom = true;
 
-                
+                }
+
+
 
             }
             

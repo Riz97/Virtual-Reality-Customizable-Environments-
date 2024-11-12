@@ -1039,7 +1039,7 @@ MonoBehaviour:
   CodexNetwork: {fileID: 29696901}
   QwenNetwork: {fileID: 1408937800}
   Codegeex4NetworkManager: {fileID: 530560321}
-  CodeLlamaNetworkManager: {fileID: 0}
+  CodeLlamaNetworkManager: {fileID: 1826651666}
 --- !u!4 &331239456
 Transform:
   m_ObjectHideFlags: 0
