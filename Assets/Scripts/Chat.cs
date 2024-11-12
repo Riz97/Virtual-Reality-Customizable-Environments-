@@ -300,8 +300,7 @@ public class Chat : MonoBehaviour
 
                 result_auxx = result_aux.Replace("`", "");
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
-                result = RemoveAfterCharacter(result, '*');
-
+            
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "codegeex4"; //The actual Codex LLM must be changed inside the Python Server
                 Debug.Log(result);
