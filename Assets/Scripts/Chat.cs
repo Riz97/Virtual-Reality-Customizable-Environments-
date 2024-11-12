@@ -106,6 +106,7 @@ public class Chat : MonoBehaviour
     public CodexNetworkManager CodexNetwork = new CodexNetworkManager();
     public QwenNetworkManager QwenNetwork  = new QwenNetworkManager();
     public Codegeex4NetworkManager Codegeex4NetworkManager = new Codegeex4NetworkManager();
+    public CodeLlamaNetworkManager CodeLlamaNetworkManager = new CodeLlamaNetworkManager();
 
     //-------------------- META LLAMA CLIENT INFO----------------------
 
@@ -303,6 +304,33 @@ public class Chat : MonoBehaviour
             
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "codegeex4"; //The actual Codex LLM must be changed inside the Python Server
+                Debug.Log(result);
+                AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+
+                tries++;
+
+            }
+
+
+
+            //-------------------------------------------------------------------------------------------------
+
+            //------------------------------ COPILOT --------------------------------------------------------
+
+            if (dropdown.options[dropdown.value].text == "CODELLAMA")
+            {
+                await CodeLlamaNetworkManager.SendMessageToServer(input);
+                result_aux = await CodeLlamaNetworkManager.ReceiveMessages();
+
+                result_aux = RemoveTextBeforeUsing(result_aux);
+                result_aux = TrimAfterLastBrace(result_aux);
+
+
+                result_auxx = result_aux.Replace("`", "");
+                result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
+
+                char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
+                ModelName = "codellama"; //The actual Codex LLM must be changed inside the Python Server
                 Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
 

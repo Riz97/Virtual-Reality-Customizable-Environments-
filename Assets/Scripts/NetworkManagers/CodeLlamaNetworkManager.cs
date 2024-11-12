@@ -5,7 +5,7 @@ using UnityEngine;
 using System.Diagnostics;
 using UnityEngine.UI;
 
-public class CodeLlama4NetworkManager : MonoBehaviour
+public class CodeLlamaNetworkManager : MonoBehaviour
 {
     public string message;
     private TcpClient client;
@@ -29,10 +29,10 @@ public class CodeLlama4NetworkManager : MonoBehaviour
     }
 
     //Method that switch on the Gemini Python Server
-    public void Codegeex4ServerConnection()
+    public void CodellamaServerConnection()
     {
         Process.Start("cmd.exe", codellamaPy);
-        client = new TcpClient("127.0.1.4", 12349);
+        client = new TcpClient("127.0.1.5", 12347);
         stream = client.GetStream();
         ServerButton.interactable = false;
 
