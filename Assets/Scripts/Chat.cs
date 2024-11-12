@@ -863,7 +863,7 @@ public class Chat : MonoBehaviour
 
     {
  
-        input = " A complete, Unity C# script code with the libraries inclusion and with NO COMMENTS AT THE BEGINNING AND AT THE END OF THE SCRIPT, that follow drastically these numbered steps and (IMPORTANT) - Do not truncate the code by saying and so on for all models , you must write all the code\" : STEP ONE -  Find with the GameObject.Find method" +
+        input = " A complete, no placeholders, Unity C# script code with the libraries inclusion and with NO COMMENTS AT THE BEGINNING AND AT THE END OF THE SCRIPT, that follow drastically these numbered steps and (IMPORTANT) - Do not truncate the code by saying and so on for all models , you must write all the code\" : STEP ONE -  Find with the GameObject.Find method" +
             ", not FindObjectsByTag or FindGameObjectsWithTag,one method call per gameobject, and they are  called ";
 
         input = Define_Models(Number_of_Objects, input)+ " and destroy them" +
