@@ -271,8 +271,7 @@ public class Chat : MonoBehaviour
                 await QwenNetwork.SendMessageToServer(input);
                 result_aux = await QwenNetwork.ReceiveMessages();
 
-                result_aux = RemoveUntilColon(result_aux,'h',':');
-                result_aux = RemoveUntilColon(result_aux, 'B', '.');
+                result_aux = RemoveTextBeforeUsing(result_aux);
                 result_aux = TrimAfterLastBrace(result_aux);
 
                 result_auxx = result_aux.Replace("`", "");
@@ -295,9 +294,9 @@ public class Chat : MonoBehaviour
                 await Codegeex4NetworkManager.SendMessageToServer(input);
                 result_aux = await Codegeex4NetworkManager.ReceiveMessages();
 
-                result_aux = RemoveUntilColon(result_aux, 'h', ':');
-                result_aux = RemoveUntilColon(result_aux, 'B', '.');
+                result_aux = RemoveTextBeforeUsing(result_aux);
                 result_aux = TrimAfterLastBrace(result_aux);
+                
 
                 result_auxx = result_aux.Replace("`", "");
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
@@ -1121,27 +1120,6 @@ public class Chat : MonoBehaviour
         return false;
     }
 
-    public static string RemoveUntilColon(string input,char c,char p)
-    {
-        // Controlla se la stringa è vuota o se il primo carattere non è 'h'
-        if (string.IsNullOrEmpty(input) || input[0] != c)
-        {
-            return input; // Restituisce la stringa originale
-        }
-
-        // Trova l'indice del primo carattere ':'
-        int colonIndex = input.IndexOf('p');
-
-        // Se ':' non viene trovato, restituisce una stringa vuota
-        if (colonIndex == -1)
-        {
-            return string.Empty;
-        }
-
-        // Restituisce la parte della stringa dopo ':'
-        return input.Substring(colonIndex + 1);
-    }
-
     public static string TrimAfterLastBrace(string input)
     {
         // Trova l'indice dell'ultima parentesi graffa chiusa '}'
@@ -1155,6 +1133,21 @@ public class Chat : MonoBehaviour
 
         // Ritorna la sottostringa fino all'ultima '}'
         return input.Substring(0, lastBraceIndex + 1);
+    }
+
+    static string RemoveTextBeforeUsing(string text)
+    {
+        // Trova l'indice della prima occorrenza di "using"
+        int index = text.IndexOf("using");
+
+        // Se "using" non è trovato, restituisci il testo originale
+        if (index == -1)
+        {
+            return text;
+        }
+
+        // Ritorna il testo a partire dalla posizione di "using" fino alla fine
+        return text.Substring(index);
     }
 
     //---------------------------------------------------------------------------------------------------------
