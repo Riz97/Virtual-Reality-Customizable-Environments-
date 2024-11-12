@@ -333,7 +333,7 @@ public class Chat : MonoBehaviour
 
 
         if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && 
-            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && ContieneSottoStringaAlmenoDueVolte(result, "Nature")/* && CheckIfWordContainedTwice(result, "Vector3(", Number_of_Objects)*/)
+            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && (ContieneSottoStringaAlmenoDueVolte(result, "Nature") || ContieneSottoStringaAlmenoDueVolte(result, "Furniture") /* && CheckIfWordContainedTwice(result, "Vector3(", Number_of_Objects)*/))
         {
 
             //Elapsed time for the generation of the script
