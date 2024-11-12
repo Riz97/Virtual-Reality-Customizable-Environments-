@@ -29,10 +29,10 @@ public class Codegeex4NetworkManager : MonoBehaviour
     }
 
     //Method that switch on the Gemini Python Server
-    public void QwenServerConnection()
+    public void Codegeex4ServerConnection()
     {
         Process.Start("cmd.exe", geexPy);
-        client = new TcpClient("127.0.1.3", 12340);
+        client = new TcpClient("127.0.1.4", 12349);
         stream = client.GetStream();
         ServerButton.interactable = false;
 

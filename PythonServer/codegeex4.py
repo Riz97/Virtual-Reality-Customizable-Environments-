@@ -6,7 +6,7 @@ PORT = 12349        # Port to listen on (non-privileged ports are > 1023)
 model = "codegeex4"
 
 
-print("Welcome to the QWEN Python server for this Framework")
+print("Welcome to the CODEGEEX4 Python server for this Framework")
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST,PORT))
