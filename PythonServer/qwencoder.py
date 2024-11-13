@@ -3,7 +3,7 @@ import socket
 import time
 HOST = '127.0.1.3'  # Standard loopback interface address (localhost)
 PORT = 12340        # Port to listen on (non-privileged ports are > 1023)
-model = "codegeex4"
+model = "qwen2.5-coder"
 
 
 print("Welcome to the QWEN Python server for this Framework")

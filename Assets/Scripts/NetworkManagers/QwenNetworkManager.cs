@@ -17,8 +17,8 @@ public class QwenNetworkManager: MonoBehaviour
 
     //Location must be checked in different devices
 
-    private string qwenPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\qwencoder.py"; //Laptop
-    //private string qwenPy = "/k python C:\\Users\\ricky\\Desktop\\Virtual-Reality-Customizable-Environments-\\PythonServer\\qwencoder.py"; //Desktop
+    //private string qwenPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\qwencoder.py"; //Laptop
+    private string qwenPy = "/k python C:\\Users\\ricky\\Desktop\\Virtual-Reality-Customizable-Environments-\\PythonServer\\qwencoder.py"; //Desktop
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------
     public void Start()
