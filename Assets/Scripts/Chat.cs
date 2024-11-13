@@ -126,6 +126,7 @@ public class Chat : MonoBehaviour
     public async void Start()
 
     {
+        //test();
 
         Number_Models_Text.SetText("Number of models is : " + Number_of_Objects.ToString());
 
@@ -338,12 +339,12 @@ public class Chat : MonoBehaviour
 
     public void AIList(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
     {
-           Debug.Log(ContainsAll(result, Mandatory_Words));
-           Debug.Log(ContainsAny(result, Material_Words));
-           Debug.Log(firstNonWhiteSpaceChar == 'u');
-           Debug.Log(ContainsAny(result, All));
-           Debug.Log(CheckContainsTwoStrings(result, All));
-           Debug.Log(ContieneSottoStringaAlmenoDueVolte(result, "Nature"));
+           //Debug.Log(ContainsAll(result, Mandatory_Words));
+           //Debug.Log(ContainsAny(result, Material_Words));
+           //Debug.Log(firstNonWhiteSpaceChar == 'u');
+           //Debug.Log(ContainsAny(result, All));
+           //Debug.Log(CheckContainsTwoStrings(result, All));
+           //Debug.Log(ContieneSottoStringaAlmenoDueVolte(result, "Nature"));
         
 
         if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && 
@@ -409,43 +410,18 @@ public class Chat : MonoBehaviour
 
         //While the algorithm is running the button for genearating a script is not interactable, It will be interactable again when the script has been executed
         Generate_Script_Button.interactable = false;
-        
+
         //-----------------------------------Deletion of the objects of the old customized or bases scenes -------------------------------
 
-        //For bases scene we have a known number of models
-        if (Bases)
-        {
-            for (int i = 0; i < 7; i++)
-            {
-                GameObject.Destroy(GameObject.Find("Model_" + i.ToString()));
-                
-
-            }
-            Bases = false;
-        }
-
-
-        //For the customized scenes the number of models is determined by the user 
-        if (Custom)
-        {
-            
-            for (int i = 0; i < n; i++)
-            {
-                GameObject.Destroy(GameObject.Find("Model_" + i.ToString()));
-
-            }
-            Custom = false;
-        }
-
-        //Delete also all the "Clone" that can be Instantiated incorrectly by a AI generated script
         foreach (GameObject obj in allObjects)
         {
-            if (obj.name.Contains("Clone"))
+            if (obj.name.Contains("Clone")|| obj.name.Contains("Model_"))
             {
                 Destroy(obj);
             }
         }
 
+        
         //-----------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -463,9 +439,10 @@ public class Chat : MonoBehaviour
 
 
         List<string> list_Directions_aux = isIn_Direction(input,Directions,allWords); // Example of the final List : Right Chair , Left bed , table
-     
+
         //String list handler for the specified position
 
+      
 
         for (int i =0; i < list_Directions_aux.Count; i++)
         {
@@ -688,6 +665,7 @@ public class Chat : MonoBehaviour
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         //-----------------------------------------------------------------------   CUSTOM ENVIRONMENT -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
         // -------------------------  FURNITURE   ---------------
@@ -1168,5 +1146,34 @@ public class Chat : MonoBehaviour
 
     //---------------------------------------------------------------------------------------------------------
 
+    public void test()
+    {
+        //For bases scene we have a known number of models
+        if (Bases)
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                GameObject.Destroy(GameObject.Find("Model_" + i.ToString()));
+
+
+            }
+            Bases = false;
+        }
+
+
+        //For the customized scenes the number of models is determined by the user 
+        if (Custom)
+        {
+
+            for (int i = 0; i < n; i++)
+            {
+                GameObject.Destroy(GameObject.Find("Model_" + i.ToString()));
+
+            }
+            Custom = false;
+        }
+
+       
+    }
 }
 
