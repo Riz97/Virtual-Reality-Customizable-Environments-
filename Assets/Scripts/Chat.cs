@@ -101,6 +101,8 @@ public class Chat : MonoBehaviour
  
     public GameObject Models;
 
+    //------------------------- NETWORK MANAGERS FOR ALL THE PYTHON MANAGERS ----------------------------------------------------
+
     public GeminiNetworkManager GeminiNetwork = new GeminiNetworkManager();
     public LlamaNetworkManager LlamaNetwork = new LlamaNetworkManager();
     public CodexNetworkManager CodexNetwork = new CodexNetworkManager();
@@ -108,20 +110,15 @@ public class Chat : MonoBehaviour
     public Codegeex4NetworkManager Codegeex4NetworkManager = new Codegeex4NetworkManager();
     public CodeLlamaNetworkManager CodeLlamaNetworkManager = new CodeLlamaNetworkManager();
 
-    //-------------------- META LLAMA CLIENT INFO----------------------
-
-    //------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------
 
     //-------------------- OPEN AI CLIENT INFO ------------------------
-
 
     //public static Model model = Model.GPT3_5_Turbo_16k;
     public static Model model = Model.GPT3_5_Turbo;
     //public static Model model = Model.GPT4;
 
     public static string ModelName = model.ToString();
-
-   
 
     //--------------------------------------------------------------------
 
@@ -161,14 +158,10 @@ public class Chat : MonoBehaviour
 
         if (input != null && input != input_aux)
         {        
-            
-            
-
 
             //Time of execution Start
             float start_time = Time.time;
             string result_aux, result_auxx;
-
 
             //-----------------------OpenAI API Usage----------------------------------
 
@@ -203,6 +196,9 @@ public class Chat : MonoBehaviour
                 await GeminiNetwork.SendMessageToServer(input);
                 result_aux = await GeminiNetwork.ReceiveMessages();
 
+                result_aux = RemoveTextBeforeUsing(result_aux);
+                result_aux = TrimAfterLastBrace(result_aux);
+
                 result_auxx = result_aux.Replace("`", "");
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
                 result = RemoveAfterCharacter(result, '*');
@@ -224,13 +220,11 @@ public class Chat : MonoBehaviour
 
                 await LlamaNetwork.SendMessageToServer(input);
                 result_aux = await LlamaNetwork.ReceiveMessages();
+                result_aux = RemoveTextBeforeUsing(result_aux);
+                result_aux = TrimAfterLastBrace(result_aux);
 
                 result_auxx = result_aux.Replace("`", "");
-                result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "").Replace("Here is the code that follows the steps you provided:","")
-                .Replace("Here is the code that follows the specified steps:","")
-                .Replace("Here is the code that follows the steps:","").Replace("Here is the Unity  script code that follows the specified steps:","")
-                .Replace("Here is the Unity C# script code that follows the numbered steps:","").Replace("Here is the Unity C# script that follows the steps you provided:","")
-                .Replace("Here is the Unity C# script that meets your requirements:","").Replace("Here is the Unity C# script that follows the specified steps:","");
+                result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", ""):
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "Llama3.1"; //The actual Meta Llama LLM must be changed inside the Python Server
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
@@ -245,9 +239,10 @@ public class Chat : MonoBehaviour
             if (dropdown.options[dropdown.value].text == "CODEX")
             {
 
-
                 await CodexNetwork.SendMessageToServer(input);
                 result_aux = await CodexNetwork.ReceiveMessages();
+                result_aux = RemoveTextBeforeUsing(result_aux);
+                result_aux = TrimAfterLastBrace(result_aux);
 
                 result_auxx = result_aux.Replace("`", "");
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
@@ -259,13 +254,11 @@ public class Chat : MonoBehaviour
 
                 tries++;
 
-
-
             }
 
             //-----------------------------------------------------------------------------------------------------
 
-            //------------------------------ COPILOT --------------------------------------------------------
+            //------------------------------ QWEN --------------------------------------------------------
 
             if (dropdown.options[dropdown.value].text == "QWEN")
             {
@@ -280,7 +273,7 @@ public class Chat : MonoBehaviour
                 result = RemoveAfterCharacter(result, '*');
                 
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-                ModelName = "qwen2.5-coder"; //The actual Codex LLM must be changed inside the Python Server
+                ModelName = "qwen2.5-coder"; //The actual  LLM must be changed inside the Python Server
                 Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
 
@@ -288,7 +281,7 @@ public class Chat : MonoBehaviour
 
             }
 
-            //------------------------------ COPILOT --------------------------------------------------------
+            //------------------------------ CODEGEEX4 --------------------------------------------------------
 
             if (dropdown.options[dropdown.value].text == "CODEGEEX4")
             {
@@ -297,13 +290,12 @@ public class Chat : MonoBehaviour
 
                 result_aux = RemoveTextBeforeUsing(result_aux);
                 result_aux = TrimAfterLastBrace(result_aux);
-                
-
+          
                 result_auxx = result_aux.Replace("`", "");
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
             
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-                ModelName = "codegeex4"; //The actual Codex LLM must be changed inside the Python Server
+                ModelName = "codegeex4"; //The actual LLM must be changed inside the Python Server
                 Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
 
@@ -311,11 +303,9 @@ public class Chat : MonoBehaviour
 
             }
 
-
-
             //-------------------------------------------------------------------------------------------------
 
-            //------------------------------ COPILOT --------------------------------------------------------
+            //------------------------------ CODELLAMA --------------------------------------------------------
 
             if (dropdown.options[dropdown.value].text == "CODELLAMA")
             {
@@ -325,12 +315,11 @@ public class Chat : MonoBehaviour
                 result_aux = RemoveTextBeforeUsing(result_aux);
                 result_aux = TrimAfterLastBrace(result_aux);
 
-
                 result_auxx = result_aux.Replace("`", "");
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
 
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-                ModelName = "codellama"; //The actual Codex LLM must be changed inside the Python Server
+                ModelName = "codellama"; //The actual LLM must be changed inside the Python Server
                 Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
 
@@ -356,8 +345,6 @@ public class Chat : MonoBehaviour
            Debug.Log(CheckContainsTwoStrings(result, All));
            Debug.Log(ContieneSottoStringaAlmenoDueVolte(result, "Nature"));
         
-
-
 
         if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && 
             ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && (ContieneSottoStringaAlmenoDueVolte(result, "Nature") || ContieneSottoStringaAlmenoDueVolte(result, "Furniture") /* && CheckIfWordContainedTwice(result, "Vector3(", Number_of_Objects)*/))
@@ -424,8 +411,6 @@ public class Chat : MonoBehaviour
         Generate_Script_Button.interactable = false;
         
         //-----------------------------------Deletion of the objects of the old customized or bases scenes -------------------------------
-
-        // TODO : DELETE THE CLONES iF THERE ARE SOME
 
         //For bases scene we have a known number of models
         if (Bases)
@@ -904,15 +889,15 @@ public class Chat : MonoBehaviour
 
         input = "A complete C# Unity Script that follow correctly these numbered steps, DO NOT USE TAGS, :" +
             " STEP ONE -- Find with the Gameobject.Find() method the gameobject called 'Plane' and change its material by using the following code Resources.Load<Material>(" + Material + "/Material) " +
-     " STEP TWO -- Find with the method Gameobject.Find(), DO NOT USE FindGameObjectsWithTag() or similar, the gameobjects that are called ";
+            " STEP TWO -- Find with the method Gameobject.Find(), DO NOT USE FindGameObjectsWithTag() or similar, the gameobjects that are called ";
         input = Define_Models(Number_of_Objects, input) + " and destroy them" +
-     " STEP THREE -- Instantiate the new object loaded from the Resources/" + Material + "folder; the objects to be instantiated are the following";
+            " STEP THREE -- Instantiate the new object loaded from the Resources/" + Material + "folder; the objects to be instantiated are the following";
         input = Enum_Objects(list, Number_of_Objects, input) + " with this code, for every object, Resources.Load<GameObject>(" + "\"" + Material + "/nameoftheobject\")"+
-     "STEP FOUR -- It is mandatory to rename the freshly created models with .name in the following way: ";
+            "STEP FOUR -- It is mandatory to rename the freshly created models with .name in the following way: ";
         input = Define_Models(Number_of_Objects, input) +
-    "STEP FIVE -- The positions of every object are the follwing and they must be inserted: ";
+            "STEP FIVE -- The positions of every object are the follwing and they must be inserted: ";
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + "all the values must be float " +
-    "STEP SIX -- Add a box collider for every object";
+            "STEP SIX -- Add a box collider for every object";
 
 
 
@@ -996,7 +981,7 @@ public class Chat : MonoBehaviour
 
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    //----------------------------------------- META LANGUAGE ---------------------------------------------------------------------------------
+    //----------------------------------------- META LANGUAGE AUXILIARY METHODS ---------------------------------------------------------------------------------
 
     //If the inside the string s there is at list one string of the substrings set return true
     //Otherwise , it returns false
