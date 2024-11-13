@@ -355,7 +355,7 @@ public class Chat : MonoBehaviour
            Debug.Log(ContainsAny(result, All));
            Debug.Log(CheckContainsTwoStrings(result, All));
            Debug.Log(ContieneSottoStringaAlmenoDueVolte(result, "Nature"));
-        Debug.Log(CheckIfWordContainedTwice(result, "Vector3", Number_of_Objects));
+        
 
 
 
@@ -519,7 +519,7 @@ public class Chat : MonoBehaviour
             Number_of_Objects = 5; // In this way the global variable is set with the exact amount of objects for this environment
 
 
-            input = " Unity C# script code, no comments or suggestions just code, that follow drastically these numbered steps " +
+            input = " Unity C# script code that follow drastically these numbered steps " +
                     " 1) Find with the Find() method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
                     " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the following code Resources.Load<Material>(Furniture/Material) " +
                     " 3) Substitute them with objects loaded from the Furniture folder, the gameobjects to be uploaded are 'Desk' 'Table' 'Chair' 'Chair'  " +
@@ -546,7 +546,7 @@ public class Chat : MonoBehaviour
             Number_of_Objects = 7;
 
 
-            input = " Unity C# script code, no comments, that follow drastically these numbered steps " +
+            input = " Unity C# script code, that follow drastically these numbered steps " +
                     " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6' and destroy them"+
                     " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder" +
                     " 3) Substitute them with the objects loaded from the Resources/Furniture, the gameobjects to be uploaded are 'Bed' 'Drawer' 'Desk' 'Chair' 'Drawer' 'Shower' 'Sink'"+
@@ -574,7 +574,7 @@ public class Chat : MonoBehaviour
             Number_of_Objects = 6;
 
 
-            input = " Unity C# script code, no comments, that follow drastically these numbered steps " +
+            input = " Unity C# script code, that follow drastically these numbered steps " +
                     " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 and destroy them " +
                     " 2) MANDATORY!!!! Find with the Find() method , do not use FindGameObjectsWithTag(), the gameobject 'Plane' and change its material with the material loaded from Nature/Material folder" +
                     " 3) Substitute them with the objects loaded from the Resources/Nature, the gameobjects to be uploaded are 'Oak' 'Pine' 'Pine' 'Mushroom' 'Oak' 'Stone'" +
@@ -599,7 +599,7 @@ public class Chat : MonoBehaviour
 
             Number_of_Objects = 5;
 
-            input = " Unity C# script code, no comments, that follow drastically these numbered steps " +
+            input = " Unity C# script code, that follow drastically these numbered steps " +
                     " 1) Find with the Find method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
                     " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Nature/Material folder " +
                     " 3) Substitute them with the objects loaded previously from the Resources/Nature, the gameobjects to be uploaded are 'Pine' 'Flower' 'Mushroom' 'Oak' 'Wood' " +
@@ -624,7 +624,7 @@ public class Chat : MonoBehaviour
 
             Number_of_Objects = 5;
 
-            input = " Unity C# script code, no comments, that follow drastically these numbered steps " +
+            input = " Unity C# script code, that follow drastically these numbered steps " +
                     " 1) Find with the Find method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
                     " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Cars/Material folder " +
                     " 3) Substitute them with the objects loaded from the Resources/Cars, the gameobjects to be uploaded are 'Pine' 'Flower' 'Mushroom' 'Oak' 'Wood' " +
@@ -647,7 +647,7 @@ public class Chat : MonoBehaviour
 
             Number_of_Objects = 7;
 
-            input = " Unity C# script code, no comments, that follow drastically these numbered steps " +
+            input = " Unity C# script code, that follow drastically these numbered steps " +
                     " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6' and destroy them" +
                     " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from City/Material folder" +
                     " 3) Substitute them with the objects loaded from the Resources/City, the gameobjects to be uploaded are 'Bench' 'Bin' 'Mailbox' 'Stoplight' 'Dumpster' 'Barrel' 'Barrel' " +
@@ -892,7 +892,7 @@ public class Chat : MonoBehaviour
 
     {
  
-        input = " A complete, no placeholders, Unity C# script code with the libraries inclusion and with NO COMMENTS AT THE BEGINNING AND AT THE END OF THE SCRIPT, that follow drastically these numbered steps and (IMPORTANT) - Do not truncate the code by saying and so on for all models , you must write all the code\" : STEP ONE -  Find with the GameObject.Find method" +
+        input = " A complete, no placeholders, Unity C# script code with the libraries inclusion , that follow drastically these numbered steps and (IMPORTANT) - Do not truncate the code by saying and so on for all models , you must write all the code\" : STEP ONE -  Find with the GameObject.Find method" +
             ", not FindObjectsByTag or FindGameObjectsWithTag,one method call per gameobject, and they are  called ";
 
         input = Define_Models(Number_of_Objects, input)+ " and destroy them" +
