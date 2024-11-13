@@ -349,7 +349,7 @@ public class Chat : MonoBehaviour
 
     public void AIList(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
     {
-    Debug.Log(ContainsAll(result, Mandatory_Words));
+           Debug.Log(ContainsAll(result, Mandatory_Words));
            Debug.Log(ContainsAny(result, Material_Words));
            Debug.Log(firstNonWhiteSpaceChar == 'u');
            Debug.Log(ContainsAny(result, All));
@@ -418,7 +418,8 @@ public class Chat : MonoBehaviour
     public void ReadStringInput(TMP_InputField InputField)
 
     {
-      
+        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+
         //While the algorithm is running the button for genearating a script is not interactable, It will be interactable again when the script has been executed
         Generate_Script_Button.interactable = false;
         
@@ -432,6 +433,7 @@ public class Chat : MonoBehaviour
             for (int i = 0; i < 7; i++)
             {
                 GameObject.Destroy(GameObject.Find("Model_" + i.ToString()));
+                
 
             }
             Bases = false;
@@ -449,11 +451,18 @@ public class Chat : MonoBehaviour
             }
             Custom = false;
         }
-
+        //Delete also all the "Clone" that can be Instantiated incorrectly by a AI generated script
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.name.Contains("Clone"))
+            {
+                Destroy(obj);
+            }
+        }
 
         //-----------------------------------------------------------------------------------------------------------------------------------
-    
-      
+
+
         input = InputField.text.ToString().ToLower();
         input_auxx = InputField.text.ToString().ToLower();
 
@@ -891,29 +900,21 @@ public class Chat : MonoBehaviour
     public string Input_Request(string input, int Number_of_Objects, List<string> list, string Material, List<string> list_Directions)
 
     {
- 
-        input = " A complete, no placeholders, Unity C# script code with the libraries inclusion , that follow drastically these numbered steps and (IMPORTANT) - Do not truncate the code by saying and so on for all models , you must write all the code\" : STEP ONE -  Find with the GameObject.Find method" +
-            ", not FindObjectsByTag or FindGameObjectsWithTag,one method call per gameobject, and they are  called ";
 
-        input = Define_Models(Number_of_Objects, input)+ " and destroy them" +
-                " STEP TWO - Instantiate the new objects, through Instantiate method,  loaded from the Resources/" + Material + 
-               
-                " the gameobjects to be instantiated are :  ";
-
-        input = Enum_Objects(list, Number_of_Objects, input) + "in the same way is written here Resources.Load<GameObject>("+"\""+Material + "/nameoftheobject\")"+
-            
-            "STEP THREE - In the third step, it is mandatory to  rename the freshly created models with .name in the following way";
-
-        input = Define_Models(Number_of_Objects, input) + " STEP FOUR -The positions for every objects are the following and are ALL mandatory to be inserted in the script as float, do  not truncate the code, : ";
-
+        input = "A complete C# Unity Script that follow correctly these numbered steps, DO NOT USE TAGS, :" +
+            " STEP ONE -- Find with the Gameobject.Find() method the gameobject called 'Plane' and change its material by using the following code Resources.Load<Material>(" + Material + "/Material) " +
+     " STEP TWO -- Find with the method Gameobject.Find(), DO NOT USE FindGameObjectsWithTag() or similar, the gameobjects that are called ";
+        input = Define_Models(Number_of_Objects, input) + " and destroy them" +
+     " STEP THREE -- Instantiate the new object loaded from the Resources/" + Material + "folder; the objects to be instantiated are the following";
+        input = Enum_Objects(list, Number_of_Objects, input) + " with this code, for every object, Resources.Load<GameObject>(" + "\"" + Material + "/nameoftheobject\")"+
+     "STEP FOUR -- It is mandatory to rename the freshly created models with .name in the following way: ";
+        input = Define_Models(Number_of_Objects, input) +
+    "STEP FIVE -- The positions of every object are the follwing and they must be inserted: ";
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) +
-                " STEP FIVE - Find with the Find() method the gameobject " +
-                " 'Plane' and change its material with the exact following code Resources.Load<Material>(" + Material + "/Material) " +
-               " STEP SIX - add a boxcollider per gameobject ";
-       
-               
+    "STEP SIX -- Add a box collider for every object";
 
-               
+
+
 
        return input;
     }
