@@ -224,7 +224,7 @@ public class Chat : MonoBehaviour
                 result_aux = TrimAfterLastBrace(result_aux);
 
                 result_auxx = result_aux.Replace("`", "");
-                result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", ""):
+                result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "Llama3.1"; //The actual Meta Llama LLM must be changed inside the Python Server
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
