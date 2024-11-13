@@ -451,6 +451,7 @@ public class Chat : MonoBehaviour
             }
             Custom = false;
         }
+
         //Delete also all the "Clone" that can be Instantiated incorrectly by a AI generated script
         foreach (GameObject obj in allObjects)
         {
@@ -910,7 +911,7 @@ public class Chat : MonoBehaviour
      "STEP FOUR -- It is mandatory to rename the freshly created models with .name in the following way: ";
         input = Define_Models(Number_of_Objects, input) +
     "STEP FIVE -- The positions of every object are the follwing and they must be inserted: ";
-        input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) +
+        input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + "all the values must be float " +
     "STEP SIX -- Add a box collider for every object";
 
 
@@ -953,7 +954,7 @@ public class Chat : MonoBehaviour
 
         for (int ii = 0; ii < Number_of_Objects; ii++)
         {
-            input += " Model_" + ii.ToString() + " is a " + objects[ii] + " at Vector3(" + Random_PositionX(list_Directions, ii).ToString().Replace(",", ".") + ",-0.47," + Random_PositionZ(list_Directions, ii).ToString().Replace(",", ".") + ")";
+            input += " Model_" + ii.ToString() + " is a " + objects[ii] + " at Vector3(" + Random_PositionX(list_Directions, ii).ToString().Replace(",", ".") + ",-0.47," + Random_PositionZ(list_Directions, ii).ToString().Replace(",", ".") +  ")";
         }
 
         return input;
