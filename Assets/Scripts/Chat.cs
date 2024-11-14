@@ -339,13 +339,13 @@ public class Chat : MonoBehaviour
 
     public void AIList(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
     {
-           //Debug.Log(ContainsAll(result, Mandatory_Words));
-           //Debug.Log(ContainsAny(result, Material_Words));
-           //Debug.Log(firstNonWhiteSpaceChar == 'u');
-           //Debug.Log(ContainsAny(result, All));
-           //Debug.Log(CheckContainsTwoStrings(result, All));
-           //Debug.Log(ContieneSottoStringaAlmenoDueVolte(result, "Nature"));
-        
+        //Debug.Log(ContainsAll(result, Mandatory_Words));
+        //Debug.Log(ContainsAny(result, Material_Words));
+        //Debug.Log(firstNonWhiteSpaceChar == 'u');
+        //Debug.Log(ContainsAny(result, All));
+        //Debug.Log(CheckContainsTwoStrings(result, All));
+        //Debug.Log(ContieneSottoStringaAlmenoDueVolte(result, "Nature"));
+        Domain.errorcount = 0;
 
         if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && 
             ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && (ContieneSottoStringaAlmenoDueVolte(result, "Nature") || ContieneSottoStringaAlmenoDueVolte(result, "Furniture") /* && CheckIfWordContainedTwice(result, "Vector3(", Number_of_Objects)*/))
@@ -406,6 +406,9 @@ public class Chat : MonoBehaviour
     public void ReadStringInput(TMP_InputField InputField)
 
     {
+        
+
+        Debug.Log("read string" + Domain.errorcount);
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
 
         //While the algorithm is running the button for genearating a script is not interactable, It will be interactable again when the script has been executed
