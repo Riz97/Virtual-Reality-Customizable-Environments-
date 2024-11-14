@@ -6,14 +6,6 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
-using System.Reflection;
-using JetBrains.Annotations;
-using System.Linq.Expressions;
-using UnityEngine.InputSystem.Android;
-using OpenAI.Chat;
-using Newtonsoft.Json.Serialization;
-
 public class Domain : MonoBehaviour
 {
 
@@ -52,7 +44,7 @@ public class Domain : MonoBehaviour
     string path = Application.dataPath + "/Logs/" + s_time + ".txt";
     string faultypath = Application.dataPath + "/Logs/Faulty Scripts/Faulty_Scripts.txt";
     private Chat chat = new Chat();
-    private int n;
+    
     public void Start()
     {
         //Waiter
@@ -94,7 +86,7 @@ public class Domain : MonoBehaviour
         {
             sourceCode = Output_Text.text.ToString();
 
-//----------------------------------------------- C# RUNTIME COMPILER ROSLYN USAGE ------------------------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------- C# RUNTIME COMPILER ROSLYN USAGE ------------------------------------------------------------------------------------------------------------------------------------------------
             // Create domain
             domain = ScriptDomain.CreateDomain("Example Domain");
 
@@ -107,12 +99,11 @@ public class Domain : MonoBehaviour
 
             proxy.SafeCall(sourceCode);
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
             isExecutable = true;
 
-            //If the user has asked for a Bases Environment we have to set the flag to true , in this way when another environment is asked , the system knows the 
-            //exact amount of models to destroy.
+          //If the script does not have any kind of errors, the Log File can be refreshed and the button can be interactable again
 
             if (isExecutable)
             {
@@ -130,9 +121,7 @@ public class Domain : MonoBehaviour
 
                 if (!File.Exists(path))
                 {
-
                     File.WriteAllText(path, "LOG GENERATED FOR THE SESSION" + "\n");
-
                 }
 
                 File.AppendAllText(path, "\nModel - " + Chat.ModelName + "\nNumber of models in the scene ~ "
@@ -145,7 +134,6 @@ public class Domain : MonoBehaviour
             }
             //--------------------------------------------------------------------------------------------------------------
             //------------------------------------------------- LOG FAULTY SCRIPTS FILES FUNCTION ------------------------------------------
-
 
         }
     }

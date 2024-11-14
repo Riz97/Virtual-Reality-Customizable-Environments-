@@ -11,11 +11,6 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using Button = UnityEngine.UI.Button;
 
-using System.IO;
-using Amazon.Runtime;
-
-
-
 public class Chat : MonoBehaviour
 
     
@@ -72,8 +67,10 @@ public class Chat : MonoBehaviour
     List<string> City_Strings = new List<string>() {"City"};
     List<string> City_Models = new List<string>() {"Barrel" , "Bench" , "Bin" , "Dumpster" , "Hydrant", "Mailbox" , "Stoplight"};
 
-    List<string> All = new List<string>() { "Barrel\"", "Bench\"", "Bin\"", "Dumpster\"", "Hydrant\"", "Mailbox\"", "Stoplight\"", "Cable\"", "Garbage\"", "Pallet\"", "Car\"", "Plank\"", "Tank\"", "Tubes\"", "Oak\"", "Bush\"", "Mushroom\"", 
-                                            "Wood\"", "Stone\"", "Pine\"", "Flower\"", "Cops\"", "Sedan\"", "Sport\"", "Suv\"", "Taxi\"", "Sport\"", "Desk\"", "Chair\"", "Bed\"", "Table\"", "Drawer\"", "Shower\"", "Sink\"" };
+    List<string> All = new List<string>() { "Barrel\"", "Bench\"", "Bin\"", "Dumpster\"", "Hydrant\"", "Mailbox\"", "Stoplight\"", "Cable\"", "Garbage\"", "Pallet\"", 
+                                            "Car\"", "Plank\"", "Tank\"", "Tubes\"", "Oak\"", "Bush\"", "Mushroom\"", 
+                                            "Wood\"", "Stone\"", "Pine\"", "Flower\"", "Cops\"", "Sedan\"", "Sport\"", "Suv\"", "Taxi\"", 
+                                            "Sport\"", "Desk\"", "Chair\"", "Bed\"", "Table\"", "Drawer\"", "Shower\"", "Sink\"" };
 
 
     [SerializeField] public TMP_Text Text;
@@ -123,11 +120,8 @@ public class Chat : MonoBehaviour
     //--------------------------------------------------------------------
 
     // Update is called once per frame
-    public async void Start()
-
-    {
-        //test();
-
+    public async void Start() {
+   
         Number_Models_Text.SetText("Number of models is : " + Number_of_Objects.ToString());
 
         //Reset of the Plane's material
@@ -184,8 +178,6 @@ public class Chat : MonoBehaviour
                 tries++;
 
             }
-
-
 
             //-----------------------------------------------------------------------
 
@@ -1148,35 +1140,5 @@ public class Chat : MonoBehaviour
     }
 
     //---------------------------------------------------------------------------------------------------------
-
-    public void test()
-    {
-        //For bases scene we have a known number of models
-        if (Bases)
-        {
-            for (int i = 0; i < 7; i++)
-            {
-                GameObject.Destroy(GameObject.Find("Model_" + i.ToString()));
-
-
-            }
-            Bases = false;
-        }
-
-
-        //For the customized scenes the number of models is determined by the user 
-        if (Custom)
-        {
-
-            for (int i = 0; i < n; i++)
-            {
-                GameObject.Destroy(GameObject.Find("Model_" + i.ToString()));
-
-            }
-            Custom = false;
-        }
-
-       
-    }
-}
+}//END OF THE SCRIPT
 
