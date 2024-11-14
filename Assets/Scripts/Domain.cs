@@ -81,17 +81,7 @@ public class Domain : MonoBehaviour
 
     IEnumerator WaitIA()
     {
-        //In this way we wait 20 seconds only the first time the app is launched
-        //, in these  seconds the ai should be able to 
-        //provide a correct script that Roslyn will compile at runtime
-
-
-
-        yield return new WaitForSeconds(10);
-
-
-
-
+  
         //The system is put in wait, until the script is found and printed in the output text window
 
         while ((Output_Text.text.ToString() == Wait_Message || Output_Text.text.ToString() == Computing_Message))
@@ -104,11 +94,9 @@ public class Domain : MonoBehaviour
         {
             sourceCode = Output_Text.text.ToString();
 
+//----------------------------------------------- C# RUNTIME COMPILER ROSLYN USAGE ------------------------------------------------------------------------------------------------------------------------------------------------
             // Create domain
             domain = ScriptDomain.CreateDomain("Example Domain");
-
-            //try
-            //{
 
             // Compile and load code - Note that we use 'CompileAndLoadMainSource' which is the same as 'CompileAndLoadSource' but returns the main type in the compiled assembly
 
@@ -118,6 +106,9 @@ public class Domain : MonoBehaviour
             ScriptProxy proxy = type.CreateInstance(gameObject);
 
             proxy.SafeCall(sourceCode);
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
             isExecutable = true;
 
             //If the user has asked for a Bases Environment we have to set the flag to true , in this way when another environment is asked , the system knows the 
@@ -130,7 +121,6 @@ public class Domain : MonoBehaviour
                 FaultyScriptCount = 0;
                 errorcount = 0;
             }
-
 
             //------------------------------------------------- LOG FILES FUNCTION ------------------------------------------
 
@@ -199,17 +189,16 @@ public class Domain : MonoBehaviour
         }
 
     }
-
+//------------------------------------ POP UP ------------------------------------------------------------------------
     IEnumerator showPopup()
     {
         popup.SetActive(true); // Mostra il pop-up
         yield return new WaitForSeconds(5); // Aspetta 5 secondi
         popup.SetActive(false); // Nasconde il pop-up
     }
+//----------------------------------------------------------------------------------------------------------------------
 
-    
-   
-
+//-------------------------------- UNITY CONSOLE ERROR CHECKER --------------------------------------------------------------
     private void OnEnable()
     {
         // LogMessageReceived Activated when the script is used
@@ -223,22 +212,16 @@ public class Domain : MonoBehaviour
     }
     private void OnLogMessageReceived(string logString, string stackTrace, LogType type)
     {
-
-        // Verifica se il log è un errore o un'eccezione
+        //It checks if there are errors in the Unity Console
         if (type == LogType.Error || type == LogType.Exception)
         {
+            //It execute the code one time
             if(errorcount == 0)
             {
-            
-                // Esegui il codice specifico in caso di errore
                 CodeErrorExecution();
                 errorcount++;
             }
-          
-           
         }
-
-       
     }
     private void CodeErrorExecution()
     {
@@ -255,9 +238,9 @@ public class Domain : MonoBehaviour
             DoScript();
             isExecutable = true;
             Generate_Script_Button.interactable = false;
-
     }
-}
+//--------------------------------------------------------------------------------------------------------------------------------
+}//END OF THE SCRIPT
 
 
 
