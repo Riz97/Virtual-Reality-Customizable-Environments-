@@ -173,7 +173,7 @@ public class Chat : MonoBehaviour
                 result_aux = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
                 result = result_aux.Replace("C#", "").Replace("`", "");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-                Debug.Log(result);
+                //Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 tries++;
 
@@ -194,10 +194,10 @@ public class Chat : MonoBehaviour
 
                 result_auxx = result_aux.Replace("`", "");
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
-                result = RemoveAfterCharacter(result, '*');
+               
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "Gemini-Pro-1.0"; //The actual Google Gemini LLM must be changed inside the Python Server
-                Debug.Log(result);
+                //Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 tries++;
 
@@ -220,9 +220,10 @@ public class Chat : MonoBehaviour
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "Llama3.1"; //The actual Meta Llama LLM must be changed inside the Python Server
+                //Debug.Log(result)
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 tries++; 
-                Debug.Log(tries);
+               
             }
 
             // -------------------------------------------------------------------------------------------------
@@ -239,10 +240,10 @@ public class Chat : MonoBehaviour
 
                 result_auxx = result_aux.Replace("`", "");
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
-                result = RemoveAfterCharacter(result, '*');
+                
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "gpt-4o-mini"; //The actual Codex LLM must be changed inside the Python Server
-                Debug.Log(result);
+                //Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
 
                 tries++;
@@ -263,11 +264,11 @@ public class Chat : MonoBehaviour
 
                 result_auxx = result_aux.Replace("`", "");
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
-                result = RemoveAfterCharacter(result, '*');
+                
                 
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "qwen2.5-coder"; //The actual  LLM must be changed inside the Python Server
-                Debug.Log(result);
+                //Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
 
                 tries++;
@@ -289,7 +290,7 @@ public class Chat : MonoBehaviour
             
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "codegeex4"; //The actual LLM must be changed inside the Python Server
-                Debug.Log(result);
+                //Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
 
                 tries++;
@@ -313,7 +314,7 @@ public class Chat : MonoBehaviour
 
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "codellama"; //The actual LLM must be changed inside the Python Server
-                Debug.Log(result);
+                //Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
 
                 tries++;
@@ -339,8 +340,11 @@ public class Chat : MonoBehaviour
         //Debug.Log(ContieneSottoStringaAlmenoDueVolte(result, "Nature"));
         Domain.errorcount = 0;
 
+        //EXECUTION CHECKS
+        //The generated script must pass all these checks
         if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && 
-            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && (ContieneSottoStringaAlmenoDueVolte(result, "Nature") || ContieneSottoStringaAlmenoDueVolte(result, "Furniture") /* && CheckIfWordContainedTwice(result, "Vector3(", Number_of_Objects)*/))
+            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && (SubStringin2Times(result, "Nature") || SubStringin2Times(result, "Furniture")
+            || SubStringin2Times(result, "Nature") || SubStringin2Times(result, "Furniture") || SubStringin2Times(result, "Nature")))
         {
 
             //Elapsed time for the generation of the script
@@ -398,9 +402,6 @@ public class Chat : MonoBehaviour
     public void ReadStringInput(TMP_InputField InputField)
 
     {
-        
-
-        Debug.Log("read string" + Domain.errorcount);
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
 
         //While the algorithm is running the button for genearating a script is not interactable, It will be interactable again when the script has been executed
@@ -416,7 +417,6 @@ public class Chat : MonoBehaviour
             }
         }
 
-        
         //-----------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -861,16 +861,16 @@ public class Chat : MonoBehaviour
     {
 
         input = "A complete C# Unity Script that follow correctly these numbered steps, DO NOT USE TAGS, :" +
-            " STEP ONE -- Find with the Gameobject.Find() method the gameobject called 'Plane' and change its material by using the following code Resources.Load<Material>(" + Material + "/Material) " +
-            " STEP TWO -- Find with the method Gameobject.Find(), DO NOT USE FindGameObjectsWithTag() or similar, the gameobjects that are called ";
+        " STEP ONE -- Find with the Gameobject.Find() method the gameobject called 'Plane' and change its material by using the following code Resources.Load<Material>(" + Material + "/Material) "+
+        " STEP TWO -- Find with the method Gameobject.Find(), DO NOT USE FindGameObjectsWithTag() or similar, the gameobjects that are called ";
         input = Define_Models(Number_of_Objects, input) + " and destroy them" +
-            " STEP THREE -- Instantiate the new object loaded from the Resources/" + Material + "folder; the objects to be instantiated are the following";
+        " STEP THREE -- Instantiate the new object loaded from the Resources/" + Material + "folder; the objects to be instantiated are the following";
         input = Enum_Objects(list, Number_of_Objects, input) + " with this code, for every object, Resources.Load<GameObject>(" + "\"" + Material + "/nameoftheobject\")"+
-            "STEP FOUR -- It is mandatory to rename the freshly created models with .name in the following way: ";
+        " STEP FOUR -- It is mandatory to rename the freshly created models with .name in the following way: ";
         input = Define_Models(Number_of_Objects, input) +
-            "STEP FIVE -- The positions of every object are the follwing and they must be inserted: ";
+        " STEP FIVE -- The positions of every object are the follwing and they must be inserted: ";
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + "all the values must be float " +
-            "STEP SIX -- Add a box collider for every object";
+        " STEP SIX -- Add a box collider for every object";
 
 
 
@@ -1027,6 +1027,7 @@ public class Chat : MonoBehaviour
         return subSet;
     }
 
+    //Checks if at least two strings in a list are contained inside a string of text
     bool CheckContainsTwoStrings(string input, List<string> list)
     {
         int count = 0;
@@ -1046,96 +1047,55 @@ public class Chat : MonoBehaviour
         return false;
     }
 
-
-    static bool CheckIfWordContainedTwice(string inputString, string word, int Number_of_obj)
+    public static bool SubStringin2Times(string text, string substring)
     {
         int count = 0;
+        int position = 0;
 
-        for (int i = 0; i < inputString.Length - word.Length + 1; i++)
-        {
-            if (inputString.Substring(i, word.Length) == word)
-            {
-                count++;
-            }
-        }
-
-        if(count == Number_of_obj || count > Number_of_Objects)
-        {
-            return true;
-        }
-
-        if(count < Number_of_Objects)
-        {
-            return false;
-        }
-
-        return false;
-      
-    }
-
-    public static string RemoveAfterCharacter(string input, char delimiter)
-    {
-        int index = input.IndexOf(delimiter);
-        if (index >= 0)
-        {
-            return input.Substring(0, index);
-        }
-        else
-        {
-            return input; // Se il carattere non è trovato, restituisce la stringa originale
-        }
-    }
-
-
-    public static bool ContieneSottoStringaAlmenoDueVolte(string testo, string sottostringa)
-    {
-        int count = 0;
-        int posizione = 0;
-
-        // Cerca la sotto-stringa finché ci sono occorrenze
-        while ((posizione = testo.IndexOf(sottostringa, posizione, StringComparison.OrdinalIgnoreCase)) != -1)
+        // Search through the string the occurences of the substring
+        while ((position = text.IndexOf(substring, position, StringComparison.OrdinalIgnoreCase)) != -1)
         {
             count++;
-            posizione += sottostringa.Length; // Avanza oltre l'occorrenza trovata
+            position += substring.Length; // Go on through the string
 
-            // Se troviamo almeno due occorrenze, restituiamo true
+            // If two occurences are found , return true
             if (count >= 2)
             {
                 return true;
             }
         }
 
-        // Se non sono state trovate almeno due occorrenze, restituisce false
+        //Otherwise we did not find two occurences and we must return false
         return false;
     }
 
     public static string TrimAfterLastBrace(string input)
     {
-        // Trova l'indice dell'ultima parentesi graffa chiusa '}'
+        //Find the last '}' index
         int lastBraceIndex = input.LastIndexOf('}');
 
-        // Se non c'è nessuna '}', ritorna la stringa originale
+        // "}" not found , return the original text
         if (lastBraceIndex == -1)
         {
             return input;
         }
 
-        // Ritorna la sottostringa fino all'ultima '}'
+        //Return the substring until the index of the last '}'
         return input.Substring(0, lastBraceIndex + 1);
     }
 
     static string RemoveTextBeforeUsing(string text)
     {
-        // Trova l'indice della prima occorrenza di "using"
+        //Find the index of the first occurence of the words "using"
         int index = text.IndexOf("using");
 
-        // Se "using" non è trovato, restituisci il testo originale
+        // "using" not found , return the original text
         if (index == -1)
         {
             return text;
         }
 
-        // Ritorna il testo a partire dalla posizione di "using" fino alla fine
+        //Return the test from the first usinn occurence
         return text.Substring(index);
     }
 
