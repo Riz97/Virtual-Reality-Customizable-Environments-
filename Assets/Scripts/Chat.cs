@@ -494,7 +494,7 @@ public class Chat : MonoBehaviour
                     " and rename them 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 " +
                     " 'Model_0' (Desk) at Vector3(0.08,-0.47,7.13), 'Model_1' (Chair) at Vector3(0.13,-0.47,9.25) " +
                     " 'Model_2' (Table) at Vector3(-2.64,-0.47,4.62) " +
-                    " 'Model_3' (Chair) at Vector3(-2.76,-0.47,6.28) 'Model_4' (Chair) at Vector3(-4.37,-0.47,4.81) and  rotation Y equals -97.34 " +
+                    " 'Model_3' (Chair) at Vector3(-2.76,-0.47,6.28) 'Model_4' (Chair) at Vector3(-4.37,-0.47,4.81) and  rotation Y equals -97.34 only for this object " +
                     " STEP FOUR -- Add a simple collider for every object " +
                     " STEP FIVE -- Use the method caleld Start() e no auxiliary methods";
 
@@ -519,8 +519,8 @@ public class Chat : MonoBehaviour
                     " STEP THREE -- Substitute them with the objects loaded from the Resources/Furniture, the gameobjects to be uploaded are 'Bed' 'Drawer' 'Desk' 'Chair' 'Drawer' 'Shower' 'Sink'"+
                     " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' 'Model_5' 'Model_6' " +
                     " Model_0' (Bed) at Vector3(-0.64,-0.47,9.99), 'Model_1' (Drawer) at Vector3(-3.30,-0.47,12.38) " +
-                    " (Desk) at Vector3(-4.35,-0.47,6.35) and Y rotation equals to 87.809" +
-                    " 'Model_3' (Chair) at Vector3(-3.31,-0.47,6.09) and Y rotation equals 97.00 " +
+                    " (Desk) at Vector3(-4.35,-0.47,6.35) and Y rotation equals to 87.809 only for this object" +
+                    " 'Model_3' (Chair) at Vector3(-3.31,-0.47,6.09) and Y rotation equals 97.00 only for this object " +
                     " 'Model_4' (Drawer) at Vector3(1-42,-0.47,12.1) " +
                     " 'Model_5' (Shower) at  Vector3(4.69,-0.47,10.72) and " +
                     " 'Model_6' (Sink) at Vector3(6.34,-0.47,10.02) " +
@@ -619,10 +619,10 @@ public class Chat : MonoBehaviour
                     " STEP TWO -- Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from City/Material folder" +
                     " STEP THREE -- Substitute them with the objects loaded from the Resources/City, the gameobjects to be uploaded are 'Bench' 'Bin' 'Mailbox' 'Stoplight' 'Dumpster' 'Barrel' 'Barrel' " +
                     " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' 'Model_5' 'Model_6' " +
-                    " 'Model_0' (Bench)  at Vector3(-3.29,-0.47,7.85) and Y rotation equals to 88.27 , 'Model_1' (Bin) at Vector3(-3.25,-0.47,5.99)  " +
-                    " 'Model_2' (Mailbox) at Vector3(-3.28,-0.47,9.66) and Y rotation equals to -78.88 " +
-                    " 'Model_3' (Chair) at Vector3(-3.31,-0.47,6.09) and Y rotation equals 97.00 'Model_3' (Stoplight) at Vector3(1.31,-0.47,25.09) and Y rotation equals -176.29 " +
-                    " 'Model_4' (Dumpster) at Vector3(6.66,-0.47,8.08) and Y rotation equals -92.135 'Model_5' (Barrel) at Vector3(6.24,-0.47,6) " +
+                    " 'Model_0' (Bench)  at Vector3(-3.29,-0.47,7.85) and Y rotation equals to 88.27 only for this object, 'Model_1' (Bin) at Vector3(-3.25,-0.47,5.99)  " +
+                    " 'Model_2' (Mailbox) at Vector3(-3.28,-0.47,9.66) and Y rotation equals to -78.88 only for this object " +
+                    " 'Model_3' (Chair) at Vector3(-3.31,-0.47,6.09) and Y rotation equals 97.00 only for this object, 'Model_3' (Stoplight) at Vector3(1.31,-0.47,25.09) and Y rotation equals -176.29 only for this object" +
+                    " 'Model_4' (Dumpster) at Vector3(6.66,-0.47,8.08) and Y rotation equals -92.135 only for this object, 'Model_5' (Barrel) at Vector3(6.24,-0.47,6) " +
                     " 'Model_5' (Barrel) at  Vector3(6.24,-0.47,6.43) Y position equals to -0.47 " +
                     " 'Model_6' (Sink) at Vector3(6.34,-0.47,10.02) and 'Model_6' (Barrel) at Vector3(7.04,-0.47,6.54) " +
                     " STEP FOUR -- Add a collider for every object" +
