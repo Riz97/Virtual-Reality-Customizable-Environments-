@@ -10,6 +10,7 @@ using TMPro;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using Button = UnityEngine.UI.Button;
+using NUnit.Framework;
 
 public class Chat : MonoBehaviour
 
@@ -487,16 +488,15 @@ public class Chat : MonoBehaviour
 
 
             input = " Unity C# script code that follow drastically these numbered steps " +
-                    " 1) Find with the Find() method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
-                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the following code Resources.Load<Material>(Furniture/Material) " +
-                    " 3) Substitute them with objects loaded from the Furniture folder, the gameobjects to be uploaded are 'Desk' 'Table' 'Chair' 'Chair'  " +
+                    " STEP ONE -- Find with the Find() method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
+                    " STEP TWO -- Find with the Find() method the gameobject 'Plane' and change its material with the following code Resources.Load<Material>(Furniture/Material) " +
+                    " STEP THREE -- Substitute them with objects loaded from the Furniture folder, the gameobjects to be uploaded are 'Desk' 'Table' 'Chair' 'Chair'  " +
                     " and rename them 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 " +
-                    " 'Model_0' (Desk) at Y position equals to -0.47, at X position 0.08 and Z position 7.13 , 'Model_1' (Chair) at Y position equals to -0.47," +
-                    " at X position 0.13 and Z position 9.25 'Model_2' (Table) at Y position equals to -0.47, at X position -2.64 and Z position 4.62 " +
-                    " 'Model_3' (Chair) at Y position equals to -0.47, at X position  -2.76 and Z position 6.28  'Model_4' (Chair) at Y position equals to -0.47, " +
-                    " at X position -4.37 and Z position 4.81 and  rotation Y equals -97.34" +
-                    " 4) Add a simple collider for every object " +
-                    " 5) Use the method caleld Start() e no auxiliary methods";
+                    " 'Model_0' (Desk) at Vector3(0.08,-0.47,7.13), 'Model_1' (Chair) at Vector3(0.13,-0.47,9.25) " +
+                    " 'Model_2' (Table) at Vector3(-2.64,-0.47,4.62) " +
+                    " 'Model_3' (Chair) at Vector3(-2.76,-0.47,6.28) 'Model_4' (Chair) at Vector3(-4.37,-0.47,4.81) and  rotation Y equals -97.34 " +
+                    " STEP FOUR -- Add a simple collider for every object " +
+                    " STEP FIVE -- Use the method caleld Start() e no auxiliary methods";
 
             Start();
 
@@ -513,19 +513,19 @@ public class Chat : MonoBehaviour
             Number_of_Objects = 7;
 
 
-            input = " Unity C# script code, that follow drastically these numbered steps " +
-                    " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6' and destroy them"+
-                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder" +
-                    " 3) Substitute them with the objects loaded from the Resources/Furniture, the gameobjects to be uploaded are 'Bed' 'Drawer' 'Desk' 'Chair' 'Drawer' 'Shower' 'Sink'"+
+            input = " A complete C# Unity Script that follow correctly these numbered steps : " +
+                    " STEP ONE -- Find with the Find() method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6' and destroy them"+
+                    " STEP TWO -- Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder" +
+                    " STEP THREE -- Substitute them with the objects loaded from the Resources/Furniture, the gameobjects to be uploaded are 'Bed' 'Drawer' 'Desk' 'Chair' 'Drawer' 'Shower' 'Sink'"+
                     " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' 'Model_5' 'Model_6' " +
-                    " Model_0' (Bed) at Y position equals to -0.47, at X position -0.64 and Z position 9.99 , 'Model_1' (Drawer) at Y position equals to -0.47, at X position -3.30 and " +
-                    " Z position 12.38 'Model_2' (Desk) at Y position equals to -0.47, at X position -4.35 and Z position 6.35 and Y rotation equals to 87.809" +
-                    " 'Model_3' (Chair) at Y position equals to -0.47, at X position  -3.31 and Z position 6.09 and Y rotation equals 97.00 " +
-                    " 'Model_4' (Drawer) at Y position equals to -0.47, at X position 1.42 and Z position 12.1 " +
-                    " 'Model_5' (Shower) at Y position equals to -0.47, at X position 4.69 and Z position 10.72 and " +
-                    " 'Model_6' (Sink) at Y position equals to -0.47, at X position 6.34 and Z position 10.02"+
-                    " 4) Add a collider for every object" +
-                    " 5) use a method called Start";
+                    " Model_0' (Bed) at Vector3(-0.64,-0.47,9.99), 'Model_1' (Drawer) at Vector3(-3.30,-0.47,12.38) " +
+                    " (Desk) at Vector3(-4.35,-0.47,6.35) and Y rotation equals to 87.809" +
+                    " 'Model_3' (Chair) at Vector3(-3.31,-0.47,6.09) and Y rotation equals 97.00 " +
+                    " 'Model_4' (Drawer) at Vector3(1-42,-0.47,12.1) " +
+                    " 'Model_5' (Shower) at  Vector3(4.69,-0.47,10.72) and " +
+                    " 'Model_6' (Sink) at Vector3(6.34,-0.47,10.02) " +
+                    " STEP FOUR -- Add a collider for every object" +
+                    " STEP FIVE -- Use a method called Start";
 
             Start();
             
@@ -541,17 +541,17 @@ public class Chat : MonoBehaviour
             Number_of_Objects = 6;
 
 
-            input = " Unity C# script code, that follow drastically these numbered steps " +
-                    " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 and destroy them " +
-                    " 2) MANDATORY!!!! Find with the Find() method , do not use FindGameObjectsWithTag(), the gameobject 'Plane' and change its material with the material loaded from Nature/Material folder" +
-                    " 3) Substitute them with the objects loaded from the Resources/Nature, the gameobjects to be uploaded are 'Oak' 'Pine' 'Pine' 'Mushroom' 'Oak' 'Stone'" +
+            input = " A complete C# Unity Script that follow correctly these numbered steps : " +
+                    " STEP ONE -- Find with the Find() method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 and destroy them " +
+                    " STEP TWO -- Find with the Find() method, the gameobject 'Plane' and change its material with the material loaded from Nature/Material folder" +
+                    " STEP THREE -- Substitute them with the objects loaded from the Resources/Nature, the gameobjects to be uploaded are 'Oak' 'Pine' 'Pine' 'Mushroom' 'Oak' 'Stone'" +
                     " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' 'Model_5' " +
-                    " 'Model_0' (Oak) at Y position equals to -0.47, at X position -4.25 and Z position 10.48, 'Model_1' (Pine) at Y position equals to -0.47, at X position -1.48 and Z position 7.49 " +
-                    " 'Model_2' (Pine) at Y position equals to -0.47, at X position -0.77 and Z position 9.61 Model_3' (Mushroom) at Y position equals to -0.47, at X position  -2.31 and Z position 7.68  " +
-                    " 'Model_4' (Oak) at Y position equals to -0.47, at X position 1.11 and Z position 7.74 " +
-                    " 'Model_5' (Stone) at Y position equals to -0.47, at X position -2.98 and Z position 13.72 " +
-                    " 4) Add a collider for every object" +
-                    " 5) use a method called Start";
+                    " 'Model_0' (Oak) at Vector3(-4.25,-0.47,10.48), 'Model_1' (Pine) at Vector3(-1.48,-0.47,7.49) " +
+                    " 'Model_2' (Pine) at Vector3(-0.77,-0.47,9.61) Model_3' (Mushroom) at Vector3(-2.31,-0.47,7.68) " +
+                    " 'Model_4' (Oak) at Vector3(1.11,-0.47,7.74) " +
+                    " 'Model_5' (Stone) at Vector3(-2.98,-0.47,13.72) " +
+                    " STEP FOUR -- Add a collider for every object" +
+                    " STEP FIVE use a method called Start";
 
             Start();
 
@@ -566,16 +566,16 @@ public class Chat : MonoBehaviour
 
             Number_of_Objects = 5;
 
-            input = " Unity C# script code, that follow drastically these numbered steps " +
-                    " 1) Find with the Find method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
-                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Nature/Material folder " +
-                    " 3) Substitute them with the objects loaded previously from the Resources/Nature, the gameobjects to be uploaded are 'Pine' 'Flower' 'Mushroom' 'Oak' 'Wood' " +
+            input = " A complete C# Unity Script that follow correctly these numbered steps :  " +
+                    " STEP ONE -- Find with the Find() method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
+                    " STEP TWO -- Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Nature/Material folder " +
+                    " STEP THREE -- Substitute them with the objects loaded previously from the Resources/Nature, the gameobjects to be uploaded are 'Pine' 'Flower' 'Mushroom' 'Oak' 'Wood' " +
                     " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' " +
-                    " 'Model_0' (Pine) at Y position equals to -0.47, at X position -3.52 and Z position 7.48, 'Model_1' (Flower) at Y position equals to -0.47, at X position -4.17 and Z position 7.25 " +
-                    " 'Model_2' (Mushroom) at Y position equals to -0.47, at X position -2.70 and Z position 7.41 'Model_3' (Oak) at Y position equals to -0.47, at X position  -1.7 and Z position 7.68 " +
-                    " 'Model_4' (Wood) at Y position equals to -0.47, at X position 1.11 and Z position 7.74 " +
-                    " 4) Add a collider for every object " +
-                    " 5) use a method called Start";
+                    " 'Model_0' (Pine) at Vector3(-3.52,-0.43,7.48), 'Model_1' (Flower) at Vector3(-4.17,-0.43,7.25) " +
+                    " 'Model_2' (Mushroom) at Vector3(-2.70,-0.43,7.41), 'Model_3' (Oak) at Vector3(-1.7,-0.43,7.68) " +
+                    " 'Model_4' (Wood) at Vector3(1.11,-0.43,7.74) " +
+                    " STEP FOUR -- Add a collider for every object " +
+                    " STEP FIVE -- Use a method called Start";
 
             Start();
 
@@ -591,16 +591,16 @@ public class Chat : MonoBehaviour
 
             Number_of_Objects = 5;
 
-            input = " Unity C# script code, that follow drastically these numbered steps " +
-                    " 1) Find with the Find method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
-                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Cars/Material folder " +
-                    " 3) Substitute them with the objects loaded from the Resources/Cars, the gameobjects to be uploaded are 'Pine' 'Flower' 'Mushroom' 'Oak' 'Wood' " +
+            input = " A complete C# Unity Script that follow correctly these numbered steps : " +
+                    " STEP ONE --  Find with the Find() method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
+                    " STEP TWO --  Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Cars/Material folder " +
+                    " STEP THREE -- Substitute them with the objects loaded from the Resources/Cars, the gameobjects to be uploaded are 'Pine' 'Flower' 'Mushroom' 'Oak' 'Wood' " +
                     " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' " +
-                    " 'Model_0' (Sport) at Y position equals to -0.47, at X position -3.74 and Z position 17.69, 'Model_1' (Cops) at Y position equals to -0.47, at X position -0.59 and Z position 22.06 " +
-                    " 'Model_2' (Suv) at Y position equals to -0.47, at X position 2.52 and Z position 17.69 'Model_3' (Taxi) at Y position equals to -0.47, at X position  -7.33 and Z position 21.52  " +
-                    " 'Model_4' (Sedan) at Y position equals to -0.47, at X position 6.53 and Z position 21.18 " +
-                    " 4) Add a collider for every object " +
-                    " 5) use a method called Start";
+                    " 'Model_0' (Sport) at Vector3(-3.74,-0.47,17.69) , 'Model_1' (Cops) at Vector3(-0.59,-0.47,22.06) " +
+                    " 'Model_2' (Suv) at Vector3(2.52,-0.47,17.69) 'Model_3' (Taxi) at Vector3(-7.33,-0.47,21.52) " +
+                    " 'Model_4' (Sedan) at Vector3(6.53,-0.47,21.18) " +
+                    " STEP FOUR -- Add a collider for every object " +
+                    " STEP FIVE -- Use a method called Start";
 
             Start();
         }
@@ -614,19 +614,20 @@ public class Chat : MonoBehaviour
 
             Number_of_Objects = 7;
 
-            input = " Unity C# script code, that follow drastically these numbered steps " +
-                    " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6' and destroy them" +
-                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from City/Material folder" +
-                    " 3) Substitute them with the objects loaded from the Resources/City, the gameobjects to be uploaded are 'Bench' 'Bin' 'Mailbox' 'Stoplight' 'Dumpster' 'Barrel' 'Barrel' " +
+            input = " A complete C# Unity Script that follow correctly these numbered steps : " +
+                    " STEP ONE -- Find with the Find() method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6' and destroy them" +
+                    " STEP TWO -- Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from City/Material folder" +
+                    " STEP THREE -- Substitute them with the objects loaded from the Resources/City, the gameobjects to be uploaded are 'Bench' 'Bin' 'Mailbox' 'Stoplight' 'Dumpster' 'Barrel' 'Barrel' " +
                     " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' 'Model_5' 'Model_6' " +
-                    " 'Model_0' (Bench) at Y position equals to -0.47, at X position -3.29 and Z position 7.85 and Y rotation equals to 88.27 , 'Model_1' (Bin) at Y position equals to -0.47, at X position -3.25 and Z position 5.99 " +
-                    " 'Model_2' (Mailbox) at Y position equals to -0.47, at X position -3.28 and Z position 9.66 and Y rotation equals to -78.88 " +
-                    " 'Model_3' (Chair) at Y position equals to -0.47, at X position  -3.31 and Z position 6.09 and Y rotation equals 97.00 'Model_3' (Stoplight) at Y position equals to -0.47, at X position  1.31 and Z position 25.09 and Y rotation equals -176.29 " +
-                    " 'Model_4' (Dumpster) at Y position equals to -0.47, at X position 6.66 and Z position 8.08 and Y rotation equals -92.135 'Model_5' (Barrel) at Y position equals to -0.47, at X position 6.24 " +
-                    " 'Model_5' (Barrel) at Y position equals to -0.47, at X position 6.24 and Z position 6.43" +
-                    " 'Model_6' (Sink) at Y position equals to -0.47, at X position 6.34 and Z position 10.02 and 'Model_6' (Barrel) at Y position equals to -0.47, at X position 7.04 and Z position 6.54" +
-                    " 4) Add a collider for every object" +
-                    " 5) use a method called Start";
+                    " 'Model_0' (Bench)  at Vector3(-3.29,-0.47,7.85) and Y rotation equals to 88.27 , 'Model_1' (Bin) at Vector3(-3.25,-0.47,5.99)  " +
+                    " 'Model_2' (Mailbox) at Vector3(-3.28,-0.47,9.66) and Y rotation equals to -78.88 " +
+                    " 'Model_3' (Chair) at Vector3(-3.31,-0.47,6.09) and Y rotation equals 97.00 'Model_3' (Stoplight) at Vector3(1.31,-0.47,25.09) and Y rotation equals -176.29 " +
+                    " 'Model_4' (Dumpster) at Vector3(6.66,-0.47,8.08) and Y rotation equals -92.135 'Model_5' (Barrel) at Vector3(6.24,-0.47,6) " +
+                    " 'Model_5' (Barrel) at  Vector3(6.24,-0.47,6.43) Y position equals to -0.47 " +
+                    " 'Model_6' (Sink) at Vector3(6.34,-0.47,10.02) and 'Model_6' (Barrel) at Vector3(7.04,-0.47,6.54) " +
+                    " STEP FOUR -- Add a collider for every object" +
+                    " STEP FIVE -- use a method called Start";
+            
 
             Start();
 
@@ -641,18 +642,19 @@ public class Chat : MonoBehaviour
 
             Number_of_Objects = 6;
 
-            input = " Unity C# scrpti code, no comments, that follow drastically these numbered steps " +
-                    " 1) Find with the Find method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 and destroy them " +
-                    " 2) MANDATORY!!!! Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Industrial/Material folder" +
-                    " 3) Substitute them with the objects loaded from the Resources/Industrial, the gameobjects to be uploaded are 'Tubes' 'Plank' 'Garbage' 'Pallet' 'Pallet' 'Car' " +
+            input = " A complete C# Unity Script that follow correctly these numbered steps : " +
+                    " STEP ONE -- Find with the Find() method, the gameobjects that are called  'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 and destroy them " +
+                    " STEP TWO -- Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Industrial/Material folder" +
+                    " STEP THREE Substitute them with the objects loaded from the Resources/Industrial, the gameobjects to be uploaded are 'Tubes' 'Plank' 'Garbage' 'Pallet' 'Pallet' 'Car' " +
                     " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' 'Model_5' " +
-                    " 'Model_0' (Tubes) at Y position equals to -0.47, at X position -4.56 and Z position 7.55, 'Model_1' (Plank) at Y position equals to -0.47, at X position -1.81 and Z position 11.90 " +
-                    " 'Model_2' (Garbage) at Y position equals to -0.47, at X position 1.64 and Z position 11.61 Model_3' 'Model_3' (Pallet) at Y position equals to -0.47, at X position  2.90 and Z position 9.70  " +
-                    " 'Model_4' (Pallet) at Y position equals to -0.47, at X position 4.11 and Z position 9.28  " +
-                    " 'Model_5' (Car) at Y position equals to -0.47, at X position 6.66 and Z position 8.86 " +
-                    " 4) Add a collider for every object" +
-                    " 5) use a method called Start";
+                    " 'Model_0' (Tubes) at Vector3(-4.56,-0.47,7.55) 'Model_1' (Plank) at Vector3(-1.81,-0.47,11.90) " +
+                    " 'Model_2' (Garbage) at Vector3(1.64,-0.47,11.61) 'Model_3' (Pallet) at Vector3(2.90,-0.47,9.70)  " +
+                    " 'Model_4' (Pallet) at  Vector3(4.11,-0.47,9.28) " +
+                    " 'Model_5' (Car) at Vector3(6.66,-0.47,8.86) " +
+                    " STEP FOUR -- Add a collider for every object " +
+                    " STEP FIVE -- Use a method called Start";
 
+            
             Start();
 
         }
