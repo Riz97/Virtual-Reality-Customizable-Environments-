@@ -19,9 +19,6 @@ public class Domain : MonoBehaviour
 
     [SerializeField] public GameObject popup;
 
-    [SerializeField] public Material[] material;
-
-
     public static int errorcount = 0;
     int temp = 0;
 
