@@ -80,3 +80,8 @@ Assets/Resources/OpenAIConfiguration.asset
 *.dll
 Assets/Resources/OpenAIConfiguration.asset
 PythonServer/codex.py
+*.meta
+Assets/Models/SourceFileMariPrefab/officeassets/textures/M_Cactus_1024_Colour.jpeg
+/Assets/Models/SourceFileMariPrefab
+/Assets/Models
+/Assets/Prefab/PrefabValentini

@@ -3799,7 +3799,6 @@ GameObject:
   - component: {fileID: 1182225937}
   - component: {fileID: 1182225939}
   - component: {fileID: 1182225940}
-  - component: {fileID: 1182225941}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -3879,18 +3878,6 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
---- !u!114 &1182225941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1182225935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b5f22ecc1b94d04da3beea0c1fda298, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1259676689
 GameObject:
   m_ObjectHideFlags: 0
@@ -6514,6 +6501,7 @@ GameObject:
   - component: {fileID: 1876130440}
   - component: {fileID: 1876130439}
   - component: {fileID: 1876130438}
+  - component: {fileID: 1876130441}
   m_Layer: 5
   m_Name: Reset
   m_TagString: Untagged
@@ -6585,7 +6573,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1182225941}
+      - m_Target: {fileID: 1876130441}
         m_TargetAssemblyTypeName: Reset, Assembly-CSharp
         m_MethodName: ResetScene
         m_Mode: 1
@@ -6635,6 +6623,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1876130436}
   m_CullTransparentMesh: 1
+--- !u!114 &1876130441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876130436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b5f22ecc1b94d04da3beea0c1fda298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1921083185
 GameObject:
   m_ObjectHideFlags: 0

@@ -775,7 +775,6 @@ MonoBehaviour:
   Generate_Script_Button: {fileID: 1542641696}
   InputField: {fileID: 1705133087}
   popup: {fileID: 375727552}
-  material: []
 --- !u!4 &98382860
 Transform:
   m_ObjectHideFlags: 0
@@ -1592,6 +1591,7 @@ GameObject:
   - component: {fileID: 318116907}
   - component: {fileID: 318116906}
   - component: {fileID: 318116905}
+  - component: {fileID: 318116908}
   m_Layer: 5
   m_Name: Reset
   m_TagString: Untagged
@@ -1663,7 +1663,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1444323497}
+      - m_Target: {fileID: 318116908}
         m_TargetAssemblyTypeName: Reset, Assembly-CSharp
         m_MethodName: ResetScene
         m_Mode: 1
@@ -1713,6 +1713,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 318116903}
   m_CullTransparentMesh: 1
+--- !u!114 &318116908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318116903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b5f22ecc1b94d04da3beea0c1fda298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &348835458
 GameObject:
   m_ObjectHideFlags: 0
@@ -5461,7 +5473,6 @@ GameObject:
   - component: {fileID: 1444323495}
   - component: {fileID: 1444323493}
   - component: {fileID: 1444323494}
-  - component: {fileID: 1444323497}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -5541,18 +5552,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1444323497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1444323492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b5f22ecc1b94d04da3beea0c1fda298, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1490500000
 GameObject:
   m_ObjectHideFlags: 0
