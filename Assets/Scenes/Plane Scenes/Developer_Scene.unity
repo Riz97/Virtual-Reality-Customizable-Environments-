@@ -3517,12 +3517,6 @@ MonoBehaviour:
   Generate_Script_Button: {fileID: 55758270}
   InputField: {fileID: 1921083187}
   popup: {fileID: 1760362447}
-  material:
-  - {fileID: 2100000, guid: 4c157cc8cdc264bcf9f241bcd0fdd202, type: 2}
-  - {fileID: 2100000, guid: 133fc9d56a0f72a4592593fffe06ceeb, type: 2}
-  - {fileID: 2100000, guid: 7fcfac62b5d07884ca0987363723305b, type: 2}
-  - {fileID: 2100000, guid: b0ed4675df634844dacf7ea270360209, type: 2}
-  - {fileID: 2100000, guid: 5d8af8f434f69794eabd684fb44b4fbf, type: 2}
 --- !u!1 &1147259504
 GameObject:
   m_ObjectHideFlags: 0
@@ -7941,11 +7935,11 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1121958101}
+  - {fileID: 331239456}
   - {fileID: 705507995}
   - {fileID: 1291648068}
   - {fileID: 2023639684}
   - {fileID: 1182225938}
-  - {fileID: 331239456}
   - {fileID: 2006551386}
   - {fileID: 24031617}
   - {fileID: 362741909}
