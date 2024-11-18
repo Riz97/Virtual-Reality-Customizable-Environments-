@@ -343,9 +343,9 @@ public class Chat : MonoBehaviour
 
         //EXECUTION CHECKS
         //The generated script must pass all these checks
-        if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u') && 
-            ContainsAny(result, All) && CheckContainsTwoStrings(result, All) && (SubStringin2Times(result, "Nature") || SubStringin2Times(result, "Furniture")
-            || SubStringin2Times(result, "Nature") || SubStringin2Times(result, "Furniture") || SubStringin2Times(result, "Nature")))
+        if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u')
+            && CheckContainsTwoStrings(result, All) && (SubStringin2Times(result, "Nature") || SubStringin2Times(result, "Furniture")
+            || SubStringin2Times(result, "City") || SubStringin2Times(result, "Industry") || SubStringin2Times(result, "Cars")))
         {
 
             //Elapsed time for the generation of the script
