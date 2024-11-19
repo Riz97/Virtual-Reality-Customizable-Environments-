@@ -11,6 +11,8 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using Button = UnityEngine.UI.Button;
 using NUnit.Framework;
+using UnityEngine.XR;
+using UnityEngine.UI;
 
 public class Chat : MonoBehaviour
 
@@ -34,8 +36,11 @@ public class Chat : MonoBehaviour
 
     public static float elapsed_time;
     public static int tries = 0;
-    
- 
+
+    private InputDevice rightController;
+    private bool isTriggerPressed = false;
+
+
 
     List<string> Mandatory_Words = new List<string>() {"Find(",".name"};
 
@@ -95,6 +100,8 @@ public class Chat : MonoBehaviour
     [SerializeField] public  Material material;
 
     [SerializeField] public TMP_Dropdown dropdown;
+
+    [SerializeField] public Toggle Coordinates_Toggle;
     
  
     public GameObject Models;
@@ -122,7 +129,10 @@ public class Chat : MonoBehaviour
 
     // Update is called once per frame
     public async void Start() {
-   
+
+        // Trova il controller destro (se usi quello sinistro, cambia il tipo)
+       
+
         Number_Models_Text.SetText("Number of models is : " + Number_of_Objects.ToString());
 
         //Reset of the Plane's material
@@ -857,10 +867,56 @@ public class Chat : MonoBehaviour
         return randomCoordinate;
     }
 
-    //Input Request function definition for the customized environments
-    public string Input_Request(string input, int Number_of_Objects, List<string> list, string Material, List<string> list_Directions)
 
+
+
+    void Update()
     {
+        var devices = new List<InputDevice>();
+        InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller, devices);
+
+        if (devices.Count > 0)
+        {
+            rightController = devices[0];
+        }
+
+        // Controlla se il controller è stato trovato
+        if (rightController.isValid)
+        {
+            bool triggerValue;
+        
+
+            // Leggi lo stato del grilletto
+            if (rightController.TryGetFeatureValue(CommonUsages.triggerButton, out triggerValue) && triggerValue)
+            {
+                // Esegui il salvataggio una sola volta quando il trigger viene premuto per la prima volta
+                if (!isTriggerPressed)
+                {
+                    isTriggerPressed = true;
+
+                    // Ottieni le coordinate del punto in cui stai mirando
+                    Vector3 position;
+                    if (rightController.TryGetFeatureValue(CommonUsages.devicePosition, out position))
+                    {
+                        Debug.Log("Trigger premuto. Coordinate salvate: " + position);
+
+                        // Salva la posizione in base alla logica della tua applicazione
+                        
+                    }
+                }
+            }
+            else
+            {
+                // Se il trigger è rilasciato, resetta il flag per consentire una nuova pressione
+                isTriggerPressed = false;
+            }
+        }
+    }
+
+
+//Input Request function definition for the customized environments
+public string Input_Request(string input, int Number_of_Objects, List<string> list, string Material, List<string> list_Directions)
+{
 
         input = "A complete C# Unity Script that follow correctly these numbered steps, DO NOT USE TAGS, :" +
         " STEP ONE -- Find with the Gameobject.Find() method the gameobject called 'Plane' and change its material by using the following code Resources.Load<Material>(" + Material + "/Material) "+
@@ -909,7 +965,9 @@ public class Chat : MonoBehaviour
 
     public string Define_Models_Coordinates(List<string> objects, int Number_of_Objects, string input, List<string> list_Directions)
     {
-
+        //If(button activated)
+        //Save all the coordinates in a list
+        //take the coordinates in a correct order and save them in the input request.
 
 
         for (int ii = 0; ii < Number_of_Objects; ii++)
@@ -1102,5 +1160,6 @@ public class Chat : MonoBehaviour
     }
 
     //---------------------------------------------------------------------------------------------------------
+
 }//END OF THE SCRIPT
 
