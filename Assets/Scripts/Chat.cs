@@ -107,6 +107,8 @@ public class Chat : MonoBehaviour
  
     public GameObject Models;
 
+    int counter = 0;
+
     //------------------------- NETWORK MANAGERS FOR ALL THE PYTHON MANAGERS ----------------------------------------------------
 
     public GeminiNetworkManager GeminiNetwork = new GeminiNetworkManager();
@@ -897,7 +899,7 @@ public class Chat : MonoBehaviour
 
                     // Ottieni le coordinate del punto in cui stai mirando
                     Vector3 position;
-                    if (rightController.TryGetFeatureValue(CommonUsages.devicePosition, out position))
+                    if (rightController.TryGetFeatureValue(CommonUsages.devicePosition, out position) && counter == Number_of_Objects)
                     {
                        
 
@@ -919,8 +921,7 @@ public class Chat : MonoBehaviour
 
     private void SaveCoordinateXZ(Vector3 position)
     {
-       
-        
+
         float x, z;
         x = position.x;
         z = position.z;
