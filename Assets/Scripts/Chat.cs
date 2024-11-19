@@ -898,10 +898,11 @@ public class Chat : MonoBehaviour
                     Vector3 position;
                     if (rightController.TryGetFeatureValue(CommonUsages.devicePosition, out position))
                     {
-                        Debug.Log("Trigger premuto. Coordinate salvate: " + position);
+                       
 
                         // Salva la posizione in base alla logica della tua applicazione
-                        
+                        SaveCoordinateX(position);
+                        SaveCoordinateZ(position);
                     }
                 }
             }
@@ -912,6 +913,30 @@ public class Chat : MonoBehaviour
             }
         }
     }
+
+    private float SaveCoordinateX(Vector3 position)
+    {
+        // Implementa la logica di salvataggio (puoi salvare in una lista, in un file, ecc.)
+        // Esempio semplice:
+        Debug.Log("Coordinate salvate X: " + position.x);
+        float x;
+        x = position.x;
+        
+
+        return x;
+    }
+
+    private float SaveCoordinateZ(Vector3 position)
+    {
+        Debug.Log("Coordinate salvate X: " + position.x);
+        float z;
+        z = position.z;
+
+        return z;
+    }
+
+
+
 
 
 //Input Request function definition for the customized environments
