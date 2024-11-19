@@ -40,7 +40,8 @@ public class Chat : MonoBehaviour
     private InputDevice rightController;
     private bool isTriggerPressed = false;
 
-
+    public static List<float> CustomCoordinatesX = new List<float>();
+    public static List<float> CustomCoordinatesZ = new List<float>();
 
     List<string> Mandatory_Words = new List<string>() {"Find(",".name"};
 
@@ -901,8 +902,8 @@ public class Chat : MonoBehaviour
                        
 
                         // Salva la posizione in base alla logica della tua applicazione
-                        SaveCoordinateX(position);
-                        SaveCoordinateZ(position);
+                        SaveCoordinateXZ(position);
+                        
                     }
                 }
             }
@@ -912,32 +913,20 @@ public class Chat : MonoBehaviour
                 isTriggerPressed = false;
             }
         }
+
+
     }
 
-    private float SaveCoordinateX(Vector3 position)
+    private void SaveCoordinateXZ(Vector3 position)
     {
-        // Implementa la logica di salvataggio (puoi salvare in una lista, in un file, ecc.)
-        // Esempio semplice:
-        Debug.Log("Coordinate salvate X: " + position.x);
-        float x;
-        x = position.x;
+       
         
-
-        return x;
-    }
-
-    private float SaveCoordinateZ(Vector3 position)
-    {
-        Debug.Log("Coordinate salvate X: " + position.x);
-        float z;
+        float x, z;
+        x = position.x;
         z = position.z;
-
-        return z;
+        CustomCoordinatesX.Add(x);
+        CustomCoordinatesZ.Add(z);
     }
-
-
-
-
 
 //Input Request function definition for the customized environments
 public string Input_Request(string input, int Number_of_Objects, List<string> list, string Material, List<string> list_Directions)
@@ -990,17 +979,29 @@ public string Input_Request(string input, int Number_of_Objects, List<string> li
 
     public string Define_Models_Coordinates(List<string> objects, int Number_of_Objects, string input, List<string> list_Directions)
     {
-        //If(button activated)
-        //Save all the coordinates in a list
-        //take the coordinates in a correct order and save them in the input request.
+        
 
-
-        for (int ii = 0; ii < Number_of_Objects; ii++)
+        if (Coordinates_Toggle.isOn)
         {
-            input += " Model_" + ii.ToString() + " is a " + objects[ii] + " at Vector3(" + Random_PositionX(list_Directions, ii).ToString().Replace(",", ".") + ",-0.47," + Random_PositionZ(list_Directions, ii).ToString().Replace(",", ".") +  ")";
+            for (int ii = 0; ii < Number_of_Objects; ii++)
+            {
+                input += " Model_" + ii.ToString() + " is a " + objects[ii] + " at Vector3(" + CustomCoordinatesX[ii].ToString().Replace(",", ".") + ",-0.47," + CustomCoordinatesZ[ii].ToString().Replace(",", ".") + ")";
+            }
+
+          
+            return input;
         }
 
-        return input;
+        else
+        {
+
+            for (int ii = 0; ii < Number_of_Objects; ii++)
+            {
+                input += " Model_" + ii.ToString() + " is a " + objects[ii] + " at Vector3(" + Random_PositionX(list_Directions, ii).ToString().Replace(",", ".") + ",-0.47," + Random_PositionZ(list_Directions, ii).ToString().Replace(",", ".") + ")";
+            }
+
+            return input;
+        }
     }
 
     //------------------------------------------------- Numbers Of Models Increase - Decrease -----------------------------------------------------------------------------------------

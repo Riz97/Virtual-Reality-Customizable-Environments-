@@ -108,6 +108,8 @@ public class Domain : MonoBehaviour
                 Generate_Script_Button.interactable = true;
                 FaultyScriptCount = 0;
                 errorcount = 0;
+                Chat.CustomCoordinatesX.Clear();
+                Chat.CustomCoordinatesZ.Clear();
             }
 
             //------------------------------------------------- LOG FILES FUNCTION ------------------------------------------
