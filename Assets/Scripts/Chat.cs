@@ -32,7 +32,6 @@ public class Chat : MonoBehaviour
     public static bool Custom = false;
     private bool check = false;
     string sceneName;
-    public Camera uiCamera;
     private int n;
 
     private const string Computing_Message = "Computing the script , just wait!!!!";
@@ -110,10 +109,6 @@ public class Chat : MonoBehaviour
     [SerializeField] public GameObject Ballon;
  
     public GameObject Models;
-
-   // Riferimento al controller XR
-    public GameObject planeObject; // Riferimento al Plane (o altro GameObject)
-
 
     int counter = 0;
 
@@ -476,6 +471,24 @@ public class Chat : MonoBehaviour
 
         }
 
+
+        if (Number_of_Objects != counter)
+        {
+            Debug.Log("sono qua");
+            Text.color = new Color(255, 0, 0);
+            Text.text = ("Error: You have to position all the models that you have requested!");
+            Generate_Script_Button.interactable = true;
+
+            if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
+            {
+                Info_Text.text = ("Error: You have to position all the models that you have requested!");
+                Generate_Script_Button.interactable = true;
+                input = null;
+                return;
+            }
+            input = null;
+            return;
+        }
         List<string> list_Directions = list_Directions_aux;
 
         Text.color = new Color32(27, 255, 0, 255);
@@ -805,6 +818,9 @@ public class Chat : MonoBehaviour
 
             //------------------------------------------------------------------------------------------------------------------
         }
+
+
+    
 
     }
 

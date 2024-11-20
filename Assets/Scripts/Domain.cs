@@ -29,6 +29,7 @@ public class Domain : MonoBehaviour
     private const string Wait_Message = "Sorry, the AI was not able to generate a correct script. Wait! The AI is trying to generate another one :)";
     private const string Computing_Message = "Computing the script , just wait!!!!";
     private const string Error = "Error : you have to ask for the exactly amount of models requested  for this simulation";
+    private const string Error_Position = "Error: You have to position all the models that you have requested!";
 
     //------------------------------------------------------------------------------------------------
 
@@ -46,7 +47,8 @@ public class Domain : MonoBehaviour
     {
         //Waiter
         if (Output_Text.text.ToString() != Welcome_Message && Output_Text.text.ToString()
-           != Error_Message && Output_Text.text.ToString() != Wait_Message && Output_Text.text != "Executing......")
+           != Error_Message && Output_Text.text.ToString() != Wait_Message && Output_Text.text != "Executing......" 
+           && Output_Text.text.ToString() != Error_Position)
         {
             PrintAI_Thoughts();
         }
@@ -79,7 +81,7 @@ public class Domain : MonoBehaviour
             //Debug.Log("I'm waiting for the executable script");
         }
 
-        if (Output_Text.text != Welcome_Message && Output_Text.text != Error_Message && Output_Text.text.ToString() != Wait_Message && Output_Text.text != "Executing......" && Output_Text.text != Error && Output_Text.text != Computing_Message)
+        if (Output_Text.text != Error_Position && Output_Text.text != Welcome_Message && Output_Text.text != Error_Message && Output_Text.text.ToString() != Wait_Message && Output_Text.text != "Executing......" && Output_Text.text != Error && Output_Text.text != Computing_Message)
         {
             sourceCode = Output_Text.text.ToString();
 
