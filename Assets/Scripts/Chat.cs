@@ -107,6 +107,8 @@ public class Chat : MonoBehaviour
  
     public GameObject Models;
 
+    GameObject Ballon = Resources.Load<GameObject>("Ballon");
+
     int counter = 0;
 
     //------------------------- NETWORK MANAGERS FOR ALL THE PYTHON MANAGERS ----------------------------------------------------
@@ -905,7 +907,8 @@ public class Chat : MonoBehaviour
 
                         // Salva la posizione in base alla logica della tua applicazione
                         SaveCoordinateXZ(position);
-                        
+                        Instantiate(Ballon, new Vector3(position.x, -0.47f, position.z), Quaternion.identity);
+
                     }
                 }
             }
