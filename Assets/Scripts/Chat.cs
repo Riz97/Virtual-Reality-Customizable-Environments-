@@ -144,7 +144,7 @@ public class Chat : MonoBehaviour
 
 
 
-        Number_Models_Text.SetText("Number of models is : " + Number_of_Objects.ToString());
+        Number_Models_Text.SetText("Number of models is : " + Number_of_Objects.ToString() + "(" + counter.ToString() + ")");
 
         //Reset of the Plane's material
         GameObject plane = GameObject.Find("Plane");
@@ -879,8 +879,6 @@ public class Chat : MonoBehaviour
     }
 
 
-
-
     void Update()
     {
         var devices = new List<InputDevice>();
@@ -900,16 +898,13 @@ public class Chat : MonoBehaviour
             if (rightController.TryGetFeatureValue(CommonUsages.primaryButton, out triggerValue) && triggerValue)
             {
                 // Salva la posizione solo quando il trigger viene premuto per la prima volta
-                if (!isTriggerPressed)
+                if (!isTriggerPressed && counter != Number_of_Objects)
                 {
                     isTriggerPressed = true;
 
-                    // Ottieni la posizione del controller
-               
-
-                        // Usa la posizione come necessario
+                  
                         SaveCoordinateXZ(xrOriginTransform.position);
-                    
+                
                 }
             }
             else
@@ -930,9 +925,8 @@ public class Chat : MonoBehaviour
         z = position.z;
         CustomCoordinatesX.Add(x);
         CustomCoordinatesZ.Add(z);
-        Debug.Log(x);
-        Debug.Log(z);
         Instantiate(Ballon, new Vector3(x, 0.97f, z), Quaternion.identity);
+        Number_Models_Text.SetText("Number of models is : " + Number_of_Objects + "(" + (counter+1).ToString() +")");
         counter++;
 
     }
@@ -1019,13 +1013,13 @@ public class Chat : MonoBehaviour
     public void Add()
     {
 
-        Number_Models_Text.SetText("Number of models is : " + (Number_of_Objects + 1).ToString());
+        Number_Models_Text.SetText("Number of models is : " + (Number_of_Objects + 1).ToString() + "(" + counter.ToString() + ")");
        Number_of_Objects += 1;
     }
 
     public void Subtract()
     {
-        Number_Models_Text.SetText("Number of models is : " + (Number_of_Objects -1).ToString());
+        Number_Models_Text.SetText("Number of models is : " + (Number_of_Objects -1).ToString() + "(" + counter.ToString() + ")");
         Number_of_Objects -= 1;
     }
 
