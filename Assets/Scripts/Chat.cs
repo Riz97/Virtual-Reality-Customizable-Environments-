@@ -13,12 +13,15 @@ using Button = UnityEngine.UI.Button;
 using NUnit.Framework;
 using UnityEngine.XR;
 using UnityEngine.UI;
-
+using UnityEngine.EventSystems;
+using UnityEngine.XR.Interaction.Toolkit;
 public class Chat : MonoBehaviour
 
     
 {
   public static string result;
+
+    public Transform xrOriginTransform;
 
     private string input ;
     public static string input_aux;
@@ -29,7 +32,7 @@ public class Chat : MonoBehaviour
     public static bool Custom = false;
     private bool check = false;
     string sceneName;
-
+    public Camera uiCamera;
     private int n;
 
     private const string Computing_Message = "Computing the script , just wait!!!!";
@@ -37,7 +40,7 @@ public class Chat : MonoBehaviour
     public static float elapsed_time;
     public static int tries = 0;
 
-    private InputDevice rightController;
+    [SerializeField] public InputDevice rightController;
     private bool isTriggerPressed = false;
 
     public static List<float> CustomCoordinatesX = new List<float>();
@@ -103,11 +106,14 @@ public class Chat : MonoBehaviour
     [SerializeField] public TMP_Dropdown dropdown;
 
     [SerializeField] public Toggle Coordinates_Toggle;
-    
+
+    [SerializeField] public GameObject Ballon;
  
     public GameObject Models;
 
-    GameObject Ballon = Resources.Load<GameObject>("Ballon");
+   // Riferimento al controller XR
+    public GameObject planeObject; // Riferimento al Plane (o altro GameObject)
+
 
     int counter = 0;
 
@@ -135,8 +141,8 @@ public class Chat : MonoBehaviour
     // Update is called once per frame
     public async void Start() {
 
-        // Trova il controller destro (se usi quello sinistro, cambia il tipo)
-       
+
+
 
         Number_Models_Text.SetText("Number of models is : " + Number_of_Objects.ToString());
 
@@ -885,42 +891,36 @@ public class Chat : MonoBehaviour
             rightController = devices[0];
         }
 
-        // Controlla se il controller è stato trovato
+        // Verifica se il controller è valido
         if (rightController.isValid)
         {
             bool triggerValue;
-        
 
             // Leggi lo stato del grilletto
-            if (rightController.TryGetFeatureValue(CommonUsages.triggerButton, out triggerValue) && triggerValue)
+            if (rightController.TryGetFeatureValue(CommonUsages.primaryButton, out triggerValue) && triggerValue)
             {
-                // Esegui il salvataggio una sola volta quando il trigger viene premuto per la prima volta
+                // Salva la posizione solo quando il trigger viene premuto per la prima volta
                 if (!isTriggerPressed)
                 {
                     isTriggerPressed = true;
 
-                    // Ottieni le coordinate del punto in cui stai mirando
-                    Vector3 position;
-                    if (rightController.TryGetFeatureValue(CommonUsages.devicePosition, out position) && counter == Number_of_Objects)
-                    {
-                       
+                    // Ottieni la posizione del controller
+               
 
-                        // Salva la posizione in base alla logica della tua applicazione
-                        SaveCoordinateXZ(position);
-                        Instantiate(Ballon, new Vector3(position.x, -0.47f, position.z), Quaternion.identity);
-
-                    }
+                        // Usa la posizione come necessario
+                        SaveCoordinateXZ(xrOriginTransform.position);
+                    
                 }
             }
             else
             {
-                // Se il trigger è rilasciato, resetta il flag per consentire una nuova pressione
+                // Se il trigger viene rilasciato, resetta il flag
                 isTriggerPressed = false;
             }
         }
-
-
     }
+
+
 
     private void SaveCoordinateXZ(Vector3 position)
     {
@@ -930,10 +930,15 @@ public class Chat : MonoBehaviour
         z = position.z;
         CustomCoordinatesX.Add(x);
         CustomCoordinatesZ.Add(z);
+        Debug.Log(x);
+        Debug.Log(z);
+        Instantiate(Ballon, new Vector3(x, 0.97f, z), Quaternion.identity);
+        counter++;
+
     }
 
-//Input Request function definition for the customized environments
-public string Input_Request(string input, int Number_of_Objects, List<string> list, string Material, List<string> list_Directions)
+    //Input Request function definition for the customized environments
+    public string Input_Request(string input, int Number_of_Objects, List<string> list, string Material, List<string> list_Directions)
 {
 
         input = "A complete C# Unity Script that follow correctly these numbered steps, DO NOT USE TAGS, :" +
