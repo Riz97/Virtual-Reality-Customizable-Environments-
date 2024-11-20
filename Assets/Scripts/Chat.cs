@@ -472,6 +472,10 @@ public class Chat : MonoBehaviour
         }
 
 
+// -------------------------------------- ERROR CASE: NOT POSITIONED ALL THE 3D OBJECTS -----------------------------------
+
+    //Error Handler, if the user did not put in position the exact number of 3d objects that he has requested
+
         if (Number_of_Objects != counter)
         {
             Debug.Log("sono qua");
@@ -489,6 +493,8 @@ public class Chat : MonoBehaviour
             input = null;
             return;
         }
+//-------------------------------------------------------------------------------------------------------------------------------------
+
         List<string> list_Directions = list_Directions_aux;
 
         Text.color = new Color32(27, 255, 0, 255);
