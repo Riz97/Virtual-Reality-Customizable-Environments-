@@ -14,7 +14,7 @@ public class Menu : MonoBehaviour
     public float rotationSpeed = 30f;
 
     List<string> Macrocategory = new List<string>() { "Nature", "City", "Industry", "Cars", "Furniture" };
-    List<string> Nature = new List<string>() {"Oak", "Pine" , "Bush","Flower","Mushroom","Stone","Wood"};
+    List<string> Nature = new List<string>() {"Pine", "Oak" , "Bush","Flower","Mushroom","Stone","Wood"};
     List<string> City = new List<string>() {"Bench", "Stoplight", "Barrel", "Bin", "Dumpster", "Hydrant", "Mailbox" };
     List<string> Furniture = new List<string>() { "Bed", "Chair", "Desk", "Drawer", "Shower", "Sink", "Table" };
     List<string> Industry = new List<string>() {"Cable","Car","Garbage","Pallet","Plank","Tank","Tubes"};
@@ -53,32 +53,47 @@ public class Menu : MonoBehaviour
         Macro_Text.text = Macrocategory[currentIndex];
         if(Macro_Text.text == "Nature")
         {
+           
             Objects_Text.text = Nature[0];
+            ShowPrefab(0);
+            currentPrefabIndex = 0;
         }
 
         if (Macro_Text.text == "City")
         {
+            
             Objects_Text.text = City[0];
+            ShowPrefab(0);
+            currentPrefabIndex = 0;
         }
 
         if (Macro_Text.text == "Furniture")
         {
+           
             Objects_Text.text = Furniture[0];
+            ShowPrefab(0);
+            currentPrefabIndex = 0;
         }
 
 
         if (Macro_Text.text == "Industry")
         {
+            
             Objects_Text.text = Industry[0];
+            ShowPrefab(0);
+            currentPrefabIndex = 0;
         }
 
 
         if (Macro_Text.text == "Cars")
         {
+            
             Objects_Text.text = Cars[0];
+            ShowPrefab(0);
+            currentPrefabIndex = 0;
         }
 
-        ShowPrefab(currentPrefabIndex);
+        //ShowPrefab(currentPrefabIndex);
     }
 
     public void DecreaseMacro()
@@ -87,37 +102,46 @@ public class Menu : MonoBehaviour
         Macro_Text.text = Macrocategory[currentIndex];
         if (Macro_Text.text == "Nature")
         {
+            
             Objects_Text.text = Nature[0];
             ShowPrefab(0);
-
+            currentPrefabIndex = 0;
         }
 
         if (Macro_Text.text == "City")
         {
+           
             Objects_Text.text = City[0];
-            ShowPrefab(0);
+            ShowPrefab(0); 
+            currentPrefabIndex = 0;
         }
 
         if (Macro_Text.text == "Furniture")
         {
+            
             Objects_Text.text = Furniture[0];
             ShowPrefab(0);
+            currentPrefabIndex = 0;
 
         }
 
 
         if (Macro_Text.text == "Industry")
         {
+           
             Objects_Text.text = Industry[0];
             ShowPrefab(0);
+            currentPrefabIndex = 0;
 
         }
 
 
         if (Macro_Text.text == "Cars")
         {
+           
             Objects_Text.text = Cars[0];
             ShowPrefab(0);
+            currentPrefabIndex = 0;
         }
 
         
