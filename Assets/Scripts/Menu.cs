@@ -88,31 +88,39 @@ public class Menu : MonoBehaviour
         if (Macro_Text.text == "Nature")
         {
             Objects_Text.text = Nature[0];
+            ShowPrefab(0);
+
         }
 
         if (Macro_Text.text == "City")
         {
             Objects_Text.text = City[0];
+            ShowPrefab(0);
         }
 
         if (Macro_Text.text == "Furniture")
         {
             Objects_Text.text = Furniture[0];
+            ShowPrefab(0);
+
         }
 
 
         if (Macro_Text.text == "Industry")
         {
             Objects_Text.text = Industry[0];
+            ShowPrefab(0);
+
         }
 
 
         if (Macro_Text.text == "Cars")
         {
             Objects_Text.text = Cars[0];
+            ShowPrefab(0);
         }
 
-        ShowPrefab(currentPrefabIndex);
+        
     }
 
     public void IncreaseObjects()
