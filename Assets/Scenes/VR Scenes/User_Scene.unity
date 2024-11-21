@@ -1808,7 +1808,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.3351, y: -2.0331264}
+  m_AnchoredPosition: {x: 5.3351, y: -2.011799}
   m_SizeDelta: {x: -10.0387, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &207989659
@@ -11370,7 +11370,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1590079702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11379,8 +11379,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.4599609, y: 2.2420044}
-  m_SizeDelta: {x: 935.39746, y: 350.15887}
+  m_AnchoredPosition: {x: -215, y: 758.1}
+  m_SizeDelta: {x: -3278.7, y: -863.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1590079704
 MonoBehaviour:
@@ -12460,7 +12460,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xrOriginTransform: {fileID: 169701834}
-  uiCamera: {fileID: 1865832368}
   Text: {fileID: 207989662}
   InputField: {fileID: 266598569}
   Reminders_List: []
@@ -12474,7 +12473,6 @@ MonoBehaviour:
   Coordinates_Toggle: {fileID: 1999792518}
   Ballon: {fileID: 1403870238999768668, guid: 977eb910211115749a1c5583ceba14b1, type: 3}
   Models: {fileID: 2013011777}
-  planeObject: {fileID: 9524840}
   GeminiNetwork: {fileID: 471845378}
   LlamaNetwork: {fileID: 1083722138}
   CodexNetwork: {fileID: 1442929473}
@@ -12496,11 +12494,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &1865832368 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 9014170783809206330, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
-  m_PrefabInstance: {fileID: 169701825}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1867094245
 GameObject:
   m_ObjectHideFlags: 0

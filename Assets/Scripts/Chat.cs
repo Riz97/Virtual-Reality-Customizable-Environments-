@@ -1035,7 +1035,7 @@ public class Chat : MonoBehaviour
     public void Add()
     {
 
-        Number_Models_Text.SetText("Number of models is : " + (Number_of_Objects + 1).ToString() + "(" + counter.ToString() + ")");
+       Number_Models_Text.SetText("Number of models is : " + (Number_of_Objects + 1).ToString() + "(" + counter.ToString() + ")");
        Number_of_Objects += 1;
     }
 
