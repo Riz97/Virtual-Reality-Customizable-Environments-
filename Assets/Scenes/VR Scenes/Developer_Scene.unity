@@ -7383,7 +7383,7 @@ MonoBehaviour:
   Number_Models_Text: {fileID: 522181133}
   material: {fileID: 5561349426305759274, guid: 9e1dc1c14313460d872de39e35129b39, type: 3}
   dropdown: {fileID: 669416852}
-  Coordinates_Toggle: {fileID: 0}
+  Coordinates_Toggle: {fileID: 618847020}
   Ballon: {fileID: 1403870238999768668, guid: 977eb910211115749a1c5583ceba14b1, type: 3}
   Models: {fileID: 437474354}
   GeminiNetwork: {fileID: 925024862}
