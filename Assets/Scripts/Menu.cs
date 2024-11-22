@@ -6,30 +6,39 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    private int currentIndex = 0;
-    private int currentPrefabIndex = 0;
+    private int currentIndex = 0; //Index for the correct displayment of the name in the Text
+    private int currentPrefabIndex = 0; //Index for the correct displayment of the 3D Object preview
     private GameObject currentInstance;
     public TMP_Text Macro_Text;
     public TMP_Text Objects_Text;
     public float rotationSpeed = 30f;
 
     List<string> Macrocategory = new List<string>() { "Nature", "City", "Industry", "Cars", "Furniture" };
+
+    //---------------------------------- Objects' name for every Macro-Category ------------------------------------------
+
     List<string> Nature = new List<string>() {"Pine", "Oak" , "Bush","Flower","Mushroom","Stone","Wood"};
     List<string> City = new List<string>() {"Bench", "Stoplight", "Barrel", "Bin", "Dumpster", "Hydrant", "Mailbox" };
     List<string> Furniture = new List<string>() { "Bed", "Chair", "Desk", "Drawer", "Shower", "Sink", "Table" };
     List<string> Industry = new List<string>() {"Cable","Car","Garbage","Pallet","Plank","Tank","Tubes"};
     List<string> Cars = new List<string>() {"Cops","Sedan","Sport","Suv","Taxi"};
+    
+    //---------------------------------------------------------------------------------------------------------------------
  
+    //-------------------------------- Lists of the respective Macro Category Prefabs -----------------------------------
+
     public List<GameObject> NaturePrefabs;
     public List<GameObject> CityPrefabs;
     public List<GameObject> FurniturePrefabs;
     public List<GameObject> CarsPrefabs;
     public List<GameObject> IndustryPrefabs;
 
-    public Transform previewPosition;       // Posizione nella scena dove istanziare il prefab di anteprima
+    //---------------------------------------------------------------------------------------------------------------------
+
+    public Transform previewPosition; //3D Object Position for the Preview
   
 
-    // Start is called before the first frame update
+
     void Start()
     {
         Macro_Text.text = Macrocategory[0];
@@ -39,21 +48,23 @@ public class Menu : MonoBehaviour
 
     void Update()
     {
-        // Ruota il prefab corrente se esiste
+        // Preview Prefab rotation
         if (currentInstance != null)
         {
             currentInstance.transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.World);
         }
     }
 
-
+    //Menu for the Macro Category when '>' button is clicked. The process is the same for all the Macro Categories
     public void IncreaseMacro() { 
  
-        currentIndex = (currentIndex + 1) % Macrocategory.Count; // 0 resto 1 quando index è 1, stessa cosa per 2 3 4 , quando è 5 si riparte
-        Macro_Text.text = Macrocategory[currentIndex];
+        currentIndex = (currentIndex + 1) % Macrocategory.Count; 
+        Macro_Text.text = Macrocategory[currentIndex]; //Update of the text with the current index
+
+        //Check which Macro Category is on
         if(Macro_Text.text == "Nature")
         {
-           
+           //Start with the first object of the category, show it and reset the prefabindex
             Objects_Text.text = Nature[0];
             ShowPrefab(0);
             currentPrefabIndex = 0;
@@ -92,10 +103,9 @@ public class Menu : MonoBehaviour
             ShowPrefab(0);
             currentPrefabIndex = 0;
         }
-
-        //ShowPrefab(currentPrefabIndex);
     }
 
+    //Same as before but in this case the button clicked is '<'
     public void DecreaseMacro()
     {
         currentIndex = (currentIndex - 1 + Macrocategory.Count) % Macrocategory.Count;
@@ -147,10 +157,13 @@ public class Menu : MonoBehaviour
         
     }
 
+    //Method attached to the button '>'  for the Gameobjects that scroll through the list of objects belonging to the same macro category
+    //Same process for every macro category
     public void IncreaseObjects()
     {
         if(Macro_Text.text == "Nature")
         {
+            //Compute the prefab index, show the name of the object and show the 3D object prefab.
             currentPrefabIndex = (currentPrefabIndex + 1) % NaturePrefabs.Count;
             Objects_Text.text = Nature[currentPrefabIndex];
             ShowPrefab(currentPrefabIndex);
@@ -186,6 +199,8 @@ public class Menu : MonoBehaviour
 
     }
 
+    //Method attached to the button '<'  for the Gameobjects that scroll through the list of objects belonging to the same macro category
+    //Same process for every macro category
     public void DecreaseObjects()
     {
         if(Macro_Text.text == "Nature")
@@ -229,6 +244,7 @@ public class Menu : MonoBehaviour
 
     }
 
+    //Auxiliary method that instantiate the selected gameobject depending on the Macro Category selected
     void ShowPrefab(int index)
     {
         // Rimuovi il prefab corrente se esiste
