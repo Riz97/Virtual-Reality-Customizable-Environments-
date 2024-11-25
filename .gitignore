@@ -9,7 +9,10 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
-/Assets/Resources/
+/Assets/Resources/OpenAIConfiguration.asset
+/Assets/Resources/OpenAIConfiguration.meta
+/Assets/Resources/HuggingFaceAPIConfig.asset
+/Assets/Resources/HuggingFaceAPIConfig.meta
 
 
 # MemoryCaptures can get excessive in size.
