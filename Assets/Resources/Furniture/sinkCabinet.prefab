@@ -107,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2001481142071145005}
   m_Layer: 0
-  m_Name: sinkCabinet
+  m_Name: SinkCabinet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

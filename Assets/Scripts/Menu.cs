@@ -1,11 +1,22 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
+
+
+
 {
+
+    public GameObject plane;
+    public GameObject objectToPosition;
+    public float offset = 0.1f;
+
+    private bool isPositioned = false;
+
+
     private int currentIndex = 0; //Index for the correct displayment of the name in the Text
     private int currentPrefabIndex = 0; //Index for the correct displayment of the 3D Object preview
     private GameObject currentInstance;
@@ -19,7 +30,11 @@ public class Menu : MonoBehaviour
 
     List<string> Nature = new List<string>() {"Pine", "Oak" , "Bush","Flower","Mushroom","Stone","Wood"};
     List<string> City = new List<string>() {"Bench", "Stoplight", "Barrel", "Bin", "Dumpster", "Hydrant", "Mailbox" };
-    List<string> Furniture = new List<string>() { "Bed", "Chair", "Desk", "Drawer", "Shower", "Sink", "Table" };
+
+    List<string> Furniture = new List<string>() { "Bed", "Chair", "Desk", "Drawer", "Shower", "Sink", "Table","Bookshelf"
+    ,"Cabinet", "Can" , "Chest", "Column", "Couch","Dresser","ElegantDesk","Globe","KingBed","Lamp","Library","PCDesk","Satellite"
+    ,"Shelf","SinkCabinet","TableCoffee","Tub","WC","Whitebin" };
+
     List<string> Industry = new List<string>() {"Cable","Car","Garbage","Pallet","Plank","Tank","Tubes"};
     List<string> Cars = new List<string>() {"Cops","Sedan","Sport","Suv","Taxi"};
     
@@ -252,10 +267,11 @@ public class Menu : MonoBehaviour
         {
             Destroy(currentInstance);
         }
-        if(Macro_Text.text == "Nature")
-        { 
+        if (Macro_Text.text == "Nature")
+        {
             currentInstance = Instantiate(NaturePrefabs[index], previewPosition.position, previewPosition.rotation);
             currentInstance.transform.SetParent(previewPosition, true);
+
 
         }
 
@@ -270,6 +286,8 @@ public class Menu : MonoBehaviour
         {
             currentInstance = Instantiate(FurniturePrefabs[index], previewPosition.position, previewPosition.rotation);
             currentInstance.transform.SetParent(previewPosition, true);
+
+
 
         }
 
@@ -286,9 +304,5 @@ public class Menu : MonoBehaviour
             currentInstance.transform.SetParent(previewPosition, true);
 
         }
-
-
-
     }
-
 }

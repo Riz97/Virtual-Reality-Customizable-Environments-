@@ -145,7 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2459715546054193924}
   m_Layer: 0
-  m_Name: tradchest
+  m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

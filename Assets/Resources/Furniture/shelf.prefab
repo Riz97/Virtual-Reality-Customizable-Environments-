@@ -206,7 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5327090834818865721}
   m_Layer: 0
-  m_Name: shelf
+  m_Name: Shelf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

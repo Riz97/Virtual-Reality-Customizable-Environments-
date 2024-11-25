@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4715085194859155400}
   - component: {fileID: 7389191242847386370}
   m_Layer: 0
-  m_Name: eleganttable
+  m_Name: ElegantDesk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
