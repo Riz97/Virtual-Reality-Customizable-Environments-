@@ -124,8 +124,8 @@ public class Chat : MonoBehaviour
 
     //-------------------- OPEN AI CLIENT INFO ------------------------
 
-    //public static Model model = Model.GPT3_5_Turbo_16k;
-    public static Model model = Model.GPT3_5_Turbo;
+    public static Model model = Model.GPT3_5_Turbo_16K;
+    //public static Model model = Model.GPT3_5_Turbo;
     //public static Model model = Model.GPT4;
 
     public static string ModelName = model.ToString();
@@ -187,9 +187,11 @@ public class Chat : MonoBehaviour
                 var api = new OpenAIClient();
                 var chatRequest = new ChatRequest(messages, model);
                 result_aux = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
+                result_aux = RemoveTextBeforeUsing(result_aux);
+                result_aux = TrimAfterLastBrace(result_aux);
                 result = result_aux.Replace("C#", "").Replace("`", "");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
-                //Debug.Log(result);
+                Debug.Log(result);
                 AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 tries++;
 
@@ -475,7 +477,7 @@ public class Chat : MonoBehaviour
 
     //Error Handler, if the user did not put in position the exact number of 3d objects that he has requested
 
-        if (Number_of_Objects != counter)
+        if (Number_of_Objects != counter && Coordinates_Toggle.isOn)
         {
             Debug.Log("sono qua");
             Text.color = new Color(255, 0, 0);
@@ -956,7 +958,7 @@ public class Chat : MonoBehaviour
     public string Input_Request(string input, int Number_of_Objects, List<string> list, string Material, List<string> list_Directions)
 {
 
-        input = "A complete C# Unity Script that follow correctly these numbered steps, DO NOT USE TAGS, :" +
+        input = "A complete C# Unity Script that follow correctly these numbered steps, DO NOT USE TAG and do not truncate the code or use placeholders, :" +
         " STEP ONE -- Find with the Gameobject.Find() method the gameobject called 'Plane' and change its material by using the following code Resources.Load<Material>(" + Material + "/Material) "+
         " STEP TWO -- Find with the method Gameobject.Find(), DO NOT USE FindGameObjectsWithTag() or similar, the gameobjects that are called ";
         input = Define_Models(Number_of_Objects, input) + " and destroy them" +
