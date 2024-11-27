@@ -3004,6 +3004,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b23b4240256b945aa38df409ed957e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plane: {fileID: 0}
+  objectToPosition: {fileID: 0}
+  offset: 0.1
   Macro_Text: {fileID: 1440521850}
   Objects_Text: {fileID: 1107410077}
   rotationSpeed: 30
@@ -3031,6 +3034,7 @@ MonoBehaviour:
   - {fileID: 2208735421509717212, guid: 1fdecd1d51d369a4893da0c2c8fdbb1d, type: 3}
   - {fileID: 1216322106693271214, guid: 442b0c1370be0034c87e57a90b6a67e0, type: 3}
   - {fileID: 6324690477100463212, guid: 0b97e78f7edaae84396f675eba772e75, type: 3}
+  - {fileID: 7031848445962258164, guid: 3727788ed9a6db045b585dfad248fca3, type: 3}
   CarsPrefabs:
   - {fileID: 6871175417294970825, guid: 9489ac6be26107b45a05f75c97c282dd, type: 3}
   - {fileID: 6012248048251265860, guid: 1d3ca4e86e313ab43bf305936d523fab, type: 3}
@@ -15895,6 +15899,8 @@ SceneRoots:
   - {fileID: 1651956594}
   - {fileID: 469891933}
   - {fileID: 779432085}
+  - {fileID: 416781751}
+  - {fileID: 1943324276}
   - {fileID: 928063440}
   - {fileID: 1165476812}
   - {fileID: 947156879}
@@ -15911,7 +15917,5 @@ SceneRoots:
   - {fileID: 1312295752}
   - {fileID: 628274519}
   - {fileID: 1114113681}
-  - {fileID: 1943324276}
-  - {fileID: 416781751}
   - {fileID: 1883906426}
   - {fileID: 159798947}

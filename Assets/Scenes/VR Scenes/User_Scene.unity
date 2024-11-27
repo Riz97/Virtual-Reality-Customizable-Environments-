@@ -2279,7 +2279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.3351, y: -1.8289406}
+  m_AnchoredPosition: {x: 5.3351, y: -2.637512}
   m_SizeDelta: {x: -10.0387, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &207989659
@@ -4461,26 +4461,7 @@ MonoBehaviour:
   - {fileID: 2208735421509717212, guid: 1fdecd1d51d369a4893da0c2c8fdbb1d, type: 3}
   - {fileID: 1216322106693271214, guid: 442b0c1370be0034c87e57a90b6a67e0, type: 3}
   - {fileID: 6324690477100463212, guid: 0b97e78f7edaae84396f675eba772e75, type: 3}
-  - {fileID: 8772278029108606366, guid: 0d9ca147597bfa64f9e9a44bf1c9cd4c, type: 3}
-  - {fileID: 6716731462353958060, guid: 0dd876fdf16696440b2b0804451cd4b0, type: 3}
-  - {fileID: 254974724364549761, guid: 130a48711e8ae63408049ca65605570c, type: 3}
-  - {fileID: 2984051387804985790, guid: ba89da084f2abca4587a9597e135ce70, type: 3}
-  - {fileID: 8806671713370312346, guid: 45ae20525eabe114fb3d9fbf8208a127, type: 3}
-  - {fileID: 1187611379611432548, guid: 696ef214381309c408fc0adbb49e51f5, type: 3}
-  - {fileID: 2597245074637600397, guid: 24b7a72ea4ed2b94ebf39c36d5560069, type: 3}
-  - {fileID: 9046414681571842775, guid: 44ee26f473770b0408cc54706ff5fa14, type: 3}
-  - {fileID: 6437504770040778225, guid: 8beeb80741fd0c041aa5bb7a7fb1f947, type: 3}
-  - {fileID: 7551196080947522420, guid: ff33a5279329a5e46a8908703f7b7d90, type: 3}
-  - {fileID: 4599040446509691879, guid: 374280248ac61f34d9636897a42ced35, type: 3}
-  - {fileID: 5704733370239891478, guid: e5b33b8e3444b134e9ea87d719edb240, type: 3}
-  - {fileID: 6988665047156961724, guid: 7b384b8b82276284fbf2c3f72991fb6b, type: 3}
-  - {fileID: 366917588862124051, guid: 0d30666c8741c4f4e8de1aef0246fdc5, type: 3}
-  - {fileID: 6052278086207503627, guid: 16f62f06f804edf4480a2d4bc2ab04f9, type: 3}
-  - {fileID: 6663142632114374292, guid: 871a38d39fd8c164e9f4d36301a4b20d, type: 3}
-  - {fileID: 3815837842853675678, guid: 11cc8ccaf1729fd49bdb1735e324e4f5, type: 3}
-  - {fileID: 2608762340572785185, guid: 045794a8484fe6349ab905e01f47feaa, type: 3}
-  - {fileID: 1065357930306351097, guid: 3727788ed9a6db045b585dfad248fca3, type: 3}
-  - {fileID: 4817431226749775245, guid: f2021172bd3fc19448fec8994420a00b, type: 3}
+  - {fileID: 7031848445962258164, guid: 3727788ed9a6db045b585dfad248fca3, type: 3}
   CarsPrefabs:
   - {fileID: 6871175417294970825, guid: 9489ac6be26107b45a05f75c97c282dd, type: 3}
   - {fileID: 6012248048251265860, guid: 1d3ca4e86e313ab43bf305936d523fab, type: 3}
