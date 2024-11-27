@@ -1244,7 +1244,7 @@ MonoBehaviour:
   Number_Models_Text: {fileID: 1761568652}
   material: {fileID: 5561349426305759274, guid: 9e1dc1c14313460d872de39e35129b39, type: 3}
   dropdown: {fileID: 709131174}
-  Coordinates_Toggle: {fileID: 0}
+  Coordinates_Toggle: {fileID: 870795762}
   Ballon: {fileID: 0}
   Models: {fileID: 24031616}
   GeminiNetwork: {fileID: 1681943903}
