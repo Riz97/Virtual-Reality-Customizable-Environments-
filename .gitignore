@@ -31,6 +31,8 @@
 # Visual Studio cache directory
 .vs/
 
+*.mp4
+
 # Gradle cache directory
 .gradle/
 
