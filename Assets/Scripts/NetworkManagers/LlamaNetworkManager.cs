@@ -18,8 +18,8 @@ public class LlamaNetworkManager : MonoBehaviour
 
     //Location must be checked in different devices
 
-    //private string llamaPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\llama.py"; //Laptop
-    private string llamaPy = "/k python C:\\Users\\ricky\\Desktop\\Virtual-Reality-Customizable-Environments-\\PythonServer\\llama.py"; //Desktop
+    private string llamaPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\llama.py"; //Laptop
+    //private string llamaPy = "/k python C:\\Users\\ricky\\Desktop\\Virtual-Reality-Customizable-Environments-\\PythonServer\\llama.py"; //Desktop
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------
     public void Start()

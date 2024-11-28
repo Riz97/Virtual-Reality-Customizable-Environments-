@@ -1,4 +1,3 @@
-
 LOG GENERATED FOR THE SESSION
 
 Model - Llama3.1
