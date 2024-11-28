@@ -1,7 +1,7 @@
 import socket
 import time
 import google.generativeai as genai 
-model = genai.GenerativeModel("gemini-1.5-pro")
+model = genai.GenerativeModel("gemini-1.5-pro-001")
 HOST = '127.0.1.2'  # Standard loopback interface address (localhost)
 PORT = 12346        # Port to listen on (non-privileged ports are > 1023)
 genai.configure(api_key="AIzaSyBG9tpsOWjiHEvHxRe2CsKtGYISdkYgT-4")
