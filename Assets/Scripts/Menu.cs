@@ -31,7 +31,7 @@ public class Menu : MonoBehaviour
     List<string> Nature = new List<string>() {"Pine", "Oak" , "Bush","Flower","Mushroom","Stone","Wood"};
     List<string> City = new List<string>() {"Bench", "Stoplight", "Barrel", "Bin", "Dumpster", "Hydrant", "Mailbox","Barrier" };
 
-    List<string> Furniture = new List<string>() { "Bed", "Chair", "Desk", "Drawer", "Shower", "Sink", "Table","WC"};
+    List<string> Furniture = new List<string>() { "Bed", "Chair", "Desk", "Drawer", "Shower", "Sink", "Table","WC","Couch","KingsizeBed"};
 
     List<string> Industry = new List<string>() {"Cable","Car","Garbage","Pallet","Plank","Tank","Tubes"};
     List<string> Cars = new List<string>() {"Cops","Sedan","Sport","Suv","Taxi"};

@@ -2279,7 +2279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.3351, y: -1.8190352}
+  m_AnchoredPosition: {x: 5.3351, y: -2.548831}
   m_SizeDelta: {x: -10.0387, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &207989659
@@ -4463,6 +4463,8 @@ MonoBehaviour:
   - {fileID: 1216322106693271214, guid: 442b0c1370be0034c87e57a90b6a67e0, type: 3}
   - {fileID: 6324690477100463212, guid: 0b97e78f7edaae84396f675eba772e75, type: 3}
   - {fileID: 7031848445962258164, guid: 3727788ed9a6db045b585dfad248fca3, type: 3}
+  - {fileID: 1234089374815657525, guid: 1efa7a1b9ee862045a8a6f569f5ec744, type: 3}
+  - {fileID: 8111806227990302168, guid: 70983f04dbb531b4b94d9fb233aa5570, type: 3}
   CarsPrefabs:
   - {fileID: 6871175417294970825, guid: 9489ac6be26107b45a05f75c97c282dd, type: 3}
   - {fileID: 6012248048251265860, guid: 1d3ca4e86e313ab43bf305936d523fab, type: 3}
@@ -6491,7 +6493,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 592665567}
-  - component: {fileID: 592665569}
   - component: {fileID: 592665568}
   m_Layer: 0
   m_Name: Preview GameObject
@@ -6536,18 +6537,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &592665569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 592665566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 705b1899e03efd144b0a36c0009dc89a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &604956553
 GameObject:
   m_ObjectHideFlags: 0

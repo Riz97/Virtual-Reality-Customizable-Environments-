@@ -61,7 +61,7 @@ public class Chat : MonoBehaviour
 
     List<string> Furniture_Strings = new List<string>() { "Office" };
     List<string> Apartment_Strings = new List<string>() { "Apartment" };
-    List<string> Furniture_Models = new List<string>() {"Desk", "Chair" , "Bed" , "Table" ,"Drawer","Shower", "Sink","WC"};
+    List<string> Furniture_Models = new List<string>() {"Desk", "Chair" , "Bed" , "Table" ,"Drawer","Shower", "Sink","WC","Couch", "KingsizeBed" };
 
     List<string> Car_Strings = new List<string>() { "Cars","Grid" };
     List<string> Car_Models = new List<string>() { "Cops", "Sedan", "Sport" , "Suv", "Taxi" , "Sport" };
@@ -79,7 +79,7 @@ public class Chat : MonoBehaviour
     List<string> All = new List<string>() { "Barrel\"", "Bench\"", "Bin\"", "Dumpster\"", "Hydrant\"", "Mailbox\"", "Stoplight\"", "Cable\"", "Garbage\"", "Pallet\"", 
         "Car\"", "Plank\"", "Tank\"", "Tubes\"", "Oak\"", "Bush\"", "Mushroom\"", 
         "Wood\"", "Stone\"", "Pine\"", "Flower\"", "Cops\"", "Sedan\"", "Sport\"", "Suv\"", "Taxi\"", 
-        "Sport\"", "Desk\"", "Chair\"" , "Bed\"" , "Table\"" ,"Drawer\"","Shower\"", "Sink\"","WC\"","Barrier\"" };
+        "Sport\"", "Desk\"", "Chair\"" , "Bed\"" , "Table\"" ,"Drawer\"","Shower\"", "Sink\"","WC\"","Barrier\"","Couch\"","KingsizeBed\"" };
 
     [SerializeField] public TMP_Text Text;
 
