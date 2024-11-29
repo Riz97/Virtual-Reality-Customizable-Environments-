@@ -2279,7 +2279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.3351, y: -2.637512}
+  m_AnchoredPosition: {x: 5.3351, y: -1.8190352}
   m_SizeDelta: {x: -10.0387, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &207989659
@@ -4453,6 +4453,7 @@ MonoBehaviour:
   - {fileID: 9002975250769281862, guid: 53e475089ce39514190b56a493feb7fc, type: 3}
   - {fileID: 8043512881044359865, guid: 1ba15978291e2594583dc8dc0088a622, type: 3}
   - {fileID: 2051364216636306802, guid: 36d132f6e5934b145a84aa404f3b832d, type: 3}
+  - {fileID: 7558486260827422416, guid: b1cac7d1861639948a11621da0762c86, type: 3}
   FurniturePrefabs:
   - {fileID: 2341093198424923974, guid: da513c0767587bb48b8f620d75a81d22, type: 3}
   - {fileID: 5247046975163116671, guid: eaa01cc210e18944393288d5be908e52, type: 3}
@@ -6492,7 +6493,6 @@ GameObject:
   - component: {fileID: 592665567}
   - component: {fileID: 592665569}
   - component: {fileID: 592665568}
-  - component: {fileID: 592665570}
   m_Layer: 0
   m_Name: Preview GameObject
   m_TagString: Untagged
@@ -6532,7 +6532,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -6548,37 +6548,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705b1899e03efd144b0a36c0009dc89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plane: {fileID: 9524840}
-  objectToPosition: {fileID: 592665566}
-  offset: 0.1
-  isPositioned: 0
---- !u!54 &592665570
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 592665566}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &604956553
 GameObject:
   m_ObjectHideFlags: 0

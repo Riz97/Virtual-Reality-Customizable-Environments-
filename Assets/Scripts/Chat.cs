@@ -74,12 +74,12 @@ public class Chat : MonoBehaviour
     List<string> Industrial_Models = new List<string>() {"Cable","Garbage","Pallet", "Car" , "Plank", "Tank" , "Tubes"};
 
     List<string> City_Strings = new List<string>() {"City"};
-    List<string> City_Models = new List<string>() {"Barrel" , "Bench" , "Bin" , "Dumpster" , "Hydrant", "Mailbox" , "Stoplight"};
+    List<string> City_Models = new List<string>() {"Barrel" , "Bench" , "Bin" , "Dumpster" , "Hydrant", "Mailbox" , "Stoplight","Barrier"};
 
     List<string> All = new List<string>() { "Barrel\"", "Bench\"", "Bin\"", "Dumpster\"", "Hydrant\"", "Mailbox\"", "Stoplight\"", "Cable\"", "Garbage\"", "Pallet\"", 
         "Car\"", "Plank\"", "Tank\"", "Tubes\"", "Oak\"", "Bush\"", "Mushroom\"", 
         "Wood\"", "Stone\"", "Pine\"", "Flower\"", "Cops\"", "Sedan\"", "Sport\"", "Suv\"", "Taxi\"", 
-        "Sport\"", "Desk\"", "Chair\"" , "Bed\"" , "Table\"" ,"Drawer\"","Shower\"", "Sink\"","WC\"" };
+        "Sport\"", "Desk\"", "Chair\"" , "Bed\"" , "Table\"" ,"Drawer\"","Shower\"", "Sink\"","WC\"","Barrier\"" };
 
     [SerializeField] public TMP_Text Text;
 

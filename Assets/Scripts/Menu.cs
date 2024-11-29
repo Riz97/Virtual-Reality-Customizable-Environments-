@@ -29,7 +29,7 @@ public class Menu : MonoBehaviour
     //---------------------------------- Objects' name for every Macro-Category ------------------------------------------
 
     List<string> Nature = new List<string>() {"Pine", "Oak" , "Bush","Flower","Mushroom","Stone","Wood"};
-    List<string> City = new List<string>() {"Bench", "Stoplight", "Barrel", "Bin", "Dumpster", "Hydrant", "Mailbox" };
+    List<string> City = new List<string>() {"Bench", "Stoplight", "Barrel", "Bin", "Dumpster", "Hydrant", "Mailbox","Barrier" };
 
     List<string> Furniture = new List<string>() { "Bed", "Chair", "Desk", "Drawer", "Shower", "Sink", "Table","WC"};
 
