@@ -61,25 +61,26 @@ public class Chat : MonoBehaviour
 
     List<string> Furniture_Strings = new List<string>() { "Office" };
     List<string> Apartment_Strings = new List<string>() { "Apartment" };
-    List<string> Furniture_Models = new List<string>() {"Desk", "Chair" , "Bed" , "Table" ,"Drawer","Shower", "Sink","WC","Couch", "KingsizeBed" };
+    List<string> Furniture_Models = new List<string>() { "Desk", "Chair", "Bed", "Table", "Drawer", "Shower", "Sink", "WC", "Couch", "KingsizeBed", "PcDesk", "Shelf", "SinkCabinet", "Stove", "Subwoofer", "TableCoffee", "Dresser" };
 
     List<string> Car_Strings = new List<string>() { "Cars","Grid" };
     List<string> Car_Models = new List<string>() { "Cops", "Sedan", "Sport" , "Suv", "Taxi" , "Sport" };
 
     List<string> Nature_Strings = new List<string>() {"Nature"};
     List<string> Forest_Strings = new List<string>() { "Forest" };
-    List<string> Nature_Models = new List<string>() { "Oak", "Bush", "Mushroom", "Wood", "Stone" , "Pine", "Flower"};
+    List<string> Nature_Models = new List<string>() { "Oak", "Bush", "Mushroom", "Wood", "Stone" , "Pine", "Flower","Toilet"};
 
     List<string> Industrial_Strings = new List<string>() {"Industry","Industrial"};
     List<string> Industrial_Models = new List<string>() {"Cable","Garbage","Pallet", "Car" , "Plank", "Tank" , "Tubes"};
 
     List<string> City_Strings = new List<string>() {"City"};
-    List<string> City_Models = new List<string>() {"Barrel" , "Bench" , "Bin" , "Dumpster" , "Hydrant", "Mailbox" , "Stoplight","Barrier"};
+    List<string> City_Models = new List<string>() {"Barrel" , "Bench" , "Bin" , "Dumpster" , "Hydrant", "Mailbox" , "Stoplight","Barrier","Swing"};
 
     List<string> All = new List<string>() { "Barrel\"", "Bench\"", "Bin\"", "Dumpster\"", "Hydrant\"", "Mailbox\"", "Stoplight\"", "Cable\"", "Garbage\"", "Pallet\"", 
         "Car\"", "Plank\"", "Tank\"", "Tubes\"", "Oak\"", "Bush\"", "Mushroom\"", 
         "Wood\"", "Stone\"", "Pine\"", "Flower\"", "Cops\"", "Sedan\"", "Sport\"", "Suv\"", "Taxi\"", 
-        "Sport\"", "Desk\"", "Chair\"" , "Bed\"" , "Table\"" ,"Drawer\"","Shower\"", "Sink\"","WC\"","Barrier\"","Couch\"","KingsizeBed\"" };
+        "Sport\"", "Desk\"", "Chair\"" , "Bed\"" , "Table\"" ,"Drawer\"","Shower\"", "Sink\"","WC\"","Barrier\"","Couch\"","KingsizeBed\"","Toilet\"","Swing\"",
+        "PcDesk\"","Shelf\"","SinkCabinet\"","Stove\"","Subwoofer\"","TableCoffe\"","Dresser\""};
 
     [SerializeField] public TMP_Text Text;
 
