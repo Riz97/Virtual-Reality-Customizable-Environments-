@@ -54,7 +54,10 @@
       "url": "https://package.openupm.com",
       "scopes": [
         "com.openai",
-        "com.utilities"
+        "com.utilities",
+        "com.sparkgames.sketchfabbrowser",
+        "com.cysharp.unitask",
+        "com.atteneder.gltfast"
       ]
     }
   ]
