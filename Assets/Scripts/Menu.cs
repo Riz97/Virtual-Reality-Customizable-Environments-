@@ -5,13 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
-
-
-
-{
-
-    public GameObject plane;
-    public GameObject objectToPosition;
+{   
     public float offset = 0.1f;
 
     private bool isPositioned = false;
