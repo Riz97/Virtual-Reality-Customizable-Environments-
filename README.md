@@ -22,7 +22,6 @@ A Reset button has been implemented in order to reset the scene if there are tec
 THIRD PART
 
 The user can now position wherever he wants the 3D objects, by pressing the Meta Quest Controller "A". As before, in the "Number of Models" window he has to decide how many models he wants inside the scene, but if he flags the "Customize Objects' Position", he must position all the models, otherwise the request won't be sent to the LLM. The user can track this information by looking at the text in the window, between the parenthesis he can visualize the number of models he has already positioned.
-
 It is possible now to visualize a preview of the 3D objects available in the framework. The user can go through the macro categories by using the dedicated buttons and can visualize the objects related to that macro category.
 It has also been added a virtual keyboard. In this way, when the user select the Input Field , in User Mode and Developer Mode, in front of him will appear a virtual keyboard and he can use it in order to write the virtual environment request without using the vocal commands or the physical keyboard.
 
