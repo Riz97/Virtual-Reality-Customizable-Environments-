@@ -13,3 +13,5 @@ SECOND PART
 In the second part of this project, we have added several improvements; the first one is the possibility to use Gemini-Pro-1.0 as Large Language Model. The execution time of the script with Roslyn takes only few seconds after the script has been found by the LLM chosen.
 The input request is now shorter and clearer.
 It has been possible to use Gemini LLMs because of the implementation of a Pyhton Server that communicates directly with Gemini and send all the LLMs' responses to Unity, where they will be processed and analyzed by the system.
+More Large Language Models have been added : LLama 3.1, Codegeex4, Qwen. and codellama. All of them are trained fot completing tasks based on code generation. All the Python servers linked to each LLM can be activated through buttons in the Unity scene. In the "Testing" folder can be found a pdf containing the table with all the tests conducted on all the LLMs.
+
