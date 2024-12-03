@@ -14,4 +14,15 @@ In the second part of this project, we have added several improvements; the firs
 The input request is now shorter and clearer.
 It has been possible to use Gemini LLMs because of the implementation of a Pyhton Server that communicates directly with Gemini and send all the LLMs' responses to Unity, where they will be processed and analyzed by the system.
 More Large Language Models have been added : LLama 3.1, Codegeex4, Qwen. and codellama. All of them are trained fot completing tasks based on code generation. All the Python servers linked to each LLM can be activated through buttons in the Unity scene. In the "Testing" folder can be found a pdf containing the table with all the tests conducted on all the LLMs.
+A Reset button has been implemented in order to reset the scene if there are technical issues with the servers or with the LLM request.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+THIRD PART
+
+The user can now position wherever he wants the 3D objects, by pressing the Meta Quest Controller "A". As before, in the "Number of Models" window he has to decide how many models he wants inside the scene, but if he flags the "Customize Objects' Position", he must position all the models, otherwise the request won't be sent to the LLM. The user can track this information by looking at the text in the window, between the parenthesis he can visualize the number of models he has already positioned.
+
+
+
 
