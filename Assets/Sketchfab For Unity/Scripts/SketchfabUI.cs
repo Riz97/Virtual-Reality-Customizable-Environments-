@@ -192,6 +192,7 @@ namespace Sketchfab
 
 		public void LoadFonts()
 		{
+	
 			OSLight = Resources.Load<Font>("OpenSans-Light");
 			OSBold = Resources.Load<Font>("OpenSans-Bold");
 			OSRegular = Resources.Load<Font>("OpenSans-Regular");
@@ -207,6 +208,7 @@ namespace Sketchfab
 
 		public GUIStyle getKeyStyle()
 		{
+			
 			if(_keyStyle == null)
 			{
 				_keyStyle = new GUIStyle(EditorStyles.label);

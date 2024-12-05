@@ -1,0 +1,330 @@
+Prerequisiti
+API Token di Sketchfab: Ottieni un token API personale da Sketchfab Settings.
+Progetto Unity:
+Crea un progetto Unity e assicurati che abbia accesso a UnityWebRequest per le richieste HTTP.
+JSON Parsing:
+Usa una libreria come Newtonsoft.Json o Unity's JsonUtility per gestire le risposte API.
+
+
+Per integrare l'API REST di Sketchfab con un'interfaccia personalizzata in Unity, puoi creare un sistema che consente agli utenti di cercare, visualizzare e scaricare modelli direttamente nell'applicazione. Questo esempio mostrerà come configurare un'interfaccia Unity per eseguire una query sull'API di Sketchfab, ottenere i modelli, e scaricarli per l'utilizzo nella scena.
+
+Prerequisiti
+API Token di Sketchfab: Ottieni un token API personale da Sketchfab Settings.
+Progetto Unity:
+Crea un progetto Unity e assicurati che abbia accesso a UnityWebRequest per le richieste HTTP.
+JSON Parsing:
+Usa una libreria come Newtonsoft.Json o Unity's JsonUtility per gestire le risposte API.
+Architettura del Sistema
+Interfaccia Utente:
+Campo di testo per inserire la query di ricerca.
+Lista di modelli risultanti con un pulsante per scaricare ciascuno.
+API REST:
+Effettua richieste a Sketchfab per cercare e scaricare i modelli.
+Gestione dei Modelli:
+Scarica e decomprimi i file .zip dei modelli.
+Importa il modello nella scena.
+
+. Script per Gestire l'API REST
+Crea un file SketchfabAPI.cs per interfacciarti con l'API REST di Sketchfab:
+
+
+using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.Networking;
+
+public class SketchfabAPI : MonoBehaviour
+{
+    private const string ApiBaseUrl = "https://api.sketchfab.com/v3";
+    private string apiToken = "YOUR_API_TOKEN";
+
+    public void SearchModels(string query, Action<string> callback)
+    {
+        string url = $"{ApiBaseUrl}/search?type=models&q={query}";
+        StartCoroutine(SendRequest(url, callback));
+    }
+
+    public void DownloadModel(string modelUid, Action<string> callback)
+    {
+        string url = $"{ApiBaseUrl}/models/{modelUid}/download";
+        StartCoroutine(SendRequest(url, callback, true));
+    }
+
+    private IEnumerator SendRequest(string url, Action<string> callback, bool authRequired = false)
+    {
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        if (authRequired)
+            request.SetRequestHeader("Authorization", $"Bearer {apiToken}");
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            callback?.Invoke(request.downloadHandler.text);
+        }
+        else
+        {
+            Debug.LogError($"Errore API: {request.error}");
+        }
+    }
+}
+
+2. Interfaccia Utente
+Crea un file SketchfabBrowserUI.cs per la tua interfaccia personalizzata:
+
+using UnityEngine;
+using UnityEngine.UI;
+
+public class SketchfabBrowserUI : MonoBehaviour
+{
+    public SketchfabAPI sketchfabAPI;
+
+    public InputField searchInputField;
+    public Button searchButton;
+    public Transform resultsContainer;
+    public GameObject resultPrefab; // Un prefab per visualizzare i modelli trovati
+
+    private void Start()
+    {
+        searchButton.onClick.AddListener(() =>
+        {
+            string query = searchInputField.text;
+            if (!string.IsNullOrEmpty(query))
+                SearchModels(query);
+        });
+    }
+
+    private void SearchModels(string query)
+    {
+        sketchfabAPI.SearchModels(query, OnSearchResults);
+    }
+
+    private void OnSearchResults(string json)
+    {
+        // Parsa il JSON per ottenere i risultati
+        SketchfabSearchResponse response = JsonUtility.FromJson<SketchfabSearchResponse>(json);
+        foreach (Transform child in resultsContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (var result in response.results)
+        {
+            GameObject resultObject = Instantiate(resultPrefab, resultsContainer);
+            resultObject.GetComponentInChildren<Text>().text = result.name;
+
+            Button downloadButton = resultObject.GetComponentInChildren<Button>();
+            downloadButton.onClick.AddListener(() =>
+            {
+                DownloadModel(result.uid);
+            });
+        }
+    }
+
+    private void DownloadModel(string modelUid)
+    {
+        sketchfabAPI.DownloadModel(modelUid, OnModelDownloaded);
+    }
+
+    private void OnModelDownloaded(string json)
+    {
+        Debug.Log("Modello scaricato con successo!");
+        // Qui puoi gestire il modello scaricato e importarlo nella scena
+    }
+}
+
+3. Struttura JSON
+Definisci le classi per il parsing JSON. Ad esempio:
+
+[System.Serializable]
+public class SketchfabSearchResponse
+{
+    public SketchfabModel[] results;
+}
+
+[System.Serializable]
+public class SketchfabModel
+{
+    public string uid;
+    public string name;
+    public string thumbnailUrl;
+}
+
+4. Prefab per i Risultati
+Crea un prefab semplice per rappresentare i risultati:
+
+Text: Nome del modello.
+Button: Pulsante per scaricare.
+
+
+
+Per integrare l'API REST di Sketchfab con un'interfaccia personalizzata in Unity, puoi creare un sistema che consente agli utenti di cercare, visualizzare e scaricare modelli direttamente nell'applicazione. Questo esempio mostrerà come configurare un'interfaccia Unity per eseguire una query sull'API di Sketchfab, ottenere i modelli, e scaricarli per l'utilizzo nella scena.
+
+Prerequisiti
+API Token di Sketchfab: Ottieni un token API personale da Sketchfab Settings.
+Progetto Unity:
+Crea un progetto Unity e assicurati che abbia accesso a UnityWebRequest per le richieste HTTP.
+JSON Parsing:
+Usa una libreria come Newtonsoft.Json o Unity's JsonUtility per gestire le risposte API.
+Architettura del Sistema
+Interfaccia Utente:
+Campo di testo per inserire la query di ricerca.
+Lista di modelli risultanti con un pulsante per scaricare ciascuno.
+API REST:
+Effettua richieste a Sketchfab per cercare e scaricare i modelli.
+Gestione dei Modelli:
+Scarica e decomprimi i file .zip dei modelli.
+Importa il modello nella scena.
+Codice Esempio
+1. Script per Gestire l'API REST
+Crea un file SketchfabAPI.cs per interfacciarti con l'API REST di Sketchfab:
+
+csharp
+Copia codice
+using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.Networking;
+
+public class SketchfabAPI : MonoBehaviour
+{
+    private const string ApiBaseUrl = "https://api.sketchfab.com/v3";
+    private string apiToken = "YOUR_API_TOKEN";
+
+    public void SearchModels(string query, Action<string> callback)
+    {
+        string url = $"{ApiBaseUrl}/search?type=models&q={query}";
+        StartCoroutine(SendRequest(url, callback));
+    }
+
+    public void DownloadModel(string modelUid, Action<string> callback)
+    {
+        string url = $"{ApiBaseUrl}/models/{modelUid}/download";
+        StartCoroutine(SendRequest(url, callback, true));
+    }
+
+    private IEnumerator SendRequest(string url, Action<string> callback, bool authRequired = false)
+    {
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        if (authRequired)
+            request.SetRequestHeader("Authorization", $"Bearer {apiToken}");
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            callback?.Invoke(request.downloadHandler.text);
+        }
+        else
+        {
+            Debug.LogError($"Errore API: {request.error}");
+        }
+    }
+}
+2. Interfaccia Utente
+Crea un file SketchfabBrowserUI.cs per la tua interfaccia personalizzata:
+
+csharp
+Copia codice
+using UnityEngine;
+using UnityEngine.UI;
+
+public class SketchfabBrowserUI : MonoBehaviour
+{
+    public SketchfabAPI sketchfabAPI;
+
+    public InputField searchInputField;
+    public Button searchButton;
+    public Transform resultsContainer;
+    public GameObject resultPrefab; // Un prefab per visualizzare i modelli trovati
+
+    private void Start()
+    {
+        searchButton.onClick.AddListener(() =>
+        {
+            string query = searchInputField.text;
+            if (!string.IsNullOrEmpty(query))
+                SearchModels(query);
+        });
+    }
+
+    private void SearchModels(string query)
+    {
+        sketchfabAPI.SearchModels(query, OnSearchResults);
+    }
+
+    private void OnSearchResults(string json)
+    {
+        // Parsa il JSON per ottenere i risultati
+        SketchfabSearchResponse response = JsonUtility.FromJson<SketchfabSearchResponse>(json);
+        foreach (Transform child in resultsContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (var result in response.results)
+        {
+            GameObject resultObject = Instantiate(resultPrefab, resultsContainer);
+            resultObject.GetComponentInChildren<Text>().text = result.name;
+
+            Button downloadButton = resultObject.GetComponentInChildren<Button>();
+            downloadButton.onClick.AddListener(() =>
+            {
+                DownloadModel(result.uid);
+            });
+        }
+    }
+
+    private void DownloadModel(string modelUid)
+    {
+        sketchfabAPI.DownloadModel(modelUid, OnModelDownloaded);
+    }
+
+    private void OnModelDownloaded(string json)
+    {
+        Debug.Log("Modello scaricato con successo!");
+        // Qui puoi gestire il modello scaricato e importarlo nella scena
+    }
+}
+3. Struttura JSON
+Definisci le classi per il parsing JSON. Ad esempio:
+
+csharp
+Copia codice
+[System.Serializable]
+public class SketchfabSearchResponse
+{
+    public SketchfabModel[] results;
+}
+
+[System.Serializable]
+public class SketchfabModel
+{
+    public string uid;
+    public string name;
+    public string thumbnailUrl;
+}
+4. Prefab per i Risultati
+Crea un prefab semplice per rappresentare i risultati:
+
+Text: Nome del modello.
+Button: Pulsante per scaricare.
+
+
+
+Come Funziona
+Ricerca:
+Inserisci una query nella barra di ricerca.
+Lo script invia una richiesta all'API di Sketchfab e restituisce i risultati.
+Visualizzazione dei Risultati:
+Mostra una lista di modelli con nome e pulsante di download.
+Download del Modello:
+Premendo il pulsante, viene inviata una richiesta per scaricare il file .zip del modello.
+Gestione del Modello:
+Estrai il file .zip e importalo nella scena (devi integrare una libreria ZIP come SharpZipLib).
+
+
+
+
+
+
