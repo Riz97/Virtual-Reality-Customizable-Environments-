@@ -9,7 +9,7 @@ using Amazon.Runtime.Internal.Endpoints.StandardLibrary;
 public class SketchfabAPI : MonoBehaviour
 {
     private const string ApiBaseUrl = "https://api.sketchfab.com/v3";
-    private string apiToken = "XUnZY9S8XJNI0bGx3J2VtHjRY6qpkesAaT5k9CqYAAyv6k6OOxs0Rb6pSM1POqy8XxbrlHTvfCwdQ0GzfjzUD4Y9NM7AIQjCRXKprUHb3Iv0k1hx1xQT3CPSu2MbSbGr";  // Inserisci qui il tuo API Token
+    private string apiToken = "vvAlrUNsMbiGG02w7So1CDE61eimIY";  // Inserisci qui il tuo API Token
 
     // Esegui la ricerca per modelli
     public void SearchModels(string query, Action<List<SketchfabModel>> callback)
@@ -37,10 +37,7 @@ public class SketchfabAPI : MonoBehaviour
             {
                 if (result.isDownloadable)
                 {
-                    
                     downloadableModels.Add(result);
-                    Debug.Log(downloadableModels.ToString());
-
                 }
             }
 
@@ -55,10 +52,10 @@ public class SketchfabAPI : MonoBehaviour
     // Recupera il link di download per un modello
     public void GetDownloadLink(string modelUid, Action<string> callback)
     {
-        
-        string url = $"{ApiBaseUrl}/models/{modelUid}/download";
+
+        string url = $"{ApiBaseUrl}/models/ff4433c1d5974ed6b9fdecba6d8a3126/download";
         Debug.Log(url);
-       
+        StartCoroutine(SendDownloadRequest(url, callback));
     }
 
     // Invia la richiesta HTTP per ottenere il link di download
