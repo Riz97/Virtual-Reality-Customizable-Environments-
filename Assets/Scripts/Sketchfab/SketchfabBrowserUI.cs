@@ -11,7 +11,7 @@ public class SketchfabBrowser : MonoBehaviour
     [Header("UI Elements")]
     public TMP_InputField keywordInput; // Campo per inserire la keyword
     public Button searchButton;    // Bottone per avviare la ricerca
-    public Transform contentParent; // Genitore degli elementi nella Scroll View
+    public TMP_Text Info; // Genitore degli elementi nella Scroll View
 
     private string apiToken = "a2cba13cba97b522dfba8241b25334cf"; // Sostituisci con la tua API Key
     private string apiUrl = "https://api.sketchfab.com/v3/search?type=models";
@@ -50,11 +50,8 @@ public class SketchfabBrowser : MonoBehaviour
 
     private void DisplayModels(string jsonResponse)
     {
+        string Modelstext = "";
         // Pulisci la lista precedente
-        foreach (Transform child in contentParent)
-        {
-            Destroy(child.gameObject);
-        }
 
         // Parsifica il JSON
         JObject response = JObject.Parse(jsonResponse);
@@ -66,21 +63,11 @@ public class SketchfabBrowser : MonoBehaviour
             string modelAuthor = model["user"]["username"].ToString();
             string modelUrl = model["viewerUrl"].ToString();
 
-            // Crea un nuovo oggetto testo per il modello
-            GameObject textObj = new GameObject("ModelText");
-            textObj.transform.SetParent(contentParent);
-            textObj.AddComponent<Text>();
+            Modelstext = Modelstext + $"Name: {modelName} \n Author: {modelAuthor} \n URL: {modelUrl}\n\n";
 
-            // Configura il testo
-            Text textComponent = textObj.GetComponent<Text>();
-            textComponent.text = $"Name: {modelName}\nAuthor: {modelAuthor}\nURL: {modelUrl}";
-            textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            textComponent.fontSize = 14;
-            textComponent.color = Color.black;
-
-            // Imposta il layout
-            RectTransform rectTransform = textObj.GetComponent<RectTransform>();
-            rectTransform.sizeDelta = new Vector2(500, 100);
+          
+            
         }
-    }
+        Info.text = Modelstext;
+    } 
 }
