@@ -1,17 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.UI;
-using Newtonsoft.Json.Linq;
 using TMPro;
+using UnityEngine.Networking;
+using Newtonsoft.Json.Linq;
+using System.Collections;
 
 public class SketchfabBrowser : MonoBehaviour
 {
     [Header("UI Elements")]
     public TMP_InputField keywordInput; // Campo per inserire la keyword
     public Button searchButton;    // Bottone per avviare la ricerca
-    public TMP_Text Info; // Genitore degli elementi nella Scroll View
+    public Transform contentParent; // Il Content della ScrollView
+    public GameObject modelItemPrefab; // Prefab dell'elemento del modello (Text + Button)
 
     private string apiToken = "a2cba13cba97b522dfba8241b25334cf"; // Sostituisci con la tua API Key
     private string apiUrl = "https://api.sketchfab.com/v3/search?type=models";
@@ -50,8 +50,11 @@ public class SketchfabBrowser : MonoBehaviour
 
     private void DisplayModels(string jsonResponse)
     {
-        string Modelstext = "";
         // Pulisci la lista precedente
+        foreach (Transform child in contentParent)
+        {
+            Destroy(child.gameObject);
+        }
 
         // Parsifica il JSON
         JObject response = JObject.Parse(jsonResponse);
@@ -63,11 +66,23 @@ public class SketchfabBrowser : MonoBehaviour
             string modelAuthor = model["user"]["username"].ToString();
             string modelUrl = model["viewerUrl"].ToString();
 
-            Modelstext = Modelstext + $"Name: {modelName} \n Author: {modelAuthor} \n URL: {modelUrl}\n\n";
+            // Crea un nuovo item per il modello
+            GameObject modelItem = Instantiate(modelItemPrefab, contentParent);
 
-          
-            
+            // Trova gli elementi di testo e bottone nel prefab
+            TMP_Text nameText = modelItem.transform.Find("ModelName").GetComponent<TMP_Text>();
+            TMP_Text authorText = modelItem.transform.Find("ModelAuthor").GetComponent<TMP_Text>();
+            Button openButton = modelItem.transform.Find("OpenButton").GetComponent<Button>();
+
+            // Imposta il testo del modello
+            nameText.text = modelName;
+            authorText.text =  modelAuthor;
+            // Aggiungi il comportamento al bottone
+            openButton.onClick.AddListener(() => OpenModelUrl(modelUrl));
         }
-        Info.text = Modelstext;
-    } 
+    }
+    private void OpenModelUrl(string url)
+    {
+        Debug.Log(url); // Apri l'URL nel browser
+    }
 }
