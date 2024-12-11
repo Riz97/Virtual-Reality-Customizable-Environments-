@@ -36,6 +36,8 @@ public class SketchfabBrowser : MonoBehaviour
 
     private void Start()
     {
+       
+
         searchButton.onClick.AddListener(SearchModels);
     }
 
@@ -60,6 +62,7 @@ public class SketchfabBrowser : MonoBehaviour
         if (request.result == UnityWebRequest.Result.Success)
         {
             DisplayModels(request.downloadHandler.text);
+            Debug.ClearDeveloperConsole();
         }
         else
         {
@@ -106,6 +109,9 @@ public class SketchfabBrowser : MonoBehaviour
             nameText.text = modelName;
             authorText.text = modelAuthor;
 
+         
+
+
             // Scarica e applica l'immagine come texture
             StartCoroutine(DownloadAndApplyImage(imagePreview, targetRawImage));
 
@@ -134,7 +140,7 @@ public class SketchfabBrowser : MonoBehaviour
         // Avvia il download dell'immagine
         using (UnityWebRequest webRequest = UnityWebRequestTexture.GetTexture(url))
         {
-            webRequest.disposeDownloadHandlerOnDispose = true;
+            webRequest.disposeDownloadHandlerOnDispose = false;
 
             // Aspetta il completamento della richiesta
             yield return webRequest.SendWebRequest();
@@ -187,6 +193,8 @@ public class SketchfabBrowser : MonoBehaviour
             rectTransform.sizeDelta = new Vector2(rectTransform.rect.height * textureAspectRatio, rectTransform.rect.height);
         }
     }
+
+
 
 }
 
