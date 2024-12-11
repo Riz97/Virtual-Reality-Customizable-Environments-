@@ -10,6 +10,8 @@ using System.Net.Sockets;
 using UnityEditor.PackageManager;
 using System.Threading.Tasks;
 using System.Text;
+using UnityEditor;
+using System;
 
 public class SketchfabBrowser : MonoBehaviour
 {
@@ -93,7 +95,7 @@ public class SketchfabBrowser : MonoBehaviour
             
 
             //Button behaviour if pressed
-            openButton.onClick.AddListener(() => OpenModelUrl(modelUrl));
+            openButton.onClick.AddListener(() => OpenModelUrl(modelName.Replace(" ","")+" "+modelUrl));
         }
     }
 
@@ -112,4 +114,37 @@ public class SketchfabBrowser : MonoBehaviour
         stream = client.GetStream();
 
     }
+
+
 }
+
+#if UNITY_EDITOR
+
+
+[InitializeOnLoad]
+public static class PlayModeStateHandler
+{
+    static PlayModeStateHandler()
+    {
+        EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+    }
+
+    private static void OnPlayModeStateChanged(PlayModeStateChange state)
+    {
+        if (state == PlayModeStateChange.ExitingPlayMode)
+        {
+            UnityEngine.Debug.Log("Il PlayMode è stato fermato. Codice eseguito al termine della scena.");
+            // Inserisci qui il codice che vuoi eseguire
+            string folderPath = @"C:\Users\ricky\Desktop\Framework\Virtual-Reality-Customizable-Environments-\Assets\Imported";
+
+            string[] files = Directory.GetFiles(folderPath);
+            // Elimina ogni file
+            foreach (string file in files)
+            {
+                File.Delete(file);
+                Console.WriteLine($"Eliminato: {file}");
+            }
+        }
+    }
+}
+#endif

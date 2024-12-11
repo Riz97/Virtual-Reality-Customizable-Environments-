@@ -6,7 +6,7 @@ from time import sleep
 api_token = "vvAlrUNsMbiGG02w7So1CDE61eimIY"  # Authorization Token, follow the SKETCHFAB README to understand how to obtain one  (remember that it expires)
 HOST = '127.0.1.10'  # Standard loopback interface address (localhost)
 PORT = 12321 
-percorso_salvataggio = "C:/Users/ricky/Desktop/file.zip" #path of the zip of the model just downloaded
+percorso_salvataggio = "C:/Users/ricky/Desktop/Framework/Virtual-Reality-Customizable-Environments-/Assets/Imported/file.zip" #path of the zip of the model just downloaded
 
 #TODO - Make this python script a server that receives Sketchfab UID from Unity
 
@@ -43,18 +43,18 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         while True:
             data = conn.recv(102400)
             print(data.decode()) #Uid sent by the Unity Framework Download Button
-
-            #Downloading the 3D Model
-            download_url = get_download_link(data.decode(), api_token)
+            name,uid = data.decode().split(" ",1)
+#             #Downloading the 3D Model
+            download_url = get_download_link(uid, api_token)
             print(download_url)
 
             response = requests.get(download_url, stream=True)
-
-            #File Saving
+            percorso_salvataggio = "C:/Users/ricky/Desktop/Framework/Virtual-Reality-Customizable-Environments-/Assets/Imported/"+name+".zip"
+             #File Saving
             with open(percorso_salvataggio, 'wb') as f:
-                for chunk in response.iter_content(chunk_size=1024):
-                    if chunk:
-                        f.write(chunk)
+                 for chunk in response.iter_content(chunk_size=1024):
+                     if chunk:
+                         f.write(chunk)
 
 
 
