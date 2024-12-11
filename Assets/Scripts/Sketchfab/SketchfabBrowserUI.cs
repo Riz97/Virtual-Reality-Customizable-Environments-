@@ -114,9 +114,17 @@ public class SketchfabBrowser : MonoBehaviour
         stream = client.GetStream();
 
     }
+public void Update()
+{
+
+}
 
 
 }
+
+
+
+
 
 #if UNITY_EDITOR
 
@@ -129,20 +137,25 @@ public static class PlayModeStateHandler
         EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
     }
 
+    //When the Scene is stopped, all the zip folders are deleted
     private static void OnPlayModeStateChanged(PlayModeStateChange state)
     {
+
+        //Code executed when the scene is stopped
+
         if (state == PlayModeStateChange.ExitingPlayMode)
         {
             UnityEngine.Debug.Log("Il PlayMode è stato fermato. Codice eseguito al termine della scena.");
-            // Inserisci qui il codice che vuoi eseguire
-            string folderPath = @"C:\Users\ricky\Desktop\Framework\Virtual-Reality-Customizable-Environments-\Assets\Imported";
+          
+            string folderPath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\Imported";
 
-            string[] files = Directory.GetFiles(folderPath);
-            // Elimina ogni file
-            foreach (string file in files)
+            string[] zipFiles = Directory.GetFiles(folderPath, "*.zip");
+
+            // Elimina ogni file .zip
+            foreach (string zipFile in zipFiles)
             {
-                File.Delete(file);
-                Console.WriteLine($"Eliminato: {file}");
+                File.Delete(zipFile);
+                Console.WriteLine($"File zip eliminato: {zipFile}");
             }
         }
     }
