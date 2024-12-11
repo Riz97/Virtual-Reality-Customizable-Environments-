@@ -3,7 +3,7 @@ import os
 import socket
 from time import sleep
 # Il tuo token di accesso Sketchfab
-api_token = "vvAlrUNsMbiGG02w7So1CDE61eimIY"  # Authorization Token, follow the SKETCHFAB README to understand how to obtaiin one  (remember that it expires)
+api_token = "vvAlrUNsMbiGG02w7So1CDE61eimIY"  # Authorization Token, follow the SKETCHFAB README to understand how to obtain one  (remember that it expires)
 HOST = '127.0.1.10'  # Standard loopback interface address (localhost)
 PORT = 12321 
 percorso_salvataggio = "C:/Users/ricky/Desktop/file.zip" #path of the zip of the model just downloaded
@@ -42,22 +42,23 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         print('Connected by', addr)
         while True:
             data = conn.recv(102400)
-            print(data.decode())
-        
+            print(data.decode()) #Uid sent by the Unity Framework Download Button
+
+            #Downloading the 3D Model
+            download_url = get_download_link(data.decode(), api_token)
+            print(download_url)
+
+            response = requests.get(download_url, stream=True)
+
+            #File Saving
+            with open(percorso_salvataggio, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=1024):
+                    if chunk:
+                        f.write(chunk)
 
 
 
 
-# Ottieni il link di download del modello
-download_url = get_download_link(data, api_token)
-print(download_url)
 
 
 
-response = requests.get(download_url, stream=True)
-
-#File Saved
-with open(percorso_salvataggio, 'wb') as f:
-    for chunk in response.iter_content(chunk_size=1024):
-        if chunk:
-            f.write(chunk)
