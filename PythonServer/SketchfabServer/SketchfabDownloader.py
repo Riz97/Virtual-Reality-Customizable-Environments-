@@ -42,7 +42,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         print('Connected by', addr)
         while True:
             data = conn.recv(102400)
-            print(data.decode)
+            print(data.decode())
+        
+
+
+
 
 # Ottieni il link di download del modello
 download_url = get_download_link(data, api_token)

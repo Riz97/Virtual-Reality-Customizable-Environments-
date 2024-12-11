@@ -8,6 +8,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Net.Sockets;
 using UnityEditor.PackageManager;
+using System.Threading.Tasks;
+using System.Text;
 
 public class SketchfabBrowser : MonoBehaviour
 {
@@ -96,10 +98,11 @@ public class SketchfabBrowser : MonoBehaviour
     }
 
     //TODO - Manage the Download 
-    private void OpenModelUrl(string url)
+    public async Task OpenModelUrl(string message)
     {
-        url = url.Replace("https://sketchfab.com/3d-models/none-", "");
-        UnityEngine.Debug.Log(url);
+        message = message.Replace("https://sketchfab.com/3d-models/none-","");
+        byte[] data = Encoding.UTF8.GetBytes(message);
+        await stream.WriteAsync(data, 0, data.Length);
     }
 
     public void SketchfabServerConnection()
