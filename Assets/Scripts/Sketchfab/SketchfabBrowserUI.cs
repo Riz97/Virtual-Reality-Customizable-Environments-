@@ -4,9 +4,18 @@ using TMPro;
 using UnityEngine.Networking;
 using Newtonsoft.Json.Linq;
 using System.Collections;
+using System.Diagnostics;
+using System.IO;
+using System.Net.Sockets;
+using UnityEditor.PackageManager;
 
 public class SketchfabBrowser : MonoBehaviour
 {
+    private TcpClient client;
+    private NetworkStream stream;
+    private string SketchfabPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\SketchfabServer\\SketchfabDownloader.py";
+
+
     [Header("UI Elements")]
     public TMP_InputField keywordInput; 
     public Button searchButton;    
@@ -45,7 +54,7 @@ public class SketchfabBrowser : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Errore nella richiesta API: " + request.error);
+            UnityEngine.Debug.LogError("Errore nella richiesta API: " + request.error);
         }
     }
 
@@ -89,6 +98,15 @@ public class SketchfabBrowser : MonoBehaviour
     //TODO - Manage the Download 
     private void OpenModelUrl(string url)
     {
-        Debug.Log(url); 
+        url = url.Replace("https://sketchfab.com/3d-models/none-", "");
+        UnityEngine.Debug.Log(url);
+    }
+
+    public void SketchfabServerConnection()
+    {
+        Process.Start("cmd.exe", SketchfabPy);
+        client = new TcpClient("127.0.1.10", 12321);
+        stream = client.GetStream();
+
     }
 }
