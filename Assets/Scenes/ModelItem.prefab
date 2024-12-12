@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1279599276543080304}
   - component: {fileID: 6159079813943026298}
   - component: {fileID: 7277779643875765278}
-  - component: {fileID: 1524664884122228751}
   m_Layer: 5
   m_Name: ModelItem
   m_TagString: Untagged
@@ -80,21 +79,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1524664884122228751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409743525427429801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ff9a097a31f88943a197a6e482ab624, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imageUrl: https://media.sketchfab.com/models/e02f45fe989543dab27c187461fdbbbe/thumbnails/e271969b5e8645fe8c2bf1a801cffa4f/d6aee34aa5d54a8b8d96f656c6c5876f.jpeg
-  targetRawImage: {fileID: 1325427516036763563}
-  preserveAspect: 1
 --- !u!1 &1269125686802193830
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,8 +153,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255384
-  m_fontColor: {r: 0.09372544, g: 1, b: 0, a: 1}
+    rgba: 4289219394
+  m_fontColor: {r: 0.259167, g: 0.29378125, b: 0.6603774, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -263,8 +247,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1198, y: -106.46997}
-  m_SizeDelta: {x: 176.37903, y: 130.45001}
+  m_AnchoredPosition: {x: 1354.6016, y: -103.50891}
+  m_SizeDelta: {x: 252.6456, y: 152.8961}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7606856458889438835
 CanvasRenderer:
@@ -421,7 +405,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 95649796764195668}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7205688390330807609
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,8 +626,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278845184
-  m_fontColor: {r: 0, g: 1, b: 0.033422947, a: 1}
+    rgba: 4282408959
+  m_fontColor: {r: 1, g: 0.37132752, b: 0.25094342, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
