@@ -656,6 +656,7 @@ MonoBehaviour:
   contentParent: {fileID: 369055240}
   modelItemPrefab: {fileID: 409743525427429801, guid: 2c39271266fd1a1449424f3cc65ca679, type: 3}
   UpdatingText: {fileID: 1997168683}
+  CheckButton: {fileID: 0}
 --- !u!114 &606006741
 MonoBehaviour:
   m_ObjectHideFlags: 0

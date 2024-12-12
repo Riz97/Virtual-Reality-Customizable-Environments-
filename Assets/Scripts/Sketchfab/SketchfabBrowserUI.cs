@@ -31,6 +31,7 @@ public class SketchfabBrowser : MonoBehaviour
     public Transform contentParent; // Scrollview Content
     public GameObject modelItemPrefab; // Prefab , 2 Texts and 1 button
     public TMP_Text UpdatingText;
+    public Button CheckButton;
 
     private string apiToken = "a2cba13cba97b522dfba8241b25334cf"; // API Key, can be found in the sketchfab website 
     private string apiUrl = "https://api.sketchfab.com/v3/search?type=models";
@@ -110,9 +111,26 @@ public class SketchfabBrowser : MonoBehaviour
 
             //Download the 3D model when openButton is pressed
             openButton.onClick.AddListener(() => OpenModelUrl(modelName.Replace(" ", "") + " " + modelUrl));
-
+            
 
         }
+
+
+    }
+
+    public void IntegrityCheck(string modelName)
+    {
+        string path = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\Imported";
+        // Get all files in the directory (including subdirectories)
+        string[] files = Directory.GetDirectories(path);
+        string[] zipFiles = Directory.GetFiles(path+"\\"+modelName.Replace(" ",""), "*.zip", SearchOption.AllDirectories);
+        Debug.Log(files[0]);
+        if (zipFiles.Length > 0)
+        {
+            Directory.Delete(path + "\\" + modelName.Replace(" ", ""), true);
+        }
+
+
     }
     public async Task OpenModelUrl(string message)
     {
@@ -211,8 +229,10 @@ public static class PlayModeStateHandler
     private static void OnPlayModeStateChanged(PlayModeStateChange state)
     {
         string path = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\Imported";
+        string fbxPath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\ImportedFBX";
 
         string[] subdirectories = Directory.GetDirectories(path);
+        string[] fbxFiles = Directory.GetFiles(fbxPath,"*.fbx");
         string[] metafiles = Directory.GetFiles(path,"*.meta");
         //Code executed when the scene is stopped
 
@@ -228,6 +248,11 @@ public static class PlayModeStateHandler
             foreach(string metafile in metafiles)
             {
                 File.Delete(metafile);
+            }
+
+            foreach(string fbxFile in  fbxFiles)
+            {
+                File.Delete(fbxFile);
             }
         }
     }
