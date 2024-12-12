@@ -22,7 +22,7 @@ public class SketchfabBrowser : MonoBehaviour
     private string SketchfabPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\SketchfabServer\\SketchfabDownloader.py";
     string path = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\Imported";
     public static string ImagePreview;
-    public bool preserveAspect = true; // Mantieni le proporzioni dell'immagine
+    public bool preserveAspect = true;
 
     [Header("UI Elements")]
     public TMP_InputField keywordInput; 
@@ -31,12 +31,11 @@ public class SketchfabBrowser : MonoBehaviour
     public GameObject modelItemPrefab; // Prefab , 2 Texts and 1 button
     public TMP_Text UpdatingText;
 
-    private string apiToken = "a2cba13cba97b522dfba8241b25334cf"; // Sostituisci con la tua API Key
+    private string apiToken = "a2cba13cba97b522dfba8241b25334cf"; // API Key, can be found in the sketchfab website 
     private string apiUrl = "https://api.sketchfab.com/v3/search?type=models";
 
     private void Start()
     {
-       
 
         searchButton.onClick.AddListener(SearchModels);
     }
@@ -72,55 +71,49 @@ public class SketchfabBrowser : MonoBehaviour
 
     private void DisplayModels(string jsonResponse)
     {
-        // Pulisce la lista di modelli precedenti
+        //Delete all the previous displayed models
         foreach (Transform child in contentParent)
         {
             Destroy(child.gameObject);
         }
 
-        // Parsing del JSON
+        // JSON Parsing
         JObject response = JObject.Parse(jsonResponse);
         JArray models = (JArray)response["results"];
 
         foreach (var model in models)
         {
-            // Estrae il nome del modello, autore e URL
+            //Save the Model name, the author, the Url and the Preview image url
             string modelName = model["name"].ToString();
             string modelAuthor = model["user"]["username"].ToString();
             string modelUrl = model["viewerUrl"].ToString();
             string imagePreview = model["thumbnails"]["images"][0]["url"].ToString();
 
-            // Aggiungi "https://" se manca nel link dell'immagine
-            if (!imagePreview.StartsWith("http://") && !imagePreview.StartsWith("https://"))
-            {
-                imagePreview = "https:" + imagePreview; // Aggiungi https:// al link se non presente
-            }
+           
 
-            // Crea il prefab che rappresenta un record del modello Sketchfab
+            //Create the prefab that represent a specific record
             GameObject modelItem = Instantiate(modelItemPrefab, contentParent);
 
-            // Trova tutti i gameobject necessari
+            //Found all the gameobjects attached to the specific prefab
             TMP_Text nameText = modelItem.transform.Find("ModelName").GetComponent<TMP_Text>();
             TMP_Text authorText = modelItem.transform.Find("ModelAuthor").GetComponent<TMP_Text>();
             Button openButton = modelItem.transform.Find("OpenButton").GetComponent<Button>();
             RawImage targetRawImage = modelItem.transform.Find("Preview").GetComponent<RawImage>();
 
-            // Assegna il nome preso dal JSON al prefab
+            //Save the Model name and the author from the JSON
             nameText.text = modelName;
             authorText.text = modelAuthor;
 
          
 
 
-            // Scarica e applica l'immagine come texture
+            // Download and apply the image to the RawImage
             StartCoroutine(DownloadAndApplyImage(imagePreview, targetRawImage));
 
-            // Imposta il comportamento del bottone se premuto
+            //Download the 3D model when openButton is pressed
             openButton.onClick.AddListener(() => OpenModelUrl(modelName.Replace(" ", "") + " " + modelUrl));
         }
     }
-
-    //TODO - Manage the Download 
     public async Task OpenModelUrl(string message)
     {
         message = message.Replace("https://sketchfab.com/3d-models/none-","");
@@ -135,14 +128,16 @@ public class SketchfabBrowser : MonoBehaviour
         stream = client.GetStream();
 
     }
+
+    //Download the image and apply it to the RawImage
     IEnumerator DownloadAndApplyImage(string url,RawImage targetRawImage)
     {
-        // Avvia il download dell'immagine
+        // Start the downlaod
         using (UnityWebRequest webRequest = UnityWebRequestTexture.GetTexture(url))
         {
             webRequest.disposeDownloadHandlerOnDispose = false;
 
-            // Aspetta il completamento della richiesta
+            // Wait for the completion of the request
             yield return webRequest.SendWebRequest();
 
             if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
@@ -150,19 +145,19 @@ public class SketchfabBrowser : MonoBehaviour
             }
             else
             {
-                // Ottieni la texture
+                // Got the texture
                 Texture2D downloadedTexture = DownloadHandlerTexture.GetContent(webRequest);
 
                 if (downloadedTexture != null)
                 {
 
 
-                    // Assegna la texture alla RawImage
+                    // Assign the texture to the RawImage
                     if (targetRawImage != null)
                     {
                         targetRawImage.texture = downloadedTexture;
 
-                        // Adatta l'immagine alla forma della RawImage
+                        // Adapt the image to the frame 
                         if (preserveAspect)
                         {
                             AdjustAspectRatio(targetRawImage, downloadedTexture);
@@ -173,23 +168,24 @@ public class SketchfabBrowser : MonoBehaviour
             }
         }
     }
+    //Adapt the image to the corresponding frame aspect
     void AdjustAspectRatio(RawImage rawImage, Texture2D texture)
     {
-        // Ottieni il RectTransform della RawImage
+        // Save the RectTransform of the RawImage
         RectTransform rectTransform = rawImage.GetComponent<RectTransform>();
 
-        // Calcola il rapporto tra larghezza e altezza
+        
         float textureAspectRatio = (float)texture.width / texture.height;
         float rawImageAspectRatio = rectTransform.rect.width / rectTransform.rect.height;
 
         if (textureAspectRatio > rawImageAspectRatio)
         {
-            // L'immagine è più larga: ridimensiona l'altezza
+            //Image wider
             rectTransform.sizeDelta = new Vector2(rectTransform.rect.width, rectTransform.rect.width / textureAspectRatio);
         }
         else
         {
-            // L'immagine è più alta: ridimensiona la larghezza
+            //Image higher
             rectTransform.sizeDelta = new Vector2(rectTransform.rect.height * textureAspectRatio, rectTransform.rect.height);
         }
     }
