@@ -118,20 +118,6 @@ public class SketchfabBrowser : MonoBehaviour
 
     }
 
-    public void IntegrityCheck(string modelName)
-    {
-        string path = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\Imported";
-        // Get all files in the directory (including subdirectories)
-        string[] files = Directory.GetDirectories(path);
-        string[] zipFiles = Directory.GetFiles(path+"\\"+modelName.Replace(" ",""), "*.zip", SearchOption.AllDirectories);
-        Debug.Log(files[0]);
-        if (zipFiles.Length > 0)
-        {
-            Directory.Delete(path + "\\" + modelName.Replace(" ", ""), true);
-        }
-
-
-    }
     public async Task OpenModelUrl(string message)
     {
         UpdatingText.text = "Downloading the required 3D model!!";
