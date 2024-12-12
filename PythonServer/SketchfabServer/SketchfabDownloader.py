@@ -165,6 +165,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             fbx_files = find_fbx_files(extract_to)
             if fbx_files:
                 copy_fbx_files(fbx_files, fbx_save_path)
+                print(fbx_files)
             else:
                 # Nessun file FBX trovato, elimina la directory principale
                 delete_folder_and_contents(extract_to)
