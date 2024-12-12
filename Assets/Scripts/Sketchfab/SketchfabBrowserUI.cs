@@ -104,18 +104,19 @@ public class SketchfabBrowser : MonoBehaviour
             nameText.text = modelName;
             authorText.text = modelAuthor;
 
-         
-
-
             // Download and apply the image to the RawImage
             StartCoroutine(DownloadAndApplyImage(imagePreview, targetRawImage));
 
             //Download the 3D model when openButton is pressed
             openButton.onClick.AddListener(() => OpenModelUrl(modelName.Replace(" ", "") + " " + modelUrl));
+
+           
         }
     }
     public async Task OpenModelUrl(string message)
     {
+        UpdatingText.text = "Downloading the required 3D model!!";
+
         message = message.Replace("https://sketchfab.com/3d-models/none-","");
         byte[] data = Encoding.UTF8.GetBytes(message);
         await stream.WriteAsync(data, 0, data.Length);
