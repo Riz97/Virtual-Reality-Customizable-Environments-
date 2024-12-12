@@ -9,7 +9,7 @@ public class UpdatingDownloadedFBX : MonoBehaviour
     public string folderPath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\ImportedFBX";
 
     // Path del file di testo dove salvare i nomi degli oggetti
-    public string logFilePath = "C:\\Users\\ricky\\Desktop\\folderContents.txt";
+    public string logFilePath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\folderContents.txt";
 
     // Intervallo di aggiornamento in secondi
     public float updateInterval = 5.0f;
