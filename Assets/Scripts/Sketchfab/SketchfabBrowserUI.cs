@@ -14,13 +14,14 @@ using UnityEditor;
 using System;
 using Debug = UnityEngine.Debug;
 using UnityEditor.PackageManager.Requests;
+using System.IO.Compression;
+using static GLTFast.Schema.AnimationChannelBase;
 
 public class SketchfabBrowser : MonoBehaviour
 {
     private TcpClient client;
     private NetworkStream stream;
     private string SketchfabPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\SketchfabServer\\SketchfabDownloader.py";
-    string path = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\Imported";
     public static string ImagePreview;
     public bool preserveAspect = true;
 
@@ -33,13 +34,13 @@ public class SketchfabBrowser : MonoBehaviour
 
     private string apiToken = "a2cba13cba97b522dfba8241b25334cf"; // API Key, can be found in the sketchfab website 
     private string apiUrl = "https://api.sketchfab.com/v3/search?type=models";
-
+    
     private void Start()
     {
-
         searchButton.onClick.AddListener(SearchModels);
     }
 
+    
     public void SearchModels()
     {
         string keyword = keywordInput.text.Trim();
@@ -110,7 +111,7 @@ public class SketchfabBrowser : MonoBehaviour
             //Download the 3D model when openButton is pressed
             openButton.onClick.AddListener(() => OpenModelUrl(modelName.Replace(" ", "") + " " + modelUrl));
 
-           
+
         }
     }
     public async Task OpenModelUrl(string message)
@@ -209,21 +210,24 @@ public static class PlayModeStateHandler
     //When the Scene is stopped, all the zip folders are deleted
     private static void OnPlayModeStateChanged(PlayModeStateChange state)
     {
+        string path = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\Imported";
 
+        string[] subdirectories = Directory.GetDirectories(path);
+        string[] metafiles = Directory.GetFiles(path,"*.meta");
         //Code executed when the scene is stopped
 
         if (state == PlayModeStateChange.ExitingPlayMode)
-        {
-          
-            string folderPath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\Imported";
-
-            string[] zipFiles = Directory.GetFiles(folderPath, "*.zip");
-
-            // Elimina ogni file .zip
-            foreach (string zipFile in zipFiles)
+        { 
+            // Delete all the subdirectories in Imported
+            foreach (string subdirectory in subdirectories)
             {
-                File.Delete(zipFile);
-                
+                Directory.Delete(subdirectory, true);
+                Debug.Log($"Deleted directory: {subdirectory}");
+            }
+            //Delete also the .meta files otherwise the folder won't be deleted completely
+            foreach(string metafile in metafiles)
+            {
+                File.Delete(metafile);
             }
         }
     }
