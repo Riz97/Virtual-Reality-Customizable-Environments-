@@ -19,7 +19,7 @@ public class UpdatingDownloadedFBX : MonoBehaviour
     private float timer;
 
     public TMP_Text text;
-
+    public TMP_Text UpdatingText;
     void Start()
     {
         // Verifica che la cartella esista
@@ -86,6 +86,7 @@ public class UpdatingDownloadedFBX : MonoBehaviour
                 {
                     Debug.Log("sono qua");
                     writer.WriteLine(Path.GetFileName(file.Replace(".fbx", "")));
+                    UpdatingText.text = "Successful Download";
                 }
 
 
