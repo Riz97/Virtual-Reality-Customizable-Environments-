@@ -113,6 +113,8 @@ public class SketchfabBrowser : MonoBehaviour
 
     public async Task OpenModelUrl(string message)
     {
+        UpdatingText.alignment = (TextAlignmentOptions)TextAlignment.Left;
+
         UpdatingText.text = "Downloading the required 3D model!!";
 
         message = message.Replace("https://sketchfab.com/3d-models/none-","");
