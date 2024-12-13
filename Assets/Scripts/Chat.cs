@@ -109,10 +109,11 @@ public class Chat : MonoBehaviour
     [SerializeField] public GameObject Ballon;
  
     public GameObject Models;
+    public Toggle Sketchfab_Toggle;
 
     int counter = 0;
 
-    //------------------------- NETWORK MANAGERS FOR ALL THE PYTHON MANAGERS ----------------------------------------------------
+    //------------------------- NETWORK MANAGERS FOR ALL THE PYTHON SERVERS ----------------------------------------------------
 
     public GeminiNetworkManager GeminiNetwork = new GeminiNetworkManager();
     public LlamaNetworkManager LlamaNetwork = new LlamaNetworkManager();
@@ -135,9 +136,6 @@ public class Chat : MonoBehaviour
 
     // Update is called once per frame
     public async void Start() {
-
-
-
 
         Number_Models_Text.SetText("Number of models is : " + Number_of_Objects.ToString() + "(" + counter.ToString() + ")");
 
@@ -179,7 +177,7 @@ public class Chat : MonoBehaviour
 
             if (dropdown.options[dropdown.value].text == "GPT")
             {
-
+         
                 var messages = new List<OpenAI.Chat.Message>
             {
                 new OpenAI.Chat.Message(Role.User, input)
@@ -193,7 +191,16 @@ public class Chat : MonoBehaviour
                 result = result_aux.Replace("C#", "").Replace("`", "");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 Debug.Log(result);
-                AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+
+                if (Sketchfab_Toggle.isOn)
+                {
+
+                }
+
+                else
+                {
+                    AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                }
                 tries++;
 
             }
@@ -216,8 +223,18 @@ public class Chat : MonoBehaviour
                
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "Gemini-Pro-1.0"; //The actual Google Gemini LLM must be changed inside the Python Server
-                //Debug.Log(result);
-                AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                                              //Debug.Log(result);
+
+                if (Sketchfab_Toggle.isOn)
+                {
+
+                }
+                else 
+                { 
+                   AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                }
+                
+                
                 tries++;
 
             }
@@ -239,8 +256,16 @@ public class Chat : MonoBehaviour
                 result = result_auxx.Replace("C#", "").Replace("csharp", "").Replace("c#", "");
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "Llama3.1"; //The actual Meta Llama LLM must be changed inside the Python Server
-                //Debug.Log(result)
-                AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                Debug.Log(result);
+                if (Sketchfab_Toggle.isOn)
+                {
+                   
+                }
+                else
+                {
+                    AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                }
+
                 tries++; 
                
             }
@@ -262,9 +287,16 @@ public class Chat : MonoBehaviour
                 
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "gpt-4o-mini"; //The actual Codex LLM must be changed inside the Python Server
-                //Debug.Log(result);
-                AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                                           //Debug.Log(result);
+                if (Sketchfab_Toggle.isOn)
+                {
 
+                }
+
+                else
+                {
+                    AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                }
                 tries++;
 
             }
@@ -287,8 +319,15 @@ public class Chat : MonoBehaviour
                 
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "qwen2.5-coder"; //The actual  LLM must be changed inside the Python Server
-                //Debug.Log(result);
-                AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                                             //Debug.Log(result);
+                if (Sketchfab_Toggle.isOn)
+                {
+                    
+                }
+                else
+                {
+                    AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                }
 
                 tries++;
 
@@ -309,8 +348,17 @@ public class Chat : MonoBehaviour
             
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "codegeex4"; //The actual LLM must be changed inside the Python Server
-                //Debug.Log(result);
-                AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                                         //Debug.Log(result);
+                if (Sketchfab_Toggle.isOn)
+                {
+
+                }
+
+                else
+                {
+                    AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                }
+                
 
                 tries++;
 
@@ -333,9 +381,16 @@ public class Chat : MonoBehaviour
 
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "codellama"; //The actual LLM must be changed inside the Python Server
-                //Debug.Log(result);
-                AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                                         //Debug.Log(result);
+                if (Sketchfab_Toggle.isOn)
+                {
 
+                }
+
+                else
+                {
+                    AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
+                }
                 tries++;
 
             }

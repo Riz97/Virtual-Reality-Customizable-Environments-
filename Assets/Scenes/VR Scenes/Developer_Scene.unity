@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10181,7 +10181,8 @@ MonoBehaviour:
   xrOriginTransform: {fileID: 1183273346}
   Text: {fileID: 1704329019}
   InputField: {fileID: 1912926498}
-  Reminders_List: []
+  Reminders_List:
+  - 
   First_Reminder: 
   Generate_Script_Button: {fileID: 1777703883}
   Output_Text: {fileID: 1704329019}
@@ -10192,6 +10193,7 @@ MonoBehaviour:
   Coordinates_Toggle: {fileID: 618847020}
   Ballon: {fileID: 1403870238999768668, guid: 977eb910211115749a1c5583ceba14b1, type: 3}
   Models: {fileID: 437474354}
+  Sketchfab_Toggle: {fileID: 1295211031}
   GeminiNetwork: {fileID: 925024862}
   LlamaNetwork: {fileID: 905770569}
   CodexNetwork: {fileID: 1114113680}

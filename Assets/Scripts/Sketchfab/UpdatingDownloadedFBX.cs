@@ -58,6 +58,7 @@ public class UpdatingDownloadedFBX : MonoBehaviour
 
     }
 
+    //Method for Updating the Scroll View responsible for displaying the downloaded models' names
     void UpdateScrollView()
     {
         string txtPath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\folderContents.txt";
