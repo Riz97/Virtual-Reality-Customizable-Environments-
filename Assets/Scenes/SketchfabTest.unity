@@ -1986,6 +1986,7 @@ MonoBehaviour:
   logFilePath: C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\folderContents.txt
   updateInterval: 2
   text: {fileID: 813510960}
+  UpdatingText: {fileID: 1997168683}
 --- !u!4 &1021132068
 Transform:
   m_ObjectHideFlags: 0
