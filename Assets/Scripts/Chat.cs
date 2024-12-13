@@ -351,12 +351,7 @@ public class Chat : MonoBehaviour
 
     public void AIList(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
     {
-        //Debug.Log(ContainsAll(result, Mandatory_Words));
-        //Debug.Log(ContainsAny(result, Material_Words));
-        //Debug.Log(firstNonWhiteSpaceChar == 'u');
-        //Debug.Log(ContainsAny(result, All));
-        //Debug.Log(CheckContainsTwoStrings(result, All));
-        //Debug.Log(ContieneSottoStringaAlmenoDueVolte(result, "Nature"));
+
         Domain.errorcount = 0;
 
         //EXECUTION CHECKS
