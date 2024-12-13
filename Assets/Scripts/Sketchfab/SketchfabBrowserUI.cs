@@ -7,23 +7,16 @@ using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Sockets;
-using UnityEditor.PackageManager;
 using System.Threading.Tasks;
 using System.Text;
 using UnityEditor;
-using System;
 using Debug = UnityEngine.Debug;
-using UnityEditor.PackageManager.Requests;
-using System.IO.Compression;
-using static GLTFast.Schema.AnimationChannelBase;
-using System.Threading;
+
 
 public class SketchfabBrowser : MonoBehaviour
 {
     private TcpClient client;
     private NetworkStream stream;
-    string fbxPath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\ImportedFBX";
-
     private string SketchfabPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\SketchfabServer\\SketchfabDownloader.py";
     public static string ImagePreview;
     public bool preserveAspect = true;
@@ -39,8 +32,6 @@ public class SketchfabBrowser : MonoBehaviour
     private string apiToken = "a2cba13cba97b522dfba8241b25334cf"; // API Key, can be found in the sketchfab website 
     private string apiUrl = "https://api.sketchfab.com/v3/search?type=models";
     
-    int count = 0;
-
     private void Start()
     {
         searchButton.onClick.AddListener(SearchModels);
@@ -116,14 +107,9 @@ public class SketchfabBrowser : MonoBehaviour
 
             //Download the 3D model when openButton is pressed
             openButton.onClick.AddListener(() => OpenModelUrl(modelName.Replace(" ", "") + " " + modelUrl));
-            
-
+          
         }
-
-
     }
-
-
 
     public async Task OpenModelUrl(string message)
     {
@@ -133,7 +119,6 @@ public class SketchfabBrowser : MonoBehaviour
         byte[] data = Encoding.UTF8.GetBytes(message);
         await stream.WriteAsync(data, 0, data.Length);
 
-        //StartCoroutine(wait());
     }
 
     public void SketchfabServerConnection()
@@ -143,12 +128,6 @@ public class SketchfabBrowser : MonoBehaviour
         stream = client.GetStream();
 
     }
-    //IEnumerator wait()
-    //{
-    //    yield return new WaitForSeconds(10);
-    //    UpdatingText.text = "Download DONE";
-
-    //}
 
     //Download the image and apply it to the RawImage
     IEnumerator DownloadAndApplyImage(string url,RawImage targetRawImage)

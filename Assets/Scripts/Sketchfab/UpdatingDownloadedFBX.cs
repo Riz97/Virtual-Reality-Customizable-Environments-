@@ -1,61 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using System.IO;
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 
 public class UpdatingDownloadedFBX : MonoBehaviour
 {
-    // Path della cartella da monitorare
+    //Path of the folder to monitor
     public string folderPath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\ImportedFBX";
 
-    // Path del file di testo dove salvare i nomi degli oggetti
+    //File where we save the name of the saved files
     public string logFilePath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\folderContents.txt";
 
-    // Intervallo di aggiornamento in secondi
+    //Updating Interval
     public float updateInterval = 5.0f;
 
     private float timer;
-public TMP_Text UpdatingText;
+    public TMP_Text UpdatingText;
     public TMP_Text text;
     
     void Start()
     {
-        // Verifica che la cartella esista
+        //Check if the Folder exists
         if (!Directory.Exists(folderPath))
         {
             Debug.LogError($"La cartella '{folderPath}' non esiste!");
             return;
         }
 
-        // Crea il file di log se non esiste
+        //If the Log file does not exist, create it 
         if (!File.Exists(logFilePath))
         {
-            File.Create(logFilePath).Dispose(); // Dispose rilascia immediatamente le risorse
+            File.Create(logFilePath).Dispose(); 
         }
 
-        // Inizializza il timer
+        //Initialize the timer
         timer = updateInterval;
 
-        // Scrivi i nomi iniziali degli oggetti
-        UpdateFileLog();
     }
 
     void Update()
     {
 
-        // Aggiorna il timer
+        // Update the Timer
         timer -= Time.deltaTime;
 
         if (timer <= 0)
         {
-            // Aggiorna il file di log
+            //Update File and the ScrollView that contains the name of the downloaded files
             UpdateFileLog();
 
             UpdateScrollView();
 
-            // Resetta il timer
+            // Reset the Timer
             timer = updateInterval;
         }
 
@@ -76,7 +72,7 @@ public TMP_Text UpdatingText;
 
     void UpdateFileLog()
     {
-        // Ottieni i nomi di tutti i file nella cartella
+        //Process to get all the files' names inside the folder, discard the .meta files
         string[] files = Directory.GetFiles(folderPath);
         using (StreamWriter writer = new StreamWriter(logFilePath, false)) // False per sovrascrivere
         {
@@ -84,8 +80,9 @@ public TMP_Text UpdatingText;
             {
                 if (!file.Contains(".meta"))
                 {
-                    Debug.Log("sono qua");
+                    
                     writer.WriteLine(Path.GetFileName(file.Replace(".fbx", "")));
+                    //If the 3D object name is inserted inside the file the download was successful
                     UpdatingText.text = "Successful Download";
                 }
 
