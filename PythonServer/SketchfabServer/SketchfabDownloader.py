@@ -157,7 +157,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             extract_to = os.path.join(base_save_path, name)
             unzip_file(zip_path, extract_to)
             os.remove(zip_path)
-
+            content = "fatto"
+            conn.sendall(content.encode())
             # Cerca e gestisci ricorsivamente file .zip e .fbx nelle sottocartelle
             process_nested_zips(extract_to)
 
@@ -166,6 +167,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             if fbx_files:
                 copy_fbx_files(fbx_files, fbx_save_path)
                 print(fbx_files)
+                content = "fatto"
+                conn.sendall(content.encode())
             else:
                 # Nessun file FBX trovato, elimina la directory principale
                 delete_folder_and_contents(extract_to)
+             

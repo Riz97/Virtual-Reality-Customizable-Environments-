@@ -983,8 +983,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.491, y: -103.0019}
-  m_SizeDelta: {x: 493.1789, y: 393.0955}
+  m_AnchoredPosition: {x: 31.0527, y: -88.392}
+  m_SizeDelta: {x: 590.2693, y: 241.49}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &676166364
 MonoBehaviour:
@@ -1983,7 +1983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   folderPath: C:\Users\ricky\Desktop\Framework\Virtual-Reality-Customizable-Environments-\Assets\ImportedFBX
-  logFilePath: C:\Users\ricky\Desktop\folderContents.txt
+  logFilePath: C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\folderContents.txt
   updateInterval: 2
   text: {fileID: 813510960}
 --- !u!4 &1021132068

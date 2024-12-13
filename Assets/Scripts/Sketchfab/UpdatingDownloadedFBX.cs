@@ -44,7 +44,7 @@ public class UpdatingDownloadedFBX : MonoBehaviour
 
     void Update()
     {
-        
+
         // Aggiorna il timer
         timer -= Time.deltaTime;
 
@@ -52,6 +52,7 @@ public class UpdatingDownloadedFBX : MonoBehaviour
         {
             // Aggiorna il file di log
             UpdateFileLog();
+
             UpdateScrollView();
 
             // Resetta il timer
@@ -64,9 +65,9 @@ public class UpdatingDownloadedFBX : MonoBehaviour
     void UpdateScrollView()
     {
         string txtPath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\folderContents.txt";
-        
-        
-        if(File.Exists(txtPath))
+
+
+        if (File.Exists(txtPath))
         {
             string txtContent = File.ReadAllText(txtPath);
             text.text = txtContent;
@@ -77,18 +78,17 @@ public class UpdatingDownloadedFBX : MonoBehaviour
     {
         // Ottieni i nomi di tutti i file nella cartella
         string[] files = Directory.GetFiles(folderPath);
-
-        // Scrivi i nomi dei file nel log
         using (StreamWriter writer = new StreamWriter(logFilePath, false)) // False per sovrascrivere
         {
             foreach (string file in files)
             {
-                 if (!file.Contains(".meta"))
+                if (!file.Contains(".meta"))
                 {
-                    writer.WriteLine(Path.GetFileName(file.Replace(".fbx","")));
+                    Debug.Log("sono qua");
+                    writer.WriteLine(Path.GetFileName(file.Replace(".fbx", "")));
                 }
-                
-               
+
+
             }
         }
     }

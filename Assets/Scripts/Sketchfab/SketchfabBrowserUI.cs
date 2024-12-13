@@ -195,9 +195,6 @@ public class SketchfabBrowser : MonoBehaviour
             rectTransform.sizeDelta = new Vector2(rectTransform.rect.height * textureAspectRatio, rectTransform.rect.height);
         }
     }
-
-
-
 }
 
 #if UNITY_EDITOR
