@@ -217,6 +217,8 @@ public static class PlayModeStateHandler
         string path = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\Imported";
         string fbxPath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\ImportedFBX";
 
+        string txtPath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\folderContents.txt";
+
         string[] subdirectories = Directory.GetDirectories(path);
         string[] fbxFiles = Directory.GetFiles(fbxPath,"*.fbx");
         string[] metafiles = Directory.GetFiles(path,"*.meta");
@@ -228,7 +230,7 @@ public static class PlayModeStateHandler
             foreach (string subdirectory in subdirectories)
             {
                 Directory.Delete(subdirectory, true);
-                Debug.Log($"Deleted directory: {subdirectory}");
+               
             }
             //Delete also the .meta files otherwise the folder won't be deleted completely
             foreach(string metafile in metafiles)
@@ -240,6 +242,9 @@ public static class PlayModeStateHandler
             {
                 File.Delete(fbxFile);
             }
+
+            File.WriteAllText(txtPath,string.Empty);
+
         }
     }
 }
