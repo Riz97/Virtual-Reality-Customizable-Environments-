@@ -12550,8 +12550,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 124.8, y: -24.4}
-  m_SizeDelta: {x: 209.6, y: 39.3}
+  m_AnchoredPosition: {x: 124.8, y: -44}
+  m_SizeDelta: {x: 209.6, y: 78.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1188412628
 MonoBehaviour:
@@ -12586,7 +12586,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Check if you want to position the objects on you own
+  m_Text: 'Check if you want to use 3d objects downloaded from sketchfab
 
 '
 --- !u!222 &1188412629
