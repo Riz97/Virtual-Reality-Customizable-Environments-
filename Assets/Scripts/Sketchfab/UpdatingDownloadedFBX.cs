@@ -17,9 +17,9 @@ public class UpdatingDownloadedFBX : MonoBehaviour
     public float updateInterval = 5.0f;
 
     private float timer;
-
+public TMP_Text UpdatingText;
     public TMP_Text text;
-    public TMP_Text UpdatingText;
+    
     void Start()
     {
         // Verifica che la cartella esista

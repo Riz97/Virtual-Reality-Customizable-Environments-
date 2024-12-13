@@ -3329,7 +3329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionSource: {fileID: 1748013037}
   distance: 2
-  verticalOffset: -0.6
+  verticalOffset: -0.3
 --- !u!1 &393115625
 GameObject:
   m_ObjectHideFlags: 0
@@ -4876,8 +4876,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279172864
-  m_fontColor: {r: 0, g: 1, b: 0.05490196, a: 1}
+    rgba: 4288321307
+  m_fontColor: {r: 0.105882354, g: 0.5921569, b: 0.6039216, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5435,7 +5435,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1048, y: -158}
+  m_AnchoredPosition: {x: 1053, y: -158}
   m_SizeDelta: {x: 350.4, y: 72.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &618847020
@@ -6887,7 +6887,6 @@ MonoBehaviour:
   contentParent: {fileID: 1221259522}
   modelItemPrefab: {fileID: 409743525427429801, guid: 2c39271266fd1a1449424f3cc65ca679, type: 3}
   UpdatingText: {fileID: 1378340786}
-  CheckButton: {fileID: 0}
 --- !u!1 &713560023
 GameObject:
   m_ObjectHideFlags: 0
@@ -6954,8 +6953,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279172864
-  m_fontColor: {r: 0, g: 1, b: 0.05490196, a: 1}
+    rgba: 4288321307
+  m_fontColor: {r: 0.105882354, g: 0.5921569, b: 0.6039216, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7243,8 +7242,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279172864
-  m_fontColor: {r: 0, g: 1, b: 0.05490196, a: 1}
+    rgba: 4288321307
+  m_fontColor: {r: 0.105882354, g: 0.5921569, b: 0.6039216, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9308,6 +9307,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 711567384}
+        m_TargetAssemblyTypeName: SketchfabBrowser, Assembly-CSharp
+        m_MethodName: SketchfabServerConnection
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &847382179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9921,7 +9932,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 896775081}
-  - component: {fileID: 896775083}
   - component: {fileID: 896775082}
   m_Layer: 0
   m_Name: Update Handler
@@ -9960,25 +9970,8 @@ MonoBehaviour:
   folderPath: C:\Users\ricky\Desktop\Framework\Virtual-Reality-Customizable-Environments-\Assets\ImportedFBX
   logFilePath: C:\Users\ricky\Desktop\Framework\Virtual-Reality-Customizable-Environments-\Assets\folderContents.txt
   updateInterval: 2
+  UpdatingText: {fileID: 1378340786}
   text: {fileID: 864151858}
-  UpdatingText: {fileID: 1492584004}
---- !u!114 &896775083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 896775080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6696c82b968c60408dddc87e79c51a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  folderPath: C:\Users\ricky\Desktop\Framework\Virtual-Reality-Customizable-Environments-\Assets\ImportedFBX
-  logFilePath: C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\folderContents.txt
-  updateInterval: 2
-  text: {fileID: 0}
-  UpdatingText: {fileID: 0}
 --- !u!1 &905770568
 GameObject:
   m_ObjectHideFlags: 0
@@ -12566,7 +12559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7768243, g: 0.9811321, b: 0.15364903, a: 1}
+  m_Color: {r: 0.8301887, g: 0.6456385, b: 0.1378427, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13293,8 +13286,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279172864
-  m_fontColor: {r: 0, g: 1, b: 0.05490196, a: 1}
+    rgba: 4288321307
+  m_fontColor: {r: 0.105882354, g: 0.5921569, b: 0.6039216, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -13908,15 +13901,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.10594519, g: 0.59266907, b: 0.6037736, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -14693,7 +14686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7768243, g: 0.9811321, b: 0.15364903, a: 1}
+  m_Color: {r: 0.83137256, g: 0.64705884, b: 0.13725491, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15018,7 +15011,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492584002}
   m_LocalRotation: {x: -0, y: -0.018204931, z: -0, w: 0.99983436}
-  m_LocalPosition: {x: 0, y: 0, z: 22}
+  m_LocalPosition: {x: 0, y: 0, z: 17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15026,7 +15019,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 462, y: -194}
+  m_AnchoredPosition: {x: 337, y: -194}
   m_SizeDelta: {x: 767.5, y: 54.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1492584004
@@ -15058,8 +15051,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279172864
-  m_fontColor: {r: 0, g: 1, b: 0.05490196, a: 1}
+    rgba: 4288321307
+  m_fontColor: {r: 0.105882354, g: 0.5921569, b: 0.6039216, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -18418,7 +18411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionSource: {fileID: 1748013037}
   distance: 2
-  verticalOffset: -0.6
+  verticalOffset: -0.3
 --- !u!1 &1913061120
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class VirtualKeyboard : MonoBehaviour
     public Transform positionSource;
 
     public float distance = 0.5f;
-    public float verticalOffset = -0.5f;
+    public float verticalOffset = -0.3f;
 
     // Start is called before the first frame update
     void Start()
