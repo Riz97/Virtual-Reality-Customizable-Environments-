@@ -15,6 +15,7 @@ using UnityEngine.XR;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.InputSystem;
 public class Chat : MonoBehaviour
 
     
@@ -39,7 +40,7 @@ public class Chat : MonoBehaviour
     public static float elapsed_time;
     public static int tries = 0;
 
-    [SerializeField] public InputDevice rightController;
+    [SerializeField] public UnityEngine.XR.InputDevice rightController;
     private bool isTriggerPressed = false;
 
     public static List<float> CustomCoordinatesX = new List<float>();
@@ -58,6 +59,7 @@ public class Chat : MonoBehaviour
        
     List<string> Directions = new List<string>() { "Right", "Left" , "Middle","right", "left" , "center","Center","middle"};
 
+    List<string> downloaded_fbx = new List<string>();
 
     List<string> Furniture_Strings = new List<string>() { "Office" };
     List<string> Apartment_Strings = new List<string>() { "Apartment" };
@@ -351,7 +353,7 @@ public class Chat : MonoBehaviour
                                          //Debug.Log(result);
                 if (Sketchfab_Toggle.isOn)
                 {
-
+                    
                 }
 
                 else
@@ -404,16 +406,15 @@ public class Chat : MonoBehaviour
 
 
 
-    public void AIList(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
+    public void AIListSketchfab(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
     {
 
         Domain.errorcount = 0;
 
         //EXECUTION CHECKS
         //The generated script must pass all these checks
-        if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u')
-            && CheckContainsTwoStrings(result, All) && (SubStringin2Times(result, "Nature") || SubStringin2Times(result, "Furniture")
-            || SubStringin2Times(result, "City") || SubStringin2Times(result, "Industry") || SubStringin2Times(result, "Cars")))
+        if (ContainsAll(result, Mandatory_Words) &&   (firstNonWhiteSpaceChar == 'u'))
+            
         {
 
             //Elapsed time for the generation of the script
@@ -464,6 +465,68 @@ public class Chat : MonoBehaviour
             return;
         }
     }
+
+    public void AIList(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
+    {
+
+        Domain.errorcount = 0;
+
+        //EXECUTION CHECKS
+        //The generated script must pass all these checks
+        if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u')
+            && CheckContainsTwoStrings(result, All) && (SubStringin2Times(result, "Nature") || SubStringin2Times(result, "Furniture")
+            || SubStringin2Times(result, "City") || SubStringin2Times(result, "Industry") || SubStringin2Times(result, "Cars")))
+        {
+
+            //Elapsed time for the generation of the script
+            elapsed_time = Time.time - start_time;
+
+            //It sets the text of the scroll view
+            Text.color = new Color32(27, 255, 0, 255);
+            Text.SetText(result.ToString());
+
+            // If we arrive at this point, we know that the script generated is acceptable. So we must set the input string to STOP in order to
+            // block the communication between the python server and the GEMINI LLM
+
+            input = "STOP";
+
+            //--------------------------------------- User Mode Information ---------------------------------------
+
+            if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
+            {
+                Info_Text.text = ("Executing......");
+
+            }
+
+            //-----------------------------------------------------------------------------------------------------
+
+        }
+        else if (input != null)
+        {
+
+            Text.color = new Color32(27, 255, 0, 255);
+
+            //--------------------------- User Mode Information -----------------------------------------
+
+            if (sceneName == "VR_User_Scene" || sceneName == "User_Scene")
+            {
+                Info_Text.text = ("Sorry, the AI was not able to generate a correct script. Wait! The AI is trying to generate another one :)");
+
+            }
+
+            //-------------------------------------------------------------------------------------
+
+            Text.SetText("Sorry, the AI was not able to generate a correct script. Wait! The AI is trying to generate another one :)");
+
+            Start();
+        }
+
+        else
+        {
+            return;
+        }
+    }
+
 
     //It handles the InputField string written by the user
 
@@ -568,6 +631,7 @@ public class Chat : MonoBehaviour
 
         //------------------------------------------------------------------------------------ BASE CASES ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+        
      
         
         // ------ OFFICE -----------
@@ -756,6 +820,13 @@ public class Chat : MonoBehaviour
         //-----------------------------------------------------------------------   CUSTOM ENVIRONMENTS -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+        else if (Sketchfab_Toggle.isOn)
+        {
+            createModels(Number_of_Objects);
+            input = Input_Request_Sketchfab(input,Number_of_Objects,downloaded_fbx,"Furniture",list_Directions);
+
+            Start();
+        }
 
         // -------------------------  FURNITURE   ---------------
 
@@ -955,7 +1026,8 @@ public class Chat : MonoBehaviour
 
     void Update()
     {
-        var devices = new List<InputDevice>();
+        downloaded_fbx = UpdatingDownloadedFBX.downloaded;
+        var devices = new List<UnityEngine.XR.InputDevice>();
         InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller, devices);
 
         if (devices.Count > 0)
@@ -969,7 +1041,7 @@ public class Chat : MonoBehaviour
             bool triggerValue;
 
             // Leggi lo stato del grilletto
-            if (rightController.TryGetFeatureValue(CommonUsages.primaryButton, out triggerValue) && triggerValue)
+            if (rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primaryButton, out triggerValue) && triggerValue)
             {
                 // Salva la posizione solo quando il trigger viene premuto per la prima volta
                 if (!isTriggerPressed && counter != Number_of_Objects)

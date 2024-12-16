@@ -1,5 +1,8 @@
 
+using NUnit.Framework;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -17,6 +20,7 @@ public class UpdatingDownloadedFBX : MonoBehaviour
     private float timer;
     public TMP_Text UpdatingText;
     public TMP_Text text;
+    public static List<string> downloaded = new List<string>();
     
     void Start()
     {
@@ -83,6 +87,8 @@ public class UpdatingDownloadedFBX : MonoBehaviour
                 {
                     
                     writer.WriteLine(Path.GetFileName(file.Replace(".fbx", "")));
+                    downloaded.Append(Path.GetFileName(file.Replace(".fbx", "")));
+                 
                     //If the 3D object name is inserted inside the file the download was successful
                     UpdatingText.alignment = (TextAlignmentOptions)TextAlignment.Left;
                     UpdatingText.text = "Successful Download";
