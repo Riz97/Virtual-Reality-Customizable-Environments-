@@ -59,7 +59,7 @@ public class Chat : MonoBehaviour
        
     List<string> Directions = new List<string>() { "Right", "Left" , "Middle","right", "left" , "center","Center","middle"};
 
-    List<string> downloaded_fbx = new List<string>();
+    List<string> downloaded_fbx = new List<string>() { };
 
     List<string> Furniture_Strings = new List<string>() { "Office" };
     List<string> Apartment_Strings = new List<string>() { "Apartment" };
@@ -113,7 +113,7 @@ public class Chat : MonoBehaviour
     public GameObject Models;
     public Toggle Sketchfab_Toggle;
 
-    int counter = 0;
+    public static int counter = 0;
 
     //------------------------- NETWORK MANAGERS FOR ALL THE PYTHON SERVERS ----------------------------------------------------
 
@@ -608,7 +608,8 @@ public class Chat : MonoBehaviour
             input = null;
             return;
         }
-//-------------------------------------------------------------------------------------------------------------------------------------
+        
+        //-------------------------------------------------------------------------------------------------------------------------------------
 
         List<string> list_Directions = list_Directions_aux;
 
@@ -657,8 +658,6 @@ public class Chat : MonoBehaviour
             Start();
 
         }
-
-
 
         // ------ APARTMENT -----------
 
@@ -820,7 +819,7 @@ public class Chat : MonoBehaviour
         //-----------------------------------------------------------------------   CUSTOM ENVIRONMENTS -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-        else if (Sketchfab_Toggle.isOn)
+        else if (Sketchfab_Toggle.isOn && downloaded_fbx.Count()!=0)
         {
             createModels(Number_of_Objects);
           
@@ -1028,6 +1027,7 @@ public class Chat : MonoBehaviour
     void Update()
     {
         downloaded_fbx = UpdatingDownloadedFBX.downloaded;
+  
         var devices = new List<UnityEngine.XR.InputDevice>();
         InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller, devices);
 
@@ -1110,6 +1110,8 @@ public class Chat : MonoBehaviour
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + "all the values must be float " +
         " STEP SIX -- Add a box collider for every object";
 
+        Debug.Log(input);
+
         return input;
     }
 
@@ -1144,7 +1146,7 @@ public class Chat : MonoBehaviour
     {
         
 
-        if (Coordinates_Toggle.isOn && Sketchfab_Toggle.isOn)
+        if (Coordinates_Toggle.isOn)
         {
             for (int ii = 0; ii < Number_of_Objects; ii++)
             {
