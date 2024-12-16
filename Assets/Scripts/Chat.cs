@@ -16,6 +16,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
+using UnityEditor;
 public class Chat : MonoBehaviour
 
     
@@ -410,7 +411,7 @@ public class Chat : MonoBehaviour
     {
 
         Domain.errorcount = 0;
-
+        AssetDatabase.Refresh();
         //EXECUTION CHECKS
         //The generated script must pass all these checks
         if (ContainsAll(result, Mandatory_Words) &&   (firstNonWhiteSpaceChar == 'u'))
@@ -1027,7 +1028,7 @@ public class Chat : MonoBehaviour
     void Update()
     {
         downloaded_fbx = UpdatingDownloadedFBX.downloaded;
-  
+        
         var devices = new List<UnityEngine.XR.InputDevice>();
         InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller, devices);
 

@@ -8,6 +8,7 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 public class Domain : MonoBehaviour
 {
 
@@ -20,6 +21,9 @@ public class Domain : MonoBehaviour
     [SerializeField] public TMP_InputField InputField;
 
     [SerializeField] public GameObject popup;
+
+    [SerializeField] TMP_Text NumberPositions_Text;
+
 
     public static int errorcount = 0;
     int temp = 0;
@@ -119,6 +123,7 @@ public class Domain : MonoBehaviour
                 Chat.counter = 0;
                 Chat.CustomCoordinatesX.Clear();
                 Chat.CustomCoordinatesZ.Clear();
+                NumberPositions_Text.SetText("Number of models is : " + Chat.Number_of_Objects + "(" + (Chat.counter).ToString() + ")");
             }
 
             //------------------------------------------------- LOG FILES GENEREATION -------------------------------------------------------------------------------------------------------------------------
