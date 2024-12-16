@@ -9964,7 +9964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6696c82b968c60408dddc87e79c51a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  folderPath: C:\Users\ricky\Desktop\Framework\Virtual-Reality-Customizable-Environments-\Assets\ImportedFBX
+  folderPath: C:\Users\ricky\Desktop\Framework\Virtual-Reality-Customizable-Environments-\Assets\Resources\ImportedFBX
   logFilePath: C:\Users\ricky\Desktop\Framework\Virtual-Reality-Customizable-Environments-\Assets\folderContents.txt
   updateInterval: 2
   UpdatingText: {fileID: 1378340786}

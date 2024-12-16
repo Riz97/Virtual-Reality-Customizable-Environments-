@@ -9,7 +9,7 @@ using UnityEngine;
 public class UpdatingDownloadedFBX : MonoBehaviour
 {
     //Path of the folder to monitor
-    public string folderPath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\ImportedFBX";
+    public string folderPath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\Resources\\ImportedFBX";
 
     //File where we save the name of the saved files
     public string logFilePath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\folderContents.txt";
@@ -72,6 +72,7 @@ public class UpdatingDownloadedFBX : MonoBehaviour
         {
             string txtContent = File.ReadAllText(txtPath);
             text.text = txtContent;
+
         }
     }
 
@@ -87,7 +88,7 @@ public class UpdatingDownloadedFBX : MonoBehaviour
                 {
                     
                     writer.WriteLine(Path.GetFileName(file.Replace(".fbx", "")));
-                    downloaded.Append(Path.GetFileName(file.Replace(".fbx", "")));
+                    downloaded.Add(Path.GetFileName(file.Replace(".fbx", "")));
                  
                     //If the 3D object name is inserted inside the file the download was successful
                     UpdatingText.alignment = (TextAlignmentOptions)TextAlignment.Left;

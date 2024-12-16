@@ -196,7 +196,7 @@ public class Chat : MonoBehaviour
 
                 if (Sketchfab_Toggle.isOn)
                 {
-
+                    AIListSketchfab(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 }
 
                 else
@@ -823,6 +823,7 @@ public class Chat : MonoBehaviour
         else if (Sketchfab_Toggle.isOn)
         {
             createModels(Number_of_Objects);
+          
             input = Input_Request_Sketchfab(input,Number_of_Objects,downloaded_fbx,"Furniture",list_Directions);
 
             Start();
@@ -1085,7 +1086,7 @@ public class Chat : MonoBehaviour
         " STEP ONE -- Find with the Gameobject.Find() method the gameobject called 'Plane' and change its material by using the following code Resources.Load<Material>(" + Material + "/Material) "+
         " STEP TWO -- Find with the method Gameobject.Find(), DO NOT USE FindGameObjectsWithTag() or similar, the gameobjects that are called ";
         input = Define_Models(Number_of_Objects, input) + " and destroy them" +
-        " STEP THREE -- Instantiate the new object loaded from the Resources/" + Material + "folder; the objects to be instantiated are the following";
+        " STEP THREE -- Instantiate the new object loaded from the Resources/" + Material + "folder , remember that they are .fbx; the objects to be instantiated are the following";
         input = Enum_Objects(list, Number_of_Objects, input) + " with this code, for every object, Resources.Load<GameObject>(" + "\"" + Material + "/nameoftheobject\")"+
         " STEP FOUR -- It is mandatory to rename the freshly created models with .name in the following way: ";
         input = Define_Models(Number_of_Objects, input) +
@@ -1093,10 +1094,23 @@ public class Chat : MonoBehaviour
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + "all the values must be float " +
         " STEP SIX -- Add a box collider for every object";
 
-
-
-
        return input;
+    }
+    public string Input_Request_Sketchfab(string input, int Number_of_Objects, List<string> list, string Material, List<string> list_Directions)
+    {
+        input = "A complete C# Unity Script that follow correctly these numbered steps, DO NOT USE TAG and do not truncate the code or use placeholders, :" +
+        " STEP ONE -- Find with the Gameobject.Find() method the gameobject called 'Plane' and change its material by using the following code Resources.Load<Material>(" + Material + "/Material) " +
+        " STEP TWO -- Find with the method Gameobject.Find(), DO NOT USE FindGameObjectsWithTag() or similar, the gameobjects that are called ";
+        input = Define_Models(Number_of_Objects, input) + " and destroy them" +
+        " STEP THREE -- Instantiate the new object loaded from the folder 'ImportedFBX'; the objects to be instantiated are the following ";
+        input = Enum_Objects(list, Number_of_Objects, input) + " with this code for every object, Resources.Load<GameObject>(" + "\""+"ImportedFBX/nameoftheobject\")" +
+        " STEP FOUR -- It is mandatory to rename the freshly created models with .name in the following way: ";
+        input = Define_Models(Number_of_Objects, input) +
+        " STEP FIVE -- The positions of every object are the follwing and they must be inserted: ";
+        input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + "all the values must be float " +
+        " STEP SIX -- Add a box collider for every object";
+
+        return input;
     }
 
     //It defines which object Name must be inserted in the input for CHATGPT
@@ -1130,7 +1144,7 @@ public class Chat : MonoBehaviour
     {
         
 
-        if (Coordinates_Toggle.isOn)
+        if (Coordinates_Toggle.isOn && Sketchfab_Toggle.isOn)
         {
             for (int ii = 0; ii < Number_of_Objects; ii++)
             {

@@ -13,7 +13,7 @@ PORT = 12321
 base_save_path = "C:/Users/ricky/Desktop/Framework/Virtual-Reality-Customizable-Environments-/Assets/Imported/"
 
 # Percorso della cartella dove verranno copiati i file FBX
-fbx_save_path = "C:/Users/ricky/Desktop/Framework/Virtual-Reality-Customizable-Environments-/Assets/ImportedFBX/"
+fbx_save_path = "C:/Users/ricky/Desktop/Framework/Virtual-Reality-Customizable-Environments-/Assets/Resources/ImportedFBX/"
 
 def get_download_link(model_uid, api_token):
     """
