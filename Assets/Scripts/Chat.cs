@@ -230,7 +230,7 @@ public class Chat : MonoBehaviour
 
                 if (Sketchfab_Toggle.isOn)
                 {
-
+                    AIListSketchfab(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 }
                 else 
                 { 
@@ -262,7 +262,7 @@ public class Chat : MonoBehaviour
                 Debug.Log(result);
                 if (Sketchfab_Toggle.isOn)
                 {
-                   
+                    AIListSketchfab(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 }
                 else
                 {
@@ -293,7 +293,7 @@ public class Chat : MonoBehaviour
                                            //Debug.Log(result);
                 if (Sketchfab_Toggle.isOn)
                 {
-
+                    AIListSketchfab(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 }
 
                 else
@@ -325,7 +325,7 @@ public class Chat : MonoBehaviour
                                              //Debug.Log(result);
                 if (Sketchfab_Toggle.isOn)
                 {
-                    
+                    AIListSketchfab(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 }
                 else
                 {
@@ -354,7 +354,7 @@ public class Chat : MonoBehaviour
                                          //Debug.Log(result);
                 if (Sketchfab_Toggle.isOn)
                 {
-                    
+                    AIListSketchfab(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 }
 
                 else
@@ -387,6 +387,7 @@ public class Chat : MonoBehaviour
                                          //Debug.Log(result);
                 if (Sketchfab_Toggle.isOn)
                 {
+                    AIListSketchfab(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
 
                 }
 
@@ -1111,7 +1112,6 @@ public class Chat : MonoBehaviour
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + "all the values must be float " +
         " STEP SIX -- Add a box collider for every object";
 
-        Debug.Log(input);
 
         return input;
     }
