@@ -6879,6 +6879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preserveAspect: 1
+  ServerActivation: 0
   keywordInput: {fileID: 392038642}
   searchButton: {fileID: 2137946412}
   contentParent: {fileID: 1221259522}
@@ -8872,6 +8873,10 @@ PrefabInstance:
     - target: {fileID: 8074195219289459696, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_StartingGroupMembers.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8074195219289459696, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
+      propertyPath: m_StartingInteractionOverridesMap.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8074195219289459696, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_StartingInteractionOverridesMap.Array.data[0].groupMember
