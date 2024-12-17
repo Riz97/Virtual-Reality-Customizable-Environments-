@@ -114,9 +114,14 @@ public class Chat : MonoBehaviour
     public GameObject Models;
     public Toggle Sketchfab_Toggle;
 
-    public static int counter = 0;
+    [SerializeField] public TMP_Dropdown PBDropdown;
+    [SerializeField] public Toggle PB_Toggle;
 
+    public static int counter = 0;
+    public string PB;
     //------------------------- NETWORK MANAGERS FOR ALL THE PYTHON SERVERS ----------------------------------------------------
+
+    [Header("Network Managers")]
 
     public GeminiNetworkManager GeminiNetwork = new GeminiNetworkManager();
     public LlamaNetworkManager LlamaNetwork = new LlamaNetworkManager();
@@ -129,8 +134,8 @@ public class Chat : MonoBehaviour
 
     //-------------------- OPEN AI CLIENT INFO ------------------------
 
-    public static Model model = Model.GPT3_5_Turbo_16K;
-    //public static Model model = Model.GPT3_5_Turbo;
+    //public static Model model = Model.GPT3_5_Turbo_16K;
+    public static Model model = Model.GPT3_5_Turbo;
     //public static Model model = Model.GPT4;
 
     public static string ModelName = model.ToString();
@@ -139,6 +144,7 @@ public class Chat : MonoBehaviour
 
     // Update is called once per frame
     public async void Start() {
+      PB = PBDropdown.options[dropdown.value].text;
 
         Number_Models_Text.SetText("Number of models is : " + Number_of_Objects.ToString() + "(" + counter.ToString() + ")");
 
@@ -473,11 +479,19 @@ public class Chat : MonoBehaviour
 
         Domain.errorcount = 0;
 
+        Debug.Log(ContainsAll(result, Mandatory_Words));
+
+        Debug.Log(ContainsAny(result, Material_Words));
+
+        Debug.Log(firstNonWhiteSpaceChar == 'u');
+
+        Debug.Log(CheckContainsTwoStrings(result, All));
+
         //EXECUTION CHECKS
         //The generated script must pass all these checks
         if (ContainsAll(result, Mandatory_Words) && ContainsAny(result, Material_Words) && (firstNonWhiteSpaceChar == 'u')
-            && CheckContainsTwoStrings(result, All) && (SubStringin2Times(result, "Nature") || SubStringin2Times(result, "Furniture")
-            || SubStringin2Times(result, "City") || SubStringin2Times(result, "Industry") || SubStringin2Times(result, "Cars")))
+            && CheckContainsTwoStrings(result, All) &&( (SubStringin2Times(result, "Nature") || SubStringin2Times(result, "Furniture")
+            || SubStringin2Times(result, "City") || SubStringin2Times(result, "Industry") || SubStringin2Times(result, "Cars"))))
         {
 
             //Elapsed time for the generation of the script
@@ -633,18 +647,29 @@ public class Chat : MonoBehaviour
 
         check = true;
 
-        //------------------------------------------------------------------------------------ BASE CASES ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------------ CUSTOM BASE CASES ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        
-     
-        
+
+      
+        Debug.Log(PB);
+        // ------ CUSTOM PREBUILT ENVIRONMENTS -----------
+
+         if (PB_Toggle.isOn)
+        {
+            createModels(Number_of_Objects);
+
+  
+            input = Input_Request_PB(input, Number_of_Objects, words_Furniture, "Furniture", PB);
+            Start();
+
+        }
+
+
         // ------ OFFICE -----------
-
         if (ContainsAny(input, Furniture_Strings))
         {
-            createModels(5);
 
-            Number_of_Objects = 5; // In this way the global variable is set with the exact amount of objects for this environment
+             Number_of_Objects = 5; // In this way the global variable is set with the exact amount of objects for this environment
 
 
             input = " Unity C# script code that follow drastically these numbered steps " +
@@ -657,11 +682,9 @@ public class Chat : MonoBehaviour
                     " 'Model_3' (Chair) at Vector3(-2.76,-0.47,6.28) 'Model_4' (Chair) at Vector3(-4.37,-0.47,4.81) and  rotation Y equals -97.34 only for this object " +
                     " STEP FOUR -- Add a simple collider for every object " +
                     " STEP FIVE -- Use the method caleld Start() e no auxiliary methods";
-
             Start();
 
         }
-
         // ------ APARTMENT -----------
 
         else if (ContainsAny(input, Apartment_Strings))
@@ -672,9 +695,9 @@ public class Chat : MonoBehaviour
 
 
             input = " A complete C# Unity Script that follow correctly these numbered steps : " +
-                    " STEP ONE -- Find with the Find() method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6' and destroy them"+
+                    " STEP ONE -- Find with the Find() method the objects called 'Model_0', 'Model_1', 'Model_2' 'Model_3 'Model_4 'Model_5 'Model_6' and destroy them" +
                     " STEP TWO -- Find with the Find() method the gameobject 'Plane' and change its material with the material loaded from Furniture/Material folder" +
-                    " STEP THREE -- Substitute them with the objects loaded from the Resources/Furniture, the gameobjects to be uploaded are 'Bed' 'Drawer' 'Desk' 'Chair' 'Drawer' 'Shower' 'Sink'"+
+                    " STEP THREE -- Substitute them with the objects loaded from the Resources/Furniture, the gameobjects to be uploaded are 'Bed' 'Drawer' 'Desk' 'Chair' 'Drawer' 'Shower' 'Sink'" +
                     " and rename them 'Model_0' 'Model_1', 'Model_2', 'Model_3' 'Model_4' 'Model_5' 'Model_6' " +
                     " Model_0' (Bed) at Vector3(-0.64,-0.47,9.99), 'Model_1' (Drawer) at Vector3(-3.30,-0.47,12.38) " +
                     " (Desk) at Vector3(-4.35,-0.47,6.35) and Y rotation equals to 87.809 only for this object" +
@@ -686,7 +709,7 @@ public class Chat : MonoBehaviour
                     " STEP FIVE -- Use a method called Start";
 
             Start();
-            
+
         }
 
         // ------ FOREST -----------
@@ -785,7 +808,7 @@ public class Chat : MonoBehaviour
                     " 'Model_6' (Sink) at Vector3(6.34,-0.47,10.02) and 'Model_6' (Barrel) at Vector3(7.04,-0.47,6.54) " +
                     " STEP FOUR -- Add a collider for every object" +
                     " STEP FIVE -- use a method called Start";
-            
+
 
             Start();
 
@@ -812,16 +835,18 @@ public class Chat : MonoBehaviour
                     " STEP FOUR -- Add a collider for every object " +
                     " STEP FIVE -- Use a method called Start";
 
-            
+
             Start();
 
         }
+
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         //-----------------------------------------------------------------------   CUSTOM ENVIRONMENTS -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        //TODO
+        //------------------------------ SKETCHFAB -------------------------------------
+
         else if (Sketchfab_Toggle.isOn && words_downloaded.Count() == Number_of_Objects && words_downloaded.Count()!=0)
         {
             createModels(Number_of_Objects);
@@ -1071,15 +1096,20 @@ public class Chat : MonoBehaviour
     private void SaveCoordinateXZ(Vector3 position)
     {
 
-        float x, z;
-        x = position.x;
-        z = position.z;
-        CustomCoordinatesX.Add(x);
-        CustomCoordinatesZ.Add(z);
-        Instantiate(Ballon, new Vector3(x, 0.97f, z), Quaternion.identity);
-        Number_Models_Text.SetText("Number of models is : " + Number_of_Objects + "(" + (counter+1).ToString() +")");
-        counter++;
+        if(Coordinates_Toggle.isOn)
+        {
+             float x, z;
+            x = position.x;
+            z = position.z;
+            CustomCoordinatesX.Add(x);
+            CustomCoordinatesZ.Add(z);
+            Instantiate(Ballon, new Vector3(x, 0.97f, z), Quaternion.identity);
+            Number_Models_Text.SetText("Number of models is : " + Number_of_Objects + "(" + (counter+1).ToString() +")");
+            counter++;
 
+        }
+
+    
     }
 
     //Input Request function definition for the customized environments
@@ -1114,9 +1144,27 @@ public class Chat : MonoBehaviour
         input = Define_Models_Coordinates(list, Number_of_Objects, input, list_Directions) + "all the values must be float " +
         " STEP SIX -- Add a box collider for every object";
 
+        return input;
+    }
+
+    public string Input_Request_PB(string input, int Number_of_Objects, List<string> list, string Material, string PB)
+    {
+
+        input = "A complete C# Unity Script that follow correctly these numbered steps, DO NOT USE TAG and do not truncate the code or use placeholders, :" +
+        " STEP ONE -- Find with the Gameobject.Find() method the gameobject called 'Plane' and change its material by using the following code Resources.Load<Material>(" + Material + "/Material) " +
+        " STEP TWO -- Find with the method Gameobject.Find(), DO NOT USE FindGameObjectsWithTag() or similar, the gameobjects that are called ";
+        input = Define_Models(Number_of_Objects, input) + " and destroy them" +
+        " STEP THREE -- Instantiate the new object loaded from the Resources/" + Material + "folder , remember that they are .fbx; the objects to be instantiated are the following";
+        input = Enum_Objects(list, Number_of_Objects, input) + " with this code, for every object, Resources.Load<GameObject>(" + "\"" + Material + "/nameoftheobject\")" +
+        " STEP FOUR -- It is mandatory to rename the freshly created models with .name in the following way: ";
+        input = Define_Models(Number_of_Objects, input) +
+        " STEP FIVE --  By reading the name of the objects that i gave in input you must decide the position of each object knowing those objects must represent a " + PB + ", " +
+        "knowing that the plane coordinates range from Z -1 to 29 and X from 18 to -20 , Y position must be fixed at -0.47 for all objects , i gave you the range where the plane exists, the distances between objects cannot be too much, be careful to not have objects in the same position" +
+        " STEP SIX -- Add a box collider for every object";
 
         return input;
     }
+
 
     //It defines which object Name must be inserted in the input for CHATGPT
     public string Enum_Objects(List<string> objects, int Number_of_Objects, string input){
