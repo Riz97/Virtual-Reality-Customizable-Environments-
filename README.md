@@ -27,3 +27,5 @@ It is possible now to visualize a preview of the 3D objects available in the fra
 It has also been added a virtual keyboard. In this way, when the user select the Input Field , in User Mode and Developer Mode, in front of him will appear a virtual keyboard and he can use it in order to write the virtual environment request without using the vocal commands or the physical keyboard.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+FOURTH PART
