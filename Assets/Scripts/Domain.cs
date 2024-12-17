@@ -67,6 +67,9 @@ public class Domain : MonoBehaviour
     {
         
         PrintAI_Thoughts();
+        Chat.counter = 0;
+        NumberPositions_Text.SetText("Number of models is : " + Chat.Number_of_Objects + "(" + (Chat.counter).ToString() + ")");
+
 
     }
 
@@ -120,9 +123,9 @@ public class Domain : MonoBehaviour
                 Generate_Script_Button.interactable = true;
                 FaultyScriptCount = 0;
                 errorcount = 0;
-             
                 Chat.CustomCoordinatesX.Clear();
                 Chat.CustomCoordinatesZ.Clear();
+
             }
 
             //------------------------------------------------- LOG FILES GENEREATION -------------------------------------------------------------------------------------------------------------------------
