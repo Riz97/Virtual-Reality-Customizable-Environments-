@@ -20,6 +20,7 @@ public class SketchfabBrowser : MonoBehaviour
     private string SketchfabPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\SketchfabServer\\SketchfabDownloader.py";
     public static string ImagePreview;
     public bool preserveAspect = true;
+    public bool ServerActivation = false;
 
     [Header("UI Elements")]
     public TMP_InputField keywordInput; 
@@ -40,7 +41,7 @@ public class SketchfabBrowser : MonoBehaviour
     
     public void SearchModels()
     {
-        string keyword = keywordInput.text.Trim();
+        string keyword = keywordInput.text.Trim() + " .fbx";
         if (!string.IsNullOrEmpty(keyword))
         {
             StartCoroutine(FetchModels(keyword));
@@ -115,11 +116,20 @@ public class SketchfabBrowser : MonoBehaviour
     {
         UpdatingText.alignment = (TextAlignmentOptions)TextAlignment.Left;
 
-        UpdatingText.text = "Downloading the required 3D model!!";
+        if (!ServerActivation)
+        {
+            UpdatingText.text = "You must activate the Server!!";
+        }
 
-        message = message.Replace("https://sketchfab.com/3d-models/none-","");
-        byte[] data = Encoding.UTF8.GetBytes(message);
-        await stream.WriteAsync(data, 0, data.Length);
+        else
+        {
+
+            UpdatingText.text = "Downloading the required 3D model!!";
+
+            message = message.Replace("https://sketchfab.com/3d-models/none-", "");
+            byte[] data = Encoding.UTF8.GetBytes(message);
+            await stream.WriteAsync(data, 0, data.Length);
+        }
 
     }
 
@@ -128,6 +138,7 @@ public class SketchfabBrowser : MonoBehaviour
         Process.Start("cmd.exe", SketchfabPy);
         client = new TcpClient("127.0.1.10", 12321);
         stream = client.GetStream();
+        ServerActivation = true;
 
     }
 

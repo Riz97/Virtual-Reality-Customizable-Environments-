@@ -120,10 +120,9 @@ public class Domain : MonoBehaviour
                 Generate_Script_Button.interactable = true;
                 FaultyScriptCount = 0;
                 errorcount = 0;
-                Chat.counter = 0;
+             
                 Chat.CustomCoordinatesX.Clear();
                 Chat.CustomCoordinatesZ.Clear();
-                NumberPositions_Text.SetText("Number of models is : " + Chat.Number_of_Objects + "(" + (Chat.counter).ToString() + ")");
             }
 
             //------------------------------------------------- LOG FILES GENEREATION -------------------------------------------------------------------------------------------------------------------------

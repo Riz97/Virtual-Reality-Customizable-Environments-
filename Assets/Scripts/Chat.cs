@@ -563,6 +563,7 @@ public class Chat : MonoBehaviour
         List<string> words_Cars = isIn(input, Car_Models);
         List<string> words_Industrial = isIn(input, Industrial_Models);
         List<string> words_City = isIn(input, City_Models);
+        List<string> words_downloaded = isIn(input, downloaded_fbx);
 
         List<string> allWords = words_Cars.Concat(words_City).Concat(words_Industrial).Concat(words_Cars).Concat(words_Nature).Concat(words_Furniture).ToList(); //Auxiliary list for the isDirection method
 
@@ -820,12 +821,12 @@ public class Chat : MonoBehaviour
 
         //-----------------------------------------------------------------------   CUSTOM ENVIRONMENTS -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-        else if (Sketchfab_Toggle.isOn && downloaded_fbx.Count()!=0)
+        //TODO
+        else if (Sketchfab_Toggle.isOn && words_downloaded.Count() == Number_of_Objects && words_downloaded.Count()!=0)
         {
             createModels(Number_of_Objects);
           
-            input = Input_Request_Sketchfab(input,Number_of_Objects,downloaded_fbx,"Furniture",list_Directions);
+            input = Input_Request_Sketchfab(input,Number_of_Objects,words_downloaded,"Furniture",list_Directions);
 
             Start();
         }
@@ -904,7 +905,7 @@ public class Chat : MonoBehaviour
 
      
         else if ((words_City.Count() != Number_of_Objects || words_Cars.Count() != Number_of_Objects || words_Industrial.Count() != Number_of_Objects  
-                 || words_Nature.Count() != Number_of_Objects  || words_Furniture.Count() != Number_of_Objects)) 
+                 || words_Nature.Count() != Number_of_Objects  || words_Furniture.Count() != Number_of_Objects || words_downloaded.Count()!= Number_of_Objects)) 
         {
             Text.color = new Color(255, 0, 0);
             Text.SetText("Error : you have to ask for the exactly amount of models requested  for this simulation");
@@ -927,7 +928,8 @@ public class Chat : MonoBehaviour
          if(!ContainsAny(input,City_Models) && !ContainsAny(input, Furniture_Models) && !ContainsAny(input, Car_Models) 
             && !ContainsAny(input, Nature_Models) && !ContainsAny(input, Industrial_Models) && !ContainsAny(input,Industrial_Strings) 
             && !ContainsAny(input,Nature_Strings) && !ContainsAny(input,Forest_Strings) && !ContainsAny(input,City_Strings) 
-            && !ContainsAny(input,Furniture_Strings) && !ContainsAny(input, Apartment_Strings) && !ContainsAny(input, Car_Strings))
+            && !ContainsAny(input,Furniture_Strings) && !ContainsAny(input, Apartment_Strings) && !ContainsAny(input, Car_Strings) 
+            && !ContainsAny(input,downloaded_fbx))
         
         {
             Text.color = new Color(255, 0, 0);
