@@ -118,7 +118,7 @@ public class SketchfabBrowser : MonoBehaviour
 
         if (!ServerActivation)
         {
-            UpdatingText.text = "You must activate the Server!!";
+            UpdatingText.text = "Firstly You must activate the Server!!";
         }
 
         else
