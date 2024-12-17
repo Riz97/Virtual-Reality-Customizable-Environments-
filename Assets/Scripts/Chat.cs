@@ -596,7 +596,7 @@ public class Chat : MonoBehaviour
 
         if (Number_of_Objects != counter && Coordinates_Toggle.isOn)
         {
-            Debug.Log("sono qua");
+            
             Text.color = new Color(255, 0, 0);
             Text.text = ("Error: You have to position all the models that you have requested!");
             Generate_Script_Button.interactable = true;
