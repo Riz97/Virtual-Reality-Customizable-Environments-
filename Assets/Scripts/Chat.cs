@@ -25,7 +25,7 @@ public class Chat : MonoBehaviour
 
     public Transform xrOriginTransform;
 
-    private string input ;
+    public static string input ;
     public static string input_aux;
     public static string input_auxx;
     public static string input_auxx3;
@@ -144,7 +144,6 @@ public class Chat : MonoBehaviour
 
     // Update is called once per frame
     public async void Start() {
-      PB = PBDropdown.options[dropdown.value].text;
 
         Number_Models_Text.SetText("Number of models is : " + Number_of_Objects.ToString() + "(" + counter.ToString() + ")");
 
@@ -479,13 +478,6 @@ public class Chat : MonoBehaviour
 
         Domain.errorcount = 0;
 
-        Debug.Log(ContainsAll(result, Mandatory_Words));
-
-        Debug.Log(ContainsAny(result, Material_Words));
-
-        Debug.Log(firstNonWhiteSpaceChar == 'u');
-
-        Debug.Log(CheckContainsTwoStrings(result, All));
 
         //EXECUTION CHECKS
         //The generated script must pass all these checks
@@ -651,11 +643,13 @@ public class Chat : MonoBehaviour
 
 
       
-        Debug.Log(PB);
+        
         // ------ CUSTOM PREBUILT ENVIRONMENTS -----------
 
-         if (PB_Toggle.isOn)
+         if (words_Furniture.Count() == Number_of_Objects && words_Furniture.Count() != 0  && PB_Toggle.isOn)
         {
+            PB = PBDropdown.options[PBDropdown.value].text;
+
             createModels(Number_of_Objects);
 
   
@@ -666,7 +660,7 @@ public class Chat : MonoBehaviour
 
 
         // ------ OFFICE -----------
-        if (ContainsAny(input, Furniture_Strings))
+        if (ContainsAny(input, Furniture_Strings) && !PB_Toggle.isOn)
         {
 
              Number_of_Objects = 5; // In this way the global variable is set with the exact amount of objects for this environment
@@ -1253,6 +1247,21 @@ public class Chat : MonoBehaviour
 
         return selectedOption; 
     }
+
+    public void GetDropDownValue2()
+    {
+        PBDropdown.onValueChanged.AddListener(delegate { DropdownValueChanged2(dropdown); });
+    }
+
+    public string DropdownValueChanged2(TMP_Dropdown change)
+
+    {
+        string selectedOption = PBDropdown.options[dropdown.value].text;
+        Debug.Log(selectedOption);
+
+        return selectedOption;
+    }
+
 
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

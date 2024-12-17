@@ -125,6 +125,7 @@ public class Domain : MonoBehaviour
                 errorcount = 0;
                 Chat.CustomCoordinatesX.Clear();
                 Chat.CustomCoordinatesZ.Clear();
+                
 
             }
 
