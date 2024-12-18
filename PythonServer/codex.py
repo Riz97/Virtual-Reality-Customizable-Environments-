@@ -5,7 +5,7 @@ from openai import OpenAI
 HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
 PORT = 1234        # Port to listen on (non-privileged ports are > 1023)
 model = "gpt-4o-mini"
-client = OpenAI(api_key = "") #Insert the OpenAI API key
+client = OpenAI(api_key = "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") #Insert the OpenAI API key
 
 print("Welcome to the Codex Python server for this Framework")
 

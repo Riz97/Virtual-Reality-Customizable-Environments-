@@ -61,7 +61,7 @@ def find_fbx_files(directory_path):
     for root, dirs, files in os.walk(directory_path):  # os.walk è ricorsivo
         for file in files:
             if file.endswith('.fbx'):
-                fbx_files.append(os.path.join(root, file))  # Aggiungi il percorso completo del file .fbx
+                fbx_files.append(os.path.join(root, file.replace(" ","")))  # Aggiungi il percorso completo del file .fbx
     return fbx_files
 
 def copy_fbx_files(fbx_files, destination_directory):
