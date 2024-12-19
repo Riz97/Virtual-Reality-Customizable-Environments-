@@ -149,7 +149,18 @@ public class SketchfabBrowser : MonoBehaviour
             byte[] data = Encoding.UTF8.GetBytes(message);
             await stream.WriteAsync(data, 0, data.Length);
             response = await ReceiveMessages();
-            Debug.Log(response);
+            
+            
+
+            if(response == "OK") 
+            {
+                UpdatingText.text = "Succesfull Download";
+            }
+
+            if (response == "NOT OK")
+            {
+                UpdatingText.text = "The Requested Object cannot be imported";
+            }
         }
 
        

@@ -91,8 +91,8 @@ public class UpdatingDownloadedFBX : MonoBehaviour
                     downloaded.Add(Path.GetFileName(file.Replace(".fbx", "")));
                  
                     //If the 3D object name is inserted inside the file the download was successful
-                    UpdatingText.alignment = (TextAlignmentOptions)TextAlignment.Left;
-                    UpdatingText.text = "Successful Download";
+                    //UpdatingText.alignment = (TextAlignmentOptions)TextAlignment.Left;
+                    //UpdatingText.text = "Successful Download";
                 }
 
 

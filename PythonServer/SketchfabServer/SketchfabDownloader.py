@@ -173,13 +173,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             if fbx_files:
                 copy_fbx_files(fbx_files, fbx_save_path)
                 print(fbx_files)
-                content = "fatto"
+                content = "OK"
                 conn.sendall(content.encode())
                 content = ""
             else:
                 # Nessun file FBX trovato, elimina la directory principale
                 delete_folder_and_contents(extract_to)
-                content = "non fatto"
+                content = "NOT OK"
                 conn.sendall(content.encode())
                 content = ""
              
