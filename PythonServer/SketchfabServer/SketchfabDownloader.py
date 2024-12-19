@@ -61,21 +61,28 @@ def find_fbx_files(directory_path):
     for root, dirs, files in os.walk(directory_path):  # os.walk è ricorsivo
         for file in files:
             if file.endswith('.fbx'):
-                fbx_files.append(os.path.join(root, file.replace(" ","")))  # Aggiungi il percorso completo del file .fbx
+                fbx_files.append(os.path.join(root, file))  # Aggiungi il percorso completo del file .fbx
     return fbx_files
+
+def sanitize_file_name(file_name):
+    """
+    Rimuove spazi dal nome del file.
+    """
+    return file_name.replace(" ", "_")
 
 def copy_fbx_files(fbx_files, destination_directory):
     """
-    Copia i file .fbx nella cartella di destinazione.
+    Copia i file .fbx nella cartella di destinazione, rimuovendo spazi dai nomi.
     """
     create_folder_if_not_exists(destination_directory)
 
     for fbx_file in fbx_files:
-        destination_fbx = os.path.join(destination_directory, os.path.basename(fbx_file))  # Usa solo il nome del file per evitare conflitti
+        sanitized_name = sanitize_file_name(os.path.basename(fbx_file))  # Rimuove spazi dal nome del file
+        destination_fbx = os.path.join(destination_directory, sanitized_name)  # Usa il nome sanificato
 
         try:
             shutil.copy(fbx_file, destination_fbx)
-            print(f"File {fbx_file} copiato in {destination_directory}.")
+            print(f"File {fbx_file} copiato come {sanitized_name} in {destination_directory}.")
         except Exception as e:
             print(f"Errore nel copiare {fbx_file}: {e}")
 
@@ -157,8 +164,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             extract_to = os.path.join(base_save_path, name)
             unzip_file(zip_path, extract_to)
             os.remove(zip_path)
-            content = "fatto"
-            conn.sendall(content.encode())
+        
             # Cerca e gestisci ricorsivamente file .zip e .fbx nelle sottocartelle
             process_nested_zips(extract_to)
 
@@ -169,7 +175,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 print(fbx_files)
                 content = "fatto"
                 conn.sendall(content.encode())
+                content = ""
             else:
                 # Nessun file FBX trovato, elimina la directory principale
                 delete_folder_and_contents(extract_to)
+                content = "non fatto"
+                conn.sendall(content.encode())
+                content = ""
              

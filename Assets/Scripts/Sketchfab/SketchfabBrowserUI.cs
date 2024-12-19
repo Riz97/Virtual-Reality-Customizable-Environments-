@@ -15,6 +15,7 @@ using Debug = UnityEngine.Debug;
 
 public class SketchfabBrowser : MonoBehaviour
 {
+    public string message;
     private TcpClient client;
     private NetworkStream stream;
     private string SketchfabPy = "/k python C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\PythonServer\\SketchfabServer\\SketchfabDownloader.py";
@@ -38,7 +39,23 @@ public class SketchfabBrowser : MonoBehaviour
         searchButton.onClick.AddListener(SearchModels);
     }
 
-    
+    public async Task<string> ReceiveMessages()
+    {
+
+        byte[] buffer = new byte[102400];
+        int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+
+        if (bytesRead == 0)
+        {
+            // Handle disconnection
+            UnityEngine.Debug.Log("Disconnected from server!");
+            return "";
+        }
+
+        message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+        return message;
+    }
+
     public void SearchModels()
     {
         string keyword = keywordInput.text.Trim() + " .fbx";
@@ -114,6 +131,8 @@ public class SketchfabBrowser : MonoBehaviour
 
     public async Task OpenModelUrl(string message)
     {
+        string response;
+
         UpdatingText.alignment = (TextAlignmentOptions)TextAlignment.Left;
 
         if (!ServerActivation)
@@ -129,7 +148,11 @@ public class SketchfabBrowser : MonoBehaviour
             message = message.Replace("https://sketchfab.com/3d-models/none-", "");
             byte[] data = Encoding.UTF8.GetBytes(message);
             await stream.WriteAsync(data, 0, data.Length);
+            response = await ReceiveMessages();
+            Debug.Log(response);
         }
+
+       
 
     }
 
