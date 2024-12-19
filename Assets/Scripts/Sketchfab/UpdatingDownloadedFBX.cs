@@ -8,18 +8,25 @@ using UnityEngine;
 
 public class UpdatingDownloadedFBX : MonoBehaviour
 {
+
+    [Header("Paths")]
+
     //Path of the folder to monitor
     public string folderPath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\Resources\\ImportedFBX";
 
     //File where we save the name of the saved files
     public string logFilePath = "C:\\Users\\ricky\\Desktop\\Framework\\Virtual-Reality-Customizable-Environments-\\Assets\\folderContents.txt";
 
+    [Header("UI Elements")]
+    public TMP_Text UpdatingText;
+    public TMP_Text text;
+
+    [Header("Update Interval")]
     //Updating Interval
     public float updateInterval = 5.0f;
 
     private float timer;
-    public TMP_Text UpdatingText;
-    public TMP_Text text;
+
     public static List<string> downloaded = new List<string>();
     
     void Start()

@@ -10,6 +10,9 @@ public class Codegeex4NetworkManager : MonoBehaviour
     public string message;
     private TcpClient client;
     private NetworkStream stream;
+
+    [Header("Activation Button")]
+
     [SerializeField] Button ServerButton;
 
 

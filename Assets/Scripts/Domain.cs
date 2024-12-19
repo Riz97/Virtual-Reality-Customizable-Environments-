@@ -11,6 +11,7 @@ using UnityEngine.UI;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 public class Domain : MonoBehaviour
 {
+    [Header("Fundamental UI Elements")]
 
     [SerializeField] TMP_Text Output_Text;
 
@@ -20,9 +21,13 @@ public class Domain : MonoBehaviour
 
     [SerializeField] public TMP_InputField InputField;
 
+    [SerializeField] TMP_Text NumberPositions_Text;
+
+    [Header("Pop Error Panel")]
+    
     [SerializeField] public GameObject popup;
 
-    [SerializeField] TMP_Text NumberPositions_Text;
+    
 
 
     public static int errorcount = 0;

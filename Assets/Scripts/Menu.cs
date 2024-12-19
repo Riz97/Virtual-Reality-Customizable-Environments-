@@ -5,18 +5,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
-{   
+{
+    [Header("3D Preview")]
     public float offset = 0.1f;
-
-    private bool isPositioned = false;
-
+    public float rotationSpeed = 30f;
 
     private int currentIndex = 0; //Index for the correct displayment of the name in the Text
     private int currentPrefabIndex = 0; //Index for the correct displayment of the 3D Object preview
     private GameObject currentInstance;
+
+    [Header("Fundamental UI Elements")]
     public TMP_Text Macro_Text;
     public TMP_Text Objects_Text;
-    public float rotationSpeed = 30f;
+    
 
     List<string> Macrocategory = new List<string>() { "Nature", "City", "Industry", "Cars", "Furniture" };
 
@@ -30,10 +31,12 @@ public class Menu : MonoBehaviour
 
     List<string> Industry = new List<string>() {"Cable","Car","Garbage","Pallet","Plank","Tank","Tubes"};
     List<string> Cars = new List<string>() {"Cops","Sedan","Sport","Suv","Taxi"};
-    
+
     //---------------------------------------------------------------------------------------------------------------------
- 
+
     //-------------------------------- Lists of the respective Macro Category Prefabs -----------------------------------
+
+    [Header("Macrocategories Prefabs")]
 
     public List<GameObject> NaturePrefabs;
     public List<GameObject> CityPrefabs;
@@ -42,6 +45,8 @@ public class Menu : MonoBehaviour
     public List<GameObject> IndustryPrefabs;
 
     //---------------------------------------------------------------------------------------------------------------------
+
+    [Header("Preview Object Position")]
 
     public Transform previewPosition; //3D Object Position for the Preview
   

@@ -7553,6 +7553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd64e8998b7168a469a4811486a2c457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  message: 
   preserveAspect: 1
   ServerActivation: 0
   keywordInput: {fileID: 392038642}
@@ -10895,15 +10896,15 @@ MonoBehaviour:
   xrOriginTransform: {fileID: 1183273346}
   Text: {fileID: 1704329019}
   InputField: {fileID: 1912926498}
-  Reminders_List:
-  - 
-  First_Reminder: 
   Generate_Script_Button: {fileID: 1777703883}
   Output_Text: {fileID: 1704329019}
   Info_Text: {fileID: 0}
   Number_Models_Text: {fileID: 522181133}
   material: {fileID: 5561349426305759274, guid: 9e1dc1c14313460d872de39e35129b39, type: 3}
   dropdown: {fileID: 669416852}
+  Reminders_List:
+  - 
+  First_Reminder: 
   Coordinates_Toggle: {fileID: 618847020}
   Ballon: {fileID: 1403870238999768668, guid: 977eb910211115749a1c5583ceba14b1, type: 3}
   Models: {fileID: 437474354}

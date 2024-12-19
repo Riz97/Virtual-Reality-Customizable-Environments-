@@ -27,9 +27,10 @@ public class SketchfabBrowser : MonoBehaviour
     public TMP_InputField keywordInput; 
     public Button searchButton;    
     public Transform contentParent; // Scrollview Content
-    public GameObject modelItemPrefab; // Prefab , 2 Texts and 1 button
     public TMP_Text UpdatingText;
 
+    [Header("Item Prefab")]
+    public GameObject modelItemPrefab; // Prefab , 2 Texts and 1 button
 
     private string apiToken = "a2cba13cba97b522dfba8241b25334cf"; // API Key, can be found in the sketchfab website 
     private string apiUrl = "https://api.sketchfab.com/v3/search?type=models";

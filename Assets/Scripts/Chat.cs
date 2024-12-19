@@ -85,13 +85,11 @@ public class Chat : MonoBehaviour
         "Sport\"", "Desk\"", "Chair\"" , "Bed\"" , "Table\"" ,"Drawer\"","Shower\"", "Sink\"","WC\"","Barrier\"","Couch\"","KingsizeBed\"","Toilet\"","Swing\"",
         "PcDesk\"","Shelf\"","SinkCabinet\"","Stove\"","Subwoofer\"","TableCoffe\"","Dresser\""};
 
+    [Header("Fundamental UI Elements")]
+    
     [SerializeField] public TMP_Text Text;
 
     [SerializeField] public TMP_InputField InputField;
-
-    [SerializeField] public List<string> Reminders_List = new List<string>();
-
-    [SerializeField] public string First_Reminder;
 
     [SerializeField] public static int Number_of_Objects;
 
@@ -107,14 +105,28 @@ public class Chat : MonoBehaviour
 
     [SerializeField] public TMP_Dropdown dropdown;
 
+    [Header("LLM User Reminders")]
+
+    [SerializeField] public List<string> Reminders_List = new List<string>();
+
+    [SerializeField] public string First_Reminder;
+
+    [Header("Customizable Coordinates")]
+
     [SerializeField] public Toggle Coordinates_Toggle;
 
     [SerializeField] public GameObject Ballon;
  
-    public GameObject Models;
-    public Toggle Sketchfab_Toggle;
+    [SerializeField] public GameObject Models;
+
+    [Header("Sketchfab")]
+
+    [SerializeField] public Toggle Sketchfab_Toggle;
+    
+    [Header ("PreBuilt Test")]
 
     [SerializeField] public TMP_Dropdown PBDropdown;
+
     [SerializeField] public Toggle PB_Toggle;
 
     public static int counter = 0;
