@@ -130,29 +130,33 @@ public class SketchfabBrowser : MonoBehaviour
         }
     }
 
+    //Download Requester
     public async Task OpenModelUrl(string message)
     {
         string response;
 
         UpdatingText.alignment = (TextAlignmentOptions)TextAlignment.Left;
 
+        //If the server is not active, a message is printed 
+
         if (!ServerActivation)
         {
             UpdatingText.text = "Firstly You must activate the Server!!";
         }
 
+        //Otherwise, we say to the user that the download is started
         else
         {
 
             UpdatingText.text = "Downloading the required 3D model!!";
 
+            //Send to the server the desired 3D object labelled with an Uid
             message = message.Replace("https://sketchfab.com/3d-models/none-", "");
             byte[] data = Encoding.UTF8.GetBytes(message);
             await stream.WriteAsync(data, 0, data.Length);
-            response = await ReceiveMessages();
+            response = await ReceiveMessages(); //We await for a response from the server, that will say us if the download was ok or not
             
-            
-
+            //Depending on the response received from the server, we communicate to the server whether the download was succesful or not
             if(response == "OK") 
             {
                 UpdatingText.text = "Succesfull Download";
@@ -168,6 +172,7 @@ public class SketchfabBrowser : MonoBehaviour
 
     }
 
+    //Method attched to Sketchfab Server button 
     public void SketchfabServerConnection()
     {
         Process.Start("cmd.exe", SketchfabPy);
