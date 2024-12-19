@@ -40,6 +40,7 @@ public class SketchfabBrowser : MonoBehaviour
         searchButton.onClick.AddListener(SearchModels);
     }
 
+    //Receive the Message from the server and save it in a variable
     public async Task<string> ReceiveMessages()
     {
 
@@ -59,6 +60,7 @@ public class SketchfabBrowser : MonoBehaviour
 
     public void SearchModels()
     {
+        //Added .fbx to the input string in order to get better chanche of displaying fbx 3D objects
         string keyword = keywordInput.text.Trim() + " .fbx";
         if (!string.IsNullOrEmpty(keyword))
         {
