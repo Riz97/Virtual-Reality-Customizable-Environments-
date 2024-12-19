@@ -17,6 +17,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
 using UnityEditor;
+using static Microsoft.MixedReality.Toolkit.Experimental.UI.KeyboardKeyFunc;
 public class Chat : MonoBehaviour
 
     
@@ -44,12 +45,15 @@ public class Chat : MonoBehaviour
     [SerializeField] public UnityEngine.XR.InputDevice rightController;
     private bool isTriggerPressed = false;
 
+    //--------------------------------------- Custom Coordinates Lists ------------------------------------------------------------------------------------------------------------------
     public static List<float> CustomCoordinatesX = new List<float>();
     public static List<float> CustomCoordinatesZ = new List<float>();
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    //--------------------------------------- Handling Requests Lists   ------------------------------------------------------------------------------------------------------------------
 
     List<string> Mandatory_Words = new List<string>() {"Find(",".name"};
-
-    List<string> Atleast2_Words = new List<string>() { "Furniture/", "Cars/", "Nature/", "City/", "Industrial/" };
 
     List<string> Material_Words = new List<string>() {
            "\"" + "Furniture/Material"+ "\"" , 
@@ -84,6 +88,9 @@ public class Chat : MonoBehaviour
         "Wood\"", "Stone\"", "Pine\"", "Flower\"", "Cops\"", "Sedan\"", "Sport\"", "Suv\"", "Taxi\"", 
         "Sport\"", "Desk\"", "Chair\"" , "Bed\"" , "Table\"" ,"Drawer\"","Shower\"", "Sink\"","WC\"","Barrier\"","Couch\"","KingsizeBed\"","Toilet\"","Swing\"",
         "PcDesk\"","Shelf\"","SinkCabinet\"","Stove\"","Subwoofer\"","TableCoffe\"","Dresser\""};
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
     [Header("Fundamental UI Elements")]
     
@@ -214,6 +221,7 @@ public class Chat : MonoBehaviour
 
                 if (Sketchfab_Toggle.isOn)
                 {
+                    //Sketchfab Request
                     AIListSketchfab(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 }
 
@@ -247,6 +255,7 @@ public class Chat : MonoBehaviour
 
                 if (Sketchfab_Toggle.isOn)
                 {
+                    //Sketchfab Request
                     AIListSketchfab(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 }
                 else 
@@ -279,6 +288,7 @@ public class Chat : MonoBehaviour
                 Debug.Log(result);
                 if (Sketchfab_Toggle.isOn)
                 {
+                    //Sketchfab Request
                     AIListSketchfab(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 }
                 else
@@ -310,6 +320,7 @@ public class Chat : MonoBehaviour
                                            //Debug.Log(result);
                 if (Sketchfab_Toggle.isOn)
                 {
+                    //Sketchfab Request
                     AIListSketchfab(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 }
 
@@ -342,6 +353,7 @@ public class Chat : MonoBehaviour
                                              //Debug.Log(result);
                 if (Sketchfab_Toggle.isOn)
                 {
+                    //Sketchfab Request
                     AIListSketchfab(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 }
                 else
@@ -371,6 +383,7 @@ public class Chat : MonoBehaviour
                                          //Debug.Log(result);
                 if (Sketchfab_Toggle.isOn)
                 {
+                    //Sketchfab Request
                     AIListSketchfab(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 }
 
@@ -401,7 +414,8 @@ public class Chat : MonoBehaviour
 
                 char firstNonWhiteSpaceChar = result.FirstOrDefault(c => !Char.IsWhiteSpace(c));
                 ModelName = "codellama"; //The actual LLM must be changed inside the Python Server
-                                         //Debug.Log(result);
+                                         
+                //Sketchfab Request
                 if (Sketchfab_Toggle.isOn)
                 {
                     AIListSketchfab(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
@@ -410,6 +424,7 @@ public class Chat : MonoBehaviour
 
                 else
                 {
+                    //Normal Request
                     AIList(result, firstNonWhiteSpaceChar, Number_of_Objects, start_time);
                 }
                 tries++;
@@ -425,6 +440,7 @@ public class Chat : MonoBehaviour
 
 
 
+    //Sketchfab Request Checker for the AI generated Script, which contains different checks with respect of AIList()
     public void AIListSketchfab(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
     {
 
@@ -485,6 +501,7 @@ public class Chat : MonoBehaviour
         }
     }
 
+    //AI Generated Script Checker
     public void AIList(string result, char firstNonWhiteSpaceChar, int Number_Of_Objects, float start_time)
     {
 
@@ -585,12 +602,8 @@ public class Chat : MonoBehaviour
 
         List<string> allWords = words_Cars.Concat(words_City).Concat(words_Industrial).Concat(words_Cars).Concat(words_Nature).Concat(words_Furniture).ToList(); //Auxiliary list for the isDirection method
 
-
-        List<string> list_Directions_aux = isIn_Direction(input,Directions,allWords); // Example of the final List : Right Chair , Left bed , table
-
         //String list handler for the specified position
-
-      
+        List<string> list_Directions_aux = isIn_Direction(input,Directions,allWords); // Example of the final List : Right Chair , Left bed , table
 
         for (int i =0; i < list_Directions_aux.Count; i++)
         {
@@ -598,7 +611,6 @@ public class Chat : MonoBehaviour
             {
                 list_Directions_aux.Remove(list_Directions_aux[i+1]); //if in the list the model is preceded by a position, remove the model string from the list 
             }
-
 
             else
             {
@@ -678,7 +690,7 @@ public class Chat : MonoBehaviour
              Number_of_Objects = 5; // In this way the global variable is set with the exact amount of objects for this environment
 
 
-            input = " Unity C# script code that follow drastically these numbered steps " +
+            input = " A complete C# Unity Script that follow drastically these numbered steps " +
                     " STEP ONE -- Find with the Find() method the objects called  called 'Model_0','Model_1', 'Model_2' 'Model_3 'Model_4 and destroy them " +
                     " STEP TWO -- Find with the Find() method the gameobject 'Plane' and change its material with the following code Resources.Load<Material>(Furniture/Material) " +
                     " STEP THREE -- Substitute them with objects loaded from the Furniture folder, the gameobjects to be uploaded are 'Desk' 'Table' 'Chair' 'Chair'  " +
@@ -1071,37 +1083,37 @@ public class Chat : MonoBehaviour
             rightController = devices[0];
         }
 
-        // Verifica se il controller è valido
+        // Check if the controller is valid
         if (rightController.isValid)
         {
             bool triggerValue;
 
-            // Leggi lo stato del grilletto
+            // Capture the state of the trigger
             if (rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primaryButton, out triggerValue) && triggerValue)
             {
-                // Salva la posizione solo quando il trigger viene premuto per la prima volta
+                // Save the desired position coordinated when the button A is pressed
                 if (!isTriggerPressed && counter != Number_of_Objects)
                 {
                     isTriggerPressed = true;
 
-                  
+                        //Save the desired coordinates
                         SaveCoordinateXZ(xrOriginTransform.position);
                 
                 }
             }
             else
             {
-                // Se il trigger viene rilasciato, resetta il flag
+                //When the button is released, it is not pressed anymore
                 isTriggerPressed = false;
             }
         }
     }
 
 
-
+    //Method that saves the coordinate X and Z of the position of the player when the button is pressed
     private void SaveCoordinateXZ(Vector3 position)
     {
-
+        //If the coordinates toggle is on, save the coordinates and instantiate a placeholder ballon, and refresh the TMP_Text
         if(Coordinates_Toggle.isOn)
         {
              float x, z;
@@ -1114,8 +1126,6 @@ public class Chat : MonoBehaviour
             counter++;
 
         }
-
-    
     }
 
     //Input Request function definition for the customized environments
@@ -1136,6 +1146,7 @@ public class Chat : MonoBehaviour
 
        return input;
     }
+    //Input Request function builder for the customized environments that use Sketchfab Objects
     public string Input_Request_Sketchfab(string input, int Number_of_Objects, List<string> list, string Material, List<string> list_Directions)
     {
         input = "A complete C# Unity Script that follow correctly these numbered steps, DO NOT USE TAG and do not truncate the code or use placeholders, :" +
@@ -1153,6 +1164,7 @@ public class Chat : MonoBehaviour
         return input;
     }
 
+    //Input Request function builder for pre built environments (THIS IS A TEST, IT DOES NOT WORK PROPERLY)
     public string Input_Request_PB(string input, int Number_of_Objects, List<string> list, string Material, string PB)
     {
 
@@ -1196,13 +1208,13 @@ public class Chat : MonoBehaviour
         return input;
     }
 
-    //Auxiliary function for building the input for CHATGPT , for each objects gives the X and Z coordinates, depending on the position requested by the user
+    //Auxiliary function for building the input for the LLM , for each objects gives the X and Z coordinates, depending on the position requested by the user
     // list contains the direction of the request model
 
     public string Define_Models_Coordinates(List<string> objects, int Number_of_Objects, string input, List<string> list_Directions)
     {
         
-
+        //If the user wants to position the objects by himself, the coordinates of the XR Origin are saved and written in the natural language request
         if (Coordinates_Toggle.isOn)
         {
             for (int ii = 0; ii < Number_of_Objects; ii++)
@@ -1246,6 +1258,7 @@ public class Chat : MonoBehaviour
 
     //------------------------------------------------- DROPDOWN MENU OPTIONS MANAGER ---------------------------------------------------------------------
 
+    //Dropdwon For the Large Language Models available
     public void GetDropDownValue()
     {
         dropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(dropdown); }); 
@@ -1259,6 +1272,8 @@ public class Chat : MonoBehaviour
 
         return selectedOption; 
     }
+
+    //Dropdwon for the Pre built Environments (TEST, IT DOES NOT WORK PROPERLY)
 
     public void GetDropDownValue2()
     {
