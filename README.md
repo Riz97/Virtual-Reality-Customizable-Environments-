@@ -18,7 +18,6 @@ More Large Language Models have been added : LLama 3.1, Codegeex4, Qwen. and cod
 A Reset button has been implemented in order to reset the scene if there are technical issues with the servers or with the LLM request.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------
 
 THIRD PART
 
@@ -27,3 +26,5 @@ It is possible now to visualize a preview of the 3D objects available in the fra
 It has also been added a virtual keyboard. In this way, when the user select the Input Field , in User Mode and Developer Mode, in front of him will appear a virtual keyboard and he can use it in order to write the virtual environment request without using the vocal commands or the physical keyboard.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+FOURTH PART
