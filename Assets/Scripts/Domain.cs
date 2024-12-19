@@ -1,6 +1,5 @@
 ﻿
-using OpenAI.Files;
-using OpenAI.Threads;
+
 using RoslynCSharp;
 using System;
 using System.Collections;
@@ -8,7 +7,6 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 public class Domain : MonoBehaviour
 {
     [Header("Fundamental UI Elements")]
@@ -27,13 +25,8 @@ public class Domain : MonoBehaviour
     
     [SerializeField] public GameObject popup;
 
-    
-
-
     public static int errorcount = 0;
     int temp = 0;
-
-    bool faulty = false;
 
     //-------------------- SYSTEM MESSAGES----------------------------------------------------------
 
@@ -72,6 +65,8 @@ public class Domain : MonoBehaviour
     {
         
         PrintAI_Thoughts();
+
+        //Script Executed, Reset of the Number of objects positioned by the user
         Chat.counter = 0;
         NumberPositions_Text.SetText("Number of models is : " + Chat.Number_of_Objects + "(" + (Chat.counter).ToString() + ")");
 
@@ -272,6 +267,8 @@ public class Domain : MonoBehaviour
 
             FaultyScriptCount++;//Increase the number of faulty scripts generated for an environment
             StartCoroutine(showPopup());//It shows a 5 seconds pop up error
+            
+            //Start the process again
             chat.ReadStringInput(InputField);
             DoScript();
             Generate_Script_Button.interactable = false;

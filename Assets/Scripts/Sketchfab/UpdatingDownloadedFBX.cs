@@ -31,7 +31,7 @@ public class UpdatingDownloadedFBX : MonoBehaviour
     
     void Start()
     {
-        //Check if the Folder exists
+        //Check if the Folder ImportedFBX exists inside the project
         if (!Directory.Exists(folderPath))
         {
             Debug.LogError($"La cartella '{folderPath}' non esiste!");
@@ -88,20 +88,18 @@ public class UpdatingDownloadedFBX : MonoBehaviour
         //Process to get all the files' names inside the folder, discard the .meta files
         string[] files = Directory.GetFiles(folderPath);
         using (StreamWriter writer = new StreamWriter(logFilePath, false)) // False per sovrascrivere
-        {
+        {   
+            //Checks all the file in folderpath
             foreach (string file in files)
-            {
+            {   
+                //Get rid of .meta files, rename and add the downloaded 3D Objects 
                 if (!file.Contains(".meta"))
                 {
                     
                     writer.WriteLine(Path.GetFileName(file.Replace(".fbx", "")));
                     downloaded.Add(Path.GetFileName(file.Replace(".fbx", "")));
-                 
-                    //If the 3D object name is inserted inside the file the download was successful
-                    //UpdatingText.alignment = (TextAlignmentOptions)TextAlignment.Left;
-                    //UpdatingText.text = "Successful Download";
+             
                 }
-
 
             }
         }

@@ -10,14 +10,11 @@ using TMPro;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using Button = UnityEngine.UI.Button;
-using NUnit.Framework;
 using UnityEngine.XR;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.InputSystem;
+
 using UnityEditor;
-using static Microsoft.MixedReality.Toolkit.Experimental.UI.KeyboardKeyFunc;
+
 public class Chat : MonoBehaviour
 
     
