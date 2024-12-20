@@ -1207,7 +1207,7 @@ public class Chat : MonoBehaviour {
     {
         
         //If the user wants to position the objects by himself, the coordinates of the XR Origin are saved and written in the natural language request
-        if (Coordinates_Toggle.isOn)
+        if (Coordinates_Toggle.isOn && !Sketchfab_Toggle)
         {
             for (int ii = 0; ii < Number_of_Objects; ii++)
             {
@@ -1217,6 +1217,18 @@ public class Chat : MonoBehaviour {
           
             return input;
         }
+
+        if(Sketchfab_Toggle.isOn && Coordinates_Toggle.isOn)
+        {
+            for (int ii = 0; ii < Number_of_Objects; ii++)
+            {
+                input += " Model_" + ii.ToString() + " is a " + objects[ii] + " at Vector3(" + CustomCoordinatesX[ii].ToString().Replace(",", ".") + ",-0.15," + CustomCoordinatesZ[ii].ToString().Replace(",", ".") + ")";
+            }
+
+
+            return input;
+        }
+
 
         else
         {

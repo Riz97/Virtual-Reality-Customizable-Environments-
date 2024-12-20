@@ -225,7 +225,7 @@ public class Domain : MonoBehaviour
 //----------------------------------------------------------------------------------------------------------------------
 
 //-------------------------------- UNITY CONSOLE ERROR CHECKER --------------------------------------------------------------
-    private void OnEnable()
+   private void OnEnable()
     {
         // LogMessageReceived Activated when the script is used
         Application.logMessageReceived += OnLogMessageReceived;
