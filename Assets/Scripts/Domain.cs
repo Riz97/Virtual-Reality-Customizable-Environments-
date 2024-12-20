@@ -241,15 +241,12 @@ public class Domain : MonoBehaviour
         //It checks if there are errors in the Unity Console
         if (type == LogType.Error || type == LogType.Exception)
         {
-            
             //It execute CodeErrorExecution only one time
             if(errorcount == 0)
             {
                 CodeErrorExecution();
                 errorcount++;
             }
-
-            
         }
     }
     private void CodeErrorExecution()
@@ -276,16 +273,3 @@ public class Domain : MonoBehaviour
     }
     //--------------------------------------------------------------------------------------------------------------------------------
 }//END OF THE SCRIPT
-
-
-
-
-
-
-
-
-
-
-
-
-
