@@ -15,11 +15,9 @@ using UnityEngine.UI;
 
 using UnityEditor;
 
-public class Chat : MonoBehaviour
-
-    
-{
-  public static string result;
+public class Chat : MonoBehaviour {
+  
+    public static string result;
 
     public Transform xrOriginTransform;
 
@@ -65,7 +63,8 @@ public class Chat : MonoBehaviour
 
     List<string> Furniture_Strings = new List<string>() { "Office" };
     List<string> Apartment_Strings = new List<string>() { "Apartment" };
-    List<string> Furniture_Models = new List<string>() { "Desk", "Chair", "Bed", "Table", "Drawer", "Shower", "Sink", "WC", "Couch", "KingsizeBed", "PcDesk", "Shelf", "SinkCabinet", "Stove", "Subwoofer", "TableCoffee", "Dresser" };
+    List<string> Furniture_Models = new List<string>() { "Desk", "Chair", "Bed", "Table", "Drawer", "Shower", "Sink", "WC", "Couch", "KingsizeBed", "PcDesk", "Shelf", 
+                                                         "SinkCabinet", "Stove", "Subwoofer", "TableCoffee", "Dresser" };
 
     List<string> Car_Strings = new List<string>() { "Cars","Grid" };
     List<string> Car_Models = new List<string>() { "Cops", "Sedan", "Sport" , "Suv", "Taxi" , "Sport" };
@@ -204,7 +203,7 @@ public class Chat : MonoBehaviour
          
                 var messages = new List<OpenAI.Chat.Message>
             {
-                new OpenAI.Chat.Message(Role.User, input)
+                new Message(Role.User, input)
             };
 
                 var api = new OpenAIClient();
@@ -660,12 +659,8 @@ public class Chat : MonoBehaviour
 
         check = true;
 
-        //------------------------------------------------------------------------------------ CUSTOM BASE CASES ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-      
-        
-        // ------ CUSTOM PREBUILT ENVIRONMENTS -----------
+        // ------ CUSTOM PREBUILT ENVIRONMENTS (TEST - IT DOES NOT WORK PROPERLY) -----------
 
          if (words_Furniture.Count() == Number_of_Objects && words_Furniture.Count() != 0  && PB_Toggle.isOn)
         {
@@ -681,6 +676,7 @@ public class Chat : MonoBehaviour
 
 
         // ------ OFFICE -----------
+
         if (ContainsAny(input, Furniture_Strings) && !PB_Toggle.isOn)
         {
 

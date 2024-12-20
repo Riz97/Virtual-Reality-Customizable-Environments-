@@ -34,7 +34,7 @@ public class UpdatingDownloadedFBX : MonoBehaviour
         //Check if the Folder ImportedFBX exists inside the project
         if (!Directory.Exists(folderPath))
         {
-            Debug.LogError($"La cartella '{folderPath}' non esiste!");
+            Debug.LogError($"The folder '{folderPath}' does not exist!");
             return;
         }
 
